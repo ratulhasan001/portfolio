@@ -40,13 +40,13 @@ export function PopWords({
           <span className="inline-block overflow-visible pb-1 align-bottom">
             <motion.span
               variants={{
-                hidden: { opacity: 0, scale: 0.4, y: 14, rotate: -6 },
+                hidden: { opacity: 0, scale: 0.25, y: 24, rotate: -14 },
                 show: {
                   opacity: 1,
                   scale: 1,
                   y: 0,
                   rotate: 0,
-                  transition: { type: "spring", stiffness: 420, damping: 16, mass: 0.7 },
+                  transition: { type: "spring", stiffness: 520, damping: 12, mass: 0.6 },
                 },
               }}
               className="inline-block"
@@ -65,7 +65,7 @@ export function PopIn({
   children,
   className,
   delay = 0,
-  scale = 0.85,
+  scale = 0.7,
   as = "div",
   inView = false,
   viewportMargin = "-60px",
@@ -85,13 +85,13 @@ export function PopIn({
 
   return (
     <MotionTag
-      initial={{ opacity: 0, scale, y: 6 }}
+      initial={{ opacity: 0, scale, y: 14 }}
       {...triggerProps}
       transition={{
         type: "spring",
-        stiffness: 380,
-        damping: 18,
-        mass: 0.6,
+        stiffness: 440,
+        damping: 13,
+        mass: 0.55,
         delay,
       }}
       className={className}
