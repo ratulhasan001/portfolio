@@ -103,32 +103,40 @@ export function Nav() {
             const Icon = link.icon;
             const isActive = active === link.href;
             return (
-              <a
+              <motion.a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
                   smoothScrollToId(link.href);
                 }}
+                initial="rest"
+                whileHover="hover"
+                whileTap={{ scale: 0.92 }}
                 className="group relative"
               >
                 <motion.span
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.94 }}
+                  variants={{ rest: { y: 0 }, hover: { y: -2 } }}
+                  transition={{ type: "spring", stiffness: 420, damping: 20 }}
                   className={`relative z-10 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                     isActive
                       ? "text-accent"
                       : "text-fg-muted group-hover:text-fg-default"
                   }`}
                 >
-                  <Icon
-                    size={13}
-                    className={`transition-transform duration-300 ${
-                      isActive ? "scale-110" : "group-hover:scale-110"
-                    }`}
-                  />
+                  <motion.span
+                    variants={{
+                      rest: { rotate: 0, scale: 1 },
+                      hover: { rotate: -10, scale: 1.25 },
+                    }}
+                    transition={{ type: "spring", stiffness: 450, damping: 12 }}
+                    className="flex"
+                  >
+                    <Icon size={13} className={isActive ? "scale-110" : ""} />
+                  </motion.span>
                   {link.label}
                 </motion.span>
+
                 {isActive && (
                   <motion.span
                     layoutId="nav-pill"
@@ -137,9 +145,26 @@ export function Nav() {
                   />
                 )}
                 {!isActive && (
-                  <span className="absolute inset-0 rounded-full bg-canvas-subtle opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                  <motion.span
+                    variants={{
+                      rest: { opacity: 0, scale: 0.8 },
+                      hover: { opacity: 1, scale: 1 },
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                    className="absolute inset-0 rounded-full border border-accent/20 bg-canvas-subtle shadow-[0_10px_24px_-10px_var(--color-accent)]"
+                  />
                 )}
-              </a>
+
+                <motion.span
+                  aria-hidden
+                  variants={{
+                    rest: { opacity: 0, y: -3, scale: 0.4 },
+                    hover: { opacity: 1, y: 0, scale: 1 },
+                  }}
+                  transition={{ type: "spring", stiffness: 500, damping: 20 }}
+                  className="absolute left-1/2 top-full z-10 mt-1 h-1 w-1 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_8px_1px_var(--color-accent)]"
+                />
+              </motion.a>
             );
           })}
         </nav>
