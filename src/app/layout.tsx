@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
@@ -23,6 +23,20 @@ export const metadata: Metadata = {
     "Portfolio of Ratul Hasan — CSE undergraduate researching LLM reliability and biology-informed deep learning, applying for graduate research programs.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
+const forceVisibleScript = `
+(function() {
+  setTimeout(function() {
+    document.documentElement.classList.add('force-visible');
+  }, 2500);
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,8 +50,9 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: forceVisibleScript }} />
       </head>
-      <body className="min-h-full flex flex-col bg-canvas text-fg-default">
+      <body className="safe-bottom min-h-full flex flex-col bg-canvas text-fg-default">
         <ThemeProvider>
           <NeuralField />
           <div

@@ -62,7 +62,7 @@ export function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+      className={`safe-top sticky top-0 z-50 border-b transition-colors duration-300 ${
         scrolled
           ? "border-border-default bg-canvas/85 backdrop-blur-md"
           : "border-transparent bg-canvas"

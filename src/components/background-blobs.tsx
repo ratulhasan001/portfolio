@@ -6,7 +6,11 @@ export function BackgroundBlobs() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <motion.div
-        className="blob absolute -left-32 -top-32 h-96 w-96 rounded-full bg-accent blur-[100px]"
+        className="blob absolute -left-32 -top-32 h-96 w-96 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, var(--color-accent) 0%, transparent 70%)",
+        }}
         animate={{
           x: [0, 60, -20, 0],
           y: [0, 40, 80, 0],
@@ -19,7 +23,11 @@ export function BackgroundBlobs() {
         }}
       />
       <motion.div
-        className="blob absolute -right-24 top-10 h-80 w-80 rounded-full bg-done blur-[100px]"
+        className="blob absolute -right-24 top-10 h-80 w-80 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, var(--color-done) 0%, transparent 70%)",
+        }}
         animate={{
           x: [0, -50, 30, 0],
           y: [0, 60, -30, 0],
@@ -32,7 +40,11 @@ export function BackgroundBlobs() {
         }}
       />
       <motion.div
-        className="blob absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-success blur-[110px]"
+        className="blob absolute bottom-0 left-1/3 h-72 w-72 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, var(--color-success) 0%, transparent 70%)",
+        }}
         animate={{
           x: [0, 40, -40, 0],
           y: [0, -30, 20, 0],

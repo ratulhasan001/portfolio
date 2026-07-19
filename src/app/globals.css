@@ -89,6 +89,7 @@
 
 html {
   color-scheme: dark;
+  overflow-x: hidden;
 }
 
 html[data-theme="light"] {
@@ -100,6 +101,26 @@ body {
   color: var(--fg-default);
   font-family: var(--font-sans), -apple-system, "Segoe UI", sans-serif;
   transition: background-color 0.2s ease, color 0.2s ease;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* iOS safe-area (notch / Dynamic Island / home indicator) support */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Rescue net: if animated content is still at its pre-animation state a
+   couple seconds after load (e.g. hydration was interrupted), force it
+   visible instead of leaving the page permanently blank. Any element whose
+   animation actually ran already had its inline style rewritten by then, so
+   this only ever affects genuinely stuck content. */
+html.force-visible [style*="opacity:0"] {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 ::selection {
