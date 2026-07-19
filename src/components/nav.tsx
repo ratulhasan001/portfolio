@@ -61,11 +61,27 @@ export function Nav() {
   }, []);
 
   return (
-    <header
-      className={`safe-top sticky top-0 z-50 border-b transition-colors duration-300 ${
+    <motion.header
+      animate={{
+        marginLeft: scrolled ? 14 : 0,
+        marginRight: scrolled ? 14 : 0,
+        marginTop: scrolled ? 10 : 0,
+        borderRadius: scrolled ? 20 : 0,
+        y: scrolled ? [0, -4, 0] : 0,
+      }}
+      transition={{
+        marginLeft: { type: "spring", stiffness: 260, damping: 24 },
+        marginRight: { type: "spring", stiffness: 260, damping: 24 },
+        marginTop: { type: "spring", stiffness: 260, damping: 24 },
+        borderRadius: { type: "spring", stiffness: 260, damping: 24 },
+        y: scrolled
+          ? { duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
+          : { duration: 0.3 },
+      }}
+      className={`safe-top sticky top-0 z-50 overflow-hidden transition-[background-color,border-color,box-shadow] duration-500 ${
         scrolled
-          ? "border-border-default bg-canvas/85 backdrop-blur-md"
-          : "border-transparent bg-canvas"
+          ? "border border-accent/20 bg-canvas/85 shadow-[0_24px_48px_-20px_var(--color-accent),0_14px_30px_-14px_rgba(0,0,0,0.55)] backdrop-blur-md"
+          : "border-b border-transparent bg-canvas shadow-none"
       }`}
     >
       <div className="gradient-line h-[2px] w-full opacity-70" />
@@ -255,6 +271,6 @@ export function Nav() {
           </motion.nav>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }
