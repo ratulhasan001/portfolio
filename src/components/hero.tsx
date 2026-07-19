@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   MapPin,
@@ -16,7 +17,7 @@ import { TypedLines } from "./typed-lines";
 import { GithubIcon, LinkedinIcon } from "./brand-icons";
 import { BackgroundBlobs } from "./background-blobs";
 import { CountUp } from "./count-up";
-import { PopWords, PopIn } from "./pop-in";
+import { PopWords } from "./pop-in";
 import { getBootDelay } from "@/lib/boot-delay";
 
 export function Hero() {
@@ -60,8 +61,22 @@ export function Hero() {
                   transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                   className="absolute -inset-1 rounded-full bg-[conic-gradient(from_0deg,var(--color-accent),var(--color-done),var(--color-success),var(--color-accent))] opacity-70 blur-[2px]"
                 />
-                <div className="relative flex h-28 w-28 items-center justify-center rounded-full border-4 border-canvas bg-gradient-to-br from-accent to-done text-3xl font-bold text-white shadow-lg">
-                  RH
+                <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-canvas bg-canvas-subtle shadow-lg">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 1.3, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative h-full w-full"
+                  >
+                    <Image
+                      src="/my_img.jpg"
+                      alt={profile.name}
+                      fill
+                      sizes="112px"
+                      priority
+                      className="object-cover"
+                    />
+                  </motion.div>
                 </div>
                 <motion.span
                   animate={{ scale: [1, 1.15, 1] }}
@@ -75,9 +90,6 @@ export function Hero() {
               <h1 className="mt-4 text-2xl font-bold tracking-tight text-fg-default">
                 <PopWords text={profile.name} delay={0.5 + bootDelay} stagger={0.08} />
               </h1>
-              <PopIn delay={0.85 + bootDelay}>
-                <p className="mono text-sm text-fg-muted">@{profile.handle}</p>
-              </PopIn>
 
               <p className="mt-3 text-sm leading-relaxed text-fg-muted">
                 {profile.bio}
