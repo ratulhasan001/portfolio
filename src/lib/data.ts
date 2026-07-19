@@ -2,7 +2,7 @@ export const profile = {
   name: "Ratul Hasan",
   handle: "ratulhasan001",
   role: "CSE Undergraduate · Aspiring PhD Researcher",
-  location: "Natore, Bangladesh",
+  location: "Khulna, Bangladesh",
   email: "ratulhasan.cs@gmail.com",
   phone: "+8801760972108",
   website: "ratul-hasan.netlify.app",
@@ -76,7 +76,7 @@ export const education: Education[] = [
     school: "Bangladesh Army University of Engineering & Technology (BAUET)",
     degree: "B.Sc in Computer Science and Engineering",
     location: "Natore, Bangladesh",
-    period: "2022 - Present",
+    period: "2022 - 2026",
     detail:
       "Thesis: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
     score: { label: "CGPA", value: 3.82, scale: 4.0 },
