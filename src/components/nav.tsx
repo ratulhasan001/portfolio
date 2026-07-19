@@ -114,7 +114,7 @@ export function Nav() {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-2.5 md:ml-10 md:flex">
           {links.map((link) => {
             const Icon = link.icon;
             const isActive = active === link.href;
