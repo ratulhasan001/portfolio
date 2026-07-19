@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Medal } from "lucide-react";
 import { education } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn } from "./fade-in";
@@ -44,6 +44,19 @@ export function EducationSection() {
                   <p className="mono mt-1 text-xs text-fg-subtle">
                     {edu.period} · {edu.location}
                   </p>
+                  {edu.merit && (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.5, y: -6 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ type: "spring", stiffness: 420, damping: 14, delay: 0.25 }}
+                      whileHover={{ scale: 1.06, rotate: -2 }}
+                      className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-attention/30 bg-attention-subtle px-2.5 py-1 text-xs font-semibold text-attention"
+                    >
+                      <Medal size={13} />
+                      {edu.merit}
+                    </motion.span>
+                  )}
                 </div>
               </div>
 
