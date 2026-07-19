@@ -5,7 +5,7 @@ export const profile = {
   location: "Khulna, Bangladesh",
   email: "ratulhasan.cs@gmail.com",
   phone: "+8801760972108",
-  website: "ratul-hasan.netlify.app",
+  website: "https://ratulhasan.xyz",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
   bio: "CSE undergrad researching LLM reliability and biology-informed deep learning for neurodegenerative disease forecasting. Building toward a PhD in machine learning research.",
