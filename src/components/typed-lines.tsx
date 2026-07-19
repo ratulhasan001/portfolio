@@ -45,7 +45,7 @@ export function TypedLines() {
                 text={line.output}
                 delay={0.55 + i * 0.35 + getBootDelay(1.6)}
                 stagger={0.035}
-                className="gradient-text font-semibold"
+                className="text-accent font-semibold"
               />
             </p>
           ) : (
