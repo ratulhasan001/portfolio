@@ -41,7 +41,7 @@ export const experience: Experience[] = [
     org: "ELITE Research Lab LLC",
     role: "Research Intern (Remote)",
     location: "Queens, NY, USA",
-    period: "May 2026 – Present",
+    period: "May 2026 - Present",
     current: true,
     bullets: [
       "Researching LLM bias and hallucination behavior across model families.",
@@ -53,7 +53,7 @@ export const experience: Experience[] = [
     org: "Lab AR",
     role: "Software Engineering Intern",
     location: "Dhaka, Bangladesh",
-    period: "July 2025 – August 2025",
+    period: "July 2025 - August 2025",
     bullets: [
       "Led a team project to develop a web-based Property Management System.",
       "Contributed to backend development using Laravel (PHP) and collaborated on feature implementation.",
@@ -76,16 +76,16 @@ export const education: Education[] = [
     school: "Bangladesh Army University of Engineering & Technology (BAUET)",
     degree: "B.Sc in Computer Science and Engineering",
     location: "Natore, Bangladesh",
-    period: "2022 – Present",
+    period: "2022 - Present",
     detail:
       "Thesis: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
-    score: { label: "CGPA", value: 3.8, scale: 4.0 },
+    score: { label: "CGPA", value: 3.82, scale: 4.0 },
   },
   {
     school: "Govt. Majid Memorial City College",
     degree: "Higher Secondary School Certificate",
     location: "Khulna, Bangladesh",
-    period: "2019 – 2021",
+    period: "2019 - 2021",
     score: { label: "GPA", value: 5.0, scale: 5.0 },
   },
 ];
@@ -127,7 +127,7 @@ export const publications: Publication[] = [
     authors:
       "Ratul Hasan, Md. Momenul Haque, Redoanul Haque, Yousuf Oley, Ruhani Akter",
     venue:
-      "12th International Conference on Next Generation Computing, Communication, Systems and Security (NSysS '25), ACM, New York, NY, USA, 110–114",
+      "12th International Conference on Next Generation Computing, Communication, Systems and Security (NSysS '25), ACM, New York, NY, USA, 110-114",
     date: "December 2025",
     status: "published",
     link: "https://doi.org/10.1145/3777555.3777569",
@@ -213,13 +213,13 @@ export const onlineJudges = [
 ];
 
 export const achievements = [
-  "1× ICPC Regionalist (Team: BAUET_Rong_Answer)",
-  "1× National Collegiate Programming Contest by JU — Rank 149 (Team: BAUET_PARADIGM)",
-  "2× Inter University Programming Contest — Best Rank 45 at IUT (Team: BAUET_Twisted_Minds)",
+  "1x ICPC Regionalist (Team: BAUET_Rong_Answer)",
+  "1x National Collegiate Programming Contest by JU — Rank 149 (Team: BAUET_PARADIGM)",
+  "2x Inter University Programming Contest — Best Rank 45 at IUT (Team: BAUET_Twisted_Minds)",
   "Ranked 10th, Independence Day Programming Contest, Military Institute of Science & Technology",
-  "1× Champion, 1× 2nd Runners-up, Intra University Programming Contest (Team)",
-  "1× Runners-up, Intra University Programming Contest (Solo)",
-  "1× 1st Runners-up, Intra University Three Minute Thesis Presentation",
+  "1x Champion, 1x 2nd Runners-up, Intra University Programming Contest (Team)",
+  "1x Runners-up, Intra University Programming Contest (Solo)",
+  "1x 1st Runners-up, Intra University Three Minute Thesis Presentation",
 ];
 
 export const leadership = [
