@@ -38,35 +38,83 @@ export function ContactSection() {
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <motion.a
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.05, y: -3 } }}
+                initial="rest"
+                whileHover="hover"
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 400, damping: 18 }}
                 href={`mailto:${profile.email}`}
-                className="flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-accent-emphasis"
+                className="shimmer relative flex items-center gap-2 overflow-hidden rounded-md bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-[box-shadow,background-color] duration-300 hover:bg-accent-emphasis hover:shadow-[0_14px_30px_-10px_var(--color-accent)]"
               >
-                <Mail size={15} />
-                Email me
+                <motion.span
+                  variants={{
+                    rest: { rotate: 0, y: 0 },
+                    hover: { rotate: [0, -14, 10, -6, 0], y: [0, -2, 0] },
+                  }}
+                  transition={{ duration: 0.55, ease: "easeInOut" }}
+                  className="relative flex"
+                >
+                  <Mail size={15} />
+                </motion.span>
+                <span className="relative">Email me</span>
               </motion.a>
               <motion.a
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.05, y: -3 } }}
+                initial="rest"
+                whileHover="hover"
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 400, damping: 18 }}
                 href={profile.github}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 rounded-md border border-border-default bg-canvas px-5 py-2.5 text-sm font-semibold text-fg-default transition-colors hover:border-accent hover:text-accent"
+                className="shimmer group relative flex items-center gap-2 overflow-hidden rounded-md border border-border-default bg-canvas px-5 py-2.5 text-sm font-semibold text-fg-default shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_14px_30px_-10px_var(--color-accent)]"
               >
-                <GithubIcon size={15} />
-                GitHub
+                <motion.span
+                  aria-hidden
+                  variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ originX: 0 }}
+                  className="absolute inset-0 bg-gradient-to-r from-fg-default to-fg-subtle dark:from-[#333] dark:to-[#111]"
+                />
+                <motion.span
+                  variants={{ rest: { rotate: 0, scale: 1 }, hover: { rotate: -14, scale: 1.15 } }}
+                  transition={{ type: "spring", stiffness: 400, damping: 12 }}
+                  className="relative flex transition-colors duration-300 group-hover:text-white"
+                >
+                  <GithubIcon size={15} />
+                </motion.span>
+                <span className="relative transition-colors duration-300 group-hover:text-white">
+                  GitHub
+                </span>
               </motion.a>
               <motion.a
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.05, y: -3 } }}
+                initial="rest"
+                whileHover="hover"
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 400, damping: 18 }}
                 href={profile.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 rounded-md border border-border-default bg-canvas px-5 py-2.5 text-sm font-semibold text-fg-default transition-colors hover:border-accent hover:text-accent"
+                className="shimmer group relative flex items-center gap-2 overflow-hidden rounded-md border border-border-default bg-canvas px-5 py-2.5 text-sm font-semibold text-fg-default shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_14px_30px_-10px_var(--color-accent)]"
               >
-                <LinkedinIcon size={15} />
-                LinkedIn
+                <motion.span
+                  aria-hidden
+                  variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ originX: 0 }}
+                  className="absolute inset-0 bg-[#0A66C2]"
+                />
+                <motion.span
+                  variants={{ rest: { rotate: 0, scale: 1 }, hover: { rotate: 14, scale: 1.15 } }}
+                  transition={{ type: "spring", stiffness: 400, damping: 12 }}
+                  className="relative flex transition-colors duration-300 group-hover:text-white"
+                >
+                  <LinkedinIcon size={15} />
+                </motion.span>
+                <span className="relative transition-colors duration-300 group-hover:text-white">
+                  LinkedIn
+                </span>
               </motion.a>
             </div>
           </div>

@@ -19,13 +19,6 @@ export const profile = {
   followersLabel: "Open to research collaboration",
 };
 
-export const stats = [
-  { label: "Publications", value: 3, suffix: "" },
-  { label: "Projects", value: 2, suffix: "" },
-  { label: "Contest Awards", value: 6, suffix: "+" },
-  { label: "Problems Solved", value: 1000, suffix: "+" },
-];
-
 export type Experience = {
   org: string;
   role: string;
@@ -159,6 +152,19 @@ export const publications: Publication[] = [
   },
 ];
 
+export const stats = [
+  {
+    label: "Publications",
+    value: publications.filter(
+      (p) => p.status === "accepted" || p.status === "published"
+    ).length,
+    suffix: "",
+  },
+  { label: "Projects", value: 2, suffix: "" },
+  { label: "Contest Awards", value: 6, suffix: "+" },
+  { label: "Problems Solved", value: 1000, suffix: "+" },
+];
+
 export type Project = {
   name: string;
   description: string;
@@ -231,9 +237,24 @@ export const skills = {
 };
 
 export const onlineJudges = [
-  { platform: "Codeforces", stat: "Max Rating 1650 (Expert)", handle: "Ratul_Hasan" },
-  { platform: "Codechef", stat: "Max Rating 1676 (3 Star)", handle: "ratulhasan2108" },
-  { platform: "LeetCode", stat: "50+ problems solved", handle: "ratulhasan001" },
+  {
+    platform: "Codeforces",
+    stat: "Max Rating 1650 (Expert)",
+    handle: "Ratul_Hasan",
+    link: "https://codeforces.com/profile/Ratul_Hasan",
+  },
+  {
+    platform: "Codechef",
+    stat: "Max Rating 1676 (3 Star)",
+    handle: "ratulhasan2108",
+    link: "https://www.codechef.com/users/ratulhasan2108",
+  },
+  {
+    platform: "LeetCode",
+    stat: "50+ problems solved",
+    handle: "ratulhasan001",
+    link: "https://leetcode.com/u/ratulhasan001/",
+  },
 ];
 
 export const achievements = [
