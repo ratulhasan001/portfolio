@@ -9,10 +9,13 @@ export function ThemeToggle() {
   const isDark = theme === "dark";
 
   return (
-    <button
+    <motion.button
       onClick={toggle}
       aria-label="Toggle theme"
-      className="relative flex h-8 w-8 items-center justify-center rounded-md border border-border-default bg-canvas-subtle text-fg-muted transition-colors hover:border-accent hover:text-fg-default cursor-pointer"
+      whileHover={{ scale: 1.12, y: -2, rotate: 12 }}
+      whileTap={{ scale: 0.88, rotate: 0 }}
+      transition={{ type: "spring", stiffness: 420, damping: 16 }}
+      className="relative flex h-8 w-8 items-center justify-center rounded-md border border-border-default bg-canvas-subtle text-fg-muted shadow-sm transition-[border-color,color,box-shadow] duration-300 hover:border-accent hover:text-fg-default hover:shadow-[0_8px_18px_-8px_var(--color-accent)] cursor-pointer"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
@@ -26,6 +29,6 @@ export function ThemeToggle() {
           {isDark ? <Moon size={15} /> : <Sun size={15} />}
         </motion.span>
       </AnimatePresence>
-    </button>
+    </motion.button>
   );
 }
