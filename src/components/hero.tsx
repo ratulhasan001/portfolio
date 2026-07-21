@@ -96,14 +96,32 @@ export function Hero() {
               </p>
 
               <motion.a
-                whileHover={{ scale: 1.03, borderColor: "var(--color-accent)" }}
-                whileTap={{ scale: 0.97 }}
+                variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.03, y: -2 } }}
+                initial="rest"
+                whileHover="hover"
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 href="/Ratul_Hasan_CV.pdf"
                 download
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-md border border-border-default bg-canvas-subtle px-3 py-1.5 text-sm font-medium text-fg-default transition-colors hover:text-accent"
+                className="shimmer group relative mt-4 flex w-full items-center justify-center gap-2 overflow-hidden rounded-md border border-border-default bg-canvas-subtle px-3 py-1.5 text-sm font-medium text-fg-default shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_10px_24px_-10px_var(--color-accent)]"
               >
-                <Download size={14} />
-                Download CV
+                <motion.span
+                  aria-hidden
+                  variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ originX: 0 }}
+                  className="absolute inset-0 bg-gradient-to-r from-accent to-done"
+                />
+                <motion.span
+                  variants={{ rest: { y: 0 }, hover: { y: [0, 4, -2, 0] } }}
+                  transition={{ duration: 0.65, ease: "easeInOut" }}
+                  className="relative flex transition-colors duration-300 group-hover:text-white"
+                >
+                  <Download size={14} />
+                </motion.span>
+                <span className="relative transition-colors duration-300 group-hover:text-white">
+                  Download CV
+                </span>
               </motion.a>
 
               <ul className="mt-5 w-full space-y-2.5 text-sm text-fg-muted">
