@@ -196,8 +196,10 @@ export function Nav() {
           </div>
           <ThemeToggle />
           <motion.button
-            whileTap={{ scale: 0.9 }}
-            className="flex h-8 w-8 items-center justify-center rounded-md border border-border-default text-fg-muted transition-colors hover:border-accent hover:text-accent md:hidden"
+            whileHover={{ scale: 1.12, y: -2 }}
+            whileTap={{ scale: 0.88 }}
+            transition={{ type: "spring", stiffness: 420, damping: 16 }}
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-border-default text-fg-muted shadow-sm transition-[border-color,color,box-shadow] duration-300 hover:border-accent hover:text-accent hover:shadow-[0_8px_18px_-8px_var(--color-accent)] md:hidden"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label="Toggle menu"
           >
