@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, Clock, ExternalLink, FileText, Users } from "lucide-react";
+import { BookOpen, Clock, ExternalLink, FileText, Library, Users } from "lucide-react";
 import { publications, type Publication } from "@/lib/data";
 import { SectionTitle, StatusPill } from "./ui";
 import { StaggerGroup, staggerItem } from "./fade-in";
@@ -64,6 +64,18 @@ function PublicationCard({ pub }: { pub: Publication }) {
             >
               <Clock size={11} />
               To Be Published
+            </motion.span>
+          )}
+          {pub.digitalLibrary && (
+            <motion.span
+              initial={{ opacity: 0, scale: 0.6, y: -4 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 420, damping: 15, delay: 0.22 }}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border-default bg-canvas px-2.5 py-0.5 text-xs font-medium text-fg-muted"
+            >
+              <Library size={11} />
+              {pub.digitalLibrary}
             </motion.span>
           )}
         </div>

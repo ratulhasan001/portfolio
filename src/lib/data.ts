@@ -93,6 +93,7 @@ export type Publication = {
   status: "published" | "accepted" | "under-review";
   link?: string;
   type: "conference" | "journal";
+  digitalLibrary?: string;
 };
 
 export const publications: Publication[] = [
@@ -115,6 +116,7 @@ export const publications: Publication[] = [
   date: "Expected 2026",
   status: "accepted",
   type: "conference",
+  digitalLibrary: "IEEE Xplore Digital Library",
 },
 {
   title:
@@ -126,6 +128,7 @@ export const publications: Publication[] = [
   date: "Expected 2026",
   status: "accepted",
   type: "conference",
+  digitalLibrary: "IEEE Xplore Digital Library",
 },
   {
     title:
@@ -137,6 +140,7 @@ export const publications: Publication[] = [
     date: "Expected 2026",
     status: "accepted",
     type: "conference",
+    digitalLibrary: "IEEE Xplore Digital Library",
   },
   {
     title:
@@ -149,6 +153,7 @@ export const publications: Publication[] = [
     status: "published",
     link: "https://doi.org/10.1145/3777555.3777569",
     type: "conference",
+    digitalLibrary: "ACM Digital Library",
   },
 ];
 
