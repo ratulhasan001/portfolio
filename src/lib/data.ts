@@ -112,6 +112,28 @@ export const publications: Publication[] = [
     status: "under-review",
     type: "journal",
   },
+{
+  title:
+    "SplitSafe Ultra: A Moving-Target Defense Framework for Entropy-Aware Encrypted File Persistence on IPFS",
+  authors:
+    "Md. Ahnaf Muhaimin, Ratul Hasan, Yousuf Oley, Samiha Farjana, Bristi Rani Roy, Subrata Kumer Paul, Md. Ekramul Hamid",
+  venue:
+    "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
+  date: "Expected 2026",
+  status: "accepted",
+  type: "conference",
+},
+{
+  title:
+    "ActiVisionNet-Fusion: A Dual-Stream Explainable Deep Learning Framework for Driver Drowsiness Detection",
+  authors:
+    "Nasim Ahmed, Ratul Hasan, Subrata Kumer Paul, Dewan Nafiul Islam Noor, Md. Momenul Haque, Md. Ekramul Hamid",
+  venue:
+    "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
+  date: "Expected 2026",
+  status: "accepted",
+  type: "conference",
+},
   {
     title:
       "A Gas-Optimized Blockchain Framework for Scalable Document Verification Using Dynamic Access Control and IPFS",
