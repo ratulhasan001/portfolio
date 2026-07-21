@@ -27,3 +27,53 @@ export function LinkedinIcon({ size = 16, className }: { size?: number; classNam
     </svg>
   );
 }
+
+export function CodeforcesIcon({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="4" y="10" width="4.4" height="10" rx="1.4" />
+      <rect x="9.8" y="4" width="4.4" height="16" rx="1.4" />
+      <rect x="15.6" y="7" width="4.4" height="13" rx="1.4" />
+    </svg>
+  );
+}
+
+export function CodechefIcon({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="9" cy="7.2" r="3.1" />
+      <circle cx="15" cy="7.2" r="3.1" />
+      <circle cx="12" cy="5.8" r="3.5" />
+      <rect x="6" y="12.5" width="12" height="7.5" rx="2" />
+    </svg>
+  );
+}
+
+export function LeetcodeIcon({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M5 4h6v6h8v10H5V4z" />
+    </svg>
+  );
+}

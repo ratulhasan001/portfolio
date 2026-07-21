@@ -1,13 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Trophy, Code2, Users2, Award } from "lucide-react";
+import { Trophy, Code2, Users2, Award, ExternalLink } from "lucide-react";
 import { skills, onlineJudges, achievements, leadership } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
 import { NeuralBackground } from "./neural-background";
 import { TiltCard } from "./tilt-card";
 import { PopWords, PopIn } from "./pop-in";
+import { CodeforcesIcon, CodechefIcon, LeetcodeIcon } from "./brand-icons";
+
+const judgeIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Codeforces: CodeforcesIcon,
+  Codechef: CodechefIcon,
+  LeetCode: LeetcodeIcon,
+};
 
 export function SkillsSection() {
   return (
@@ -30,21 +37,44 @@ export function SkillsSection() {
           </h3>
         </PopIn>
         <div className="grid gap-3 sm:grid-cols-3">
-          {onlineJudges.map((judge, i) => (
-            <FadeIn key={judge.platform} delay={i * 0.08}>
-              <TiltCard className="shimmer h-full rounded-md border border-border-default bg-canvas-subtle p-4 transition-colors hover:border-accent/50">
-                <p className="text-sm font-semibold text-fg-default">
-                  <PopWords text={judge.platform} inView stagger={0.04} />
-                </p>
-                <p className="gradient-text mt-1 text-lg font-bold">
-                  {judge.stat}
-                </p>
-                <p className="mono mt-1 text-xs text-fg-subtle">
-                  @{judge.handle}
-                </p>
-              </TiltCard>
-            </FadeIn>
-          ))}
+          {onlineJudges.map((judge, i) => {
+            const Icon = judgeIcons[judge.platform];
+            return (
+              <FadeIn key={judge.platform} delay={i * 0.08}>
+                <TiltCard className="shimmer h-full rounded-md border border-border-default bg-canvas-subtle p-4 transition-colors hover:border-accent/50">
+                  <div className="flex items-center gap-2">
+                    {Icon && (
+                      <motion.span
+                        whileHover={{ rotate: -10, scale: 1.15 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent"
+                      >
+                        <Icon size={14} />
+                      </motion.span>
+                    )}
+                    <p className="text-sm font-semibold text-fg-default">
+                      <PopWords text={judge.platform} inView stagger={0.04} />
+                    </p>
+                  </div>
+                  <p className="gradient-text mt-2 text-lg font-bold">
+                    {judge.stat}
+                  </p>
+                  <a
+                    href={judge.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group/handle mono mt-1 inline-flex items-center gap-1 text-xs text-fg-subtle transition-colors hover:text-accent"
+                  >
+                    @{judge.handle}
+                    <ExternalLink
+                      size={11}
+                      className="opacity-0 transition-opacity group-hover/handle:opacity-100"
+                    />
+                  </a>
+                </TiltCard>
+              </FadeIn>
+            );
+          })}
         </div>
 
         <StaggerGroup className="mt-4 space-y-2">
