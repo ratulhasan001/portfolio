@@ -8,13 +8,13 @@ export const profile = {
   website: "https://ratulhasan.xyz",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
-  bio: "CSE undergrad researching LLM reliability and biology-informed deep learning for neurodegenerative disease forecasting. Building toward a PhD in machine learning research.",
+  bio: "Computer Science graduate and AI researcher with publications in machine learning, blockchain, cybersecurity, and healthcare AI. My research focuses on building trustworthy, explainable, and secure intelligent systems, with the long-term goal of pursuing a PhD in Artificial Intelligence.",
   interests: [
-    "Machine Learning",
-    "LLM Bias & Hallucination",
-    "Computational Neuroscience",
-    "Blockchain Systems",
-    "Computer Vision",
+    "Healthcare AI",
+    "Large Language Models (LLMs)",
+  "Explainable AI (XAI)",
+  "Computer Vision",
+  "Blockchain & Decentralized Systems",
   ],
   followersLabel: "Open to research collaboration",
 };
@@ -272,9 +272,21 @@ export const achievements = [
   "1x 1st Runners-up, Intra University Three Minute Thesis Presentation",
 ];
 
-export const leadership = [
-  "President, BAUET Computer Society",
-  "Problem Setter, Intra University Programming Contest at BAUET",
-  "Trainer of Competitive Programming, BAUET Computer Society",
-  "Officer of Documentation, HULT Prize at BAUET",
+export type LeadershipEntry = { org: string; roles: string[] };
+
+export const leadership: LeadershipEntry[] = [
+  {
+    org: "BAUET Computer Society",
+    roles: [
+      "President",
+      "General Secretary",
+      "IT Secretary 1",
+      "IT Secretary 2",
+      "Deputy IT and Skill Development Secretary",
+      "Deputy Editorial Secretary",
+    ],
+  },
+  { org: "Intra University Programming Contest at BAUET", roles: ["Problem Setter"] },
+  { org: "BAUET Computer Society", roles: ["Trainer of Competitive Programming"] },
+  { org: "HULT Prize at BAUET", roles: ["Officer of Documentation"] },
 ];
