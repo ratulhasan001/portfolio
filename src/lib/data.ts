@@ -81,6 +81,8 @@ export const education: Education[] = [
     degree: "Higher Secondary School Certificate",
     location: "Khulna, Bangladesh",
     period: "2019 - 2021",
+    detail:
+      "Group: Science · Major Subjects: Physics, Chemistry, Higher Mathematics · 4th Subject: Biology",
     score: { label: "GPA", value: 5.0, scale: 5.0 },
   },
 ];
@@ -102,9 +104,10 @@ export const publications: Publication[] = [
       "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
     authors: "Ratul Hasan, Md. Momenul Haque, Ananya Sarker",
     venue: "Nature Scientific Reports",
-    date: "Under Review",
+    date: "Submitted May 2026",
     status: "under-review",
     type: "journal",
+    digitalLibrary: "SpringerLink",
   },
 {
   title:
