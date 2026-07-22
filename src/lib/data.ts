@@ -157,19 +157,6 @@ export const publications: Publication[] = [
   },
 ];
 
-export const stats = [
-  {
-    label: "Publications",
-    value: publications.filter(
-      (p) => p.status === "accepted" || p.status === "published"
-    ).length,
-    suffix: "",
-  },
-  { label: "Projects", value: 2, suffix: "" },
-  { label: "Contest Awards", value: 6, suffix: "+" },
-  { label: "Problems Solved", value: 1000, suffix: "+" },
-];
-
 export type Project = {
   name: string;
   description: string;
@@ -226,6 +213,19 @@ export const projects: Project[] = [
     language: "CSS",
     languageColor: "#563D7C",
   },
+];
+
+export const stats = [
+  {
+    label: "Publications",
+    value: publications.filter(
+      (p) => p.status === "accepted" || p.status === "published"
+    ).length,
+    suffix: "",
+  },
+  { label: "Projects", value: projects.length, suffix: "" },
+  { label: "Contest Awards", value: 6, suffix: "+" },
+  { label: "Problems Solved", value: 1000, suffix: "+" },
 ];
 
 export const skills = {
