@@ -194,10 +194,18 @@ export function Hero() {
         {/* README panel */}
         <motion.div style={{ y: yPanel }}>
           <FadeIn delay={0.15}>
-            <div className="overflow-hidden rounded-md shadow-md">
-              <FileHeader filename="README.md" label="researcher.profile" />
-              <div className="border border-border-default bg-canvas-inset px-5 py-6 sm:px-7 sm:py-8">
-                <TypedLines />
+            <div className="relative overflow-hidden rounded-md p-[2px] shadow-md">
+              <motion.span
+                aria-hidden
+                animate={{ rotate: 360 }}
+                transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+                className="absolute -inset-[100%] bg-[conic-gradient(from_0deg,var(--color-accent),var(--color-done),var(--color-success),var(--color-accent))]"
+              />
+              <div className="relative overflow-hidden rounded-md bg-canvas">
+                <FileHeader filename="README.md" label="researcher.profile" />
+                <div className="border border-border-default bg-canvas-inset px-5 py-6 sm:px-7 sm:py-8">
+                  <TypedLines />
+                </div>
               </div>
             </div>
 
