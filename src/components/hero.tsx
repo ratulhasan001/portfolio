@@ -91,7 +91,7 @@ export function Hero() {
                 <PopWords text={profile.name} delay={0.5 + bootDelay} stagger={0.08} />
               </h1>
 
-              <p className="mt-3 text-sm leading-relaxed text-fg-muted">
+              <p className="mt-3 text-justify text-sm leading-relaxed text-fg-muted">
                 {profile.bio}
               </p>
 

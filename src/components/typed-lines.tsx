@@ -7,21 +7,24 @@ import { getBootDelay } from "@/lib/boot-delay";
 type Line = { prompt: string; output: string; pop?: boolean };
 
 const lines: Line[] = [
-  { prompt: "whoami", output: "Ratul Hasan — CSE undergraduate, BAUET" },
+  {
+    prompt: "whoami",
+    output: "Ratul Hasan — Computer Science Graduate & AI Researcher",
+  },
   {
     prompt: "cat goal.txt",
     output:
-      "Pursuing a PhD in Machine Learning / AI, focused on trustworthy LLMs and biology-informed modeling for healthcare.",
+      "Advancing trustworthy and explainable AI through research in machine learning, healthcare, and intelligent systems.",
     pop: true,
   },
   {
-    prompt: "cat thesis.md",
+    prompt: "cat research.md",
     output:
-      "Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease.",
+      "Large Language Models · Healthcare AI · Explainable AI · Computer Vision · Blockchain",
   },
   {
     prompt: "echo $CURRENT_FOCUS",
-    output: "LLM bias & hallucination · mental-health NLP · applied deep learning",
+    output: "LLMs · Healthcare AI · Trustworthy AI",
   },
 ];
 

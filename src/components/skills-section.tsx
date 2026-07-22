@@ -123,25 +123,31 @@ export function SkillsSection() {
           })}
         </div>
 
-        <StaggerGroup className="mt-4 space-y-2">
+        <StaggerGroup className="mt-4 grid gap-2.5 sm:grid-cols-2">
           {achievements.map((a, i) => (
             <motion.div
               key={a}
               variants={staggerItem}
-              whileHover={{ x: 4 }}
-              className="shimmer group flex items-center gap-3 rounded-md border border-border-muted bg-canvas px-3.5 py-2.5 text-sm text-fg-muted transition-colors hover:border-attention/40"
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 320, damping: 22 }}
+              className="shimmer group relative flex items-start gap-3 overflow-hidden rounded-md border border-border-muted bg-canvas px-3.5 py-3 text-sm text-fg-muted shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-attention/50 hover:shadow-[0_16px_32px_-16px_var(--color-attention)]"
             >
-              <span className="mono text-[10px] text-fg-subtle">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+              <span
+                aria-hidden
+                className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-attention to-danger transition-transform duration-300 ease-out group-hover:scale-y-100"
+              />
               <motion.span
-                whileHover={{ rotate: -10, scale: 1.15 }}
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-attention-subtle text-attention"
+                whileHover={{ rotate: -14, scale: 1.18 }}
+                transition={{ type: "spring", stiffness: 300, damping: 14 }}
+                className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-attention-subtle text-attention"
               >
-                <Award size={12} />
+                <Award size={14} />
               </motion.span>
-              <span className="transition-colors group-hover:text-fg-default">
+              <span className="min-w-0 pr-5 leading-relaxed transition-colors group-hover:text-fg-default">
                 {a}
+              </span>
+              <span className="mono absolute right-3 top-3 text-[10px] text-fg-subtle">
+                {String(i + 1).padStart(2, "0")}
               </span>
             </motion.div>
           ))}
@@ -195,33 +201,93 @@ export function SkillsSection() {
           </h3>
         </PopIn>
         <StaggerGroup className="grid gap-3 sm:grid-cols-2">
-          {leadership.map((l, i) => (
-            <motion.div
-              key={l}
-              variants={staggerItem}
-              whileHover={{ y: -3 }}
-              transition={{ type: "spring", stiffness: 320, damping: 22 }}
-              className="shimmer group relative flex items-center gap-3 overflow-hidden rounded-md border border-border-muted bg-canvas-subtle px-4 py-3 text-sm text-fg-muted shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-done/50 hover:shadow-[0_14px_28px_-16px_var(--color-done)]"
-            >
-              <span
-                aria-hidden
-                className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-done to-accent transition-transform duration-300 ease-out group-hover:scale-y-100"
-              />
-              <span className="mono text-[10px] text-fg-subtle">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <motion.span
-                whileHover={{ rotate: -12, scale: 1.15 }}
-                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-done-subtle text-done"
+          {leadership.map((entry) =>
+            entry.roles.length > 1 ? (
+              <motion.div
+                key={entry.org}
+                variants={staggerItem}
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 320, damping: 22 }}
+                className="shimmer group relative overflow-hidden rounded-md border border-border-muted bg-canvas-subtle px-4 py-4 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-done/50 hover:shadow-[0_16px_32px_-16px_var(--color-done)] sm:col-span-2"
               >
-                <Crown size={14} />
-              </motion.span>
-              <span className="transition-colors group-hover:text-fg-default">
-                {l}
-              </span>
-            </motion.div>
-          ))}
+                <span
+                  aria-hidden
+                  className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-done to-accent transition-transform duration-300 ease-out group-hover:scale-y-100"
+                />
+                <div className="flex items-center gap-3">
+                  <motion.span
+                    whileHover={{ rotate: -12, scale: 1.15 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-done-subtle text-done"
+                  >
+                    <Crown size={16} />
+                  </motion.span>
+                  <p className="text-sm font-semibold text-fg-default">
+                    <PopWords text={entry.org} inView stagger={0.03} />
+                  </p>
+                </div>
+
+                <div className="mt-4 border-l border-done/30 pl-8">
+                  {entry.roles.map((role, i) => {
+                    const isCurrent = i === 0;
+                    return (
+                      <motion.div
+                        key={role}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.08, duration: 0.4 }}
+                        className={`relative ${i < entry.roles.length - 1 ? "pb-3" : ""}`}
+                      >
+                        <span
+                          className={`absolute -left-[34.5px] top-1 h-2.5 w-2.5 rounded-full border-2 border-canvas-subtle ${
+                            isCurrent ? "bg-done" : "bg-fg-subtle"
+                          }`}
+                        />
+                        <p
+                          className={
+                            isCurrent
+                              ? "text-base font-bold text-fg-default"
+                              : "text-sm font-medium text-fg-muted"
+                          }
+                        >
+                          {role}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key={entry.org + entry.roles[0]}
+                variants={staggerItem}
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 320, damping: 22 }}
+                className="shimmer group relative flex items-start gap-3 overflow-hidden rounded-md border border-border-muted bg-canvas-subtle px-4 py-3.5 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-done/50 hover:shadow-[0_16px_32px_-16px_var(--color-done)]"
+              >
+                <span
+                  aria-hidden
+                  className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-done to-accent transition-transform duration-300 ease-out group-hover:scale-y-100"
+                />
+                <motion.span
+                  whileHover={{ rotate: -12, scale: 1.15 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-done-subtle text-done"
+                >
+                  <Crown size={16} />
+                </motion.span>
+                <div className="min-w-0">
+                  <p className="text-base font-semibold leading-snug text-fg-default">
+                    <PopWords text={entry.roles[0]} inView stagger={0.03} />
+                  </p>
+                  <p className="mt-0.5 text-sm font-medium text-done">
+                    {entry.org}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          )}
         </StaggerGroup>
       </div>
     </section>
