@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, Clock, ExternalLink, FileText, Library, Users } from "lucide-react";
+import { BookOpen, Clock, ExternalLink, FileText, Library, Link2, Users } from "lucide-react";
 import { publications, type Publication } from "@/lib/data";
 import { SectionTitle, StatusPill } from "./ui";
 import { StaggerGroup, staggerItem } from "./fade-in";
@@ -34,7 +34,7 @@ function PublicationCard({ pub }: { pub: Publication }) {
                   href={pub.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-[linear-gradient(var(--color-accent),var(--color-accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size,color] duration-300 hover:bg-[length:100%_1px] hover:text-accent"
+                  className="group inline-flex items-center gap-1.5 bg-[linear-gradient(var(--color-accent),var(--color-accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size,color] duration-300 hover:bg-[length:100%_1px] hover:text-accent"
                 >
                   <PopWords text={pub.title} inView stagger={0.018} />
                   <ExternalLink
@@ -85,6 +85,36 @@ function PublicationCard({ pub }: { pub: Publication }) {
         <span className="italic">{pub.venue}</span>
         <span className="h-1 w-1 rounded-full bg-fg-subtle" />
         <span className="mono text-accent/80">{pub.date}</span>
+
+        {pub.link && (
+          <motion.a
+            href={pub.link}
+            target="_blank"
+            rel="noreferrer"
+            variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.06, y: -2 } }}
+            initial="rest"
+            whileHover="hover"
+            whileTap={{ scale: 0.94 }}
+            transition={{ type: "spring", stiffness: 420, damping: 18 }}
+            className="pointer-events-none relative ml-auto flex translate-y-1 scale-90 items-center gap-1.5 overflow-hidden rounded-full border border-success/30 bg-canvas px-3 py-1 text-[11px] font-semibold text-success opacity-0 shadow-sm transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 hover:border-transparent hover:text-white hover:shadow-[0_10px_22px_-8px_var(--color-success)]"
+          >
+            <motion.span
+              aria-hidden
+              variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              style={{ originX: 0 }}
+              className="absolute inset-0 -z-10 bg-gradient-to-r from-success to-accent"
+            />
+            <motion.span
+              variants={{ rest: { rotate: 0 }, hover: { rotate: 45 } }}
+              transition={{ type: "spring", stiffness: 420, damping: 14 }}
+              className="relative flex"
+            >
+              <Link2 size={11} />
+            </motion.span>
+            <span className="relative mono">{pub.link.replace("https://doi.org/", "")}</span>
+          </motion.a>
+        )}
       </div>
     </TiltCard>
   );

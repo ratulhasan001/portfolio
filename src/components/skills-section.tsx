@@ -1,7 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Trophy, Code2, Users2, Award, ExternalLink } from "lucide-react";
+import {
+  Trophy,
+  Code2,
+  Users2,
+  Award,
+  ExternalLink,
+  Crown,
+  Database,
+  Webhook,
+  Anvil,
+  Brain,
+  ScanEye,
+  Server,
+  Blocks,
+} from "lucide-react";
+import {
+  SiC,
+  SiCplusplus,
+  SiPython,
+  SiJavascript,
+  SiDjango,
+  SiLaravel,
+  SiGit,
+  SiGithub,
+  SiMysql,
+  SiPostgresql,
+} from "react-icons/si";
 import { skills, onlineJudges, achievements, leadership } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
@@ -14,6 +40,26 @@ const judgeIcons: Record<string, React.ComponentType<{ size?: number; className?
   Codeforces: CodeforcesIcon,
   Codechef: CodechefIcon,
   LeetCode: LeetcodeIcon,
+};
+
+const skillIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  C: SiC,
+  "C++": SiCplusplus,
+  Python: SiPython,
+  JavaScript: SiJavascript,
+  SQL: Database,
+  Django: SiDjango,
+  REST: Webhook,
+  Foundry: Anvil,
+  Laravel: SiLaravel,
+  Git: SiGit,
+  GitHub: SiGithub,
+  MySQL: SiMysql,
+  PostgreSQL: SiPostgresql,
+  "Machine Learning": Brain,
+  "Computer Vision": ScanEye,
+  "Backend Development": Server,
+  Blockchain: Blocks,
 };
 
 export function SkillsSection() {
@@ -121,16 +167,20 @@ export function SkillsSection() {
                 <PopWords text={category} inView stagger={0.04} />
               </p>
               <div className="mt-2.5 flex flex-wrap gap-1.5">
-                {items.map((item) => (
-                  <motion.span
-                    key={item}
-                    whileHover={{ y: -2, scale: 1.06 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                    className="chip rounded-full border border-accent/25 bg-accent/[0.07] px-2.5 py-0.5 text-xs font-medium text-accent"
-                  >
-                    {item}
-                  </motion.span>
-                ))}
+                {items.map((item) => {
+                  const Icon = skillIcons[item];
+                  return (
+                    <motion.span
+                      key={item}
+                      whileHover={{ y: -2, scale: 1.06 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                      className="chip inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/[0.07] px-2.5 py-0.5 text-xs font-medium text-accent"
+                    >
+                      {Icon && <Icon size={12} />}
+                      {item}
+                    </motion.span>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
@@ -144,18 +194,29 @@ export function SkillsSection() {
             Leadership &amp; Volunteering
           </h3>
         </PopIn>
-        <StaggerGroup className="grid gap-2.5 sm:grid-cols-2">
+        <StaggerGroup className="grid gap-3 sm:grid-cols-2">
           {leadership.map((l, i) => (
             <motion.div
               key={l}
               variants={staggerItem}
-              whileHover={{ x: 4 }}
-              className="shimmer group flex items-center gap-3 rounded-md border border-border-muted bg-canvas-subtle px-3.5 py-2.5 text-sm text-fg-muted transition-colors hover:border-done/40"
+              whileHover={{ y: -3 }}
+              transition={{ type: "spring", stiffness: 320, damping: 22 }}
+              className="shimmer group relative flex items-center gap-3 overflow-hidden rounded-md border border-border-muted bg-canvas-subtle px-4 py-3 text-sm text-fg-muted shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-done/50 hover:shadow-[0_14px_28px_-16px_var(--color-done)]"
             >
+              <span
+                aria-hidden
+                className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-done to-accent transition-transform duration-300 ease-out group-hover:scale-y-100"
+              />
               <span className="mono text-[10px] text-fg-subtle">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-done" />
+              <motion.span
+                whileHover={{ rotate: -12, scale: 1.15 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-done-subtle text-done"
+              >
+                <Crown size={14} />
+              </motion.span>
               <span className="transition-colors group-hover:text-fg-default">
                 {l}
               </span>
