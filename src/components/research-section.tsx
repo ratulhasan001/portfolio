@@ -161,7 +161,7 @@ export function ResearchSection() {
       <SectionTitle
         index="03"
         title="Research & Publications"
-        subtitle="Peer-reviewed and in-progress work spanning LLM reliability, biology-informed deep learning, and applied blockchain systems."
+        subtitle="Peer-reviewed research spanning artificial intelligence, healthcare AI, computer vision, blockchain security, and trustworthy intelligent systems."
       />
 
       <div className="space-y-10">
