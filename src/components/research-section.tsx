@@ -7,6 +7,7 @@ import { SectionTitle, StatusPill } from "./ui";
 import { StaggerGroup, staggerItem } from "./fade-in";
 import { TiltCard } from "./tilt-card";
 import { PopIn, PopWords } from "./pop-in";
+import { ParallaxLayer } from "./parallax-layer";
 
 function PublicationCard({ pub }: { pub: Publication }) {
   return (
@@ -157,7 +158,11 @@ export function ResearchSection() {
   const conferences = publications.filter((p) => p.type === "conference");
 
   return (
-    <section id="research" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+    <section id="research" className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+      <ParallaxLayer speed={35}>
+        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
+      </ParallaxLayer>
+
       <SectionTitle
         index="03"
         title="Research & Publications"

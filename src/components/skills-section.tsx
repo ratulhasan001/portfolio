@@ -32,6 +32,7 @@ import { skills, onlineJudges, achievements, leadership } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
 import { NeuralBackground } from "./neural-background";
+import { ParallaxLayer } from "./parallax-layer";
 import { TiltCard } from "./tilt-card";
 import { PopWords, PopIn } from "./pop-in";
 import { CodeforcesIcon, CodechefIcon, LeetcodeIcon } from "./brand-icons";
@@ -68,7 +69,9 @@ export function SkillsSection() {
       id="skills"
       className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
     >
-      <NeuralBackground />
+      <ParallaxLayer speed={45}>
+        <NeuralBackground />
+      </ParallaxLayer>
       <SectionTitle
         index="05"
         title="Skills & Achievements"

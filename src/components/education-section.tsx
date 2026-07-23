@@ -8,13 +8,18 @@ import { FadeIn } from "./fade-in";
 import { TiltCard } from "./tilt-card";
 import { CountUp } from "./count-up";
 import { PopWords } from "./pop-in";
+import { ParallaxLayer } from "./parallax-layer";
 
 export function EducationSection() {
   return (
     <section
       id="education"
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
+      className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
     >
+      <ParallaxLayer speed={35}>
+        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
+      </ParallaxLayer>
+
       <SectionTitle
         index="02"
         title="Education"
