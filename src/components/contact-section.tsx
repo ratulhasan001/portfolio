@@ -6,6 +6,7 @@ import { profile } from "@/lib/data";
 import { FadeIn } from "./fade-in";
 import { GithubIcon, LinkedinIcon } from "./brand-icons";
 import { BackgroundBlobs } from "./background-blobs";
+import { ParallaxLayer } from "./parallax-layer";
 import { smoothScrollToId } from "@/lib/scroll";
 import { PopWords, PopIn } from "./pop-in";
 
@@ -17,8 +18,12 @@ export function ContactSection() {
     >
       <FadeIn>
         <div className="relative overflow-hidden rounded-lg border border-border-default bg-canvas-subtle p-8 text-center sm:p-14">
-          <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_10%,transparent_75%)]" />
-          <BackgroundBlobs />
+          <ParallaxLayer speed={25}>
+            <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_10%,transparent_75%)]" />
+          </ParallaxLayer>
+          <ParallaxLayer speed={40}>
+            <BackgroundBlobs />
+          </ParallaxLayer>
           <div className="relative">
             <PopIn as="span" inView scale={0.3} className="mono text-sm text-accent">
               06 · Contact

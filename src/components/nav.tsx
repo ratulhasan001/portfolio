@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "./theme-toggle";
 import {
@@ -90,6 +90,8 @@ function OpenBadge({ vertical = false }: { vertical?: boolean }) {
 export function Nav() {
   const [active, setActive] = useState("#overview");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [navSpin, setNavSpin] = useState(0);
+  const isFirstActive = useRef(true);
 
   useEffect(() => {
     const sections = links
@@ -111,6 +113,14 @@ export function Nav() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (isFirstActive.current) {
+      isFirstActive.current = false;
+      return;
+    }
+    setNavSpin((s) => s + 1);
+  }, [active]);
+
   const bootDelay = getBootDelay(1.6);
 
   return (
@@ -125,8 +135,16 @@ export function Nav() {
         <motion.div
           animate={{ y: [0, -5, 0] }}
           transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut", delay: 1.2 + bootDelay }}
-          className="flex flex-col items-center gap-1 overflow-hidden rounded-2xl border border-accent/20 bg-canvas/85 px-3 pb-4 pt-0 shadow-[0_24px_48px_-20px_var(--color-accent),0_14px_30px_-14px_rgba(0,0,0,0.55)] backdrop-blur-md"
+          style={{ perspective: 800 }}
+          className="relative flex flex-col items-center gap-1 overflow-hidden rounded-2xl border border-accent/20 bg-canvas/85 px-3 pb-4 pt-0 shadow-[0_24px_48px_-20px_var(--color-accent),0_14px_30px_-14px_rgba(0,0,0,0.55)] backdrop-blur-md"
         >
+          <motion.span
+            aria-hidden
+            animate={{ rotateY: navSpin * 360 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="pointer-events-none absolute inset-0 z-20 rounded-2xl border-2 border-accent/60"
+          />
+
           <div className="gradient-line -mx-3 mb-3 h-[3px] w-[calc(100%+1.5rem)] shrink-0 opacity-80" />
 
           <Logo />
@@ -148,28 +166,35 @@ export function Nav() {
                   initial="rest"
                   whileHover="hover"
                   whileTap={{ scale: 0.94 }}
+                  style={{ perspective: 800 }}
                   className="group relative"
                 >
                   <motion.span
-                    variants={{ rest: { x: 0 }, hover: { x: -3 } }}
-                    transition={{ type: "spring", stiffness: 420, damping: 20 }}
-                    className={`relative z-10 flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                      isActive
-                        ? "text-accent"
-                        : "text-fg-muted group-hover:text-fg-default"
-                    }`}
+                    animate={{ rotateY: isActive ? -360 : 0 }}
+                    transition={{ duration: isActive ? 0.65 : 0 }}
+                    className="relative z-10 block"
                   >
                     <motion.span
-                      variants={{
-                        rest: { rotate: 0, scale: 1 },
-                        hover: { rotate: -12, scale: 1.25 },
-                      }}
-                      transition={{ type: "spring", stiffness: 450, damping: 12 }}
-                      className="flex shrink-0"
+                      variants={{ rest: { x: 0 }, hover: { x: -3 } }}
+                      transition={{ type: "spring", stiffness: 420, damping: 20 }}
+                      className={`flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
+                        isActive
+                          ? "text-accent"
+                          : "text-fg-muted group-hover:text-fg-default"
+                      }`}
                     >
-                      <Icon size={14} className={isActive ? "scale-110" : ""} />
+                      <motion.span
+                        variants={{
+                          rest: { rotate: 0, scale: 1 },
+                          hover: { rotate: -12, scale: 1.25 },
+                        }}
+                        transition={{ type: "spring", stiffness: 450, damping: 12 }}
+                        className="flex shrink-0"
+                      >
+                        <Icon size={14} className={isActive ? "scale-110" : ""} />
+                      </motion.span>
+                      <span className="whitespace-nowrap">{link.label}</span>
                     </motion.span>
-                    <span className="whitespace-nowrap">{link.label}</span>
                   </motion.span>
 
                   {isActive && (
@@ -276,9 +301,16 @@ export function Nav() {
                           ? "border border-accent/30 bg-accent/10 text-accent"
                           : "text-fg-muted hover:bg-canvas-subtle hover:text-fg-default"
                       }`}
+                      style={{ perspective: 800 }}
                     >
-                      <Icon size={15} />
-                      {link.label}
+                      <motion.span
+                        animate={{ rotateY: isActive ? -360 : 0 }}
+                        transition={{ duration: isActive ? 0.65 : 0 }}
+                        className="flex items-center gap-2.5"
+                      >
+                        <Icon size={15} className="shrink-0" />
+                        {link.label}
+                      </motion.span>
                     </motion.a>
                   );
                 })}

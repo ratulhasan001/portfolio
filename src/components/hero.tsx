@@ -16,6 +16,7 @@ import { FadeIn } from "./fade-in";
 import { TypedLines } from "./typed-lines";
 import { GithubIcon, LinkedinIcon } from "./brand-icons";
 import { BackgroundBlobs } from "./background-blobs";
+import { ParallaxLayer } from "./parallax-layer";
 import { CountUp } from "./count-up";
 import { PopWords } from "./pop-in";
 import { getBootDelay } from "@/lib/boot-delay";
@@ -37,8 +38,12 @@ export function Hero() {
       id="overview"
       className="relative overflow-hidden border-b border-border-default"
     >
-      <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
-      <BackgroundBlobs />
+      <ParallaxLayer speed={40}>
+        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
+      </ParallaxLayer>
+      <ParallaxLayer speed={70}>
+        <BackgroundBlobs />
+      </ParallaxLayer>
 
       <motion.div
         style={{ opacity: heroOpacity }}
@@ -194,12 +199,22 @@ export function Hero() {
         {/* README panel */}
         <motion.div style={{ y: yPanel }}>
           <FadeIn delay={0.15}>
-            <div className="relative overflow-hidden rounded-md p-[2px] shadow-md">
+            <div
+              className="relative overflow-hidden rounded-md p-[2px] shadow-md"
+              style={{ perspective: 800 }}
+            >
               <motion.span
                 aria-hidden
                 animate={{ rotate: 360 }}
                 transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
                 className="absolute -inset-[100%] bg-[conic-gradient(from_0deg,var(--color-accent),var(--color-done),var(--color-success),var(--color-accent))]"
+              />
+              <motion.span
+                aria-hidden
+                initial={{ rotateY: 0 }}
+                animate={{ rotateY: 360 }}
+                transition={{ duration: 0.9, ease: "easeInOut", delay: 0.6 + bootDelay }}
+                className="pointer-events-none absolute inset-0 z-20 rounded-md border-2 border-accent/70"
               />
               <div className="relative overflow-hidden rounded-md bg-canvas">
                 <FileHeader filename="README.md" label="researcher.profile" />
