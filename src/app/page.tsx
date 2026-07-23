@@ -16,7 +16,7 @@ export default function Home() {
       <ScrollProgress />
       <ScrollRail />
       <Nav />
-      <main className="flex-1">
+      <main className="flex-1 lg:pr-56">
         <Hero />
         <SectionConnector />
         <ExperienceSection />
