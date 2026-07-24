@@ -65,8 +65,10 @@ function Logo({ compact = false }: { compact?: boolean }) {
 function OpenBadge({ vertical = false }: { vertical?: boolean }) {
   return (
     <div
-      className={`mono flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-success/30 bg-success-subtle px-2.5 py-1 text-[11px] font-medium text-success ${
-        vertical ? "flex-col py-2 text-center leading-tight" : ""
+      className={`mono flex shrink-0 items-center gap-1.5 whitespace-nowrap border border-success/30 bg-success-subtle text-[11px] font-medium text-success ${
+        vertical
+          ? "flex-col rounded-xl px-2.5 py-2.5 text-center leading-tight"
+          : "rounded-full px-2.5 py-1"
       }`}
     >
       <motion.span
