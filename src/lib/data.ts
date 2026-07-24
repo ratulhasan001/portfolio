@@ -301,7 +301,6 @@ export const leadership: LeadershipEntry[] = [
       "Deputy Editorial Secretary",
     ],
   },
-  { org: "Intra University Programming Contest at BAUET", roles: ["Problem Setter"] },
-  { org: "BAUET Computer Society", roles: ["Trainer of Competitive Programming"] },
-  { org: "HULT Prize at BAUET", roles: ["Officer of Documentation"] },
+  { org: "Intra University Programming Contest, BAUET", roles: ["Problem Setter"] },
+  { org: "HULT Prize, BAUET", roles: ["Officer of Documentation"] },
 ];
