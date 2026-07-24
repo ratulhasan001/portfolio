@@ -43,6 +43,18 @@ export const experience: Experience[] = [
     tags: ["LLM", "NLP", "Research"],
   },
   {
+    org: "BAUET Computer Society, Dept. of CSE, BAUET",
+    role: "Programming Instructor",
+    location: "Natore, Bangladesh",
+    period: "January 2025 - May 2026",
+    bullets: [
+      "Conducted regular training sessions on C programming and competitive programming for undergraduate students.",
+      "Designed coding exercises and problem-solving sessions, and conducted practice contests.",
+      "Mentored students in programming fundamentals and competitive programming techniques to strengthen analytical and coding skills.",
+    ],
+    tags: ["C", "Competitive Programming", "Teaching"],
+  },
+  {
     org: "Lab AR",
     role: "Software Engineering Intern",
     location: "Dhaka, Bangladesh",
