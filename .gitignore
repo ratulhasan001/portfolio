@@ -28,3 +28,6 @@ next-env.d.ts
 # vercel
 .vercel
 .env*
+
+# github profile readme draft (not part of this repo)
+README2.md
