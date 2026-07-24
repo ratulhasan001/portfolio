@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #ffffff;
-  --canvas-subtle: #f6f8fa;
-  --canvas-inset: #eff1f3;
+  --canvas: #f9fafb;
+  --canvas-subtle: #f1f3f5;
+  --canvas-inset: #e9ecef;
   --canvas-overlay: #ffffff;
   --border-default: #d1d9e0;
   --border-muted: #d1d9e0b3;
