@@ -122,6 +122,8 @@ export function Nav() {
   }, [active]);
 
   const bootDelay = getBootDelay(1.6);
+  const activeLink = links.find((l) => l.href === active) ?? links[0];
+  const ActiveIcon = activeLink.icon;
 
   return (
     <>
@@ -238,6 +240,25 @@ export function Nav() {
       >
         <div className="flex items-center gap-2 rounded-full border border-accent/20 bg-canvas/90 py-1.5 pl-1.5 pr-2 shadow-[0_16px_32px_-16px_var(--color-accent)] backdrop-blur-md">
           <Logo compact />
+
+          <div className="h-4 w-px shrink-0 bg-border-default" />
+
+          <div aria-live="polite" className="overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={activeLink.href}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 26 }}
+                className="flex items-center gap-1.5 whitespace-nowrap px-0.5 text-sm font-medium text-accent"
+              >
+                <ActiveIcon size={13} />
+                {activeLink.label}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+
           <motion.button
             whileHover={{ scale: 1.12, y: -2 }}
             whileTap={{ scale: 0.88 }}
