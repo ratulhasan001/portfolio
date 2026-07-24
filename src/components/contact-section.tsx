@@ -79,7 +79,7 @@ export function ContactSection() {
                   variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   style={{ originX: 0 }}
-                  className="absolute inset-0 bg-gradient-to-r from-fg-default to-fg-subtle dark:from-[#333] dark:to-[#111]"
+                  className="absolute inset-0 bg-gradient-to-r from-[#24292f] to-[#0d1117]"
                 />
                 <motion.span
                   variants={{ rest: { rotate: 0, scale: 1 }, hover: { rotate: -14, scale: 1.15 } }}
