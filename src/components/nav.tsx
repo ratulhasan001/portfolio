@@ -231,9 +231,9 @@ export function Nav() {
 
       {/* Mobile / tablet: compact floating pill, top-right */}
       <motion.header
-        initial={{ opacity: 0, clipPath: "inset(0% 0% 100% 0%)" }}
-        animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
-        transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1], delay: 0.3 + bootDelay }}
+        initial={{ opacity: 0, y: -12, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 22, delay: 0.3 + bootDelay }}
         className="safe-top fixed right-4 top-4 z-50 lg:hidden"
       >
         <div className="flex items-center gap-2 rounded-full border border-accent/20 bg-canvas/90 py-1.5 pl-1.5 pr-2 shadow-[0_16px_32px_-16px_var(--color-accent)] backdrop-blur-md">
@@ -268,7 +268,7 @@ export function Nav() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -8 }}
               transition={{ type: "spring", stiffness: 380, damping: 28 }}
-              className="absolute right-0 top-full mt-2 w-64 overflow-hidden rounded-2xl border border-accent/20 bg-canvas/95 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.6)] backdrop-blur-md"
+              className="absolute right-0 top-full mt-2 w-64 rounded-2xl border border-accent/20 bg-canvas/95 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.6)] backdrop-blur-md"
             >
               <motion.div
                 initial="hidden"
