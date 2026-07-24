@@ -96,9 +96,27 @@ export function Hero() {
                 <PopWords text={profile.name} delay={0.5 + bootDelay} stagger={0.08} />
               </h1>
 
-              <p className="mt-3 text-justify text-sm leading-relaxed text-fg-muted">
-                {profile.bio}
-              </p>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 + bootDelay, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-3 text-justify text-sm leading-relaxed text-fg-muted"
+              >
+                Computer Science graduate with research experience in{" "}
+                <span className="font-semibold text-accent">
+                  machine learning, healthcare AI, blockchain, and cybersecurity
+                </span>
+                . Published in peer-reviewed conference proceedings, with research
+                interests in{" "}
+                <span className="font-semibold text-done">
+                  trustworthy AI, large language models, and AI for healthcare
+                </span>
+                . Aspiring to pursue{" "}
+                <span className="font-semibold text-success">
+                  graduate research in Artificial Intelligence
+                </span>
+                .
+              </motion.p>
 
               <motion.a
                 variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.03, y: -2 } }}
@@ -129,53 +147,84 @@ export function Hero() {
                 </span>
               </motion.a>
 
-              <ul className="mt-5 w-full space-y-2.5 text-sm text-fg-muted">
-                <li className="flex items-center gap-2">
-                  <MapPin size={15} className="shrink-0 text-fg-subtle" />
-                  {profile.location}
-                </li>
-                <li className="flex items-center gap-2">
-                  <Mail size={15} className="shrink-0 text-fg-subtle" />
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="truncate hover:text-accent"
-                  >
-                    {profile.email}
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <LinkIcon size={15} className="shrink-0 text-fg-subtle" />
-                  <a
-                    href={`https://${profile.website}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="truncate hover:text-accent"
-                  >
-                    {profile.website}
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <GithubIcon size={15} className="shrink-0 text-fg-subtle" />
-                  <a
-                    href={profile.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="truncate hover:text-accent"
-                  >
-                    github.com/{profile.handle}
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <LinkedinIcon size={15} className="shrink-0 text-fg-subtle" />
-                  <a
-                    href={profile.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="truncate hover:text-accent"
-                  >
-                    linkedin.com/in/ratul-hasan
-                  </a>
-                </li>
+              <ul className="mt-5 w-full space-y-1">
+                {[
+                  { icon: MapPin, label: profile.location },
+                  {
+                    icon: Mail,
+                    label: profile.email,
+                    href: `mailto:${profile.email}`,
+                  },
+                  {
+                    icon: LinkIcon,
+                    label: profile.website,
+                    href: `https://${profile.website}`,
+                    external: true,
+                  },
+                  {
+                    icon: GithubIcon,
+                    label: `github.com/${profile.handle}`,
+                    href: profile.github,
+                    external: true,
+                  },
+                  {
+                    icon: LinkedinIcon,
+                    label: "linkedin.com/in/ratul-hasan",
+                    href: profile.linkedin,
+                    external: true,
+                  },
+                ].map((item, i) => {
+                  const Icon = item.icon;
+                  const rowContent = (
+                    <>
+                      <motion.span
+                        whileHover={{ rotate: -10, scale: 1.15 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white"
+                      >
+                        <Icon size={13} />
+                      </motion.span>
+                      <span className="truncate text-sm text-fg-muted transition-colors duration-300 group-hover:text-fg-default">
+                        {item.label}
+                      </span>
+                    </>
+                  );
+                  return (
+                    <motion.li
+                      key={item.label}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        delay: i * 0.06,
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 24,
+                      }}
+                    >
+                      {item.href ? (
+                        <motion.a
+                          href={item.href}
+                          target={item.external ? "_blank" : undefined}
+                          rel={item.external ? "noreferrer" : undefined}
+                          whileHover={{ x: 4 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 24 }}
+                          className="group relative -mx-2 flex items-center gap-2.5 rounded-lg px-2 py-1.5"
+                        >
+                          {rowContent}
+                          <span
+                            aria-hidden
+                            className="absolute inset-0 -z-10 rounded-lg bg-canvas-subtle opacity-0 shadow-[0_10px_22px_-12px_var(--color-accent)] transition-opacity duration-300 group-hover:opacity-100"
+                          />
+                        </motion.a>
+                      ) : (
+                        <div className="group relative -mx-2 flex items-center gap-2.5 rounded-lg px-2 py-1.5">
+                          {rowContent}
+                        </div>
+                      )}
+                    </motion.li>
+                  );
+                })}
               </ul>
 
               <div className="mt-5 flex flex-wrap gap-1.5">

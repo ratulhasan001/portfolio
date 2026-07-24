@@ -8,7 +8,7 @@ export const profile = {
   website: "https://ratulhasan.xyz",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
-  bio: "Computer Science graduate and AI researcher with publications in machine learning, blockchain, cybersecurity, and healthcare AI. My research focuses on building trustworthy, explainable, and secure intelligent systems, with the long-term goal of pursuing a PhD in Artificial Intelligence.",
+  bio: "Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.",
   interests: [
     "Healthcare AI",
     "Large Language Models (LLMs)",
