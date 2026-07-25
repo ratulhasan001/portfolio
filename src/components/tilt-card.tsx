@@ -99,7 +99,7 @@ export function TiltLink({
       onMouseLeave={t.handleMouseLeave}
       onMouseEnter={t.handleMouseEnter}
       style={{ rotateX: t.rotateX, rotateY: t.rotateY, scale: t.scale, transformPerspective: 800 }}
-      className={`group relative ${className ?? ""}`}
+      className={`group relative block ${className ?? ""}`}
     >
       <motion.span
         aria-hidden
