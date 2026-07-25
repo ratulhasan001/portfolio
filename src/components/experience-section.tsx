@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { GitCommitHorizontal } from "lucide-react";
 import { experience } from "@/lib/data";
-import { SectionTitle, Chip } from "./ui";
+import { SectionTitle } from "./ui";
 import { PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
 
@@ -11,14 +11,14 @@ export function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
+      className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14"
     >
       <ParallaxLayer speed={35}>
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
       </ParallaxLayer>
 
       <SectionTitle
-        index="01"
+        index="03"
         title="Experience"
         subtitle="A commit history of roles and research positions."
       />
@@ -69,11 +69,6 @@ export function ExperienceSection() {
                 </li>
               ))}
             </ul>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {exp.tags.map((t) => (
-                <Chip key={t}>{t}</Chip>
-              ))}
-            </div>
           </motion.li>
         ))}
       </ol>
