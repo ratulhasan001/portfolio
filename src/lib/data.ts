@@ -1,20 +1,21 @@
 export const profile = {
   name: "Ratul Hasan",
   handle: "ratulhasan001",
-  role: "CSE Undergraduate · Aspiring PhD Researcher",
+  role: "CSE Undergraduate · Aspiring Graduate Researcher",
   location: "Khulna, Bangladesh",
   email: "ratulhasan.cs@gmail.com",
   phone: "+8801760972108",
   website: "https://ratulhasan.xyz",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
-  bio: "Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.",
-  interests: [
+  summary:
+    "Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.",
+  focusAreas: [
+    "Machine Learning",
+    "Large Language Models",
+    "Explainable AI",
     "Healthcare AI",
-    "Large Language Models (LLMs)",
-  "Explainable AI (XAI)",
-  "Computer Vision",
-  "Blockchain & Decentralized Systems",
+    "Blockchain & Decentralized Systems",
   ],
   followersLabel: "Open to research collaboration",
 };
@@ -119,7 +120,7 @@ export const publications: Publication[] = [
     date: "Submitted May 2026",
     status: "under-review",
     type: "journal",
-    digitalLibrary: "SpringerLink",
+    digitalLibrary: "Springer Nature Link",
   },
 {
   title:
@@ -238,9 +239,9 @@ export const stats = [
     ).length,
     suffix: "",
   },
-  { label: "Projects", value: projects.length, suffix: "" },
-  { label: "Contest Awards", value: 6, suffix: "+" },
+  { label: "Research Projects", value: projects.length, suffix: "" },
   { label: "Problems Solved", value: 1000, suffix: "+" },
+  { label: "Programming Awards", value: 6, suffix: "+" },
 ];
 
 export const skills = {
