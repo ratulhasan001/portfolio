@@ -21,11 +21,11 @@ import { getBootDelay } from "@/lib/boot-delay";
 
 const links = [
   { href: "#overview", label: "Overview", icon: LayoutDashboard },
-  { href: "#experience", label: "Experience", icon: Briefcase },
-  { href: "#education", label: "Education", icon: GraduationCap },
   { href: "#research", label: "Research", icon: FlaskConical },
-  { href: "#projects", label: "Projects", icon: FolderGit2 },
+  { href: "#education", label: "Education", icon: GraduationCap },
+  { href: "#experience", label: "Experience", icon: Briefcase },
   { href: "#skills", label: "Skills", icon: Trophy },
+  { href: "#projects", label: "Projects", icon: FolderGit2 },
   { href: "#contact", label: "Contact", icon: Mail },
 ];
 
@@ -91,9 +91,17 @@ function OpenBadge({ vertical = false }: { vertical?: boolean }) {
 
 export function Nav() {
   const [active, setActive] = useState("#overview");
+  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [navSpin, setNavSpin] = useState(0);
   const isFirstActive = useRef(true);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const sections = links
@@ -129,33 +137,50 @@ export function Nav() {
 
   return (
     <>
-      {/* Desktop: floating vertical bar on the right */}
+      {/* Desktop: floating horizontal bar, top */}
       <motion.header
         initial={{ opacity: 0, clipPath: "inset(0% 0% 100% 0%)" }}
-        animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
-        transition={{ duration: 0.85, ease: [0.65, 0, 0.35, 1], delay: 0.3 + bootDelay }}
-        className="fixed right-6 top-1/2 z-50 hidden -translate-y-1/2 lg:block"
+        animate={{
+          opacity: 1,
+          clipPath: "inset(0% 0% 0% 0%)",
+          marginLeft: scrolled ? 14 : 0,
+          marginRight: scrolled ? 14 : 0,
+          marginTop: scrolled ? 10 : 0,
+          borderRadius: scrolled ? 20 : 0,
+          y: scrolled ? [0, -4, 0] : 0,
+        }}
+        transition={{
+          clipPath: { duration: 0.85, ease: [0.65, 0, 0.35, 1], delay: 0.3 + bootDelay },
+          opacity: { duration: 0.85, delay: 0.3 + bootDelay },
+          marginLeft: { type: "spring", stiffness: 260, damping: 24 },
+          marginRight: { type: "spring", stiffness: 260, damping: 24 },
+          marginTop: { type: "spring", stiffness: 260, damping: 24 },
+          borderRadius: { type: "spring", stiffness: 260, damping: 24 },
+          y: scrolled
+            ? { duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
+            : { duration: 0.3 },
+        }}
+        style={{ perspective: 1200 }}
+        className={`safe-top sticky top-0 z-50 hidden overflow-hidden transition-[background-color,border-color,box-shadow] duration-500 lg:block ${
+          scrolled
+            ? "border border-accent/20 bg-canvas/85 shadow-[0_24px_48px_-20px_var(--color-accent),0_14px_30px_-14px_rgba(0,0,0,0.55)] backdrop-blur-md"
+            : "border-b border-transparent bg-canvas shadow-none"
+        }`}
       >
-        <motion.div
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut", delay: 1.2 + bootDelay }}
-          style={{ perspective: 800 }}
-          className="relative flex flex-col items-center gap-1 overflow-hidden rounded-2xl border border-accent/20 bg-canvas/85 px-3 pb-4 pt-0 shadow-[0_24px_48px_-20px_var(--color-accent),0_14px_30px_-14px_rgba(0,0,0,0.55)] backdrop-blur-md"
-        >
-          <motion.span
-            aria-hidden
-            animate={{ rotateY: navSpin * 360 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="pointer-events-none absolute inset-0 z-20 rounded-2xl border-2 border-accent/60"
-          />
+        <motion.span
+          aria-hidden
+          animate={{ rotateY: navSpin * 360 }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+          style={{ borderRadius: "inherit" }}
+          className="pointer-events-none absolute inset-0 z-20 border-2 border-accent/60"
+        />
 
-          <div className="gradient-line -mx-3 mb-3 h-[3px] w-[calc(100%+1.5rem)] shrink-0 opacity-80" />
+        <div className="gradient-line h-[2px] w-full opacity-70" />
 
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Logo />
 
-          <div className="my-2 h-px w-8 shrink-0 bg-border-default" />
-
-          <nav className="flex flex-col items-stretch gap-1.5">
+          <nav className="flex items-center gap-2.5 ml-10">
             {links.map((link) => {
               const Icon = link.icon;
               const isActive = active === link.href;
@@ -169,7 +194,7 @@ export function Nav() {
                   }}
                   initial="rest"
                   whileHover="hover"
-                  whileTap={{ scale: 0.94 }}
+                  whileTap={{ scale: 0.92 }}
                   style={{ perspective: 800 }}
                   className="group relative"
                 >
@@ -179,9 +204,9 @@ export function Nav() {
                     className="relative z-10 block"
                   >
                     <motion.span
-                      variants={{ rest: { x: 0 }, hover: { x: -3 } }}
+                      variants={{ rest: { y: 0 }, hover: { y: -2 } }}
                       transition={{ type: "spring", stiffness: 420, damping: 20 }}
-                      className={`flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
+                      className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                         isActive
                           ? "text-accent"
                           : "text-fg-muted group-hover:text-fg-default"
@@ -190,47 +215,56 @@ export function Nav() {
                       <motion.span
                         variants={{
                           rest: { rotate: 0, scale: 1 },
-                          hover: { rotate: -12, scale: 1.25 },
+                          hover: { rotate: -10, scale: 1.25 },
                         }}
                         transition={{ type: "spring", stiffness: 450, damping: 12 }}
-                        className="flex shrink-0"
+                        className="flex"
                       >
-                        <Icon size={14} className={isActive ? "scale-110" : ""} />
+                        <Icon size={13} className={isActive ? "scale-110" : ""} />
                       </motion.span>
-                      <span className="whitespace-nowrap">{link.label}</span>
+                      {link.label}
                     </motion.span>
                   </motion.span>
 
                   {isActive && (
                     <motion.span
-                      layoutId="nav-pill-vertical"
+                      layoutId="nav-pill"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      className="absolute inset-0 rounded-xl border border-accent/30 bg-accent/10 shadow-[0_0_16px_-4px_var(--color-accent)]"
+                      className="absolute inset-0 rounded-full border border-accent/30 bg-accent/10 shadow-[0_0_16px_-4px_var(--color-accent)]"
                     />
                   )}
                   {!isActive && (
                     <motion.span
                       variants={{
-                        rest: { opacity: 0, scale: 0.85 },
+                        rest: { opacity: 0, scale: 0.8 },
                         hover: { opacity: 1, scale: 1 },
                       }}
                       transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                      className="absolute inset-0 rounded-xl border border-accent/20 bg-canvas-subtle shadow-[0_10px_24px_-10px_var(--color-accent)]"
+                      className="absolute inset-0 rounded-full border border-accent/20 bg-canvas-subtle shadow-[0_10px_24px_-10px_var(--color-accent)]"
                     />
                   )}
+
+                  <motion.span
+                    aria-hidden
+                    variants={{
+                      rest: { opacity: 0, y: -3, scale: 0.4 },
+                      hover: { opacity: 1, y: 0, scale: 1 },
+                    }}
+                    transition={{ type: "spring", stiffness: 500, damping: 20 }}
+                    className="absolute left-1/2 top-full z-10 mt-1 h-1 w-1 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_8px_1px_var(--color-accent)]"
+                  />
                 </motion.a>
               );
             })}
           </nav>
 
-          <div className="my-2 h-px w-8 shrink-0 bg-border-default" />
-
-          <OpenBadge vertical />
-
-          <div className="mt-2">
+          <div className="flex items-center gap-2">
+            <div className="hidden xl:flex">
+              <OpenBadge />
+            </div>
             <ThemeToggle />
           </div>
-        </motion.div>
+        </div>
       </motion.header>
 
       {/* Mobile / tablet: compact floating pill, top-right */}
