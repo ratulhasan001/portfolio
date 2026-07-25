@@ -14,7 +14,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
+      className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14"
     >
       <FadeIn>
         <div className="relative overflow-hidden rounded-lg border border-border-default bg-canvas-subtle p-8 text-center sm:p-14">

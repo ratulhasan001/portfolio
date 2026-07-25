@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function SectionConnector() {
   return (
-    <div className="relative mx-auto flex h-14 w-px items-center justify-center overflow-visible">
+    <div className="relative mx-auto flex h-8 w-px items-center justify-center overflow-visible">
       <div className="absolute inset-0 mx-auto w-px bg-border-default" />
       <motion.span
         aria-hidden

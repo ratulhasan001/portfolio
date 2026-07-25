@@ -31,23 +31,23 @@
 }
 
 :root[data-theme="dark"] {
-  --canvas: #0d1117;
-  --canvas-subtle: #161b22;
-  --canvas-inset: #010409;
-  --canvas-overlay: #161b22;
-  --border-default: #30363d;
-  --border-muted: #21262d;
-  --fg-default: #e6edf3;
-  --fg-muted: #aab4c0;
-  --fg-subtle: #88919c;
-  --accent: #4493f8;
-  --accent-emphasis: #1f6feb;
+  --canvas: #09090b;
+  --canvas-subtle: #111827;
+  --canvas-inset: #030305;
+  --canvas-overlay: #111827;
+  --border-default: #1f2937;
+  --border-muted: #17202e;
+  --fg-default: #f9fafb;
+  --fg-muted: #9ca3af;
+  --fg-subtle: #6b7280;
+  --accent: #3b82f6;
+  --accent-emphasis: #2563eb;
   --success: #3fb950;
   --success-subtle: #12261e;
   --attention: #d29922;
   --attention-subtle: #2b2111;
-  --done: #ab7df8;
-  --done-subtle: #271a3d;
+  --done: #8b5cf6;
+  --done-subtle: #211a3d;
   --danger: #f85149;
   --shadow-sm: 0 0 transparent;
   --shadow-md: 0 8px 24px rgba(1, 4, 9, 0.5);
@@ -168,6 +168,13 @@ html.force-visible [style*="opacity:0"] {
 
 .card-glow {
   box-shadow: 0 0 0 1px var(--border-default), var(--shadow-md);
+}
+
+.glass {
+  background: color-mix(in srgb, var(--canvas-subtle) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-default) 70%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 @keyframes gradient-flow {

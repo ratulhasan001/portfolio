@@ -5,16 +5,15 @@ import { BookOpen, Clock, ExternalLink, FileText, Library, Link2, Users } from "
 import { publications, type Publication } from "@/lib/data";
 import { SectionTitle, StatusPill } from "./ui";
 import { StaggerGroup, staggerItem } from "./fade-in";
-import { TiltCard } from "./tilt-card";
+import { TiltCard, TiltLink } from "./tilt-card";
 import { PopIn, PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
 
 function PublicationCard({ pub }: { pub: Publication }) {
-  return (
-    <TiltCard
-      variants={staggerItem}
-      className="shimmer rounded-md border border-border-default bg-canvas-subtle p-5 transition-colors hover:border-accent/50 sm:p-6"
-    >
+  const cardClassName =
+    "shimmer rounded-md border border-border-default bg-canvas-subtle p-5 transition-colors hover:border-accent/50 sm:p-6";
+  const body = (
+    <>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <motion.span
@@ -31,18 +30,13 @@ function PublicationCard({ pub }: { pub: Publication }) {
           <div>
             <h3 className="text-base font-semibold text-fg-default sm:text-lg">
               {pub.link ? (
-                <a
-                  href={pub.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center gap-1.5 bg-[linear-gradient(var(--color-accent),var(--color-accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size,color] duration-300 hover:bg-[length:100%_1px] hover:text-accent"
-                >
+                <span className="inline-flex items-center gap-1.5 bg-[linear-gradient(var(--color-accent),var(--color-accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size,color] duration-300 group-hover:bg-[length:100%_1px] group-hover:text-accent">
                   <PopWords text={pub.title} inView stagger={0.018} />
                   <ExternalLink
                     size={13}
                     className="opacity-0 transition-opacity group-hover:opacity-100"
                   />
-                </a>
+                </span>
               ) : (
                 <PopWords text={pub.title} inView stagger={0.018} />
               )}
@@ -88,35 +82,42 @@ function PublicationCard({ pub }: { pub: Publication }) {
         <span className="mono text-accent/80">{pub.date}</span>
 
         {pub.link && (
-          <motion.a
-            href={pub.link}
-            target="_blank"
-            rel="noreferrer"
-            variants={{ rest: { scale: 1, y: 0 }, hover: { scale: 1.06, y: -2 } }}
-            initial="rest"
-            whileHover="hover"
-            whileTap={{ scale: 0.94 }}
-            transition={{ type: "spring", stiffness: 420, damping: 18 }}
-            className="pointer-events-none relative ml-auto flex translate-y-1 scale-90 items-center gap-1.5 overflow-hidden rounded-full border border-success/30 bg-canvas px-3 py-1 text-[11px] font-semibold text-success opacity-0 shadow-sm transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 hover:border-transparent hover:text-white hover:shadow-[0_10px_22px_-8px_var(--color-success)]"
+          <span
+            aria-hidden
+            className="relative ml-auto flex translate-y-1 scale-90 items-center gap-1.5 overflow-hidden rounded-full border border-success/30 bg-canvas px-3 py-1 text-[11px] font-semibold text-success opacity-0 shadow-sm transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-hover:text-white group-hover:shadow-[0_10px_22px_-8px_var(--color-success)]"
           >
-            <motion.span
+            <span
               aria-hidden
-              variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              style={{ originX: 0 }}
-              className="absolute inset-0 -z-10 bg-gradient-to-r from-success to-accent"
+              className="absolute inset-0 -z-10 origin-left scale-x-0 bg-gradient-to-r from-success to-accent transition-transform duration-300 ease-out group-hover:scale-x-100"
             />
-            <motion.span
-              variants={{ rest: { rotate: 0 }, hover: { rotate: 45 } }}
-              transition={{ type: "spring", stiffness: 420, damping: 14 }}
-              className="relative flex"
-            >
-              <Link2 size={11} />
-            </motion.span>
+            <Link2
+              size={11}
+              className="relative transition-transform duration-300 ease-out group-hover:rotate-45"
+            />
             <span className="relative mono">{pub.link.replace("https://doi.org/", "")}</span>
-          </motion.a>
+          </span>
         )}
       </div>
+    </>
+  );
+
+  if (pub.link) {
+    return (
+      <TiltLink
+        href={pub.link}
+        target="_blank"
+        rel="noreferrer"
+        variants={staggerItem}
+        className={cardClassName}
+      >
+        {body}
+      </TiltLink>
+    );
+  }
+
+  return (
+    <TiltCard variants={staggerItem} className={cardClassName}>
+      {body}
     </TiltCard>
   );
 }
@@ -158,13 +159,13 @@ export function ResearchSection() {
   const conferences = publications.filter((p) => p.type === "conference");
 
   return (
-    <section id="research" className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+    <section id="research" className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
       <ParallaxLayer speed={35}>
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
       </ParallaxLayer>
 
       <SectionTitle
-        index="03"
+        index="01"
         title="Research & Publications"
         subtitle="Peer-reviewed research spanning artificial intelligence, healthcare AI, computer vision, blockchain security, and trustworthy intelligent systems."
       />

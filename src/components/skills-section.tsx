@@ -33,7 +33,7 @@ import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
 import { NeuralBackground } from "./neural-background";
 import { ParallaxLayer } from "./parallax-layer";
-import { TiltCard } from "./tilt-card";
+import { TiltLink } from "./tilt-card";
 import { PopWords, PopIn } from "./pop-in";
 import { CodeforcesIcon, CodechefIcon, LeetcodeIcon } from "./brand-icons";
 
@@ -67,13 +67,13 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
+      className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14"
     >
       <ParallaxLayer speed={45}>
         <NeuralBackground />
       </ParallaxLayer>
       <SectionTitle
-        index="05"
+        index="04"
         title="Skills & Achievements"
         subtitle="Competitive programming record, technical toolkit, and leadership."
       />
@@ -90,7 +90,12 @@ export function SkillsSection() {
             const Icon = judgeIcons[judge.platform];
             return (
               <FadeIn key={judge.platform} delay={i * 0.08}>
-                <TiltCard className="shimmer h-full rounded-md border border-border-default bg-canvas-subtle p-4 transition-colors hover:border-accent/50">
+                <TiltLink
+                  href={judge.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="shimmer h-full rounded-md border border-border-default bg-canvas-subtle p-4 transition-colors hover:border-accent/50"
+                >
                   <div className="flex items-center gap-2">
                     {Icon && (
                       <motion.span
@@ -108,19 +113,14 @@ export function SkillsSection() {
                   <p className="gradient-text mt-2 text-lg font-bold">
                     {judge.stat}
                   </p>
-                  <a
-                    href={judge.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group/handle mono mt-1 inline-flex items-center gap-1 text-xs text-fg-subtle transition-colors hover:text-accent"
-                  >
+                  <span className="group/handle mono mt-1 inline-flex items-center gap-1 text-xs text-fg-subtle transition-colors group-hover:text-accent">
                     @{judge.handle}
                     <ExternalLink
                       size={11}
-                      className="opacity-0 transition-opacity group-hover/handle:opacity-100"
+                      className="opacity-0 transition-opacity group-hover:opacity-100"
                     />
-                  </a>
-                </TiltCard>
+                  </span>
+                </TiltLink>
               </FadeIn>
             );
           })}

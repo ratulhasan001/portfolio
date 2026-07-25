@@ -16,18 +16,18 @@ export default function Home() {
       <ScrollProgress />
       <ScrollRail />
       <Nav />
-      <main className="flex-1 lg:pr-56">
+      <main className="flex-1">
         <Hero />
-        <SectionConnector />
-        <ExperienceSection />
-        <SectionConnector />
-        <EducationSection />
         <SectionConnector />
         <ResearchSection />
         <SectionConnector />
-        <ProjectsSection />
+        <EducationSection />
+        <SectionConnector />
+        <ExperienceSection />
         <SectionConnector />
         <SkillsSection />
+        <SectionConnector />
+        <ProjectsSection />
         <SectionConnector />
         <ContactSection />
       </main>

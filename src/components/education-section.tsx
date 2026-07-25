@@ -1,12 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, Medal } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 import { education } from "@/lib/data";
-import { SectionTitle } from "./ui";
-import { FadeIn } from "./fade-in";
-import { TiltCard } from "./tilt-card";
-import { CountUp } from "./count-up";
+import { SectionTitle, Chip } from "./ui";
 import { PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
 
@@ -14,7 +11,7 @@ export function EducationSection() {
   return (
     <section
       id="education"
-      className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24"
+      className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14"
     >
       <ParallaxLayer speed={35}>
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
@@ -26,83 +23,61 @@ export function EducationSection() {
         subtitle="Academic record and the thesis work anchoring my research direction."
       />
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <ol className="relative max-w-3xl border-l border-border-default pl-6">
         {education.map((edu, i) => (
-          <FadeIn key={edu.school} delay={i * 0.12}>
-            <TiltCard className="h-full rounded-lg border border-border-default bg-canvas-subtle p-6 shadow-sm">
-              <div className="flex items-start gap-3">
-                <motion.span
-                  whileHover={{ rotate: -12, scale: 1.08 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-done"
-                >
-                  <GraduationCap size={18} />
-                </motion.span>
-                <div>
-                  <h3 className="text-base font-semibold leading-snug text-fg-default">
-                    <PopWords text={edu.school} inView stagger={0.03} />
-                  </h3>
-                  <p className="mt-0.5 flex items-center gap-1.5 text-sm font-medium text-done">
-                    <span className="h-1 w-1 shrink-0 rounded-full bg-done" />
-                    {edu.degree}
-                  </p>
-                  <p className="mono mt-1 text-xs text-fg-subtle">
-                    {edu.period} · {edu.location}
-                  </p>
-                  {edu.merit && (
-                    <motion.span
-                      initial={{ opacity: 0, scale: 0.5, y: -6 }}
-                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ type: "spring", stiffness: 420, damping: 14, delay: 0.25 }}
-                      whileHover={{ scale: 1.06, rotate: -2 }}
-                      className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-attention/30 bg-attention-subtle px-2.5 py-1 text-xs font-semibold text-attention"
-                    >
-                      <Medal size={13} />
-                      {edu.merit}
-                    </motion.span>
-                  )}
-                </div>
-              </div>
+          <motion.li
+            key={edu.school}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-16 last:mb-0"
+          >
+            <motion.span
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 + 0.15, type: "spring" }}
+              className="absolute -left-[9px] flex h-4 w-4 items-center justify-center rounded-full border-2 border-canvas bg-accent"
+            >
+              <GraduationCap size={9} className="text-canvas" />
+            </motion.span>
 
-              {edu.score && (
-                <div className="mt-5">
-                  <div className="flex items-baseline justify-between">
-                    <span className="mono text-xs uppercase tracking-wider text-fg-subtle">
-                      {edu.score.label}
-                    </span>
-                    <span className="mono flex items-baseline gap-1">
-                      <span className="gradient-text text-2xl font-extrabold">
-                        <CountUp value={edu.score.value} decimals={2} />
-                      </span>
-                      <span className="text-sm text-fg-subtle">
-                        / {edu.score.scale.toFixed(1)}
-                      </span>
-                    </span>
-                  </div>
-                  <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-canvas-inset">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{
-                        width: `${(edu.score.value / edu.score.scale) * 100}%`,
-                      }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                      className="h-full rounded-full bg-gradient-to-r from-accent to-done"
-                    />
-                  </div>
-                </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <h4 className="text-base font-semibold text-fg-default">
+                <PopWords text={edu.degree} inView stagger={0.04} />
+              </h4>
+              {edu.merit && (
+                <span className="rounded-full bg-success-subtle px-2 py-0.5 text-[11px] font-medium text-success">
+                  {edu.merit}
+                </span>
               )}
-
-              {edu.detail && (
-                <p className="shimmer mt-4 rounded-md border border-border-muted bg-canvas px-3.5 py-3 text-sm leading-relaxed text-fg-muted">
+            </div>
+            <p className="text-sm font-medium text-accent">
+              <PopWords text={edu.school} inView delay={0.1} stagger={0.04} />
+            </p>
+            <p className="mono mt-0.5 text-xs text-fg-subtle">
+              {edu.period} · {edu.location}
+            </p>
+            {edu.detail && (
+              <ul className="mt-3 space-y-1.5 text-sm text-fg-muted">
+                <li className="flex gap-2">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-fg-subtle" />
                   {edu.detail}
-                </p>
-              )}
-            </TiltCard>
-          </FadeIn>
+                </li>
+              </ul>
+            )}
+            {edu.score && (
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                <Chip>
+                  {edu.score.label} {edu.score.value.toFixed(2)} /{" "}
+                  {edu.score.scale.toFixed(1)}
+                </Chip>
+              </div>
+            )}
+          </motion.li>
         ))}
-      </div>
+      </ol>
     </section>
   );
 }
