@@ -14,7 +14,6 @@ import {
   FolderGit2,
   Trophy,
   Mail,
-  Sparkles,
 } from "lucide-react";
 import { smoothScrollToId } from "@/lib/scroll";
 import { getBootDelay } from "@/lib/boot-delay";
@@ -59,33 +58,6 @@ function Logo({ compact = false }: { compact?: boolean }) {
         </span>
       )}
     </a>
-  );
-}
-
-function OpenBadge({ vertical = false }: { vertical?: boolean }) {
-  return (
-    <div
-      className={`mono flex shrink-0 items-center gap-1.5 whitespace-nowrap border border-success/30 bg-success-subtle text-[11px] font-medium text-success ${
-        vertical
-          ? "flex-col rounded-xl px-2.5 py-2.5 text-center leading-tight"
-          : "rounded-full px-2.5 py-1"
-      }`}
-    >
-      <motion.span
-        animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        className="h-1.5 w-1.5 shrink-0 rounded-full bg-success"
-      />
-      {vertical ? (
-        <span>
-          Open to
-          <br />
-          research
-        </span>
-      ) : (
-        "Open to research"
-      )}
-    </div>
   );
 }
 
@@ -259,9 +231,6 @@ export function Nav() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <div className="hidden xl:flex">
-              <OpenBadge />
-            </div>
             <ThemeToggle />
           </div>
         </div>
@@ -371,10 +340,6 @@ export function Nav() {
                     </motion.a>
                   );
                 })}
-                <div className="mono mt-1 flex items-center gap-1.5 self-start rounded-full border border-success/30 bg-success-subtle px-2.5 py-1 text-[11px] font-medium text-success">
-                  <Sparkles size={11} />
-                  Open to research collaboration
-                </div>
               </motion.div>
             </motion.nav>
           )}
