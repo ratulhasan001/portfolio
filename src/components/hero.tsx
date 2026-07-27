@@ -9,9 +9,10 @@ import {
   Download,
   ArrowRight,
   FileText,
+  Clock,
 } from "lucide-react";
 import { SiCodeforces, SiCodechef } from "react-icons/si";
-import { profile, onlineJudges } from "@/lib/data";
+import { profile, onlineJudges, publications } from "@/lib/data";
 import { FadeIn } from "./fade-in";
 import { GithubIcon, LinkedinIcon } from "./brand-icons";
 import { ParallaxLayer } from "./parallax-layer";
@@ -46,6 +47,14 @@ const achievements = [
     icon: FileText,
     title: "4 Peer-reviewed Publications",
     subtitle: "IEEE • ACM Conference Proceedings",
+    action: "Explore Publications",
+    href: "#research",
+    external: false,
+  },
+  {
+    icon: Clock,
+    title: `${publications.filter((p) => p.status === "under-review").length} Publication Under Review`,
+    subtitle: "Journal Submission",
     action: "Explore Publications",
     href: "#research",
     external: false,
@@ -86,26 +95,26 @@ function AchievementCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex flex-col items-start gap-1 overflow-hidden rounded-2xl border border-accent/20 bg-canvas-subtle/50 p-7 text-left shadow-sm backdrop-blur-xl transition-[transform,box-shadow,border-color] duration-250 ease-out hover:-translate-y-2 hover:border-accent/70 hover:shadow-[0_24px_55px_-24px_var(--color-accent)] sm:p-8"
+      className="group relative flex flex-col items-start gap-1 overflow-hidden rounded-xl border border-accent/20 bg-canvas-subtle/50 p-4 text-left shadow-sm backdrop-blur-xl transition-[transform,box-shadow,border-color] duration-250 ease-out hover:-translate-y-1 hover:border-accent/70 hover:shadow-[0_16px_36px_-18px_var(--color-accent)] sm:p-5"
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(160px_circle_at_20%_0%,color-mix(in_srgb,var(--color-accent)_16%,transparent),transparent)] opacity-0 transition-opacity duration-250 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(120px_circle_at_20%_0%,color-mix(in_srgb,var(--color-accent)_16%,transparent),transparent)] opacity-0 transition-opacity duration-250 group-hover:opacity-100"
       />
 
-      <span className="relative flex h-14 w-14 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent transition-transform duration-250 ease-out group-hover:scale-110">
-        <Icon size={26} />
+      <span className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent transition-transform duration-250 ease-out group-hover:scale-110">
+        <Icon size={17} />
       </span>
 
-      <h3 className="relative mt-4 text-base font-bold text-fg-default sm:text-lg">
+      <h3 className="relative mt-3 text-sm font-bold leading-snug text-fg-default">
         {title}
       </h3>
-      <p className="relative text-sm text-fg-muted">{subtitle}</p>
+      <p className="relative text-xs text-fg-muted">{subtitle}</p>
 
-      <span className="relative mt-5 flex items-center gap-1.5 text-sm font-medium text-accent">
+      <span className="relative mt-3 flex items-center gap-1.5 text-xs font-medium text-accent">
         {action}
         <ArrowRight
-          size={14}
+          size={12}
           className="transition-transform duration-250 ease-out group-hover:translate-x-1"
         />
       </span>
@@ -286,7 +295,7 @@ export function Hero() {
             Key Achievements
           </p>
         </FadeIn>
-        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {achievements.map((a, i) => (
             <AchievementCard key={a.title} {...a} delay={i * 0.1} />
           ))}
