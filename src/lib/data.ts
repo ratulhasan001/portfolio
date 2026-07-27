@@ -47,7 +47,7 @@ export const experience: Experience[] = [
     org: "BAUET Computer Society, Dept. of CSE, BAUET",
     role: "Programming Instructor",
     location: "Natore, Bangladesh",
-    period: "January 2025 - May 2026",
+    period: "July 2024 - December 2025",
     bullets: [
       "Conducted regular training sessions on C programming and competitive programming for undergraduate students.",
       "Designed coding exercises and problem-solving sessions, and conducted practice contests.",
