@@ -45,16 +45,9 @@ export function ExperienceSection() {
               <GitCommitHorizontal size={9} className="text-canvas" />
             </motion.span>
 
-            <div className="flex flex-wrap items-center gap-2">
-              <h4 className="text-base font-semibold text-fg-default">
-                <PopWords text={exp.role} inView stagger={0.04} />
-              </h4>
-              {exp.current && (
-                <span className="rounded-full bg-success-subtle px-2 py-0.5 text-[11px] font-medium text-success">
-                  current
-                </span>
-              )}
-            </div>
+            <h4 className="text-base font-semibold text-fg-default">
+              <PopWords text={exp.role} inView stagger={0.04} />
+            </h4>
             <p className="text-sm font-medium text-accent">
               <PopWords text={exp.org} inView delay={0.1} stagger={0.04} />
             </p>
