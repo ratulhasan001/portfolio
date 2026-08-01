@@ -54,7 +54,7 @@ const achievements = [
   {
     icon: Clock,
     title: `${publications.filter((p) => p.status === "under-review").length} Publication Under Review`,
-    subtitle: "Journal Submission",
+    subtitle: "Nature Scientific Reports",
     action: "Explore Publications",
     href: "#research",
     external: false,
