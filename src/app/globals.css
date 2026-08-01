@@ -88,12 +88,12 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   overflow-x: clip;
 }
 
-html[data-theme="light"] {
-  color-scheme: light;
+html[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 body {

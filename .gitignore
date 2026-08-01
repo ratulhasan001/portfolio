@@ -31,3 +31,8 @@ next-env.d.ts
 
 # github profile readme draft (not part of this repo)
 README2.md
+
+# claude code project instructions (local only)
+CLAUDE.md
+AGENTS.md
+.claude/
