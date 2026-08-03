@@ -86,7 +86,6 @@ export const education: Education[] = [
     period: "2022 - 2026",
     detail:
       "Thesis: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
-    merit: "Merit Position 3rd",
     score: { label: "CGPA", value: 3.82, scale: 4.0 },
   },
   {
