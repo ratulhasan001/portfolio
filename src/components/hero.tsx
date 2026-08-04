@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import {
   MapPin,
   Mail,
-  Link as LinkIcon,
   Download,
   ArrowRight,
   FileText,
@@ -127,7 +126,6 @@ const contactIcons = [
   { icon: Mail, label: profile.email, href: `mailto:${profile.email}` },
   { icon: GithubIcon, label: "GitHub", href: profile.github, external: true },
   { icon: LinkedinIcon, label: "LinkedIn", href: profile.linkedin, external: true },
-  { icon: LinkIcon, label: profile.website, href: `https://${profile.website}`, external: true },
 ];
 
 function IconLink({
