@@ -184,6 +184,8 @@ export function Nav() {
             </AnimatePresence>
           </div>
 
+          <ThemeToggle />
+
           <button
             className="flex h-8 w-8 items-center justify-center rounded-full border border-border-default text-fg-muted transition-colors duration-200 hover:border-accent hover:text-accent"
             onClick={() => setMobileOpen((o) => !o)}
