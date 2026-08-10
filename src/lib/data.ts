@@ -93,8 +93,6 @@ export const education: Education[] = [
     degree: "Higher Secondary School Certificate",
     location: "Khulna, Bangladesh",
     period: "2019 - 2021",
-    detail:
-      "Group: Science · Major Subjects: Physics, Chemistry, Higher Mathematics",
     score: { label: "GPA", value: 5.0, scale: 5.0 },
   },
 ];
