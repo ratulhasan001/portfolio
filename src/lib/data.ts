@@ -94,7 +94,7 @@ export const education: Education[] = [
     location: "Khulna, Bangladesh",
     period: "2019 - 2021",
     detail:
-      "Group: Science · Major Subjects: Physics, Chemistry, Higher Mathematics · 4th Subject: Biology",
+      "Group: Science · Major Subjects: Physics, Chemistry, Higher Mathematics",
     score: { label: "GPA", value: 5.0, scale: 5.0 },
   },
 ];
