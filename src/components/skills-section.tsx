@@ -36,6 +36,7 @@ import { ParallaxLayer } from "./parallax-layer";
 import { TiltLink } from "./tilt-card";
 import { PopWords, PopIn } from "./pop-in";
 import { CodeforcesIcon, CodechefIcon, LeetcodeIcon } from "./brand-icons";
+import { Disclosure } from "./disclosure";
 
 const judgeIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Codeforces: CodeforcesIcon,
@@ -67,7 +68,7 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14"
+      className="relative mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9"
     >
       <ParallaxLayer speed={45}>
         <NeuralBackground />
@@ -78,14 +79,14 @@ export function SkillsSection() {
         subtitle="Competitive programming record, technical toolkit, and leadership."
       />
 
-      <div className="mb-14">
+      <div className="mb-7">
         <PopIn inView>
-          <h3 className="mono mb-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
+          <h3 className="mono mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
             <Trophy size={13} />
             Competitive Programming
           </h3>
         </PopIn>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-2.5 sm:grid-cols-3">
           {onlineJudges.map((judge, i) => {
             const Icon = judgeIcons[judge.platform];
             return (
@@ -94,7 +95,7 @@ export function SkillsSection() {
                   href={judge.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="shimmer h-full rounded-md border border-border-default bg-canvas-subtle p-4 transition-colors hover:border-accent/50"
+                  className="shimmer h-full rounded-md border border-border-default bg-canvas-subtle p-3.5 transition-colors hover:border-accent/50"
                 >
                   <div className="flex items-center gap-2">
                     {Icon && (
@@ -110,7 +111,7 @@ export function SkillsSection() {
                       <PopWords text={judge.platform} inView stagger={0.04} />
                     </p>
                   </div>
-                  <p className="gradient-text mt-2 text-lg font-bold">
+                  <p className="gradient-text mt-1.5 text-base font-bold">
                     {judge.stat}
                   </p>
                   <span className="group/handle mono mt-1 inline-flex items-center gap-1 text-xs text-fg-subtle transition-colors group-hover:text-accent">
@@ -126,7 +127,13 @@ export function SkillsSection() {
           })}
         </div>
 
-        <StaggerGroup className="mt-4 grid gap-2.5 sm:grid-cols-2">
+        <Disclosure
+          label="Contest achievements"
+          openLabel="Hide achievements"
+          count={achievements.length}
+          className="mt-3"
+        >
+        <StaggerGroup margin="0px" className="grid gap-2.5 sm:grid-cols-2">
           {achievements.map((a, i) => (
             <motion.div
               key={a}
@@ -155,27 +162,28 @@ export function SkillsSection() {
             </motion.div>
           ))}
         </StaggerGroup>
+        </Disclosure>
       </div>
 
-      <div className="mb-14">
+      <div className="mb-7">
         <PopIn inView>
-          <h3 className="mono mb-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
+          <h3 className="mono mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
             <Code2 size={13} />
             Technical Skills
           </h3>
         </PopIn>
-        <StaggerGroup className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(skills).map(([category, items]) => (
             <motion.div
               key={category}
               variants={staggerItem}
               whileHover={{ y: -3, borderColor: "var(--color-accent)" }}
-              className="shimmer rounded-md border border-border-default bg-canvas-subtle p-4 transition-colors"
+              className="shimmer rounded-md border border-border-default bg-canvas-subtle p-3.5 transition-colors"
             >
               <p className="text-sm font-semibold text-fg-default">
                 <PopWords text={category} inView stagger={0.04} />
               </p>
-              <div className="mt-2.5 flex flex-wrap gap-1.5">
+              <div className="mt-2 flex flex-wrap gap-1.5">
                 {items.map((item) => {
                   const Icon = skillIcons[item];
                   return (
@@ -198,12 +206,18 @@ export function SkillsSection() {
 
       <div>
         <PopIn inView>
-          <h3 className="mono mb-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
+          <h3 className="mono mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
             <Users2 size={13} />
             Leadership &amp; Volunteering
           </h3>
         </PopIn>
-        <StaggerGroup className="grid gap-3 sm:grid-cols-2">
+        <Disclosure
+          label="Roles"
+          openLabel="Hide roles"
+          count={leadership.reduce((n, e) => n + e.roles.length, 0)}
+          className="mt-1"
+        >
+        <StaggerGroup margin="0px" className="grid gap-2.5 sm:grid-cols-2">
           {leadership.map((entry) =>
             entry.roles.length > 1 ? (
               <motion.div
@@ -292,6 +306,7 @@ export function SkillsSection() {
             )
           )}
         </StaggerGroup>
+        </Disclosure>
       </div>
     </section>
   );
