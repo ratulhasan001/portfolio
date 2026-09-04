@@ -150,8 +150,9 @@ export const publications: Publication[] = [
       "Ratul Hasan, Samiha Farjana, Yousuf Oley, Md. Ohiduzaman Pranto, Md Arik Rayhan",
     venue:
       "International Conference on Power, Electronics, Communications, Computing, and Intelligent Infrastructure (PECCII 2026) — IEEE Proceedings",
-    date: "Expected 2026",
-    status: "accepted",
+    date: "2026",
+    status: "published",
+    link: "https://doi.org/10.1109/PECCII70991.2026.11662071",
     type: "conference",
     digitalLibrary: "IEEE Xplore Digital Library",
   },
