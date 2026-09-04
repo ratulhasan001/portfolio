@@ -2,7 +2,7 @@
 
 import { useRef, useState, type ComponentType } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Mail, Download, ArrowRight, FileText, Clock } from "lucide-react";
+import { Mail, Download, ArrowUpRight, FileText, Clock } from "lucide-react";
 import { SiCodeforces, SiCodechef } from "react-icons/si";
 import { profile, onlineJudges, publications } from "@/lib/data";
 import { FadeIn } from "./fade-in";
@@ -15,9 +15,7 @@ import {
 import { ParallaxLayer } from "./parallax-layer";
 import { PopWords } from "./pop-in";
 import { Typewriter } from "./typewriter";
-import { MagneticLink } from "./magnetic-link";
 import { HeroPortrait } from "./hero-portrait";
-import { Disclosure } from "./disclosure";
 import { smoothScrollToId } from "@/lib/scroll";
 import { getBootDelay } from "@/lib/boot-delay";
 
@@ -29,7 +27,6 @@ const achievements = [
     icon: SiCodeforces,
     title: "Codeforces Expert",
     subtitle: "Competitive Programming",
-    action: "View Profile",
     href: codeforces.link,
     external: true,
   },
@@ -37,7 +34,6 @@ const achievements = [
     icon: SiCodechef,
     title: "Codechef 3★",
     subtitle: "Competitive Programming",
-    action: "View Profile",
     href: codechef.link,
     external: true,
   },
@@ -45,7 +41,6 @@ const achievements = [
     icon: FileText,
     title: "4 Peer-reviewed Publications",
     subtitle: "IEEE • ACM Conference Proceedings",
-    action: "Explore Publications",
     href: "#research",
     external: false,
   },
@@ -53,7 +48,6 @@ const achievements = [
     icon: Clock,
     title: `${publications.filter((p) => p.status === "under-review").length} Publication Under Review`,
     subtitle: "Nature Scientific Reports",
-    action: "Explore Publications",
     href: "#research",
     external: false,
   },
@@ -63,7 +57,6 @@ function AchievementCard({
   icon: Icon,
   title,
   subtitle,
-  action,
   href,
   external,
   delay,
@@ -71,7 +64,6 @@ function AchievementCard({
   icon: ComponentType<{ size?: number; className?: string }>;
   title: string;
   subtitle: string;
-  action: string;
   href: string;
   external: boolean;
   delay: number;
@@ -93,32 +85,29 @@ function AchievementCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex flex-col items-start gap-1 overflow-hidden rounded-xl border border-accent/20 bg-canvas-subtle/50 p-3.5 text-left shadow-sm backdrop-blur-xl transition-[transform,box-shadow,border-color] duration-250 ease-out hover:-translate-y-1 hover:border-accent/70 hover:shadow-[0_16px_36px_-18px_var(--color-accent)] sm:p-4"
+      className="group relative flex flex-col items-start justify-center gap-1 overflow-hidden rounded-xl border border-accent/20 bg-canvas-subtle/50 p-3.5 text-left shadow-sm backdrop-blur-xl transition-[transform,box-shadow,border-color] duration-250 ease-out hover:-translate-y-1 hover:border-accent/70 hover:shadow-[0_16px_36px_-18px_var(--color-accent)] sm:p-4"
     >
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(120px_circle_at_20%_0%,color-mix(in_srgb,var(--color-accent)_16%,transparent),transparent)] opacity-0 transition-opacity duration-250 group-hover:opacity-100"
       />
 
-      <div className="relative flex items-start gap-2.5">
+      <div className="relative flex w-full items-start gap-2.5">
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent transition-transform duration-250 ease-out group-hover:scale-110">
           <Icon size={17} />
         </span>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <h3 className="text-[15px] font-bold leading-snug text-fg-default">
             {title}
           </h3>
           <p className="mt-0.5 text-[13px] text-fg-muted">{subtitle}</p>
         </div>
-      </div>
-
-      <span className="relative mt-auto pt-2 flex items-center gap-1.5 text-[13px] font-medium text-accent">
-        {action}
-        <ArrowRight
-          size={13}
-          className="transition-transform duration-250 ease-out group-hover:translate-x-1"
+        <ArrowUpRight
+          size={16}
+          aria-hidden
+          className="mt-0.5 shrink-0 text-fg-subtle transition-[transform,color] duration-250 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
         />
-      </span>
+      </div>
     </motion.a>
   );
 }
@@ -129,21 +118,24 @@ const contactIcons = [
   { icon: ScholarIcon, label: "Google Scholar", href: profile.scholar, external: true },
   { icon: GithubIcon, label: "GitHub", href: profile.github, external: true },
   { icon: LinkedinIcon, label: "LinkedIn", href: profile.linkedin, external: true },
+  { icon: Download, label: "Download CV", href: "/Ratul_Hasan_CV.pdf", download: true },
 ];
 
-// First sentence stays visible; the rest sits behind the summary toggle.
-const [summaryLead, ...summaryRest] = profile.summary.split(/(?<=\.)\s+/);
+// Only the opening line of the summary runs in the hero.
+const [summaryLead] = profile.summary.split(/(?<=\.)\s+/);
 
 function IconLink({
   icon: Icon,
   label,
   href,
   external,
+  download,
 }: {
   icon: ComponentType<{ size?: number; className?: string }>;
   label: string;
   href?: string;
   external?: boolean;
+  download?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -155,6 +147,7 @@ function IconLink({
       {href ? (
         <motion.a
           href={href}
+          download={download}
           target={external ? "_blank" : undefined}
           rel={external ? "noreferrer" : undefined}
           whileHover={{ y: -2 }}
@@ -234,57 +227,9 @@ export function Hero() {
 
           <FadeIn delay={0.72 + bootDelay} className="mt-4 max-w-lg">
             <p className="text-[15px] leading-relaxed text-fg-muted">{summaryLead}</p>
-            {summaryRest.length > 0 && (
-              <Disclosure label="More about me" openLabel="Less" className="mt-2">
-                <p className="text-[15px] leading-relaxed text-fg-muted">
-                  {summaryRest.join(" ")}
-                </p>
-              </Disclosure>
-            )}
           </FadeIn>
 
-          <FadeIn delay={0.84 + bootDelay} className="mt-5 flex flex-wrap items-center gap-2.5">
-            <MagneticLink
-              href="#research"
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollToId("#research");
-              }}
-              className="shimmer gap-2 rounded-md bg-accent px-5 py-2.5 text-[15px] font-semibold text-white shadow-md transition-[box-shadow,background-color] duration-300 hover:bg-accent-emphasis hover:shadow-[0_16px_36px_-12px_var(--color-accent)]"
-            >
-              View Research
-              <motion.span
-                variants={{ rest: { x: 0 }, hover: { x: 3 } }}
-                initial="rest"
-                whileHover="hover"
-                className="flex"
-              >
-                <ArrowRight size={15} />
-              </motion.span>
-            </MagneticLink>
-
-            <MagneticLink
-              href="/Ratul_Hasan_CV.pdf"
-              download
-              className="glass gap-2 rounded-md px-5 py-2.5 text-[15px] font-semibold text-fg-default shadow-sm transition-colors duration-300 hover:text-accent"
-            >
-              <Download size={15} />
-              Download CV
-            </MagneticLink>
-
-            <MagneticLink
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollToId("#contact");
-              }}
-              className="gap-2 rounded-md border border-accent/40 px-5 py-2.5 text-[15px] font-semibold text-accent transition-colors duration-300 hover:border-accent hover:bg-accent/10"
-            >
-              Contact Me
-            </MagneticLink>
-          </FadeIn>
-
-          <FadeIn delay={0.94 + bootDelay} className="mt-4 flex flex-wrap items-center gap-2">
+          <FadeIn delay={0.84 + bootDelay} className="mt-5 flex flex-wrap items-center gap-2">
             {contactIcons.map((item) => (
               <IconLink key={item.label} {...item} />
             ))}
@@ -297,7 +242,7 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* Key achievements */}
+      {/* Featured */}
       <div className="relative mx-auto max-w-6xl px-4 pb-7 sm:px-6 sm:pb-9">
         <FadeIn>
           <p className="mono text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
