@@ -59,7 +59,7 @@ export const experience: Experience[] = [
       "Mentored students in programming fundamentals and competitive programming techniques to strengthen analytical and coding skills.",
     ],
     tags: ["C", "Competitive Programming", "Teaching"],
-    logo: "/logo/societylogo.png",
+    logo: "/logo/bsc.png",
   },
   {
     org: "Lab AR",

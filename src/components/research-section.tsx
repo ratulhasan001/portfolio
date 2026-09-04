@@ -64,13 +64,13 @@ function PublicationCard({ pub }: { pub: Publication }) {
               {mark && (
                 <span
                   title={pub.digitalLibrary}
-                  className="relative flex h-6 w-28 items-center justify-end"
+                  className="relative flex h-9 w-32 items-center justify-end"
                 >
                   <Image
                     src={mark.src}
                     alt={pub.digitalLibrary ?? "Publisher"}
                     fill
-                    sizes="112px"
+                    sizes="128px"
                     className={`object-contain object-right ${
                       mark.whitenOnDark ? "dark:brightness-0 dark:invert" : ""
                     }`}
@@ -149,11 +149,7 @@ export function ResearchSection() {
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
       </ParallaxLayer>
 
-      <SectionTitle
-        index="01"
-        title="Research & Publications"
-        subtitle="Peer-reviewed research spanning artificial intelligence, healthcare AI, computer vision, blockchain security, and trustworthy intelligent systems."
-      />
+      <SectionTitle index="01" title="Research & Publications" />
 
       <div className="space-y-6">
         <PublicationGroup

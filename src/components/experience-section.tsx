@@ -19,13 +19,9 @@ export function ExperienceSection() {
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
       </ParallaxLayer>
 
-      <SectionTitle
-        index="03"
-        title="Experience"
-        subtitle="A commit history of roles and research positions."
-      />
+      <SectionTitle index="03" title="Experience" />
 
-      <ol className="relative max-w-3xl border-l border-border-default pl-8">
+      <ol className="relative max-w-3xl border-l border-border-default pl-9">
         {experience.map((exp, i) => (
           <motion.li
             key={exp.org}

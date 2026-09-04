@@ -36,7 +36,6 @@ import { ParallaxLayer } from "./parallax-layer";
 import { TiltLink } from "./tilt-card";
 import { PopWords, PopIn } from "./pop-in";
 import { CodeforcesIcon, CodechefIcon, LeetcodeIcon } from "./brand-icons";
-import { Disclosure } from "./disclosure";
 
 const judgeIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Codeforces: CodeforcesIcon,
@@ -73,11 +72,7 @@ export function SkillsSection() {
       <ParallaxLayer speed={45}>
         <NeuralBackground />
       </ParallaxLayer>
-      <SectionTitle
-        index="04"
-        title="Skills & Achievements"
-        subtitle="Competitive programming record, technical toolkit, and leadership."
-      />
+      <SectionTitle index="04" title="Skills & Achievements" />
 
       <div className="mb-7">
         <PopIn inView>
@@ -127,12 +122,7 @@ export function SkillsSection() {
           })}
         </div>
 
-        <Disclosure
-          label="Contest achievements"
-          openLabel="Hide achievements"
-          className="mt-3"
-        >
-        <StaggerGroup margin="0px" className="grid gap-2.5 sm:grid-cols-2">
+        <StaggerGroup className="mt-3 grid gap-2.5 sm:grid-cols-2">
           {achievements.map((a, i) => (
             <motion.div
               key={a}
@@ -161,7 +151,6 @@ export function SkillsSection() {
             </motion.div>
           ))}
         </StaggerGroup>
-        </Disclosure>
       </div>
 
       <div className="mb-7">
@@ -210,8 +199,7 @@ export function SkillsSection() {
             Leadership &amp; Volunteering
           </h3>
         </PopIn>
-        <Disclosure label="Roles" openLabel="Hide roles" className="mt-1">
-        <StaggerGroup margin="0px" className="grid gap-2.5 sm:grid-cols-2">
+        <StaggerGroup className="grid gap-2.5 sm:grid-cols-2">
           {leadership.map((entry) =>
             entry.roles.length > 1 ? (
               <motion.div
@@ -300,7 +288,6 @@ export function SkillsSection() {
             )
           )}
         </StaggerGroup>
-        </Disclosure>
       </div>
     </section>
   );

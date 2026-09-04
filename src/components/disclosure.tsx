@@ -16,17 +16,13 @@ import { ChevronDown } from "lucide-react";
  */
 export function Disclosure({
   summary,
-  label,
-  openLabel,
   title = "Show details",
   children,
   className = "",
 }: {
   /** Headline row rendered to the left of the chevron. */
   summary?: React.ReactNode;
-  label?: string;
-  openLabel?: string;
-  /** Tooltip / screen-reader name for the icon-only trigger. */
+  /** Tooltip / screen-reader name for the trigger. */
   title?: string;
   children: React.ReactNode;
   className?: string;
@@ -47,7 +43,7 @@ export function Disclosure({
       transition={{ duration: 0.2, ease: "easeOut" }}
       className="flex"
     >
-      <ChevronDown size={label ? 12 : 16} />
+      <ChevronDown size={16} />
     </motion.span>
   );
 
@@ -77,17 +73,6 @@ export function Disclosure({
           <div className="min-w-0 flex-1">{summary}</div>
           {iconButton}
         </div>
-      ) : label ? (
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-controls={panelId}
-          onClick={toggle}
-          className="mono inline-flex items-center gap-1.5 rounded-full border border-accent/35 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent shadow-sm transition-colors hover:border-accent hover:bg-accent hover:text-white"
-        >
-          {open ? openLabel ?? "Less" : label}
-          {chevron}
-        </button>
       ) : (
         iconButton
       )}
