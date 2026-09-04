@@ -26,14 +26,12 @@ const achievements = [
   {
     icon: SiCodeforces,
     title: "Codeforces Expert",
-    subtitle: "Competitive Programming",
     href: codeforces.link,
     external: true,
   },
   {
     icon: SiCodechef,
     title: "Codechef 3★",
-    subtitle: "Competitive Programming",
     href: codechef.link,
     external: true,
   },
@@ -54,14 +52,12 @@ const achievements = [
 function AchievementCard({
   icon: Icon,
   title,
-  subtitle,
   href,
   external,
   delay,
 }: {
   icon: ComponentType<{ size?: number; className?: string }>;
   title: string;
-  subtitle?: string;
   href: string;
   external: boolean;
   delay: number;
@@ -94,14 +90,9 @@ function AchievementCard({
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent transition-transform duration-250 ease-out group-hover:scale-110">
           <Icon size={17} />
         </span>
-        <div className="min-w-0 flex-1">
-          <h3 className="text-[15px] font-bold leading-snug text-fg-default">
-            {title}
-          </h3>
-          {subtitle && (
-            <p className="mt-0.5 text-[13px] text-fg-muted">{subtitle}</p>
-          )}
-        </div>
+        <h3 className="min-w-0 flex-1 text-[15px] font-bold leading-snug text-fg-default">
+          {title}
+        </h3>
         <ArrowUpRight
           size={16}
           aria-hidden
