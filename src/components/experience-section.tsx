@@ -7,6 +7,7 @@ import { SectionTitle, Chip } from "./ui";
 import { PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
 import { Disclosure } from "./disclosure";
+import { TimelineLogo } from "./timeline-logo";
 
 export function ExperienceSection() {
   return (
@@ -24,7 +25,7 @@ export function ExperienceSection() {
         subtitle="A commit history of roles and research positions."
       />
 
-      <ol className="relative max-w-3xl border-l border-border-default pl-6">
+      <ol className="relative max-w-3xl border-l border-border-default pl-8">
         {experience.map((exp, i) => (
           <motion.li
             key={exp.org}
@@ -34,17 +35,13 @@ export function ExperienceSection() {
             transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="mb-6 last:mb-0"
           >
-            <motion.span
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 + 0.15, type: "spring" }}
-              className={`absolute -left-[9px] flex h-4 w-4 items-center justify-center rounded-full border-2 border-canvas ${
-                exp.current ? "bg-success" : "bg-accent"
-              }`}
-            >
-              <GitCommitHorizontal size={9} className="text-canvas" />
-            </motion.span>
+            <TimelineLogo
+              src={exp.logo}
+              alt={exp.org}
+              current={exp.current}
+              delay={i * 0.1 + 0.15}
+              fallback={<GitCommitHorizontal size={12} />}
+            />
 
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
               <h4 className="text-sm font-semibold text-fg-default sm:text-base">

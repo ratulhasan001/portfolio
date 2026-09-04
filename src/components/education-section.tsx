@@ -7,6 +7,7 @@ import { SectionTitle } from "./ui";
 import { PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
 import { Disclosure } from "./disclosure";
+import { TimelineLogo } from "./timeline-logo";
 
 export function EducationSection() {
   return (
@@ -24,7 +25,7 @@ export function EducationSection() {
         subtitle="Academic record and the thesis work anchoring my research direction."
       />
 
-      <ol className="relative max-w-3xl border-l border-border-default pl-6">
+      <ol className="relative max-w-3xl border-l border-border-default pl-8">
         {education.map((edu, i) => (
           <motion.li
             key={edu.school}
@@ -34,15 +35,12 @@ export function EducationSection() {
             transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="mb-6 last:mb-0"
           >
-            <motion.span
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 + 0.15, type: "spring" }}
-              className="absolute -left-[9px] flex h-4 w-4 items-center justify-center rounded-full border-2 border-canvas bg-accent"
-            >
-              <GraduationCap size={9} className="text-canvas" />
-            </motion.span>
+            <TimelineLogo
+              src={edu.logo}
+              alt={edu.school}
+              delay={i * 0.1 + 0.15}
+              fallback={<GraduationCap size={12} />}
+            />
 
             <div className="flex flex-wrap items-center gap-2">
               <h4 className="text-sm font-semibold text-fg-default sm:text-base">
