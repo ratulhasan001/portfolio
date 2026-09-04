@@ -9,17 +9,21 @@ import { ChevronDown } from "lucide-react";
  * inline and tuck everything else behind this toggle so a section reads
  * as a scannable list on first load.
  *
- * With no `label`, the trigger is a bare chevron button — the right weight
- * for per-item cards, where a worded button would repeat down the page.
- * Pass a `label` for section-level toggles that need naming.
+ * Pass `summary` and the trigger becomes a chevron parked at the right edge
+ * of that row — no extra line, no worded button. Pass `label` instead for
+ * section-level toggles that need naming; with neither, the chevron sits on
+ * its own.
  */
 export function Disclosure({
+  summary,
   label,
   openLabel,
   title = "Show details",
   children,
   className = "",
 }: {
+  /** Headline row rendered to the left of the chevron. */
+  summary?: React.ReactNode;
   label?: string;
   openLabel?: string;
   /** Tooltip / screen-reader name for the icon-only trigger. */
@@ -47,9 +51,33 @@ export function Disclosure({
     </motion.span>
   );
 
+  const iconButton = (
+    <motion.button
+      type="button"
+      aria-expanded={open}
+      aria-controls={panelId}
+      aria-label={open ? "Hide details" : title}
+      title={open ? "Hide details" : title}
+      onClick={toggle}
+      whileTap={{ scale: 0.9 }}
+      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors ${
+        open
+          ? "border-accent/40 bg-accent/10 text-accent"
+          : "border-border-muted bg-canvas text-fg-subtle hover:border-accent/40 hover:bg-accent/[0.06] hover:text-accent"
+      }`}
+    >
+      {chevron}
+    </motion.button>
+  );
+
   return (
     <div className={className}>
-      {label ? (
+      {summary ? (
+        <div className="flex items-start gap-3">
+          <div className="min-w-0 flex-1">{summary}</div>
+          {iconButton}
+        </div>
+      ) : label ? (
         <button
           type="button"
           aria-expanded={open}
@@ -61,22 +89,7 @@ export function Disclosure({
           {chevron}
         </button>
       ) : (
-        <motion.button
-          type="button"
-          aria-expanded={open}
-          aria-controls={panelId}
-          aria-label={open ? "Hide details" : title}
-          title={open ? "Hide details" : title}
-          onClick={toggle}
-          whileTap={{ scale: 0.9 }}
-          className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${
-            open
-              ? "border-accent/40 bg-accent/10 text-accent"
-              : "border-border-muted bg-canvas text-fg-subtle hover:border-accent/40 hover:bg-accent/[0.06] hover:text-accent"
-          }`}
-        >
-          {chevron}
-        </motion.button>
+        iconButton
       )}
 
       <AnimatePresence initial={false}>

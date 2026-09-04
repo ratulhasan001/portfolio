@@ -117,6 +117,21 @@ export type Publication = {
   link?: string;
   type: "conference" | "journal";
   digitalLibrary?: string;
+  /** Overrides the mark picked from digitalLibraryLogos. */
+  logo?: string;
+};
+
+/** Publisher marks shown on publication cards, keyed by digital library. */
+export const digitalLibraryLogos: Record<
+  string,
+  { src: string; invertOnDark?: boolean }
+> = {
+  "IEEE Xplore Digital Library": { src: "/logo/ieee.png" },
+  "ACM Digital Library": { src: "/logo/acm.webp" },
+  "Springer Nature Link": {
+    src: "/logo/scientific-reports.png",
+    invertOnDark: true,
+  },
 };
 
 export const publications: Publication[] = [

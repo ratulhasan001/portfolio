@@ -32,30 +32,33 @@ export function ProjectsSection() {
             variants={staggerItem}
             className="rounded-md border border-border-default bg-canvas-subtle p-4 shadow-sm transition-colors hover:border-accent/50"
           >
-            <div className="flex items-center justify-between gap-2">
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 text-sm font-semibold text-accent transition-[letter-spacing] duration-300 hover:tracking-wide"
-              >
-                <BookMarked size={14} />
-                <PopWords text={project.name} inView stagger={0.04} />
-                <ExternalLink
-                  size={12}
-                  className="text-fg-subtle opacity-0 transition-opacity group-hover:opacity-100"
-                />
-              </a>
-              <span className="flex shrink-0 items-center gap-1.5 text-xs text-fg-subtle">
-                <span
-                  className="animate-pulse-dot h-2.5 w-2.5 rounded-full"
-                  style={{ backgroundColor: project.languageColor }}
-                />
-                {project.language}
-              </span>
-            </div>
-
-            <Disclosure title="Show project details" className="mt-2">
+            <Disclosure
+              title="Show project details"
+              summary={
+                <div className="flex items-center justify-between gap-2">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-sm font-semibold text-accent transition-[letter-spacing] duration-300 hover:tracking-wide"
+                  >
+                    <BookMarked size={14} />
+                    <PopWords text={project.name} inView stagger={0.04} />
+                    <ExternalLink
+                      size={12}
+                      className="text-fg-subtle opacity-0 transition-opacity group-hover:opacity-100"
+                    />
+                  </a>
+                  <span className="flex shrink-0 items-center gap-1.5 text-xs text-fg-subtle">
+                    <span
+                      className="animate-pulse-dot h-2.5 w-2.5 rounded-full"
+                      style={{ backgroundColor: project.languageColor }}
+                    />
+                    {project.language}
+                  </span>
+                </div>
+              }
+            >
               <p className="text-sm leading-relaxed text-fg-muted">
                 {project.description}
               </p>
