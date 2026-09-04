@@ -192,7 +192,7 @@ export function Hero() {
 
       <motion.div
         style={{ opacity: heroOpacity, y: yShift }}
-        className="relative mx-auto grid max-w-6xl gap-7 px-4 pt-5 pb-4 sm:px-6 sm:pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-9 lg:pt-8"
+        className="relative mx-auto grid max-w-6xl gap-7 px-4 pb-4 pt-20 sm:px-6 sm:pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-9 lg:pt-8"
       >
         {/* Left: identity + copy */}
         <div>
@@ -240,7 +240,7 @@ export function Hero() {
             Featured
           </p>
         </FadeIn>
-        <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        <div className="mt-3 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
           {achievements.map((a, i) => (
             <AchievementCard key={a.title} {...a} delay={i * 0.1} />
           ))}

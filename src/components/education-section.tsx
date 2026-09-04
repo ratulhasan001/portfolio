@@ -50,7 +50,7 @@ export function EducationSection() {
 
       <SectionTitle index="02" title="Education" />
 
-      <ol className="relative max-w-3xl border-l border-border-default pl-9">
+      <ol className="relative ml-6 max-w-3xl border-l border-border-default pl-8">
         {education.map((edu, i) => (
           <motion.li
             key={edu.school}

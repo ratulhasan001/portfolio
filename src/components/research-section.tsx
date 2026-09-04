@@ -29,7 +29,7 @@ function PublicationCard({ pub }: { pub: Publication }) {
       <Disclosure
         title="Show publication details"
         summary={
-          <div className="relative flex items-start gap-3">
+          <div className="relative grid grid-cols-1 items-start gap-x-3 gap-y-2 sm:grid-cols-[auto_1fr_auto]">
             {/* Published work: the whole headline row opens the DOI. The
                 chevron sits outside this row, so it stays clickable. */}
             {pub.link && (
@@ -44,34 +44,33 @@ function PublicationCard({ pub }: { pub: Publication }) {
             <motion.span
               whileHover={{ rotate: -10, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent"
+              className="mt-0.5 hidden h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent sm:col-start-1 sm:row-start-1 sm:flex"
             >
               {pub.type === "journal" ? <FileText size={16} /> : <BookOpen size={16} />}
             </motion.span>
 
-            {/* Left: what the paper is */}
-            <div className="min-w-0 flex-1">
-              <h3 className="text-[15px] font-semibold leading-snug text-fg-default transition-colors peer-hover:text-accent sm:text-base">
-                <PopWords text={pub.title} inView stagger={0.018} />
-              </h3>
-              <div className="mt-1.5">
-                <StatusPill status={pub.status} />
-              </div>
+            <h3 className="min-w-0 text-[15px] font-semibold leading-snug text-fg-default transition-colors peer-hover:text-accent sm:col-start-2 sm:row-start-1 sm:text-base">
+              <PopWords text={pub.title} inView stagger={0.018} />
+            </h3>
+
+            <div className="sm:col-start-2 sm:row-start-2">
+              <StatusPill status={pub.status} />
             </div>
 
-            {/* Right: where, then when */}
-            <div className="flex shrink-0 flex-col items-end gap-1.5">
+            {/* Publisher and year: a row under the title on phones, a column
+                to the right of it once there is room. */}
+            <div className="flex items-center gap-3 sm:col-start-3 sm:row-span-2 sm:row-start-1 sm:flex-col sm:items-end sm:gap-1.5">
               {mark && (
                 <span
                   title={pub.digitalLibrary}
-                  className="relative flex h-9 w-32 items-center justify-end"
+                  className="relative flex h-7 w-24 items-center justify-start sm:h-9 sm:w-32 sm:justify-end"
                 >
                   <Image
                     src={mark.src}
                     alt={pub.digitalLibrary ?? "Publisher"}
                     fill
-                    sizes="128px"
-                    className={`object-contain object-right ${
+                    sizes="(min-width: 640px) 128px, 96px"
+                    className={`object-contain object-left sm:object-right ${
                       mark.whitenOnDark ? "dark:brightness-0 dark:invert" : ""
                     }`}
                   />
