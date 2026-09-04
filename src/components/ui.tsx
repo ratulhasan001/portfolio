@@ -10,7 +10,7 @@ export function Chip({ children }: { children: React.ReactNode }) {
     <motion.span
       whileHover={{ y: -2, scale: 1.05, borderColor: "var(--color-accent)", color: "var(--color-accent)" }}
       transition={{ type: "spring", stiffness: 400, damping: 20 }}
-      className="chip inline-flex items-center rounded-full border border-border-default bg-canvas-subtle px-2.5 py-0.5 text-xs font-medium text-fg-muted"
+      className="chip inline-flex items-center rounded-full border border-border-default bg-canvas-subtle px-2.5 py-1 text-[13px] font-medium text-fg-muted"
     >
       {children}
     </motion.span>
@@ -57,11 +57,11 @@ export function SectionTitle({
 }) {
   return (
     <div className="mb-5 flex items-baseline gap-3">
-      <PopIn as="span" inView scale={0.3} className="mono text-sm text-accent">
+      <PopIn as="span" inView scale={0.3} className="mono text-base text-accent">
         {index}
       </PopIn>
       <div>
-        <h2 className="text-xl font-semibold tracking-tight text-fg-default sm:text-2xl">
+        <h2 className="text-2xl font-semibold tracking-tight text-fg-default sm:text-3xl">
           <PopWords text={title} inView delay={0.1} stagger={0.06} />
         </h2>
         {subtitle && (
@@ -70,7 +70,7 @@ export function SectionTitle({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="mt-0.5 max-w-2xl text-xs text-fg-muted sm:text-sm"
+            className="mt-1 max-w-2xl text-sm text-fg-muted sm:text-[15px]"
           >
             {subtitle}
           </motion.p>

@@ -40,16 +40,16 @@ export function ProjectsSection() {
                     href={project.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-semibold text-accent transition-[letter-spacing] duration-300 hover:tracking-wide"
+                    className="flex items-center gap-2 text-[15px] font-semibold text-accent transition-[letter-spacing] duration-300 hover:tracking-wide"
                   >
-                    <BookMarked size={14} />
+                    <BookMarked size={16} />
                     <PopWords text={project.name} inView stagger={0.04} />
                     <ExternalLink
                       size={12}
                       className="text-fg-subtle opacity-0 transition-opacity group-hover:opacity-100"
                     />
                   </a>
-                  <span className="flex shrink-0 items-center gap-1.5 text-xs text-fg-subtle">
+                  <span className="flex shrink-0 items-center gap-1.5 text-[13px] text-fg-subtle">
                     <span
                       className="animate-pulse-dot h-2.5 w-2.5 rounded-full"
                       style={{ backgroundColor: project.languageColor }}
@@ -59,7 +59,7 @@ export function ProjectsSection() {
                 </div>
               }
             >
-              <p className="text-sm leading-relaxed text-fg-muted">
+              <p className="text-[15px] leading-relaxed text-fg-muted">
                 {project.description}
               </p>
 
@@ -67,14 +67,14 @@ export function ProjectsSection() {
                 {project.tools.map((tool) => (
                   <span
                     key={tool}
-                    className="chip rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-[11px] text-fg-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+                    className="chip rounded-full border border-border-muted bg-canvas px-2.5 py-0.5 text-xs text-fg-muted transition-all hover:-translate-y-0.5 hover:border-accent hover:text-accent"
                   >
                     {tool}
                   </span>
                 ))}
               </div>
 
-              <div className="mt-3 flex items-center gap-4 text-xs text-fg-subtle">
+              <div className="mt-3 flex items-center gap-4 text-[13px] text-fg-subtle">
                 <span className="flex items-center gap-1">
                   <Star size={12} />
                   Featured

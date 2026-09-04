@@ -48,21 +48,21 @@ export function ExperienceSection() {
               summary={
                 <>
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                    <h4 className="text-sm font-semibold text-fg-default sm:text-base">
+                    <h4 className="text-base font-semibold text-fg-default sm:text-lg">
                       <PopWords text={exp.role} inView stagger={0.04} />
                     </h4>
                     <span className="text-fg-subtle">·</span>
-                    <p className="text-sm font-medium text-accent">
+                    <p className="text-[15px] font-medium text-accent">
                       <PopWords text={exp.org} inView delay={0.1} stagger={0.04} />
                     </p>
                   </div>
-                  <p className="mono mt-0.5 text-xs text-fg-subtle">
+                  <p className="mono mt-1 text-[13px] text-fg-subtle">
                     {exp.period} · {exp.location}
                   </p>
                 </>
               }
             >
-              <ul className="space-y-1.5 text-sm text-fg-muted">
+              <ul className="space-y-2 text-[15px] text-fg-muted">
                 {exp.bullets.map((b) => (
                   <li key={b} className="flex gap-2">
                     <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-fg-subtle" />
