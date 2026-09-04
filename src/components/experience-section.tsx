@@ -21,7 +21,7 @@ export function ExperienceSection() {
 
       <SectionTitle index="03" title="Experience" />
 
-      <ol className="relative max-w-3xl border-l border-border-default pl-9">
+      <ol className="relative ml-6 max-w-3xl border-l border-border-default pl-8">
         {experience.map((exp, i) => (
           <motion.li
             key={exp.org}
