@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { BookOpen, Clock, ExternalLink, FileText, Library, Link2, Users } from "lucide-react";
-import { publications, type Publication } from "@/lib/data";
+import { BookOpen, Clock, ExternalLink, FileText, Link2, Users } from "lucide-react";
+import { publications, digitalLibraryLogos, type Publication } from "@/lib/data";
 import { SectionTitle, StatusPill } from "./ui";
 import { StaggerGroup, staggerItem } from "./fade-in";
 import { TiltCard } from "./tilt-card";
@@ -11,66 +12,89 @@ import { ParallaxLayer } from "./parallax-layer";
 import { Disclosure } from "./disclosure";
 
 function PublicationCard({ pub }: { pub: Publication }) {
+  const mark = pub.logo
+    ? { src: pub.logo }
+    : pub.digitalLibrary
+      ? digitalLibraryLogos[pub.digitalLibrary]
+      : undefined;
+
   return (
     <TiltCard
       variants={staggerItem}
       className="shimmer rounded-md border border-border-default bg-canvas-subtle p-4 transition-colors hover:border-accent/50"
     >
-      <div className="flex items-start gap-3">
-        <motion.span
-          whileHover={{ rotate: -10, scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent"
-        >
-          {pub.type === "journal" ? <FileText size={14} /> : <BookOpen size={14} />}
-        </motion.span>
+      <Disclosure
+        title="Show publication details"
+        summary={
+          <div className="flex items-start gap-3">
+            <motion.span
+              whileHover={{ rotate: -10, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent"
+            >
+              {pub.type === "journal" ? <FileText size={14} /> : <BookOpen size={14} />}
+            </motion.span>
 
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-start justify-between gap-2">
-            <h3 className="text-sm font-semibold leading-snug text-fg-default sm:text-[15px]">
-              <PopWords text={pub.title} inView stagger={0.018} />
-            </h3>
-            <StatusPill status={pub.status} />
-          </div>
+            {/* Left: what the paper is */}
+            <div className="min-w-0 flex-1">
+              <h3 className="text-sm font-semibold leading-snug text-fg-default sm:text-[15px]">
+                <PopWords text={pub.title} inView stagger={0.018} />
+              </h3>
+              <div className="mt-1.5">
+                <StatusPill status={pub.status} />
+              </div>
+            </div>
 
-          <p className="mono mt-1 text-xs text-fg-subtle">{pub.date}</p>
-
-          <Disclosure title="Show publication details" className="mt-2">
-            <p className="flex items-start gap-1.5 text-xs text-fg-muted">
-              <Users size={12} className="mt-0.5 shrink-0" />
-              {pub.authors}
-            </p>
-            <p className="mt-2 text-xs italic text-fg-muted">{pub.venue}</p>
-
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              {pub.status === "accepted" && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-done/40 bg-done-subtle px-2.5 py-0.5 text-xs font-medium text-done">
-                  <Clock size={11} />
-                  To Be Published
-                </span>
-              )}
-              {pub.digitalLibrary && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-border-default bg-canvas px-2.5 py-0.5 text-xs font-medium text-fg-muted">
-                  <Library size={11} />
-                  {pub.digitalLibrary}
-                </span>
-              )}
-              {pub.link && (
-                <a
-                  href={pub.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mono inline-flex items-center gap-1.5 rounded-full border border-success/30 bg-canvas px-2.5 py-0.5 text-[11px] font-semibold text-success transition-colors hover:border-success hover:bg-success-subtle"
+            {/* Right: where and when */}
+            <div className="flex shrink-0 flex-col items-end gap-1.5">
+              <span className="mono text-xs text-fg-subtle">{pub.date}</span>
+              {mark && (
+                <span
+                  title={pub.digitalLibrary}
+                  className="relative flex h-6 w-28 items-center justify-end"
                 >
-                  <Link2 size={11} />
-                  {pub.link.replace("https://doi.org/", "")}
-                  <ExternalLink size={10} />
-                </a>
+                  <Image
+                    src={mark.src}
+                    alt={pub.digitalLibrary ?? "Publisher"}
+                    fill
+                    sizes="112px"
+                    className={`object-contain object-right ${
+                      mark.invertOnDark ? "dark:invert" : ""
+                    }`}
+                  />
+                </span>
               )}
             </div>
-          </Disclosure>
+          </div>
+        }
+      >
+        <p className="flex items-start gap-1.5 text-xs text-fg-muted">
+          <Users size={12} className="mt-0.5 shrink-0" />
+          {pub.authors}
+        </p>
+        <p className="mt-2 text-xs italic text-fg-muted">{pub.venue}</p>
+
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          {pub.status === "accepted" && (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-done/40 bg-done-subtle px-2.5 py-0.5 text-xs font-medium text-done">
+              <Clock size={11} />
+              To Be Published
+            </span>
+          )}
+          {pub.link && (
+            <a
+              href={pub.link}
+              target="_blank"
+              rel="noreferrer"
+              className="mono inline-flex items-center gap-1.5 rounded-full border border-success/30 bg-canvas px-2.5 py-0.5 text-[11px] font-semibold text-success transition-colors hover:border-success hover:bg-success-subtle"
+            >
+              <Link2 size={11} />
+              {pub.link.replace("https://doi.org/", "")}
+              <ExternalLink size={10} />
+            </a>
+          )}
         </div>
-      </div>
+      </Disclosure>
     </TiltCard>
   );
 }
