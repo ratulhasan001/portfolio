@@ -17,6 +17,9 @@ function PublicationCard({ pub }: { pub: Publication }) {
     : pub.digitalLibrary
       ? digitalLibraryLogos[pub.digitalLibrary]
       : undefined;
+  // The status pill already says submitted / accepted / published, so the
+  // headline only needs the year out of the full date.
+  const year = pub.date.match(/\d{4}/)?.[0] ?? pub.date;
 
   return (
     <TiltCard
@@ -26,7 +29,18 @@ function PublicationCard({ pub }: { pub: Publication }) {
       <Disclosure
         title="Show publication details"
         summary={
-          <div className="flex items-start gap-3">
+          <div className="relative flex items-start gap-3">
+            {/* Published work: the whole headline row opens the DOI. The
+                chevron sits outside this row, so it stays clickable. */}
+            {pub.link && (
+              <a
+                href={pub.link}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open "${pub.title}" at ${pub.link.replace("https://doi.org/", "doi ")}`}
+                className="peer absolute inset-0 z-20 rounded-md"
+              />
+            )}
             <motion.span
               whileHover={{ rotate: -10, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
@@ -37,7 +51,7 @@ function PublicationCard({ pub }: { pub: Publication }) {
 
             {/* Left: what the paper is */}
             <div className="min-w-0 flex-1">
-              <h3 className="text-[15px] font-semibold leading-snug text-fg-default sm:text-base">
+              <h3 className="text-[15px] font-semibold leading-snug text-fg-default transition-colors peer-hover:text-accent sm:text-base">
                 <PopWords text={pub.title} inView stagger={0.018} />
               </h3>
               <div className="mt-1.5">
@@ -63,7 +77,7 @@ function PublicationCard({ pub }: { pub: Publication }) {
                   />
                 </span>
               )}
-              <span className="mono text-[13px] text-fg-subtle">{pub.date}</span>
+              <span className="mono text-[13px] text-fg-subtle">{year}</span>
             </div>
           </div>
         }
