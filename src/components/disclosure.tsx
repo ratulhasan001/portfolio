@@ -47,7 +47,7 @@ export function Disclosure({
       transition={{ duration: 0.2, ease: "easeOut" }}
       className="flex"
     >
-      <ChevronDown size={label ? 11 : 14} />
+      <ChevronDown size={label ? 12 : 16} />
     </motion.span>
   );
 
@@ -60,10 +60,10 @@ export function Disclosure({
       title={open ? "Hide details" : title}
       onClick={toggle}
       whileTap={{ scale: 0.9 }}
-      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors ${
+      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border shadow-sm transition-colors ${
         open
-          ? "border-accent/40 bg-accent/10 text-accent"
-          : "border-border-muted bg-canvas text-fg-subtle hover:border-accent/40 hover:bg-accent/[0.06] hover:text-accent"
+          ? "border-accent bg-accent text-white"
+          : "border-accent/35 bg-accent/10 text-accent hover:border-accent hover:bg-accent hover:text-white"
       }`}
     >
       {chevron}
@@ -83,7 +83,7 @@ export function Disclosure({
           aria-expanded={open}
           aria-controls={panelId}
           onClick={toggle}
-          className="mono inline-flex items-center gap-1 rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-[11px] font-medium text-fg-muted transition-colors hover:border-accent/50 hover:text-accent"
+          className="mono inline-flex items-center gap-1.5 rounded-full border border-accent/35 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent shadow-sm transition-colors hover:border-accent hover:bg-accent hover:text-white"
         >
           {open ? openLabel ?? "Less" : label}
           {chevron}
