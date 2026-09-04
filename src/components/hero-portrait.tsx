@@ -37,7 +37,7 @@ export function HeroPortrait() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
-      className="relative mx-auto flex h-72 w-72 items-center justify-center sm:h-80 sm:w-80 lg:h-[22rem] lg:w-[22rem]"
+      className="relative mx-auto flex h-60 w-60 items-center justify-center sm:h-80 sm:w-80 lg:h-[22rem] lg:w-[22rem]"
     >
       {/* ambient glow */}
       <motion.span
@@ -77,7 +77,7 @@ export function HeroPortrait() {
         style={{ rotateX, rotateY }}
         animate={{ y: [0, -12, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-10 h-48 w-48 rounded-full sm:h-56 sm:w-56 lg:h-64 lg:w-64"
+        className="relative z-10 h-40 w-40 rounded-full sm:h-56 sm:w-56 lg:h-64 lg:w-64"
       >
         <span
           aria-hidden
@@ -88,7 +88,7 @@ export function HeroPortrait() {
             src="/my_img.jpg"
             alt={profile.name}
             fill
-            sizes="(min-width: 1024px) 256px, (min-width: 640px) 224px, 192px"
+            sizes="(min-width: 1024px) 256px, (min-width: 640px) 224px, 160px"
             priority
             className="object-cover object-top"
           />
