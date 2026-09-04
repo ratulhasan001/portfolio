@@ -2,12 +2,41 @@
 
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
-import { education } from "@/lib/data";
+import { education, type Education } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
 import { Disclosure } from "./disclosure";
 import { TimelineLogo } from "./timeline-logo";
+
+function EntryHead({ edu }: { edu: Education }) {
+  return (
+    <>
+      <div className="flex flex-wrap items-center gap-2">
+        <h4 className="text-sm font-semibold text-fg-default sm:text-base">
+          <PopWords text={edu.degree} inView stagger={0.04} />
+        </h4>
+        {edu.score && (
+          <span className="mono rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-[11px] text-fg-muted">
+            {edu.score.label} {edu.score.value.toFixed(2)}/
+            {edu.score.scale.toFixed(1)}
+          </span>
+        )}
+        {edu.merit && (
+          <span className="rounded-full bg-success-subtle px-2 py-0.5 text-[11px] font-medium text-success">
+            {edu.merit}
+          </span>
+        )}
+      </div>
+      <p className="text-sm font-medium text-accent">
+        <PopWords text={edu.school} inView delay={0.1} stagger={0.04} />
+      </p>
+      <p className="mono mt-0.5 text-xs text-fg-subtle">
+        {edu.period} · {edu.location}
+      </p>
+    </>
+  );
+}
 
 export function EducationSection() {
   return (
@@ -42,35 +71,14 @@ export function EducationSection() {
               fallback={<GraduationCap size={12} />}
             />
 
-            <div className="flex flex-wrap items-center gap-2">
-              <h4 className="text-sm font-semibold text-fg-default sm:text-base">
-                <PopWords text={edu.degree} inView stagger={0.04} />
-              </h4>
-              {edu.score && (
-                <span className="mono rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-[11px] text-fg-muted">
-                  {edu.score.label} {edu.score.value.toFixed(2)}/
-                  {edu.score.scale.toFixed(1)}
-                </span>
-              )}
-              {edu.merit && (
-                <span className="rounded-full bg-success-subtle px-2 py-0.5 text-[11px] font-medium text-success">
-                  {edu.merit}
-                </span>
-              )}
-            </div>
-            <p className="text-sm font-medium text-accent">
-              <PopWords text={edu.school} inView delay={0.1} stagger={0.04} />
-            </p>
-            <p className="mono mt-0.5 text-xs text-fg-subtle">
-              {edu.period} · {edu.location}
-            </p>
-
-            {edu.detail && (
-              <Disclosure title="Show thesis" className="mt-2">
+            {edu.detail ? (
+              <Disclosure title="Show thesis" summary={<EntryHead edu={edu} />}>
                 <p className="text-sm leading-relaxed text-fg-muted">
                   {edu.detail}
                 </p>
               </Disclosure>
+            ) : (
+              <EntryHead edu={edu} />
             )}
           </motion.li>
         ))}

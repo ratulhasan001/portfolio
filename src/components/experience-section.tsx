@@ -43,20 +43,25 @@ export function ExperienceSection() {
               fallback={<GitCommitHorizontal size={12} />}
             />
 
-            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-              <h4 className="text-sm font-semibold text-fg-default sm:text-base">
-                <PopWords text={exp.role} inView stagger={0.04} />
-              </h4>
-              <span className="text-fg-subtle">·</span>
-              <p className="text-sm font-medium text-accent">
-                <PopWords text={exp.org} inView delay={0.1} stagger={0.04} />
-              </p>
-            </div>
-            <p className="mono mt-0.5 text-xs text-fg-subtle">
-              {exp.period} · {exp.location}
-            </p>
-
-            <Disclosure title="Show role details" className="mt-2">
+            <Disclosure
+              title="Show role details"
+              summary={
+                <>
+                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                    <h4 className="text-sm font-semibold text-fg-default sm:text-base">
+                      <PopWords text={exp.role} inView stagger={0.04} />
+                    </h4>
+                    <span className="text-fg-subtle">·</span>
+                    <p className="text-sm font-medium text-accent">
+                      <PopWords text={exp.org} inView delay={0.1} stagger={0.04} />
+                    </p>
+                  </div>
+                  <p className="mono mt-0.5 text-xs text-fg-subtle">
+                    {exp.period} · {exp.location}
+                  </p>
+                </>
+              }
+            >
               <ul className="space-y-1.5 text-sm text-fg-muted">
                 {exp.bullets.map((b) => (
                   <li key={b} className="flex gap-2">
