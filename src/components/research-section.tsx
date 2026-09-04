@@ -30,14 +30,14 @@ function PublicationCard({ pub }: { pub: Publication }) {
             <motion.span
               whileHover={{ rotate: -10, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent"
+              className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent"
             >
-              {pub.type === "journal" ? <FileText size={14} /> : <BookOpen size={14} />}
+              {pub.type === "journal" ? <FileText size={16} /> : <BookOpen size={16} />}
             </motion.span>
 
             {/* Left: what the paper is */}
             <div className="min-w-0 flex-1">
-              <h3 className="text-sm font-semibold leading-snug text-fg-default sm:text-[15px]">
+              <h3 className="text-[15px] font-semibold leading-snug text-fg-default sm:text-base">
                 <PopWords text={pub.title} inView stagger={0.018} />
               </h3>
               <div className="mt-1.5">
@@ -63,16 +63,16 @@ function PublicationCard({ pub }: { pub: Publication }) {
                   />
                 </span>
               )}
-              <span className="mono text-xs text-fg-subtle">{pub.date}</span>
+              <span className="mono text-[13px] text-fg-subtle">{pub.date}</span>
             </div>
           </div>
         }
       >
-        <p className="flex items-start gap-1.5 text-xs text-fg-muted">
+        <p className="flex items-start gap-1.5 text-sm text-fg-muted">
           <Users size={12} className="mt-0.5 shrink-0" />
           {pub.authors}
         </p>
-        <p className="mt-2 text-xs italic text-fg-muted">{pub.venue}</p>
+        <p className="mt-2 text-sm italic text-fg-muted">{pub.venue}</p>
 
         <div className="mt-3 flex flex-wrap items-center gap-2">
           {pub.status === "accepted" && (
@@ -111,7 +111,7 @@ function PublicationGroup({
   if (items.length === 0) return null;
   return (
     <div>
-      <h3 className="mono mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
+      <h3 className="mono mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
         {icon}
         {title}
         <span className="text-fg-subtle/70">({items.length})</span>

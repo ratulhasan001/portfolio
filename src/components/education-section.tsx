@@ -13,25 +13,25 @@ function EntryHead({ edu }: { edu: Education }) {
   return (
     <>
       <div className="flex flex-wrap items-center gap-2">
-        <h4 className="text-sm font-semibold text-fg-default sm:text-base">
+        <h4 className="text-base font-semibold text-fg-default sm:text-lg">
           <PopWords text={edu.degree} inView stagger={0.04} />
         </h4>
         {edu.score && (
-          <span className="mono rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-[11px] text-fg-muted">
+          <span className="mono rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-xs text-fg-muted">
             {edu.score.label} {edu.score.value.toFixed(2)}/
             {edu.score.scale.toFixed(1)}
           </span>
         )}
         {edu.merit && (
-          <span className="rounded-full bg-success-subtle px-2 py-0.5 text-[11px] font-medium text-success">
+          <span className="rounded-full bg-success-subtle px-2 py-0.5 text-xs font-medium text-success">
             {edu.merit}
           </span>
         )}
       </div>
-      <p className="text-sm font-medium text-accent">
+      <p className="text-[15px] font-medium text-accent">
         <PopWords text={edu.school} inView delay={0.1} stagger={0.04} />
       </p>
-      <p className="mono mt-0.5 text-xs text-fg-subtle">
+      <p className="mono mt-1 text-[13px] text-fg-subtle">
         {edu.period} · {edu.location}
       </p>
     </>
@@ -73,7 +73,7 @@ export function EducationSection() {
 
             {edu.detail ? (
               <Disclosure title="Show thesis" summary={<EntryHead edu={edu} />}>
-                <p className="text-sm leading-relaxed text-fg-muted">
+                <p className="text-[15px] leading-relaxed text-fg-muted">
                   {edu.detail}
                 </p>
               </Disclosure>

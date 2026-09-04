@@ -81,7 +81,7 @@ export function SkillsSection() {
 
       <div className="mb-7">
         <PopIn inView>
-          <h3 className="mono mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
+          <h3 className="mono mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
             <Trophy size={13} />
             Competitive Programming
           </h3>
@@ -107,14 +107,14 @@ export function SkillsSection() {
                         <Icon size={14} />
                       </motion.span>
                     )}
-                    <p className="text-sm font-semibold text-fg-default">
+                    <p className="text-[15px] font-semibold text-fg-default">
                       <PopWords text={judge.platform} inView stagger={0.04} />
                     </p>
                   </div>
-                  <p className="gradient-text mt-1.5 text-base font-bold">
+                  <p className="gradient-text mt-1.5 text-lg font-bold">
                     {judge.stat}
                   </p>
-                  <span className="group/handle mono mt-1 inline-flex items-center gap-1 text-xs text-fg-subtle transition-colors group-hover:text-accent">
+                  <span className="group/handle mono mt-1 inline-flex items-center gap-1 text-[13px] text-fg-subtle transition-colors group-hover:text-accent">
                     @{judge.handle}
                     <ExternalLink
                       size={11}
@@ -139,7 +139,7 @@ export function SkillsSection() {
               variants={staggerItem}
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 320, damping: 22 }}
-              className="shimmer group relative flex items-start gap-3 overflow-hidden rounded-md border border-border-muted bg-canvas px-3.5 py-3 text-sm text-fg-muted shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-attention/50 hover:shadow-[0_16px_32px_-16px_var(--color-attention)]"
+              className="shimmer group relative flex items-start gap-3 overflow-hidden rounded-md border border-border-muted bg-canvas px-4 py-3 text-[15px] text-fg-muted shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-attention/50 hover:shadow-[0_16px_32px_-16px_var(--color-attention)]"
             >
               <span
                 aria-hidden
@@ -166,7 +166,7 @@ export function SkillsSection() {
 
       <div className="mb-7">
         <PopIn inView>
-          <h3 className="mono mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
+          <h3 className="mono mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
             <Code2 size={13} />
             Technical Skills
           </h3>
@@ -179,7 +179,7 @@ export function SkillsSection() {
               whileHover={{ y: -3, borderColor: "var(--color-accent)" }}
               className="shimmer rounded-md border border-border-default bg-canvas-subtle p-3.5 transition-colors"
             >
-              <p className="text-sm font-semibold text-fg-default">
+              <p className="text-[15px] font-semibold text-fg-default">
                 <PopWords text={category} inView stagger={0.04} />
               </p>
               <div className="mt-2 flex flex-wrap gap-1.5">
@@ -190,7 +190,7 @@ export function SkillsSection() {
                       key={item}
                       whileHover={{ y: -2, scale: 1.06 }}
                       transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                      className="chip inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/[0.07] px-2.5 py-0.5 text-xs font-medium text-accent"
+                      className="chip inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/[0.07] px-2.5 py-1 text-[13px] font-medium text-accent"
                     >
                       {Icon && <Icon size={12} />}
                       {item}
@@ -205,7 +205,7 @@ export function SkillsSection() {
 
       <div>
         <PopIn inView>
-          <h3 className="mono mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle">
+          <h3 className="mono mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
             <Users2 size={13} />
             Leadership &amp; Volunteering
           </h3>
@@ -233,7 +233,7 @@ export function SkillsSection() {
                   >
                     <Crown size={16} />
                   </motion.span>
-                  <p className="text-sm font-semibold text-fg-default">
+                  <p className="text-[15px] font-semibold text-fg-default">
                     <PopWords text={entry.org} inView stagger={0.03} />
                   </p>
                 </div>
