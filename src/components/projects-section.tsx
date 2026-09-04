@@ -31,7 +31,7 @@ export function ProjectsSection() {
             <Disclosure
               title="Show project details"
               summary={
-                <div className="flex items-center justify-between gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
                   <a
                     href={project.link}
                     target="_blank"
