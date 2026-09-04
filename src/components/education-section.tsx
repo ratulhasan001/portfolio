@@ -66,7 +66,7 @@ export function EducationSection() {
             </p>
 
             {edu.detail && (
-              <Disclosure label="Thesis" className="mt-2">
+              <Disclosure title="Show thesis" className="mt-2">
                 <p className="text-sm leading-relaxed text-fg-muted">
                   {edu.detail}
                 </p>

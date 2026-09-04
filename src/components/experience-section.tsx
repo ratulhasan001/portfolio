@@ -56,11 +56,7 @@ export function ExperienceSection() {
               {exp.period} · {exp.location}
             </p>
 
-            <Disclosure
-              label="Details"
-              count={exp.bullets.length}
-              className="mt-2"
-            >
+            <Disclosure title="Show role details" className="mt-2">
               <ul className="space-y-1.5 text-sm text-fg-muted">
                 {exp.bullets.map((b) => (
                   <li key={b} className="flex gap-2">

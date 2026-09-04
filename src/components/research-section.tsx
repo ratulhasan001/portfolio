@@ -35,7 +35,7 @@ function PublicationCard({ pub }: { pub: Publication }) {
 
           <p className="mono mt-1 text-xs text-fg-subtle">{pub.date}</p>
 
-          <Disclosure label="Details" className="mt-2">
+          <Disclosure title="Show publication details" className="mt-2">
             <p className="flex items-start gap-1.5 text-xs text-fg-muted">
               <Users size={12} className="mt-0.5 shrink-0" />
               {pub.authors}

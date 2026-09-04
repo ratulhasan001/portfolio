@@ -8,49 +8,76 @@ import { ChevronDown } from "lucide-react";
  * Collapsed-by-default detail panel. Cards render their headline facts
  * inline and tuck everything else behind this toggle so a section reads
  * as a scannable list on first load.
+ *
+ * With no `label`, the trigger is a bare chevron button — the right weight
+ * for per-item cards, where a worded button would repeat down the page.
+ * Pass a `label` for section-level toggles that need naming.
  */
 export function Disclosure({
-  label = "Details",
+  label,
   openLabel,
-  count,
+  title = "Show details",
   children,
   className = "",
 }: {
   label?: string;
   openLabel?: string;
-  count?: number;
+  /** Tooltip / screen-reader name for the icon-only trigger. */
+  title?: string;
   children: React.ReactNode;
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
 
+  // Cards are often wrapped in a link — keep the toggle local.
+  const toggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpen((v) => !v);
+  };
+
+  const chevron = (
+    <motion.span
+      animate={{ rotate: open ? 180 : 0 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className="flex"
+    >
+      <ChevronDown size={label ? 11 : 14} />
+    </motion.span>
+  );
+
   return (
     <div className={className}>
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={(e) => {
-          // Cards are often wrapped in a link — keep the toggle local.
-          e.preventDefault();
-          e.stopPropagation();
-          setOpen((v) => !v);
-        }}
-        className="mono inline-flex items-center gap-1 rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-[11px] font-medium text-fg-muted transition-colors hover:border-accent/50 hover:text-accent"
-      >
-        {open ? openLabel ?? "Less" : label}
-        {typeof count === "number" && !open && (
-          <span className="text-fg-subtle">{count}</span>
-        )}
-        <motion.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-          className="flex"
+      {label ? (
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls={panelId}
+          onClick={toggle}
+          className="mono inline-flex items-center gap-1 rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-[11px] font-medium text-fg-muted transition-colors hover:border-accent/50 hover:text-accent"
         >
-          <ChevronDown size={11} />
-        </motion.span>
-      </button>
+          {open ? openLabel ?? "Less" : label}
+          {chevron}
+        </button>
+      ) : (
+        <motion.button
+          type="button"
+          aria-expanded={open}
+          aria-controls={panelId}
+          aria-label={open ? "Hide details" : title}
+          title={open ? "Hide details" : title}
+          onClick={toggle}
+          whileTap={{ scale: 0.9 }}
+          className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${
+            open
+              ? "border-accent/40 bg-accent/10 text-accent"
+              : "border-border-muted bg-canvas text-fg-subtle hover:border-accent/40 hover:bg-accent/[0.06] hover:text-accent"
+          }`}
+        >
+          {chevron}
+        </motion.button>
+      )}
 
       <AnimatePresence initial={false}>
         {open && (

@@ -130,7 +130,6 @@ export function SkillsSection() {
         <Disclosure
           label="Contest achievements"
           openLabel="Hide achievements"
-          count={achievements.length}
           className="mt-3"
         >
         <StaggerGroup margin="0px" className="grid gap-2.5 sm:grid-cols-2">
@@ -211,12 +210,7 @@ export function SkillsSection() {
             Leadership &amp; Volunteering
           </h3>
         </PopIn>
-        <Disclosure
-          label="Roles"
-          openLabel="Hide roles"
-          count={leadership.reduce((n, e) => n + e.roles.length, 0)}
-          className="mt-1"
-        >
+        <Disclosure label="Roles" openLabel="Hide roles" className="mt-1">
         <StaggerGroup margin="0px" className="grid gap-2.5 sm:grid-cols-2">
           {leadership.map((entry) =>
             entry.roles.length > 1 ? (
