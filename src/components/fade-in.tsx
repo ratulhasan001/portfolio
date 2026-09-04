@@ -30,16 +30,19 @@ export function StaggerGroup({
   children,
   className,
   stagger = 0.08,
+  margin = "-60px",
 }: {
   children: React.ReactNode;
   className?: string;
   stagger?: number;
+  /** Loosen this for groups that mount inside a collapsible panel. */
+  margin?: string;
 }) {
   return (
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin }}
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: stagger } },

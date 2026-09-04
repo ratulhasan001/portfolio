@@ -8,6 +8,8 @@ export const profile = {
   website: "https://ratulhasan.xyz",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
+  orcid: "https://orcid.org/0009-0009-5429-7501",
+  scholar: "https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en",
   summary:
     "Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.",
   focusAreas: [

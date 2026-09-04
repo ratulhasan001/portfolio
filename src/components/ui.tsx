@@ -56,12 +56,12 @@ export function SectionTitle({
   subtitle?: string;
 }) {
   return (
-    <div className="mb-8 flex items-baseline gap-3">
+    <div className="mb-5 flex items-baseline gap-3">
       <PopIn as="span" inView scale={0.3} className="mono text-sm text-accent">
         {index}
       </PopIn>
       <div>
-        <h2 className="text-2xl font-semibold tracking-tight text-fg-default sm:text-3xl">
+        <h2 className="text-xl font-semibold tracking-tight text-fg-default sm:text-2xl">
           <PopWords text={title} inView delay={0.1} stagger={0.06} />
         </h2>
         {subtitle && (
@@ -70,7 +70,7 @@ export function SectionTitle({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="mt-1 text-sm text-fg-muted"
+            className="mt-0.5 max-w-2xl text-xs text-fg-muted sm:text-sm"
           >
             {subtitle}
           </motion.p>
