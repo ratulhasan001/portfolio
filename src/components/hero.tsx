@@ -40,14 +40,12 @@ const achievements = [
   {
     icon: FileText,
     title: "4 Peer-reviewed Publications",
-    subtitle: "IEEE • ACM Conference Proceedings",
     href: "#research",
     external: false,
   },
   {
     icon: Clock,
     title: `${publications.filter((p) => p.status === "under-review").length} Publication Under Review`,
-    subtitle: "Nature Scientific Reports",
     href: "#research",
     external: false,
   },
@@ -63,7 +61,7 @@ function AchievementCard({
 }: {
   icon: ComponentType<{ size?: number; className?: string }>;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   href: string;
   external: boolean;
   delay: number;
@@ -100,7 +98,9 @@ function AchievementCard({
           <h3 className="text-[15px] font-bold leading-snug text-fg-default">
             {title}
           </h3>
-          <p className="mt-0.5 text-[13px] text-fg-muted">{subtitle}</p>
+          {subtitle && (
+            <p className="mt-0.5 text-[13px] text-fg-muted">{subtitle}</p>
+          )}
         </div>
         <ArrowUpRight
           size={16}
