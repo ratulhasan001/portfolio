@@ -100,19 +100,22 @@ function AchievementCard({
         className="pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(120px_circle_at_20%_0%,color-mix(in_srgb,var(--color-accent)_16%,transparent),transparent)] opacity-0 transition-opacity duration-250 group-hover:opacity-100"
       />
 
-      <span className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent transition-transform duration-250 ease-out group-hover:scale-110">
-        <Icon size={15} />
-      </span>
+      <div className="relative flex items-start gap-2.5">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent transition-transform duration-250 ease-out group-hover:scale-110">
+          <Icon size={17} />
+        </span>
+        <div className="min-w-0">
+          <h3 className="text-[15px] font-bold leading-snug text-fg-default">
+            {title}
+          </h3>
+          <p className="mt-0.5 text-[13px] text-fg-muted">{subtitle}</p>
+        </div>
+      </div>
 
-      <h3 className="relative mt-2 text-sm font-bold leading-snug text-fg-default">
-        {title}
-      </h3>
-      <p className="relative text-xs text-fg-muted">{subtitle}</p>
-
-      <span className="relative mt-2 flex items-center gap-1.5 text-xs font-medium text-accent">
+      <span className="relative mt-auto pt-2 flex items-center gap-1.5 text-[13px] font-medium text-accent">
         {action}
         <ArrowRight
-          size={12}
+          size={13}
           className="transition-transform duration-250 ease-out group-hover:translate-x-1"
         />
       </span>
@@ -157,12 +160,12 @@ function IconLink({
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.92 }}
           transition={{ type: "spring", stiffness: 400, damping: 20 }}
-          className="glass flex h-9 w-9 items-center justify-center rounded-full text-fg-muted transition-colors duration-200 hover:text-accent"
+          className="glass flex h-10 w-10 items-center justify-center rounded-full text-fg-muted transition-colors duration-200 hover:text-accent"
         >
-          <Icon size={15} />
+          <Icon size={16} />
         </motion.a>
       ) : (
-        <span className="glass flex h-9 w-9 items-center justify-center rounded-full text-fg-muted">
+        <span className="glass flex h-10 w-10 items-center justify-center rounded-full text-fg-muted">
           <Icon size={15} />
         </span>
       )}
@@ -210,30 +213,30 @@ export function Hero() {
         {/* Left: identity + copy */}
         <div>
           <FadeIn delay={0.1 + bootDelay}>
-            <p className="mono text-sm font-medium text-fg-muted">Hi, I&apos;m</p>
+            <p className="mono text-base font-medium text-fg-muted">Hi, I&apos;m</p>
           </FadeIn>
 
-          <h1 className="mt-1 text-3xl font-bold tracking-tight text-fg-default sm:text-4xl lg:text-5xl">
+          <h1 className="mt-1 text-4xl font-bold tracking-tight text-fg-default sm:text-5xl lg:text-6xl">
             <PopWords text={profile.name} delay={0.22 + bootDelay} stagger={0.05} />
           </h1>
 
           <FadeIn delay={0.5 + bootDelay}>
-            <p className="mt-3 text-base font-semibold text-accent sm:text-lg">
+            <p className="mt-3 text-lg font-semibold text-accent sm:text-xl">
               Aspiring Graduate Researcher
             </p>
           </FadeIn>
 
           <FadeIn delay={0.6 + bootDelay}>
-            <p className="mono mt-1.5 min-h-[1.5em] text-sm text-fg-default sm:text-base">
+            <p className="mono mt-1.5 min-h-[1.5em] text-base text-fg-default sm:text-lg">
               <Typewriter words={profile.focusAreas} />
             </p>
           </FadeIn>
 
           <FadeIn delay={0.72 + bootDelay} className="mt-4 max-w-lg">
-            <p className="text-sm leading-relaxed text-fg-muted">{summaryLead}</p>
+            <p className="text-[15px] leading-relaxed text-fg-muted">{summaryLead}</p>
             {summaryRest.length > 0 && (
               <Disclosure label="More about me" openLabel="Less" className="mt-2">
-                <p className="text-sm leading-relaxed text-fg-muted">
+                <p className="text-[15px] leading-relaxed text-fg-muted">
                   {summaryRest.join(" ")}
                 </p>
               </Disclosure>
@@ -247,7 +250,7 @@ export function Hero() {
                 e.preventDefault();
                 smoothScrollToId("#research");
               }}
-              className="shimmer gap-2 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white shadow-md transition-[box-shadow,background-color] duration-300 hover:bg-accent-emphasis hover:shadow-[0_16px_36px_-12px_var(--color-accent)]"
+              className="shimmer gap-2 rounded-md bg-accent px-5 py-2.5 text-[15px] font-semibold text-white shadow-md transition-[box-shadow,background-color] duration-300 hover:bg-accent-emphasis hover:shadow-[0_16px_36px_-12px_var(--color-accent)]"
             >
               View Research
               <motion.span
@@ -263,7 +266,7 @@ export function Hero() {
             <MagneticLink
               href="/Ratul_Hasan_CV.pdf"
               download
-              className="glass gap-2 rounded-md px-4 py-2 text-sm font-semibold text-fg-default shadow-sm transition-colors duration-300 hover:text-accent"
+              className="glass gap-2 rounded-md px-5 py-2.5 text-[15px] font-semibold text-fg-default shadow-sm transition-colors duration-300 hover:text-accent"
             >
               <Download size={15} />
               Download CV
@@ -275,7 +278,7 @@ export function Hero() {
                 e.preventDefault();
                 smoothScrollToId("#contact");
               }}
-              className="gap-2 rounded-md border border-accent/40 px-4 py-2 text-sm font-semibold text-accent transition-colors duration-300 hover:border-accent hover:bg-accent/10"
+              className="gap-2 rounded-md border border-accent/40 px-5 py-2.5 text-[15px] font-semibold text-accent transition-colors duration-300 hover:border-accent hover:bg-accent/10"
             >
               Contact Me
             </MagneticLink>
@@ -297,8 +300,8 @@ export function Hero() {
       {/* Key achievements */}
       <div className="relative mx-auto max-w-6xl px-4 pb-7 sm:px-6 sm:pb-9">
         <FadeIn>
-          <p className="mono text-xs font-semibold uppercase tracking-wider text-fg-subtle">
-            Key Achievements
+          <p className="mono text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
+            Featured
           </p>
         </FadeIn>
         <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
