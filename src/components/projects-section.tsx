@@ -55,11 +55,7 @@ export function ProjectsSection() {
               </span>
             </div>
 
-            <Disclosure
-              label="Details"
-              count={project.tools.length}
-              className="mt-2"
-            >
+            <Disclosure title="Show project details" className="mt-2">
               <p className="text-sm leading-relaxed text-fg-muted">
                 {project.description}
               </p>
