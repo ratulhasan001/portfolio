@@ -30,6 +30,8 @@ export type Experience = {
   current?: boolean;
   bullets: string[];
   tags: string[];
+  /** Path under /public — falls back to the timeline dot when absent. */
+  logo?: string;
 };
 
 export const experience: Experience[] = [
@@ -44,6 +46,7 @@ export const experience: Experience[] = [
       "Ongoing research on LLM performance in mental health and depression contexts.",
     ],
     tags: ["LLM", "NLP", "Research"],
+    logo: "/logo/elitelab.jpeg",
   },
   {
     org: "BAUET Computer Society, Dept. of CSE, BAUET",
@@ -56,6 +59,7 @@ export const experience: Experience[] = [
       "Mentored students in programming fundamentals and competitive programming techniques to strengthen analytical and coding skills.",
     ],
     tags: ["C", "Competitive Programming", "Teaching"],
+    logo: "/logo/societylogo.png",
   },
   {
     org: "Lab AR",
@@ -67,6 +71,7 @@ export const experience: Experience[] = [
       "Contributed to backend development using Laravel (PHP) and collaborated on feature implementation.",
     ],
     tags: ["Laravel", "PHP", "Backend"],
+    logo: "/logo/labar.jpeg",
   },
 ];
 
@@ -78,6 +83,8 @@ export type Education = {
   detail?: string;
   merit?: string;
   score?: { label: string; value: number; scale: number };
+  /** Path under /public — falls back to the timeline dot when absent. */
+  logo?: string;
 };
 
 export const education: Education[] = [
@@ -89,6 +96,7 @@ export const education: Education[] = [
     detail:
       "Thesis: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
     score: { label: "CGPA", value: 3.82, scale: 4.0 },
+    logo: "/logo/bsc.png",
   },
   {
     school: "Govt. Majid Memorial City College",
@@ -96,6 +104,7 @@ export const education: Education[] = [
     location: "Khulna, Bangladesh",
     period: "2019 - 2021",
     score: { label: "GPA", value: 5.0, scale: 5.0 },
+    logo: "/logo/hsc.jpg",
   },
 ];
 
