@@ -77,3 +77,33 @@ export function LeetcodeIcon({ size = 16, className }: { size?: number; classNam
     </svg>
   );
 }
+
+export function OrcidIcon({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 512 512"
+      width={size}
+      height={size}
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zM175.2 368.1h-29.8v-207h29.8v207zm-14.9-231.1a19.6 19.6 0 1 1 19.6-19.6 19.6 19.6 0 0 1-19.6 19.6zM300 368.1h-81V161.1h81.3c77.3 0 111.4 55.2 111.4 103.5.1 52.4-28.4 103.5-111.7 103.5zm-5.2-179.9h-45.9V342h47.5c67.6 0 83.1-51.3 83.1-76.9 0-41.6-26.5-76.9-84.7-76.9z" />
+    </svg>
+  );
+}
+
+export function ScholarIcon({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5s-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z" />
+    </svg>
+  );
+}
