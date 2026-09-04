@@ -26,21 +26,21 @@ export function TimelineLogo({
       whileInView={{ scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay, type: "spring" }}
-      className="absolute -left-[18px]"
+      className="absolute -left-[22px]"
     >
       {src ? (
-        <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-border-default bg-canvas-overlay shadow-sm">
+        <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-border-default bg-canvas-overlay shadow-sm">
           <Image
             src={src}
             alt={alt}
             fill
-            sizes="36px"
+            sizes="44px"
             className="object-contain p-0.5"
           />
         </span>
       ) : (
         <span
-          className={`flex h-9 w-9 items-center justify-center rounded-full border border-border-default ${
+          className={`flex h-11 w-11 items-center justify-center rounded-full border border-border-default ${
             current ? "bg-success text-canvas" : "bg-accent text-canvas"
           }`}
         >
@@ -51,7 +51,7 @@ export function TimelineLogo({
         <motion.span
           animate={{ scale: [1, 1.25, 1], opacity: [1, 0.6, 1] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-canvas bg-success"
+          className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-canvas bg-success"
         />
       )}
     </motion.span>
