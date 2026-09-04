@@ -19,11 +19,7 @@ export function ProjectsSection() {
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
       </ParallaxLayer>
 
-      <SectionTitle
-        index="05"
-        title="Pinned Projects"
-        subtitle="Applied systems work — blockchain, decentralized infrastructure, and full-stack platforms."
-      />
+      <SectionTitle index="05" title="Pinned Projects" />
 
       <StaggerGroup className="grid gap-2.5 sm:grid-cols-2">
         {projects.map((project) => (
