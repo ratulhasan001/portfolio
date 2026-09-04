@@ -45,9 +45,8 @@ function PublicationCard({ pub }: { pub: Publication }) {
               </div>
             </div>
 
-            {/* Right: where and when */}
+            {/* Right: where, then when */}
             <div className="flex shrink-0 flex-col items-end gap-1.5">
-              <span className="mono text-xs text-fg-subtle">{pub.date}</span>
               {mark && (
                 <span
                   title={pub.digitalLibrary}
@@ -59,11 +58,12 @@ function PublicationCard({ pub }: { pub: Publication }) {
                     fill
                     sizes="112px"
                     className={`object-contain object-right ${
-                      mark.invertOnDark ? "dark:invert" : ""
+                      mark.whitenOnDark ? "dark:brightness-0 dark:invert" : ""
                     }`}
                   />
                 </span>
               )}
+              <span className="mono text-xs text-fg-subtle">{pub.date}</span>
             </div>
           </div>
         }

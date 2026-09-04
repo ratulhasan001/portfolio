@@ -124,13 +124,15 @@ export type Publication = {
 /** Publisher marks shown on publication cards, keyed by digital library. */
 export const digitalLibraryLogos: Record<
   string,
-  { src: string; invertOnDark?: boolean }
+  { src: string; whitenOnDark?: boolean }
 > = {
+  // IEEE's blue reads on both themes; the mostly-black lockups are redrawn
+  // white for the dark canvas.
   "IEEE Xplore Digital Library": { src: "/logo/ieee.png" },
-  "ACM Digital Library": { src: "/logo/acm.webp" },
+  "ACM Digital Library": { src: "/logo/acm.png", whitenOnDark: true },
   "Springer Nature Link": {
     src: "/logo/scientific-reports.png",
-    invertOnDark: true,
+    whitenOnDark: true,
   },
 };
 
