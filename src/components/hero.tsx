@@ -103,13 +103,50 @@ function AchievementCard({
   );
 }
 
+// `brand` is the colour that sweeps in on hover, same trick as the contact
+// buttons — each link fills with the mark it belongs to.
 const contactIcons = [
-  { icon: Mail, label: profile.email, href: `mailto:${profile.email}` },
-  { icon: OrcidIcon, label: "ORCID", href: profile.orcid, external: true },
-  { icon: ScholarIcon, label: "Google Scholar", href: profile.scholar, external: true },
-  { icon: GithubIcon, label: "GitHub", href: profile.github, external: true },
-  { icon: LinkedinIcon, label: "LinkedIn", href: profile.linkedin, external: true },
-  { icon: Download, label: "Download CV", href: "/Ratul_Hasan_CV.pdf", download: true },
+  {
+    icon: Mail,
+    label: profile.email,
+    href: `mailto:${profile.email}`,
+    brand: "var(--color-accent)",
+  },
+  {
+    icon: OrcidIcon,
+    label: "ORCID",
+    href: profile.orcid,
+    external: true,
+    brand: "#A6CE39",
+  },
+  {
+    icon: ScholarIcon,
+    label: "Google Scholar",
+    href: profile.scholar,
+    external: true,
+    brand: "#4285F4",
+  },
+  {
+    icon: GithubIcon,
+    label: "GitHub",
+    href: profile.github,
+    external: true,
+    brand: "linear-gradient(90deg, #24292f, #0d1117)",
+  },
+  {
+    icon: LinkedinIcon,
+    label: "LinkedIn",
+    href: profile.linkedin,
+    external: true,
+    brand: "#0A66C2",
+  },
+  {
+    icon: Download,
+    label: "Download CV",
+    href: "/Ratul_Hasan_CV.pdf",
+    download: true,
+    brand: "var(--color-accent)",
+  },
 ];
 
 // Only the opening line of the summary runs in the hero.
@@ -121,14 +158,26 @@ function IconLink({
   href,
   external,
   download,
+  brand,
 }: {
   icon: ComponentType<{ size?: number; className?: string }>;
   label: string;
   href?: string;
   external?: boolean;
   download?: boolean;
+  brand?: string;
 }) {
   const [hovered, setHovered] = useState(false);
+  const icon = (
+    <motion.span
+      variants={{ rest: { rotate: 0, scale: 1 }, hover: { rotate: -12, scale: 1.15 } }}
+      transition={{ type: "spring", stiffness: 400, damping: 12 }}
+      className="relative flex transition-colors duration-300 group-hover:text-white"
+    >
+      <Icon size={16} />
+    </motion.span>
+  );
+
   return (
     <div
       className="relative flex"
@@ -141,16 +190,26 @@ function IconLink({
           download={download}
           target={external ? "_blank" : undefined}
           rel={external ? "noreferrer" : undefined}
-          whileHover={{ y: -2 }}
+          variants={{ rest: { y: 0, scale: 1 }, hover: { y: -3, scale: 1.06 } }}
+          initial="rest"
+          animate="rest"
+          whileHover="hover"
           whileTap={{ scale: 0.92 }}
-          transition={{ type: "spring", stiffness: 400, damping: 20 }}
-          className="glass flex h-10 w-10 items-center justify-center rounded-full text-fg-muted transition-colors duration-200 hover:text-accent"
+          transition={{ type: "spring", stiffness: 400, damping: 18 }}
+          className="glass group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full text-fg-muted shadow-sm transition-[box-shadow] duration-300 hover:shadow-[0_10px_22px_-10px_var(--color-accent)]"
         >
-          <Icon size={16} />
+          <motion.span
+            aria-hidden
+            variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            style={{ originX: 0, background: brand ?? "var(--color-accent)" }}
+            className="absolute inset-0"
+          />
+          {icon}
         </motion.a>
       ) : (
         <span className="glass flex h-10 w-10 items-center justify-center rounded-full text-fg-muted">
-          <Icon size={15} />
+          <Icon size={16} />
         </span>
       )}
       <AnimatePresence>
