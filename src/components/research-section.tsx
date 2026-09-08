@@ -53,8 +53,12 @@ function PublicationCard({ pub }: { pub: Publication }) {
               <PopWords text={pub.title} inView stagger={0.018} />
             </h3>
 
-            <div className="sm:col-start-2 sm:row-start-2">
+            <div className="flex flex-wrap items-center gap-2 sm:col-start-2 sm:row-start-2">
               <StatusPill status={pub.status} />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border-default bg-canvas px-2.5 py-0.5 text-xs font-medium text-fg-muted">
+                <Users size={11} />
+                {pub.authorship}
+              </span>
             </div>
 
             {/* Publisher and year: a row under the title on phones, a column
@@ -81,11 +85,7 @@ function PublicationCard({ pub }: { pub: Publication }) {
           </div>
         }
       >
-        <p className="flex items-start gap-1.5 text-sm text-fg-muted">
-          <Users size={12} className="mt-0.5 shrink-0" />
-          {pub.authors}
-        </p>
-        <p className="mt-2 text-sm italic text-fg-muted">{pub.venue}</p>
+        <p className="text-sm italic text-fg-muted">{pub.venue}</p>
 
         <div className="mt-3 flex flex-wrap items-center gap-2">
           {pub.status === "accepted" && (
