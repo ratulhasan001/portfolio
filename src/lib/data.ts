@@ -110,7 +110,8 @@ export const education: Education[] = [
 
 export type Publication = {
   title: string;
-  authors: string;
+  /** Ratul's position on the byline, e.g. "Lead Author" or "2nd Author". */
+  authorship: string;
   venue: string;
   date: string;
   status: "published" | "accepted" | "under-review";
@@ -134,13 +135,24 @@ export const digitalLibraryLogos: Record<
     src: "/logo/scientific-reports.png",
     whitenOnDark: true,
   },
+  "PLOS ONE": { src: "/logo/plos-one-logo.png", whitenOnDark: true },
 };
 
 export const publications: Publication[] = [
   {
     title:
+      "Entropy-assured post-quantum key generation on IoT edge devices: source independence, measured min-entropy and signature scheme selection",
+    authorship: "Lead Author",
+    venue: "PLOS ONE",
+    date: "Submitted 2026",
+    status: "under-review",
+    type: "journal",
+    digitalLibrary: "PLOS ONE",
+  },
+  {
+    title:
       "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
-    authors: "Ratul Hasan, Md. Momenul Haque, Ananya Sarker",
+    authorship: "Lead Author",
     venue: "Nature Scientific Reports",
     date: "Submitted May 2026",
     status: "under-review",
@@ -150,8 +162,7 @@ export const publications: Publication[] = [
 {
   title:
     "SplitSafe Ultra: A Moving-Target Defense Framework for Entropy-Aware Encrypted File Persistence on IPFS",
-  authors:
-    "Md. Ahnaf Muhaimin, Ratul Hasan, Yousuf Oley, Samiha Farjana, Bristi Rani Roy, Subrata Kumer Paul, Md. Ekramul Hamid",
+  authorship: "2nd Author",
   venue:
     "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
   date: "Expected 2026",
@@ -162,8 +173,7 @@ export const publications: Publication[] = [
 {
   title:
     "ActiVisionNet-Fusion: A Dual-Stream Explainable Deep Learning Framework for Driver Drowsiness Detection",
-  authors:
-    "Nasim Ahmed, Ratul Hasan, Subrata Kumer Paul, Dewan Nafiul Islam Noor, Md. Momenul Haque, Md. Ekramul Hamid",
+  authorship: "2nd Author",
   venue:
     "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
   date: "Expected 2026",
@@ -174,8 +184,7 @@ export const publications: Publication[] = [
   {
     title:
       "A Gas-Optimized Blockchain Framework for Scalable Document Verification Using Dynamic Access Control and IPFS",
-    authors:
-      "Ratul Hasan, Samiha Farjana, Yousuf Oley, Md. Ohiduzaman Pranto, Md Arik Rayhan",
+    authorship: "Lead Author",
     venue:
       "International Conference on Power, Electronics, Communications, Computing, and Intelligent Infrastructure (PECCII 2026) — IEEE Proceedings",
     date: "2026",
@@ -187,8 +196,7 @@ export const publications: Publication[] = [
   {
     title:
       "Quantum-Resistant FOTA: End-to-End Decentralized Firmware Updates for IoT Using Blockchain and CRYSTALS-Dilithium",
-    authors:
-      "Ratul Hasan, Md. Momenul Haque, Redoanul Haque, Yousuf Oley, Ruhani Akter",
+    authorship: "Lead Author",
     venue:
       "12th International Conference on Next Generation Computing, Communication, Systems and Security (NSysS '25), ACM, New York, NY, USA, 110-114",
     date: "December 2025",
