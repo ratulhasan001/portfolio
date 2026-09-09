@@ -36,7 +36,7 @@ function Logo({ compact = false }: { compact?: boolean }) {
       aria-label="Ratul Hasan — back to top"
       className="group flex items-center gap-2.5 font-semibold text-fg-default"
     >
-      <span className="mono flex h-8 w-8 items-center justify-center rounded-md border border-fg-default bg-fg-default text-[13px] font-bold leading-none tracking-tight text-canvas transition-colors duration-200 group-hover:bg-canvas group-hover:text-fg-default">
+      <span className="mono flex h-8 w-8 items-center justify-center rounded-full border border-fg-default bg-fg-default text-[13px] font-bold leading-none tracking-tight text-canvas transition-colors duration-200 group-hover:bg-canvas group-hover:text-fg-default">
         RH
       </span>
       {!compact && (
@@ -50,15 +50,7 @@ function Logo({ compact = false }: { compact?: boolean }) {
 
 export function Nav() {
   const [active, setActive] = useState("#overview");
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     const sections = links
@@ -89,32 +81,19 @@ export function Nav() {
       {/* Desktop: floating horizontal bar, top */}
       <motion.header
         initial={{ opacity: 0, y: -12 }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          marginLeft: scrolled ? 14 : 0,
-          marginRight: scrolled ? 14 : 0,
-          marginTop: scrolled ? 10 : 0,
-          borderRadius: scrolled ? 20 : 0,
-        }}
-        transition={{
-          opacity: { duration: 0.5, delay: 0.2 + bootDelay },
-          y: { duration: 0.5, delay: 0.2 + bootDelay },
-          marginLeft: { type: "spring", stiffness: 260, damping: 26 },
-          marginRight: { type: "spring", stiffness: 260, damping: 26 },
-          marginTop: { type: "spring", stiffness: 260, damping: 26 },
-          borderRadius: { type: "spring", stiffness: 260, damping: 26 },
-        }}
-        className={`safe-top sticky top-0 z-50 hidden overflow-hidden transition-[background-color,border-color,box-shadow] duration-500 lg:block ${
-          scrolled
-            ? "border border-border-strong bg-canvas/80 shadow-[0_10px_34px_-16px_rgba(0,0,0,0.45)] backdrop-blur-xl"
-            : "border-b border-border-strong bg-canvas shadow-none"
-        }`}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 + bootDelay }}
+        // The bar never changes shape on scroll. It carries no fill or rule of
+        // its own; the page simply passes behind it out of focus, so the only
+        // drawn edge on screen stays the rounded rail around the links.
+        className="safe-top sticky top-0 z-50 hidden bg-canvas/50 backdrop-blur-xl backdrop-saturate-150 lg:block"
       >
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
           <Logo />
 
-          <nav className="ml-10 flex items-center gap-1">
+          {/* The links sit inside their own rounded rail, so the nav reads as
+              one control rather than a rule ruled across the whole page. */}
+          <nav className="ml-10 flex items-center gap-1 rounded-full border border-border-strong px-1.5 py-1">
             {links.map((link) => {
               const Icon = link.icon;
               const isActive = active === link.href;
@@ -131,7 +110,7 @@ export function Nav() {
                   <span
                     className={`relative z-10 flex items-center gap-1.5 transition-colors duration-200 ${
                       isActive
-                        ? "text-accent"
+                        ? "text-on-accent"
                         : "text-fg-muted group-hover:text-fg-default"
                     }`}
                   >
@@ -142,7 +121,7 @@ export function Nav() {
                     <motion.span
                       layoutId="nav-pill"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      className="absolute inset-0 rounded-full bg-accent/10"
+                      className="absolute inset-0 rounded-full bg-accent"
                     />
                   )}
                 </a>
@@ -217,7 +196,7 @@ export function Nav() {
                       }}
                       className={`flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-colors duration-200 ${
                         isActive
-                          ? "bg-accent/10 text-accent"
+                          ? "bg-accent text-on-accent"
                           : "text-fg-muted hover:bg-canvas-subtle hover:text-fg-default"
                       }`}
                     >
