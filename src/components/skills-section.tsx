@@ -12,8 +12,8 @@ import {
   Webhook,
   Anvil,
   Brain,
+  ShieldCheck,
   ScanEye,
-  Server,
   Blocks,
 } from "lucide-react";
 import {
@@ -33,7 +33,7 @@ import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
 import { ParallaxLayer } from "./parallax-layer";
 import { TiltLink } from "./tilt-card";
-import { PopWords, PopIn } from "./pop-in";
+import { WipeWords, WipeIn } from "./wipe-in";
 import { CodeforcesIcon, CodechefIcon, LeetcodeIcon } from "./brand-icons";
 
 const judgeIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -56,9 +56,9 @@ const skillIcons: Record<string, React.ComponentType<{ size?: number; className?
   GitHub: SiGithub,
   MySQL: SiMysql,
   PostgreSQL: SiPostgresql,
-  "Machine Learning": Brain,
+  "Artificial Intelligence": Brain,
+  Cybersecurity: ShieldCheck,
   "Computer Vision": ScanEye,
-  "Backend Development": Server,
   Blockchain: Blocks,
 };
 
@@ -74,12 +74,12 @@ export function SkillsSection() {
       <SectionTitle index="04" title="Skills & Achievements" />
 
       <div className="mb-7">
-        <PopIn inView>
+        <WipeIn inView>
           <h3 className="mono mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
             <Trophy size={13} />
             Competitive Programming
           </h3>
-        </PopIn>
+        </WipeIn>
         <div className="grid gap-2.5 sm:grid-cols-3">
           {onlineJudges.map((judge, i) => {
             const Icon = judgeIcons[judge.platform];
@@ -89,20 +89,20 @@ export function SkillsSection() {
                   href={judge.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="shimmer h-full rounded-md border border-border-default bg-canvas-subtle p-3.5 transition-colors hover:border-accent/50"
+                  className="h-full rounded-2xl border border-border-strong bg-canvas p-4 transition-colors hover:border-fg-subtle"
                 >
                   <div className="flex items-center gap-2">
                     {Icon && (
                       <motion.span
                         whileHover={{ rotate: -10, scale: 1.15 }}
                         transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-border-default bg-canvas-subtle text-fg-default"
                       >
                         <Icon size={14} />
                       </motion.span>
                     )}
                     <p className="text-[15px] font-semibold text-fg-default">
-                      <PopWords text={judge.platform} inView stagger={0.04} />
+                      <WipeWords text={judge.platform} inView stagger={0.04} />
                     </p>
                   </div>
                   <p className="gradient-text mt-1.5 text-lg font-bold">
@@ -154,22 +154,22 @@ export function SkillsSection() {
       </div>
 
       <div className="mb-7">
-        <PopIn inView>
+        <WipeIn inView>
           <h3 className="mono mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
             <Code2 size={13} />
             Technical Skills
           </h3>
-        </PopIn>
+        </WipeIn>
         <StaggerGroup className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(skills).map(([category, items]) => (
             <motion.div
               key={category}
               variants={staggerItem}
               whileHover={{ y: -3, borderColor: "var(--color-accent)" }}
-              className="shimmer rounded-md border border-border-default bg-canvas-subtle p-3.5 transition-colors"
+              className="rounded-2xl border border-border-strong bg-canvas p-5 transition-colors"
             >
               <p className="text-[15px] font-semibold text-fg-default">
-                <PopWords text={category} inView stagger={0.04} />
+                <WipeWords text={category} inView stagger={0.04} />
               </p>
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {items.map((item) => {
@@ -179,7 +179,7 @@ export function SkillsSection() {
                       key={item}
                       whileHover={{ y: -2, scale: 1.06 }}
                       transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                      className="chip inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/[0.07] px-2.5 py-1 text-[13px] font-medium text-accent"
+                      className="mono inline-flex items-center gap-1.5 rounded-full border border-border-default px-2.5 py-1 text-[10px] uppercase tracking-[0.08em] text-fg-muted"
                     >
                       {Icon && <Icon size={12} />}
                       {item}
@@ -193,12 +193,12 @@ export function SkillsSection() {
       </div>
 
       <div>
-        <PopIn inView>
+        <WipeIn inView>
           <h3 className="mono mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
             <Users2 size={13} />
             Leadership &amp; Volunteering
           </h3>
-        </PopIn>
+        </WipeIn>
         {/* Every card takes the same shape — org label, the senior role as
             the headline, then any earlier roles as chips — so the six-role
             entry no longer dwarfs the single-role ones. */}
@@ -211,18 +211,18 @@ export function SkillsSection() {
                 variants={staggerItem}
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 320, damping: 22 }}
-                className="shimmer group relative flex flex-col overflow-hidden rounded-md border border-border-muted bg-canvas-subtle px-4 py-3.5 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-done/50 hover:shadow-[0_16px_32px_-16px_var(--color-done)]"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border-strong bg-canvas p-5 transition-colors duration-300 hover:border-fg-subtle"
               >
                 <span
                   aria-hidden
-                  className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-done to-accent transition-transform duration-300 ease-out group-hover:scale-y-100"
+                  className="absolute inset-y-0 left-0 w-0.5 scale-y-0 bg-fg-default transition-transform duration-300 ease-out group-hover:scale-y-100"
                 />
 
                 <div className="flex items-start gap-3">
                   <motion.span
                     whileHover={{ rotate: -12, scale: 1.15 }}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-done-subtle text-done"
+                    className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-border-default bg-canvas-subtle text-fg-muted"
                   >
                     <Crown size={15} />
                   </motion.span>
@@ -232,7 +232,7 @@ export function SkillsSection() {
                       {entry.org}
                     </p>
                     <p className="mt-1 text-base font-bold leading-snug text-fg-default">
-                      <PopWords text={lead} inView stagger={0.03} />
+                      <WipeWords text={lead} inView stagger={0.03} />
                     </p>
                   </div>
                 </div>
@@ -260,7 +260,7 @@ export function SkillsSection() {
                       {previous.map((role) => (
                         <span
                           key={role}
-                          className="rounded-full border border-border-default bg-canvas px-2 py-0.5 text-[11px] text-fg-muted"
+                          className="mono rounded-full border border-border-default px-2.5 py-1 text-[10px] uppercase tracking-[0.08em] text-fg-muted"
                         >
                           {role}
                         </span>
