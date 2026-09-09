@@ -110,39 +110,35 @@ export const education: Education[] = [
 
 export type Publication = {
   title: string;
-  /** Ratul's position on the byline, e.g. "Lead Author" or "2nd Author". */
-  authorship: string;
+  /** Full byline in submission order; `profile.name` is highlighted on render. */
+  authors: string[];
   venue: string;
   date: string;
   status: "published" | "accepted" | "under-review";
   link?: string;
   type: "conference" | "journal";
+  /** Key into `digitalLibraryLabels`. */
   digitalLibrary?: string;
-  /** Overrides the mark picked from digitalLibraryLogos. */
-  logo?: string;
 };
 
-/** Publisher marks shown on publication cards, keyed by digital library. */
-export const digitalLibraryLogos: Record<
-  string,
-  { src: string; whitenOnDark?: boolean }
-> = {
-  // IEEE's blue reads on both themes; the mostly-black lockups are redrawn
-  // white for the dark canvas.
-  "IEEE Xplore Digital Library": { src: "/logo/ieee.png" },
-  "ACM Digital Library": { src: "/logo/acm.png", whitenOnDark: true },
-  "Springer Nature Link": {
-    src: "/logo/scientific-reports.png",
-    whitenOnDark: true,
-  },
-  "PLOS ONE": { src: "/logo/plos-one-logo.png", whitenOnDark: true },
+/**
+ * Short, typeset labels for each digital library. Publication cards used to
+ * carry publisher artwork; a mono wordmark keeps the section quiet and reads
+ * the same in both themes.
+ */
+export const digitalLibraryLabels: Record<string, string> = {
+  "IEEE Xplore Digital Library": "IEEE Xplore",
+  "ACM Digital Library": "ACM",
+  "Springer Nature Link": "Scientific Reports",
+  "PLOS ONE": "PLOS ONE",
 };
 
 export const publications: Publication[] = [
   {
     title:
       "Entropy-assured post-quantum key generation on IoT edge devices: source independence, measured min-entropy and signature scheme selection",
-    authorship: "Lead Author",
+    // TODO: co-authors pending — fill in the full byline.
+    authors: ["Ratul Hasan"],
     venue: "PLOS ONE",
     date: "Submitted 2026",
     status: "under-review",
@@ -152,7 +148,8 @@ export const publications: Publication[] = [
   {
     title:
       "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
-    authorship: "Lead Author",
+    // TODO: co-authors pending — fill in the full byline.
+    authors: ["Ratul Hasan"],
     venue: "Nature Scientific Reports",
     date: "Submitted May 2026",
     status: "under-review",
@@ -162,7 +159,8 @@ export const publications: Publication[] = [
 {
   title:
     "SplitSafe Ultra: A Moving-Target Defense Framework for Entropy-Aware Encrypted File Persistence on IPFS",
-  authorship: "2nd Author",
+  // TODO: full byline pending — Ratul is 2nd author; add the others in order.
+  authors: ["Ratul Hasan"],
   venue:
     "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
   date: "Expected 2026",
@@ -173,7 +171,8 @@ export const publications: Publication[] = [
 {
   title:
     "ActiVisionNet-Fusion: A Dual-Stream Explainable Deep Learning Framework for Driver Drowsiness Detection",
-  authorship: "2nd Author",
+  // TODO: full byline pending — Ratul is 2nd author; add the others in order.
+  authors: ["Ratul Hasan"],
   venue:
     "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
   date: "Expected 2026",
@@ -184,7 +183,13 @@ export const publications: Publication[] = [
   {
     title:
       "A Gas-Optimized Blockchain Framework for Scalable Document Verification Using Dynamic Access Control and IPFS",
-    authorship: "Lead Author",
+    authors: [
+      "Ratul Hasan",
+      "Samiha Farjana",
+      "Yousuf Oley",
+      "Md. Ohiduzaman Pranto",
+      "Md Arik Rayhan",
+    ],
     venue:
       "International Conference on Power, Electronics, Communications, Computing, and Intelligent Infrastructure (PECCII 2026) — IEEE Proceedings",
     date: "2026",
@@ -196,7 +201,13 @@ export const publications: Publication[] = [
   {
     title:
       "Quantum-Resistant FOTA: End-to-End Decentralized Firmware Updates for IoT Using Blockchain and CRYSTALS-Dilithium",
-    authorship: "Lead Author",
+    authors: [
+      "Ratul Hasan",
+      "Md. Momenul Haque",
+      "Redoanul Haque",
+      "Yousuf Oley",
+      "Ruhani Akter",
+    ],
     venue:
       "12th International Conference on Next Generation Computing, Communication, Systems and Security (NSysS '25), ACM, New York, NY, USA, 110-114",
     date: "December 2025",
@@ -212,6 +223,8 @@ export type Project = {
   description: string;
   tools: string[];
   link: string;
+  /** Key into `projectIcons` — the stack's real brand mark on the tile. */
+  icon: string;
   language: string;
   languageColor: string;
   stars?: string;
@@ -220,6 +233,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     name: "LedgerSeal",
+    icon: "solidity",
     description:
       "A decentralized application (DApp) for constant-time document verification with dynamic access control on IPFS, built on a public blockchain.",
     tools: ["React JS", "Anvil EVM", "Foundry", "Metamask", "Pinata IPFS"],
@@ -229,6 +243,7 @@ export const projects: Project[] = [
   },
   {
     name: "BAUET Project & Thesis Archive",
+    icon: "django",
     description:
       "A repository website built with Django (MVT & REST) that indexes and presents theses and projects from BAUET.",
     tools: ["HTML", "Tailwind CSS", "JavaScript", "Django", "PostgreSQL"],
@@ -238,6 +253,7 @@ export const projects: Project[] = [
   },
   {
     name: "PheroTube",
+    icon: "javascript",
     description:
       "A basic JavaScript project for API fetching that mimics video streaming platform functionality with dynamic content loading.",
     tools: ["HTML", "CSS", "JavaScript", "API Integration"],
@@ -247,6 +263,7 @@ export const projects: Project[] = [
   },
   {
     name: "Library Management System",
+    icon: "java",
     description:
       "A library management desktop application with comprehensive book and user management features.",
     tools: ["Java Swing", "MySQL"],
@@ -256,12 +273,13 @@ export const projects: Project[] = [
   },
   {
     name: "Fashion Quest",
+    icon: "bootstrap",
     description:
       "A basic static website using CSS showcasing fashion trends and styles with modern responsive design and elegant layouts.",
-    tools: ["HTML", "CSS", "Responsive Design", "Static Website"],
+    tools: ["HTML", "CSS", "Bootstrap", "Responsive Design"],
     link: "https://ratul-fashion-quest.netlify.app/",
-    language: "CSS",
-    languageColor: "#563D7C",
+    language: "Bootstrap",
+    languageColor: "#7952B3",
   },
 ];
 
@@ -278,17 +296,21 @@ export const stats = [
   { label: "Programming Awards", value: 6, suffix: "+" },
 ];
 
+/**
+ * Ordered from the most transferable to the most specialised, so the grid
+ * reads languages -> what they are built with -> where the work sits.
+ */
 export const skills = {
-  Languages: ["C", "C++", "Python", "JavaScript", "SQL"],
-  Frameworks: ["Django", "REST", "Foundry", "Laravel"],
-  "Project Management": ["Git", "GitHub"],
-  Database: ["MySQL", "PostgreSQL"],
-  Technologies: [
+  "Research Areas": [
     "Machine Learning",
     "Computer Vision",
-    "Backend Development",
     "Blockchain",
+    "Backend Development",
   ],
+  Languages: ["Python", "C++", "C", "JavaScript", "SQL"],
+  "Frameworks & Libraries": ["Django", "Laravel", "REST", "Foundry"],
+  Databases: ["PostgreSQL", "MySQL"],
+  "Tools & Workflow": ["Git", "GitHub"],
 };
 
 export const onlineJudges = [
