@@ -21,7 +21,7 @@ export function ExperienceSection() {
 
       <SectionTitle index="03" title="Experience" />
 
-      <ol className="relative ml-6 max-w-3xl border-l border-border-default pl-8">
+      <ol className="relative ml-5 max-w-4xl border-l border-border-default pl-8 sm:ml-6 sm:pl-10">
         {experience.map((exp, i) => (
           <motion.li
             key={exp.org}
@@ -29,7 +29,7 @@ export function ExperienceSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-6 last:mb-0"
+            className="mb-7 last:mb-0"
           >
             <TimelineLogo
               src={exp.logo}
@@ -42,34 +42,52 @@ export function ExperienceSection() {
             <Disclosure
               title="Show role details"
               summary={
-                <>
-                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                    <h4 className="text-base font-semibold text-fg-default sm:text-lg">
+                <div className="min-w-0">
+                  {/* Role carries the weight; the dates sit out at the right
+                      margin in mono so the column of periods scans on its own. */}
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h4 className="text-lg font-semibold leading-tight tracking-tight text-fg-default sm:text-xl">
                       <PopWords text={exp.role} inView stagger={0.04} />
                     </h4>
-                    <span className="text-fg-subtle">·</span>
-                    <p className="text-[15px] font-medium text-accent">
-                      <PopWords text={exp.org} inView delay={0.1} stagger={0.04} />
-                    </p>
+                    <span className="mono shrink-0 text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
+                      {exp.period}
+                    </span>
                   </div>
-                  <p className="mono mt-1 text-[13px] text-fg-subtle">
-                    {exp.period} · {exp.location}
+
+                  <p className="mt-1 text-[15px] font-medium text-fg-muted">
+                    <span className="text-fg-subtle">@ </span>
+                    <PopWords text={exp.org} inView delay={0.1} stagger={0.04} />
                   </p>
-                </>
+
+                  <div className="mono mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-fg-subtle">
+                    <span>{exp.location}</span>
+                    {exp.current && (
+                      <>
+                        <span aria-hidden>·</span>
+                        <span className="inline-flex items-center gap-1.5 uppercase tracking-[0.1em] text-status-published">
+                          <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-current" />
+                          Current
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </div>
               }
             >
-              <ul className="space-y-2 text-[15px] text-fg-muted">
-                {exp.bullets.map((b) => (
-                  <li key={b} className="flex gap-2">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-fg-subtle" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {exp.tags.map((tag) => (
-                  <Chip key={tag}>{tag}</Chip>
-                ))}
+              <div className="border-l-2 border-border-muted pl-4">
+                <ul className="space-y-2 text-[15px] leading-relaxed text-fg-muted">
+                  {exp.bullets.map((b) => (
+                    <li key={b} className="flex gap-2.5">
+                      <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-fg-subtle" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {exp.tags.map((tag) => (
+                    <Chip key={tag}>{tag}</Chip>
+                  ))}
+                </div>
               </div>
             </Disclosure>
           </motion.li>
