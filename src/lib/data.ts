@@ -10,6 +10,8 @@ export const profile = {
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
   orcid: "https://orcid.org/0009-0009-5429-7501",
   scholar: "https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en",
+  tagline:
+    "Computer Science graduate with research experience in AI & Security",
   summary:
     "Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.",
   focusAreas: [
@@ -137,7 +139,6 @@ export const publications: Publication[] = [
   {
     title:
       "Entropy-assured post-quantum key generation on IoT edge devices: source independence, measured min-entropy and signature scheme selection",
-    // TODO: co-authors pending — fill in the full byline.
     authors: ["Ratul Hasan"],
     venue: "PLOS ONE",
     date: "Submitted 2026",
@@ -148,8 +149,7 @@ export const publications: Publication[] = [
   {
     title:
       "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
-    // TODO: co-authors pending — fill in the full byline.
-    authors: ["Ratul Hasan"],
+    authors: ["Ratul Hasan", "Md. Momenul Haque", "Ananya Sarker"],
     venue: "Nature Scientific Reports",
     date: "Submitted May 2026",
     status: "under-review",
@@ -159,8 +159,15 @@ export const publications: Publication[] = [
 {
   title:
     "SplitSafe Ultra: A Moving-Target Defense Framework for Entropy-Aware Encrypted File Persistence on IPFS",
-  // TODO: full byline pending — Ratul is 2nd author; add the others in order.
-  authors: ["Ratul Hasan"],
+  authors: [
+    "Md. Ahnaf Muhaimin",
+    "Ratul Hasan",
+    "Yousuf Oley",
+    "Samiha Farjana",
+    "Bristi Rani Roy",
+    "Subrata Kumer Paul",
+    "Md. Ekramul Hamid",
+  ],
   venue:
     "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
   date: "Expected 2026",
@@ -171,8 +178,14 @@ export const publications: Publication[] = [
 {
   title:
     "ActiVisionNet-Fusion: A Dual-Stream Explainable Deep Learning Framework for Driver Drowsiness Detection",
-  // TODO: full byline pending — Ratul is 2nd author; add the others in order.
-  authors: ["Ratul Hasan"],
+  authors: [
+    "Nasim Ahmed",
+    "Ratul Hasan",
+    "Subrata Kumer Paul",
+    "Dewan Nafiul Islam Noor",
+    "Md. Momenul Haque",
+    "Md. Ekramul Hamid",
+  ],
   venue:
     "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
   date: "Expected 2026",
