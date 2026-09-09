@@ -16,33 +16,30 @@ export default async function OpengraphImage() {
           alignItems: "flex-start",
           justifyContent: "center",
           padding: "80px",
-          background: "#0d1117",
-          backgroundImage:
-            "radial-gradient(circle at 78% 30%, rgba(68,147,248,0.28), transparent 55%), radial-gradient(circle at 15% 85%, rgba(171,125,248,0.22), transparent 50%)",
+          background: "#ffffff",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: 56,
-              height: 56,
-              borderRadius: "9999px",
-              background: "#161b22",
-              border: "2px solid #30363d",
+              width: 60,
+              height: 60,
+              borderRadius: 14,
+              background: "#000000",
               fontSize: 26,
-              color: "#4493f8",
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              color: "#ffffff",
             }}
           >
-            {"</>"}
+            RH
           </div>
-          <div style={{ display: "flex", fontSize: 28, color: "#8d96a0" }}>
-            <span>ratulhasan</span>
-            <span style={{ color: "#4493f8" }}>/</span>
-            <span style={{ color: "#e6edf3" }}>research</span>
+          <div style={{ display: "flex", fontSize: 30, color: "#000000" }}>
+            {profile.name}
           </div>
         </div>
 
@@ -52,19 +49,19 @@ export default async function OpengraphImage() {
             marginTop: 48,
             fontSize: 76,
             fontWeight: 700,
-            color: "#e6edf3",
+            color: "#000000",
             letterSpacing: "-0.02em",
           }}
         >
-          {profile.name}
+          Aspiring Graduate Researcher
         </div>
 
         <div
           style={{
             display: "flex",
             marginTop: 20,
-            fontSize: 32,
-            color: "#aab4c0",
+            fontSize: 30,
+            color: "#525252",
           }}
         >
           {profile.role}
@@ -75,7 +72,7 @@ export default async function OpengraphImage() {
             display: "flex",
             marginTop: 40,
             fontSize: 24,
-            color: "#4493f8",
+            color: "#000000",
           }}
         >
           {profile.website.replace("https://", "")}
@@ -89,8 +86,7 @@ export default async function OpengraphImage() {
             width: "100%",
             height: 10,
             display: "flex",
-            background:
-              "linear-gradient(90deg, #4493f8, #ab7df8, #3fb950, #4493f8)",
+            background: "#000000",
           }}
         />
       </div>
