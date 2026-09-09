@@ -2,23 +2,27 @@
 
 import { motion } from "framer-motion";
 
+/**
+ * PowerPoint's Wipe entrance: the block is revealed from its bottom edge
+ * upward. Nothing moves and nothing fades, so surrounding layout never
+ * shifts while it plays. Named FadeIn still because every call site treats
+ * it as "the standard entrance".
+ */
 export function FadeIn({
   children,
   delay = 0,
-  y = 16,
   className,
 }: {
   children: React.ReactNode;
   delay?: number;
-  y?: number;
   className?: string;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
+      whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.55, delay, ease: [0.33, 0, 0.2, 1] }}
       className={className}
     >
       {children}
@@ -51,11 +55,11 @@ export function StaggerGroup({
   );
 }
 
+/** The same wipe, applied one grid/list item after the next. */
 export const staggerItem = {
-  hidden: { opacity: 0, y: 14 },
+  hidden: { clipPath: "inset(100% 0% 0% 0%)" },
   show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+    clipPath: "inset(0% 0% 0% 0%)",
+    transition: { duration: 0.5, ease: [0.33, 0, 0.2, 1] as const },
   },
 };

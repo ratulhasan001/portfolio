@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { PopIn, PopWords } from "./pop-in";
+import { WipeIn, WipeWords } from "./wipe-in";
 import { getBootDelay } from "@/lib/boot-delay";
 
 export function Chip({ children }: { children: React.ReactNode }) {
@@ -32,14 +32,14 @@ export function FileHeader({
       </div>
       <span className="mono ml-2 text-xs text-fg-muted">{filename}</span>
       {label && (
-        <PopIn
+        <WipeIn
           as="span"
           delay={0.3 + getBootDelay(1.6)}
-          scale={0.5}
+          inView={false}
           className="ml-auto mono inline-flex items-center rounded border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[11px] font-medium text-accent"
         >
           {label}
-        </PopIn>
+        </WipeIn>
       )}
     </div>
   );
@@ -56,12 +56,12 @@ export function SectionTitle({
 }) {
   return (
     <div className="mb-5 flex items-baseline gap-3">
-      <PopIn as="span" inView scale={0.3} className="mono text-base text-accent">
+      <WipeIn as="span" inView className="mono text-base text-accent">
         {index}
-      </PopIn>
+      </WipeIn>
       <div>
         <h2 className="text-2xl font-semibold tracking-tight text-fg-default sm:text-3xl">
-          <PopWords text={title} inView delay={0.1} stagger={0.06} />
+          <WipeWords text={title} inView delay={0.1} stagger={0.06} />
         </h2>
         {subtitle && (
           <motion.p

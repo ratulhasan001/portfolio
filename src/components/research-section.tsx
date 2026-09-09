@@ -11,7 +11,7 @@ import {
 } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn } from "./fade-in";
-import { PopWords } from "./pop-in";
+import { WipeWords } from "./wipe-in";
 import { ParallaxLayer } from "./parallax-layer";
 
 const statusMeta = {
@@ -64,7 +64,7 @@ function PublicationRow({ pub }: { pub: Publication }) {
     <li className="px-4 py-4 sm:px-5 sm:py-5">
       <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1.5">
         <h3 className="min-w-0 flex-1 text-[17px] font-semibold leading-snug tracking-tight text-fg-default sm:text-xl">
-          <PopWords text={pub.title} inView stagger={0.018} />
+          <WipeWords text={pub.title} inView stagger={0.018} />
         </h3>
         <span className="mono mt-0.5 flex shrink-0 items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-fg-muted sm:text-[11px]">
           <span className={`h-1.5 w-1.5 rounded-full ${status.dot}`} />
