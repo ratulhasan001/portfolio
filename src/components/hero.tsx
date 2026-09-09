@@ -23,9 +23,8 @@ const contactIcons = [
   },
   {
     icon: CvIcon,
-    label: "Download CV",
-    href: "/Ratul_Hasan_CV.pdf",
-    download: true,
+    label: "View CV",
+    href: "/cv",
     brand: "var(--color-accent)",
     onBrand: "var(--color-on-accent)",
   },
@@ -168,6 +167,12 @@ export function Hero() {
         <FadeIn delay={0.5 + bootDelay}>
           <p className="mt-3 text-lg font-semibold text-fg-muted sm:text-xl">
             Aspiring Graduate Researcher
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={0.58 + bootDelay}>
+          <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-fg-subtle sm:text-base">
+            {profile.tagline}
           </p>
         </FadeIn>
 
