@@ -1,6 +1,5 @@
 "use client";
 
-import { Circle } from "lucide-react";
 import { motion } from "framer-motion";
 import { PopIn, PopWords } from "./pop-in";
 import { getBootDelay } from "@/lib/boot-delay";
@@ -77,46 +76,5 @@ export function SectionTitle({
         )}
       </div>
     </div>
-  );
-}
-
-export function StatusPill({
-  status,
-}: {
-  status: "published" | "accepted" | "under-review";
-}) {
-  // The pill itself stays monochrome and minimal; the dot is the one place
-  // colour is spent, so the three states separate at a glance.
-  const map = {
-    published: {
-      text: "Published",
-      dot: "text-status-published",
-      cls: "border-fg-default/25 bg-canvas text-fg-default",
-    },
-    accepted: {
-      text: "Accepted",
-      dot: "text-status-accepted",
-      cls: "border-fg-default/25 bg-canvas text-fg-default",
-    },
-    "under-review": {
-      text: "Under Review",
-      dot: "text-status-review",
-      cls: "border-dashed border-fg-subtle bg-canvas text-fg-muted",
-    },
-  } as const;
-  const s = map[status];
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${s.cls}`}
-    >
-      <motion.span
-        animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        className={`flex ${s.dot}`}
-      >
-        <Circle size={6} className="fill-current" />
-      </motion.span>
-      {s.text}
-    </span>
   );
 }

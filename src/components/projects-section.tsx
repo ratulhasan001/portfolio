@@ -59,7 +59,7 @@ export function ProjectsSection() {
             <TiltCard
               key={project.name}
               variants={staggerItem}
-              className="flex flex-col rounded-md border border-border-default bg-canvas-subtle p-3.5 shadow-sm transition-colors hover:border-accent/50"
+              className="flex min-h-[184px] flex-col rounded-md border border-border-default bg-canvas-subtle p-3.5 shadow-sm transition-colors hover:border-accent/50"
             >
               <Disclosure
                 title="Show project details"
