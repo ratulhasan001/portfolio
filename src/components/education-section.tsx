@@ -1,53 +1,131 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import { useId, useState } from "react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, GraduationCap } from "lucide-react";
 import { education, type Education } from "@/lib/data";
 import { SectionTitle } from "./ui";
+import { FadeIn } from "./fade-in";
 import { PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
-import { Disclosure } from "./disclosure";
-import { TimelineLogo } from "./timeline-logo";
 
-function EntryHead({ edu }: { edu: Education }) {
+/** Inline separator. Hidden on phones, where the meta row wraps onto
+ *  several lines and the dots would be left dangling at the line ends. */
+function Dot() {
   return (
-    <div className="min-w-0">
-      {/* Degree carries the weight; the years sit out at the right margin in
-          mono so the column of periods scans on its own. */}
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h4 className="text-lg font-semibold leading-tight tracking-tight text-fg-default sm:text-xl">
-          <PopWords text={edu.degree} inView stagger={0.04} />
-        </h4>
-        <span className="mono shrink-0 text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
-          {edu.period}
+    <span aria-hidden className="hidden text-fg-subtle sm:inline">
+      ·
+    </span>
+  );
+}
+
+function EducationRow({ edu }: { edu: Education }) {
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+  const thesis = edu.detail?.replace(/^Thesis:\s*/, "");
+
+  return (
+    <li className="px-4 py-4 sm:px-5 sm:py-5">
+      <div className="flex gap-3 sm:gap-4">
+        <span className="logo-plate relative mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border-default shadow-sm">
+          {edu.logo ? (
+            <Image
+              src={edu.logo}
+              alt={edu.school}
+              fill
+              sizes="40px"
+              className="mark-real object-contain p-0.5"
+            />
+          ) : (
+            <GraduationCap size={16} className="text-fg-muted" />
+          )}
         </span>
-      </div>
 
-      <p className="mt-1 text-[15px] font-medium text-fg-muted">
-        <PopWords text={edu.school} inView delay={0.1} stagger={0.04} />
-      </p>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1.5">
+            <h3 className="min-w-0 flex-1 text-[17px] font-semibold leading-snug tracking-tight text-fg-default sm:text-xl">
+              <PopWords text={edu.degree} inView stagger={0.04} />
+            </h3>
+            <span className="mono mt-0.5 shrink-0 text-[10px] uppercase tracking-[0.16em] text-fg-muted sm:text-[11px]">
+              {edu.period}
+            </span>
+          </div>
 
-      <div className="mono mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-fg-subtle">
-        <span>{edu.location}</span>
-        {edu.score && (
-          <>
-            <span aria-hidden>·</span>
-            <span className="text-fg-default">
-              {edu.score.label} {edu.score.value.toFixed(2)}/
-              {edu.score.scale.toFixed(1)}
+          <p className="mt-1 text-[15px] font-medium text-fg-muted">
+            <PopWords text={edu.school} inView delay={0.1} stagger={0.04} />
+          </p>
+
+          <div className="mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-2">
+            {edu.score && (
+              <span className="mono rounded-full border border-border-default px-3 py-1 text-[10px] uppercase tracking-[0.1em] text-fg-muted sm:text-[11px]">
+                {edu.score.label} {edu.score.value.toFixed(2)}/
+                {edu.score.scale.toFixed(1)}
+              </span>
+            )}
+
+            <Dot />
+            <span className="mono text-[10px] uppercase tracking-[0.1em] text-fg-subtle sm:text-[11px]">
+              {edu.location}
             </span>
-          </>
-        )}
-        {edu.merit && (
-          <>
-            <span aria-hidden>·</span>
-            <span className="uppercase tracking-[0.1em] text-status-published">
-              {edu.merit}
-            </span>
-          </>
-        )}
+
+            {edu.merit && (
+              <>
+                <Dot />
+                <span className="mono text-[10px] uppercase tracking-[0.1em] text-status-published sm:text-[11px]">
+                  {edu.merit}
+                </span>
+              </>
+            )}
+
+            {thesis && (
+              <button
+                type="button"
+                onClick={() => setOpen((v) => !v)}
+                aria-expanded={open}
+                aria-controls={panelId}
+                aria-label={open ? "Hide thesis" : "Show thesis"}
+                title={open ? "Hide thesis" : "Show thesis"}
+                className={`ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors ${
+                  open
+                    ? "border-fg-default bg-fg-default text-canvas"
+                    : "border-border-default text-fg-muted hover:border-fg-subtle hover:text-fg-default"
+                }`}
+              >
+                <motion.span
+                  animate={{ rotate: open ? 180 : 0 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="flex"
+                >
+                  <ChevronDown size={14} />
+                </motion.span>
+              </button>
+            )}
+          </div>
+
+          <AnimatePresence initial={false}>
+            {open && thesis && (
+              <motion.div
+                id={panelId}
+                key="panel"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden"
+              >
+                <div className="mt-4 border-t border-border-default pt-3">
+                  <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                    Thesis
+                  </p>
+                  <p className="text-sm leading-relaxed text-fg-muted">{thesis}</p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -55,7 +133,7 @@ export function EducationSection() {
   return (
     <section
       id="education"
-      className="relative mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9"
+      className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9"
     >
       <ParallaxLayer speed={35}>
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
@@ -63,40 +141,22 @@ export function EducationSection() {
 
       <SectionTitle index="02" title="Education" />
 
-      <ol className="relative ml-5 max-w-4xl border-l border-border-default pl-8 sm:ml-6 sm:pl-10">
-        {education.map((edu, i) => (
-          <motion.li
-            key={edu.school}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-7 last:mb-0"
-          >
-            <TimelineLogo
-              src={edu.logo}
-              alt={edu.school}
-              delay={i * 0.1 + 0.15}
-              fallback={<GraduationCap size={12} />}
-            />
+      <FadeIn>
+        <div className="overflow-hidden rounded-2xl border border-border-strong bg-canvas">
+          <div className="flex items-center gap-3 border-b border-border-default px-4 py-2.5 sm:px-5">
+            <span className="mono flex min-w-0 items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-fg-muted sm:text-[11px]">
+              <GraduationCap size={13} className="shrink-0" />
+              <span className="truncate">Academic Background</span>
+            </span>
+          </div>
 
-            {edu.detail ? (
-              <Disclosure title="Show thesis" summary={<EntryHead edu={edu} />}>
-                <div className="border-l-2 border-border-muted pl-4">
-                  <p className="mono mb-1 text-[11px] font-semibold uppercase tracking-wider text-fg-subtle">
-                    Thesis
-                  </p>
-                  <p className="text-[15px] leading-relaxed text-fg-muted">
-                    {edu.detail.replace(/^Thesis:\s*/, "")}
-                  </p>
-                </div>
-              </Disclosure>
-            ) : (
-              <EntryHead edu={edu} />
-            )}
-          </motion.li>
-        ))}
-      </ol>
+          <ul className="divide-y divide-border-default">
+            {education.map((edu) => (
+              <EducationRow key={edu.school} edu={edu} />
+            ))}
+          </ul>
+        </div>
+      </FadeIn>
     </section>
   );
 }
