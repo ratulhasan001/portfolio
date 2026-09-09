@@ -1,7 +1,7 @@
 export const profile = {
   name: "Ratul Hasan",
   handle: "ratulhasan001",
-  role: "CSE Undergraduate · Aspiring Graduate Researcher",
+  role: "Computer Science Graduate · Aspiring Graduate Researcher",
   location: "Khulna, Bangladesh",
   email: "ratulhasan.cs@gmail.com",
   phone: "+8801760972108",
@@ -15,10 +15,10 @@ export const profile = {
   summary:
     "Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.",
   focusAreas: [
+    "Artificial Intelligence",
     "Machine Learning",
+    "Computer Vision",
     "Large Language Models",
-    "Explainable AI",
-    "Healthcare AI",
     "Blockchain & Decentralized Systems",
   ],
   followersLabel: "Open to research collaboration",
@@ -315,10 +315,10 @@ export const stats = [
  */
 export const skills = {
   "Research Areas": [
-    "Machine Learning",
+    "Artificial Intelligence",
+    "Cybersecurity",
     "Computer Vision",
     "Blockchain",
-    "Backend Development",
   ],
   Languages: ["Python", "C++", "C", "JavaScript", "SQL"],
   "Frameworks & Libraries": ["Django", "Laravel", "REST", "Foundry"],

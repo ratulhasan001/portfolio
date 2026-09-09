@@ -21,7 +21,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Ratul Hasan",
   description:
-    "Portfolio of Ratul Hasan — CSE undergraduate researching LLM reliability and biology-informed deep learning, applying for graduate research programs.",
+    "Portfolio of Ratul Hasan — Computer Science graduate researching LLM reliability and biology-informed deep learning, applying for graduate research programs.",
 };
 
 export const viewport: Viewport = {
