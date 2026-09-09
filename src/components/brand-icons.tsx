@@ -107,3 +107,33 @@ export function ScholarIcon({ size = 16, className }: { size?: number; className
     </svg>
   );
 }
+
+/**
+ * "CV" set as a monogram, the same idea as the "RH" mark in the nav — the
+ * button says what it hands you instead of showing a download arrow.
+ */
+export function CvIcon({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      className={className}
+      aria-hidden="true"
+    >
+      <text
+        x="12"
+        y="12"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill="currentColor"
+        fontSize="15"
+        fontWeight="700"
+        fontFamily="var(--font-mono-family), ui-monospace, monospace"
+        letterSpacing="-0.5"
+      >
+        CV
+      </text>
+    </svg>
+  );
+}
