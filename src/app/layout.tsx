@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
 import { BootOverlay } from "@/components/boot-overlay";
+import { profile } from "@/lib/data";
 
 const sans = Plus_Jakarta_Sans({
   variable: "--font-sans-family",
@@ -18,10 +19,27 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const description =
+  "Computer Science graduate working on Artificial Intelligence and Security";
+
 export const metadata: Metadata = {
+  // Needed for link previews: without it the Open Graph image URL is resolved
+  // against localhost, so scrapers cannot fetch it.
+  metadataBase: new URL(profile.website),
   title: "Ratul Hasan",
-  description:
-    "Portfolio of Ratul Hasan — Computer Science graduate researching LLM reliability and biology-informed deep learning, applying for graduate research programs.",
+  description,
+  openGraph: {
+    type: "website",
+    url: profile.website,
+    siteName: "Ratul Hasan",
+    title: "Ratul Hasan — AI & Security Research",
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ratul Hasan — AI & Security Research",
+    description,
+  },
 };
 
 export const viewport: Viewport = {
