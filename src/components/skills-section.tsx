@@ -66,7 +66,7 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="relative mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9"
+      className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9"
     >
       <ParallaxLayer speed={45}>
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
@@ -121,15 +121,18 @@ export function SkillsSection() {
           })}
         </div>
 
-        {/* One panel, one list: seven separate cards fragmented what is
-            really a single run of contest results. */}
+        {/* Same panel shape as the publications and education lists: a
+            header rail, then every entry stacked under it. */}
         <FadeIn delay={0.1}>
-          <div className="mt-3 rounded-md border border-border-default bg-canvas-subtle px-4 py-3 shadow-sm sm:px-5 sm:py-4">
-            <h4 className="mono mb-2.5 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wider text-fg-subtle">
-              <Award size={12} />
-              Contest Achievements
-            </h4>
-            <ul className="divide-y divide-border-muted">
+          <div className="mt-3 overflow-hidden rounded-2xl border border-border-strong bg-canvas">
+            <div className="flex items-center gap-3 border-b border-border-default px-4 py-2.5 sm:px-5">
+              <span className="mono flex min-w-0 items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-fg-muted sm:text-[11px]">
+                <Award size={13} className="shrink-0" />
+                <span className="truncate">Contest Achievements</span>
+              </span>
+            </div>
+
+            <ul className="divide-y divide-border-default">
               {achievements.map((a, i) => (
                 <motion.li
                   key={a}
@@ -137,7 +140,7 @@ export function SkillsSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05, duration: 0.35 }}
-                  className="flex items-baseline gap-3 py-2 text-[15px] leading-relaxed text-fg-muted transition-colors hover:text-fg-default"
+                  className="flex items-baseline gap-3 px-4 py-3 text-[15px] leading-relaxed text-fg-muted transition-colors hover:text-fg-default sm:px-5"
                 >
                   <span className="mono w-5 shrink-0 text-[11px] text-fg-subtle">
                     {String(i + 1).padStart(2, "0")}
@@ -233,6 +236,12 @@ export function SkillsSection() {
                     </p>
                   </div>
                 </div>
+
+                {entry.description && (
+                  <p className="mt-3 text-[14px] leading-relaxed text-fg-muted">
+                    {entry.description}
+                  </p>
+                )}
 
                 {previous.length > 0 && (
                   <div className="mt-3 border-t border-border-muted pt-2.5">

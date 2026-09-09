@@ -357,7 +357,12 @@ export const achievements = [
   "1x 1st Runners-up, Intra University Three Minute Thesis Presentation",
 ];
 
-export type LeadershipEntry = { org: string; roles: string[] };
+export type LeadershipEntry = {
+  org: string;
+  roles: string[];
+  /** One line on what the role actually involved. */
+  description?: string;
+};
 
 export const leadership: LeadershipEntry[] = [
   {
@@ -371,6 +376,16 @@ export const leadership: LeadershipEntry[] = [
       "Deputy Editorial Secretary",
     ],
   },
-  { org: "Intra University Programming Contest, BAUET", roles: ["Problem Setter"] },
-  { org: "HULT Prize, BAUET", roles: ["Officer of Documentation"] },
+  {
+    org: "Intra University Programming Contest, BAUET",
+    roles: ["Problem Setter"],
+    description:
+      "Designed and reviewed algorithmic problems for the contest set — writing statements, preparing test data and reference solutions, and calibrating difficulty across the round.",
+  },
+  {
+    org: "HULT Prize, BAUET",
+    roles: ["Officer of Documentation"],
+    description:
+      "Handled documentation for the on-campus round — maintaining team registrations and records, preparing event reports, and keeping submission material organised for the organising committee.",
+  },
 ];
