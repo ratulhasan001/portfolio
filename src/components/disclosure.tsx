@@ -58,8 +58,8 @@ export function Disclosure({
       whileTap={{ scale: 0.9 }}
       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border shadow-sm transition-colors ${
         open
-          ? "border-accent bg-accent text-white"
-          : "border-accent/35 bg-accent/10 text-accent hover:border-accent hover:bg-accent hover:text-white"
+          ? "border-accent bg-accent text-on-accent"
+          : "border-accent/35 bg-accent/10 text-accent hover:border-accent hover:bg-accent hover:text-on-accent"
       }`}
     >
       {chevron}

@@ -4,7 +4,6 @@ import { useRef, type MouseEvent } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { profile } from "@/lib/data";
-import { NeuralBackground } from "./neural-background";
 
 export function HeroPortrait() {
   const ref = useRef<HTMLDivElement>(null);
@@ -52,11 +51,6 @@ export function HeroPortrait() {
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
         className="pointer-events-none absolute -inset-10 rounded-full bg-[radial-gradient(circle,var(--color-done)_0%,transparent_65%)] blur-2xl"
       />
-
-      {/* neural node backdrop */}
-      <div className="pointer-events-none absolute -inset-10 opacity-70">
-        <NeuralBackground />
-      </div>
 
       {/* holographic rings */}
       <motion.span

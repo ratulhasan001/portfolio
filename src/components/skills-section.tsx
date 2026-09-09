@@ -31,7 +31,6 @@ import {
 import { skills, onlineJudges, achievements, leadership } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
-import { NeuralBackground } from "./neural-background";
 import { ParallaxLayer } from "./parallax-layer";
 import { TiltLink } from "./tilt-card";
 import { PopWords, PopIn } from "./pop-in";
@@ -70,7 +69,7 @@ export function SkillsSection() {
       className="relative mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9"
     >
       <ParallaxLayer speed={45}>
-        <NeuralBackground />
+        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
       </ParallaxLayer>
       <SectionTitle index="04" title="Skills & Achievements" />
 
@@ -122,35 +121,33 @@ export function SkillsSection() {
           })}
         </div>
 
-        <StaggerGroup className="mt-3 grid gap-2.5 sm:grid-cols-2">
-          {achievements.map((a, i) => (
-            <motion.div
-              key={a}
-              variants={staggerItem}
-              whileHover={{ y: -4 }}
-              transition={{ type: "spring", stiffness: 320, damping: 22 }}
-              className="shimmer group relative flex items-start gap-3 overflow-hidden rounded-md border border-border-muted bg-canvas px-4 py-3 text-[15px] text-fg-muted shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-attention/50 hover:shadow-[0_16px_32px_-16px_var(--color-attention)]"
-            >
-              <span
-                aria-hidden
-                className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-attention to-danger transition-transform duration-300 ease-out group-hover:scale-y-100"
-              />
-              <motion.span
-                whileHover={{ rotate: -14, scale: 1.18 }}
-                transition={{ type: "spring", stiffness: 300, damping: 14 }}
-                className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-attention-subtle text-attention"
-              >
-                <Award size={14} />
-              </motion.span>
-              <span className="min-w-0 pr-5 leading-relaxed transition-colors group-hover:text-fg-default">
-                {a}
-              </span>
-              <span className="mono absolute right-3 top-3 text-[10px] text-fg-subtle">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-            </motion.div>
-          ))}
-        </StaggerGroup>
+        {/* One panel, one list: seven separate cards fragmented what is
+            really a single run of contest results. */}
+        <FadeIn delay={0.1}>
+          <div className="mt-3 rounded-md border border-border-default bg-canvas-subtle px-4 py-3 shadow-sm sm:px-5 sm:py-4">
+            <h4 className="mono mb-2.5 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wider text-fg-subtle">
+              <Award size={12} />
+              Contest Achievements
+            </h4>
+            <ul className="divide-y divide-border-muted">
+              {achievements.map((a, i) => (
+                <motion.li
+                  key={a}
+                  initial={{ opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05, duration: 0.35 }}
+                  className="flex items-baseline gap-3 py-2 text-[15px] leading-relaxed text-fg-muted transition-colors hover:text-fg-default"
+                >
+                  <span className="mono w-5 shrink-0 text-[11px] text-fg-subtle">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="min-w-0">{a}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </FadeIn>
       </div>
 
       <div className="mb-7">
@@ -199,94 +196,63 @@ export function SkillsSection() {
             Leadership &amp; Volunteering
           </h3>
         </PopIn>
-        <StaggerGroup className="grid gap-2.5 sm:grid-cols-2">
-          {leadership.map((entry) =>
-            entry.roles.length > 1 ? (
-              <motion.div
-                key={entry.org}
-                variants={staggerItem}
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 320, damping: 22 }}
-                className="shimmer group relative overflow-hidden rounded-md border border-border-muted bg-canvas-subtle px-4 py-4 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-done/50 hover:shadow-[0_16px_32px_-16px_var(--color-done)] sm:col-span-2"
-              >
-                <span
-                  aria-hidden
-                  className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-done to-accent transition-transform duration-300 ease-out group-hover:scale-y-100"
-                />
-                <div className="flex items-center gap-3">
-                  <motion.span
-                    whileHover={{ rotate: -12, scale: 1.15 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-done-subtle text-done"
-                  >
-                    <Crown size={16} />
-                  </motion.span>
-                  <p className="text-[15px] font-semibold text-fg-default">
-                    <PopWords text={entry.org} inView stagger={0.03} />
-                  </p>
-                </div>
-
-                <div className="mt-4 border-l border-done/30 pl-8">
-                  {entry.roles.map((role, i) => {
-                    const isCurrent = i === 0;
-                    return (
-                      <motion.div
-                        key={role}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.08, duration: 0.4 }}
-                        className={`relative ${i < entry.roles.length - 1 ? "pb-3" : ""}`}
-                      >
-                        <span
-                          className={`absolute -left-[34.5px] top-1 h-2.5 w-2.5 rounded-full border-2 border-canvas-subtle ${
-                            isCurrent ? "bg-done" : "bg-fg-subtle"
-                          }`}
-                        />
-                        <p
-                          className={
-                            isCurrent
-                              ? "text-base font-bold text-fg-default"
-                              : "text-sm font-medium text-fg-muted"
-                          }
-                        >
-                          {role}
-                        </p>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key={entry.org + entry.roles[0]}
-                variants={staggerItem}
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 320, damping: 22 }}
-                className="shimmer group relative flex items-start gap-3 overflow-hidden rounded-md border border-border-muted bg-canvas-subtle px-4 py-3.5 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-done/50 hover:shadow-[0_16px_32px_-16px_var(--color-done)]"
-              >
-                <span
-                  aria-hidden
-                  className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-done to-accent transition-transform duration-300 ease-out group-hover:scale-y-100"
-                />
+        {/* All three entries sit on one row: the multi-role card no longer
+            spans the grid, it just stacks its roles inside its own column. */}
+        <StaggerGroup className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+          {leadership.map((entry) => (
+            <motion.div
+              key={entry.org}
+              variants={staggerItem}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 320, damping: 22 }}
+              className="shimmer group relative overflow-hidden rounded-md border border-border-muted bg-canvas-subtle px-4 py-3.5 shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-done/50 hover:shadow-[0_16px_32px_-16px_var(--color-done)]"
+            >
+              <span
+                aria-hidden
+                className="absolute inset-y-0 left-0 w-1 scale-y-0 bg-gradient-to-b from-done to-accent transition-transform duration-300 ease-out group-hover:scale-y-100"
+              />
+              <div className="flex items-start gap-3">
                 <motion.span
                   whileHover={{ rotate: -12, scale: 1.15 }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-done-subtle text-done"
+                  className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-done-subtle text-done"
                 >
-                  <Crown size={16} />
+                  <Crown size={15} />
                 </motion.span>
-                <div className="min-w-0">
-                  <p className="text-base font-semibold leading-snug text-fg-default">
-                    <PopWords text={entry.roles[0]} inView stagger={0.03} />
-                  </p>
-                  <p className="mt-0.5 text-sm font-medium text-done">
-                    {entry.org}
-                  </p>
-                </div>
-              </motion.div>
-            )
-          )}
+                <p className="min-w-0 text-[15px] font-semibold leading-snug text-fg-default">
+                  <PopWords text={entry.org} inView stagger={0.03} />
+                </p>
+              </div>
+
+              <ul className="mt-3 space-y-1.5 border-l border-done/30 pl-4 sm:ml-1">
+                {entry.roles.map((role, i) => (
+                  <motion.li
+                    key={role}
+                    initial={{ opacity: 0, x: -8 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.35 }}
+                    className="relative"
+                  >
+                    <span
+                      className={`absolute -left-[18.5px] top-1.5 h-2 w-2 rounded-full border-2 border-canvas-subtle ${
+                        i === 0 ? "bg-done" : "bg-fg-subtle"
+                      }`}
+                    />
+                    <span
+                      className={
+                        i === 0
+                          ? "text-sm font-bold text-fg-default"
+                          : "text-sm font-medium text-fg-muted"
+                      }
+                    >
+                      {role}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </StaggerGroup>
       </div>
     </section>

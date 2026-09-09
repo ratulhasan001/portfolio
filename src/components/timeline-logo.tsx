@@ -29,19 +29,19 @@ export function TimelineLogo({
       className="absolute -left-[22px]"
     >
       {src ? (
-        <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-border-default bg-canvas-overlay shadow-sm">
+        <span className="logo-plate relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-border-default shadow-sm">
           <Image
             src={src}
             alt={alt}
             fill
             sizes="44px"
-            className="object-contain p-0.5"
+            className="mark-real object-contain p-0.5"
           />
         </span>
       ) : (
         <span
           className={`flex h-11 w-11 items-center justify-center rounded-full border border-border-default ${
-            current ? "bg-success text-canvas" : "bg-accent text-canvas"
+            current ? "bg-status-published text-canvas" : "bg-accent text-canvas"
           }`}
         >
           {fallback}
@@ -51,7 +51,7 @@ export function TimelineLogo({
         <motion.span
           animate={{ scale: [1, 1.25, 1], opacity: [1, 0.6, 1] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-canvas bg-success"
+          className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-canvas bg-status-published"
         />
       )}
     </motion.span>

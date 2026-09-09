@@ -49,7 +49,7 @@ export function ContactSection() {
                 whileTap={{ scale: 0.96 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
                 href={`mailto:${profile.email}`}
-                className="shimmer relative flex items-center gap-2 overflow-hidden rounded-md bg-accent px-5 py-2.5 text-[15px] font-semibold text-white shadow-md transition-[box-shadow,background-color] duration-300 hover:bg-accent-emphasis hover:shadow-[0_14px_30px_-10px_var(--color-accent)]"
+                className="shimmer relative flex items-center gap-2 overflow-hidden rounded-md bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent shadow-md transition-[box-shadow,background-color] duration-300 hover:bg-accent-emphasis hover:shadow-[0_14px_30px_-10px_var(--color-accent)]"
               >
                 <motion.span
                   variants={{

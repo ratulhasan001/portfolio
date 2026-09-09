@@ -11,30 +11,43 @@ import { TimelineLogo } from "./timeline-logo";
 
 function EntryHead({ edu }: { edu: Education }) {
   return (
-    <>
-      <div className="flex flex-wrap items-center gap-2">
-        <h4 className="text-base font-semibold text-fg-default sm:text-lg">
+    <div className="min-w-0">
+      {/* Degree carries the weight; the years sit out at the right margin in
+          mono so the column of periods scans on its own. */}
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <h4 className="text-lg font-semibold leading-tight tracking-tight text-fg-default sm:text-xl">
           <PopWords text={edu.degree} inView stagger={0.04} />
         </h4>
-        {edu.score && (
-          <span className="mono rounded-full border border-border-muted bg-canvas px-2 py-0.5 text-xs text-fg-muted">
-            {edu.score.label} {edu.score.value.toFixed(2)}/
-            {edu.score.scale.toFixed(1)}
-          </span>
-        )}
-        {edu.merit && (
-          <span className="rounded-full bg-success-subtle px-2 py-0.5 text-xs font-medium text-success">
-            {edu.merit}
-          </span>
-        )}
+        <span className="mono shrink-0 text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
+          {edu.period}
+        </span>
       </div>
-      <p className="text-[15px] font-medium text-accent">
+
+      <p className="mt-1 text-[15px] font-medium text-fg-muted">
         <PopWords text={edu.school} inView delay={0.1} stagger={0.04} />
       </p>
-      <p className="mono mt-1 text-[13px] text-fg-subtle">
-        {edu.period} · {edu.location}
-      </p>
-    </>
+
+      <div className="mono mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-fg-subtle">
+        <span>{edu.location}</span>
+        {edu.score && (
+          <>
+            <span aria-hidden>·</span>
+            <span className="text-fg-default">
+              {edu.score.label} {edu.score.value.toFixed(2)}/
+              {edu.score.scale.toFixed(1)}
+            </span>
+          </>
+        )}
+        {edu.merit && (
+          <>
+            <span aria-hidden>·</span>
+            <span className="uppercase tracking-[0.1em] text-status-published">
+              {edu.merit}
+            </span>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -50,7 +63,7 @@ export function EducationSection() {
 
       <SectionTitle index="02" title="Education" />
 
-      <ol className="relative ml-6 max-w-3xl border-l border-border-default pl-8">
+      <ol className="relative ml-5 max-w-4xl border-l border-border-default pl-8 sm:ml-6 sm:pl-10">
         {education.map((edu, i) => (
           <motion.li
             key={edu.school}
@@ -58,7 +71,7 @@ export function EducationSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-6 last:mb-0"
+            className="mb-7 last:mb-0"
           >
             <TimelineLogo
               src={edu.logo}
@@ -69,9 +82,14 @@ export function EducationSection() {
 
             {edu.detail ? (
               <Disclosure title="Show thesis" summary={<EntryHead edu={edu} />}>
-                <p className="text-[15px] leading-relaxed text-fg-muted">
-                  {edu.detail}
-                </p>
+                <div className="border-l-2 border-border-muted pl-4">
+                  <p className="mono mb-1 text-[11px] font-semibold uppercase tracking-wider text-fg-subtle">
+                    Thesis
+                  </p>
+                  <p className="text-[15px] leading-relaxed text-fg-muted">
+                    {edu.detail.replace(/^Thesis:\s*/, "")}
+                  </p>
+                </div>
               </Disclosure>
             ) : (
               <EntryHead edu={edu} />

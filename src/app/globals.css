@@ -3,63 +3,78 @@
 @custom-variant dark (&:where(:root[data-theme="dark"] *));
 
 :root {
-  --canvas: #f9fafb;
-  --canvas-subtle: #f1f3f5;
-  --canvas-inset: #e9ecef;
+  --canvas: #ffffff;
+  --canvas-subtle: #f7f7f7;
+  --canvas-inset: #efefef;
   --canvas-overlay: #ffffff;
-  --border-default: #d1d9e0;
-  --border-muted: #d1d9e0b3;
-  --fg-default: #1f2328;
-  --fg-muted: #59636e;
-  --fg-subtle: #6e7781;
-  --accent: #0969da;
-  --accent-emphasis: #0550ae;
-  --success: #1a7f37;
-  --success-subtle: #dafbe1;
-  --attention: #9a6700;
-  --attention-subtle: #fff8c5;
-  --done: #8250df;
-  --done-subtle: #fbefff;
-  --danger: #cf222e;
-  --shadow-sm: 0 1px 0 rgba(31, 35, 40, 0.04);
-  --shadow-md: 0 3px 6px rgba(140, 149, 159, 0.15);
-  --scrollbar: #d1d9e0;
-  --grid-line: rgba(31, 35, 40, 0.07);
-  --blob-opacity: 0.16;
+  --border-default: #e5e5e5;
+  --border-muted: #efefef;
+  /* One step firmer than --border-default, for panels that should read as a
+     defined block without the harshness of a full-black rule. */
+  --border-strong: #cfcfcf;
+  --fg-default: #000000;
+  --fg-muted: #525252;
+  --fg-subtle: #8a8a8a;
+  --accent: #000000;
+  --accent-emphasis: #000000;
+  /* Text/icons that sit on top of an --accent fill. */
+  --on-accent: #ffffff;
+  --success: #000000;
+  --success-subtle: #f0f0f0;
+  --attention: #404040;
+  --attention-subtle: #f0f0f0;
+  --done: #262626;
+  --done-subtle: #f0f0f0;
+  --danger: #000000;
+  --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.08);
+  --scrollbar: #d4d4d4;
+  --grid-line: rgba(0, 0, 0, 0.06);
+  --blob-opacity: 0.08;
   --blob-blend: multiply;
-  --glow-opacity: 0.06;
-  --shimmer-color: rgba(9, 105, 218, 0.14);
-  --chip-shadow: 0 1px 2px rgba(31, 35, 40, 0.06);
+  --glow-opacity: 0.05;
+  --shimmer-color: rgba(0, 0, 0, 0.06);
+  --chip-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  /* Publication status is the one signal allowed real colour, so the three
+     states read at a glance instead of by pill weight alone. */
+  --status-published: #1a7f37;
+  --status-accepted: #0969da;
+  --status-review: #bc4c00;
 }
 
 :root[data-theme="dark"] {
-  --canvas: #09090b;
-  --canvas-subtle: #111827;
-  --canvas-inset: #030305;
-  --canvas-overlay: #111827;
-  --border-default: #1f2937;
-  --border-muted: #17202e;
-  --fg-default: #f9fafb;
-  --fg-muted: #9ca3af;
-  --fg-subtle: #6b7280;
-  --accent: #3b82f6;
-  --accent-emphasis: #2563eb;
-  --success: #3fb950;
-  --success-subtle: #12261e;
-  --attention: #d29922;
-  --attention-subtle: #2b2111;
-  --done: #8b5cf6;
-  --done-subtle: #211a3d;
-  --danger: #f85149;
+  --canvas: #000000;
+  --canvas-subtle: #0d0d0d;
+  --canvas-inset: #000000;
+  --canvas-overlay: #0d0d0d;
+  --border-default: #262626;
+  --border-muted: #1a1a1a;
+  --border-strong: #3a3a3a;
+  --fg-default: #ffffff;
+  --fg-muted: #a3a3a3;
+  --fg-subtle: #737373;
+  --accent: #ffffff;
+  --accent-emphasis: #ffffff;
+  --on-accent: #000000;
+  --success: #ffffff;
+  --success-subtle: #171717;
+  --attention: #bfbfbf;
+  --attention-subtle: #171717;
+  --done: #d4d4d4;
+  --done-subtle: #171717;
+  --danger: #ffffff;
   --shadow-sm: 0 0 transparent;
-  --shadow-md: 0 8px 24px rgba(1, 4, 9, 0.5);
-  --scrollbar: #30363d;
-  --grid-line: rgba(230, 237, 243, 0.07);
-  --blob-opacity: 0.25;
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --scrollbar: #333333;
+  --grid-line: rgba(255, 255, 255, 0.07);
+  --blob-opacity: 0.14;
   --blob-blend: screen;
-  --glow-opacity: 0.12;
+  --glow-opacity: 0.1;
   --shimmer-color: rgba(255, 255, 255, 0.09);
   --chip-shadow: 0 0 transparent;
+  --status-published: #3fb950;
+  --status-accepted: #58a6ff;
+  --status-review: #f0883e;
 }
 
 @theme inline {
@@ -69,11 +84,13 @@
   --color-canvas-overlay: var(--canvas-overlay);
   --color-border-default: var(--border-default);
   --color-border-muted: var(--border-muted);
+  --color-border-strong: var(--border-strong);
   --color-fg-default: var(--fg-default);
   --color-fg-muted: var(--fg-muted);
   --color-fg-subtle: var(--fg-subtle);
   --color-accent: var(--accent);
   --color-accent-emphasis: var(--accent-emphasis);
+  --color-on-accent: var(--on-accent);
   --color-success: var(--success);
   --color-success-subtle: var(--success-subtle);
   --color-attention: var(--attention);
@@ -81,12 +98,20 @@
   --color-done: var(--done);
   --color-done-subtle: var(--done-subtle);
   --color-danger: var(--danger);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-status-published: var(--status-published);
+  --color-status-accepted: var(--status-accepted);
+  --color-status-review: var(--status-review);
+  --font-sans: var(--font-sans-family);
+  --font-mono: var(--font-mono-family);
 }
 
-* {
-  border-color: var(--border-default);
+/* Must sit in @layer base: unlayered rules outrank Tailwind's layered
+   utilities, so at the top level this `*` would quietly win over every
+   `border-*` colour utility on the page. */
+@layer base {
+  * {
+    border-color: var(--border-default);
+  }
 }
 
 html {
@@ -101,8 +126,10 @@ html[data-theme="dark"] {
 body {
   background: var(--canvas);
   color: var(--fg-default);
-  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: var(--font-sans-family), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-feature-settings: "cv11" 1, "ss01" 1;
+  letter-spacing: -0.011em;
   transition: background-color 0.2s ease, color 0.2s ease;
   overflow-x: clip;
   max-width: 100vw;
@@ -128,7 +155,7 @@ html.force-visible [style*="opacity:0"] {
 
 ::selection {
   background: var(--accent);
-  color: white;
+  color: var(--on-accent);
 }
 
 ::-webkit-scrollbar {
@@ -157,8 +184,9 @@ html.force-visible [style*="opacity:0"] {
 }
 
 .mono {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--font-mono-family), ui-monospace, SFMono-Regular, monospace;
   font-feature-settings: "tnum" 1;
+  letter-spacing: 0;
 }
 
 .text-balance {
@@ -195,10 +223,11 @@ html.force-visible [style*="opacity:0"] {
 .gradient-text {
   background-image: linear-gradient(
     90deg,
-    var(--color-accent),
-    var(--color-done),
-    var(--color-success),
-    var(--color-accent)
+    var(--color-fg-default),
+    var(--color-fg-subtle),
+    var(--color-fg-default),
+    var(--color-fg-subtle),
+    var(--color-fg-default)
   );
   background-size: 300% 100%;
   -webkit-background-clip: text;
@@ -241,10 +270,11 @@ html.force-visible [style*="opacity:0"] {
 .gradient-line {
   background-image: linear-gradient(
     90deg,
-    var(--color-accent),
-    var(--color-done),
-    var(--color-success),
-    var(--color-accent)
+    var(--color-fg-default),
+    var(--color-border-default),
+    var(--color-fg-default),
+    var(--color-border-default),
+    var(--color-fg-default)
   );
   background-size: 300% 100%;
   animation: gradient-flow 8s ease infinite;
@@ -304,7 +334,7 @@ main > section::before {
   opacity: 0;
   background: radial-gradient(
     ellipse 70% 40% at 50% 0%,
-    color-mix(in srgb, var(--color-accent) 28%, transparent),
+    color-mix(in srgb, var(--color-accent) 10%, transparent),
     transparent 70%
   );
 }
@@ -316,14 +346,14 @@ main > section::after {
   z-index: 5;
   pointer-events: none;
   border-radius: inherit;
-  box-shadow: inset 0 0 0 0 color-mix(in srgb, var(--color-accent) 55%, transparent);
+  box-shadow: inset 0 0 0 0 color-mix(in srgb, var(--color-accent) 35%, transparent);
   opacity: 0;
   transition: box-shadow 0.6s ease, opacity 0.6s ease;
 }
 
 main > section.nav-flash-target::after {
   opacity: 1;
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-accent) 40%, transparent);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-accent) 22%, transparent);
 }
 
 main > section.nav-flash::before {
@@ -346,10 +376,76 @@ main > section.nav-flash::after {
 @keyframes nav-flash-ring {
   0% {
     opacity: 1;
-    box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-accent) 70%, transparent);
+    box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-accent) 45%, transparent);
   }
   100% {
     opacity: 0;
     box-shadow: inset 0 0 0 0 color-mix(in srgb, var(--color-accent) 0%, transparent);
   }
+}
+
+/* ---- Hero marquee ------------------------------------------------------
+   Two identical tracks sit side by side; shifting the pair left by exactly
+   half its width lands the second copy where the first started, so the loop
+   is seamless. Hovering pauses it, and reduced-motion stops it outright. */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.marquee-track {
+  animation: marquee-scroll var(--marquee-duration, 38s) linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .marquee {
+    overflow-x: auto;
+  }
+}
+
+/* ---- Logo marks --------------------------------------------------------
+   Publisher wordmarks and org logos keep their real artwork in both themes.
+   The only concession dark mode gets is a touch more brightness, since most
+   of these marks were drawn for a white page. */
+.mark-real {
+  transition: filter 0.3s ease-out;
+}
+
+/* Most of these marks are dark ink on transparency, drawn for a white page.
+   Rather than recolour them, the plate they sit on stays white in both
+   themes so the artwork keeps its own colours. */
+.logo-plate {
+  background: #ffffff;
+}
+:root[data-theme="dark"] .logo-plate {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
 }

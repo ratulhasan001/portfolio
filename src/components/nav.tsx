@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "./theme-toggle";
 import {
-  GitBranch,
   Menu,
   X,
   LayoutDashboard,
@@ -36,14 +35,15 @@ function Logo({ compact = false }: { compact?: boolean }) {
         e.preventDefault();
         smoothScrollToId("#overview");
       }}
-      className="flex items-center gap-2 font-semibold text-fg-default"
+      aria-label="Ratul Hasan — back to top"
+      className="group flex items-center gap-2.5 font-semibold text-fg-default"
     >
-      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border-default bg-canvas-subtle text-accent">
-        <GitBranch size={15} />
+      <span className="mono flex h-8 w-8 items-center justify-center rounded-md border border-fg-default bg-fg-default text-[13px] font-bold leading-none tracking-tight text-canvas transition-colors duration-200 group-hover:bg-canvas group-hover:text-fg-default">
+        RH
       </span>
       {!compact && (
-        <span className="mono text-sm tracking-tight">
-          ratulhasan<span className="text-accent">/</span>research
+        <span className="text-sm font-semibold tracking-tight">
+          Ratul Hasan
         </span>
       )}
     </a>
