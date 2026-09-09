@@ -2,14 +2,11 @@
 
 import { motion } from "framer-motion";
 import { profile } from "@/lib/data";
-
-/** The site's own domain, without the scheme, used as the closing mark. */
-const domain = profile.website.replace(/^https?:\/\//, "").replace(/\/$/, "");
+import { DinoRunner } from "./dino-runner";
 
 /**
- * Closing sign-off: the domain set oversized as a piece of type, with the
- * contact links folded into the line beneath it. Replaces the old contact
- * panel, so the page ends on the mark rather than on a form.
+ * Closing sign-off: a decorative endless runner in place of a sign-off mark,
+ * with the contact links folded into the line beneath it.
  */
 export function NameOutro() {
   return (
@@ -28,18 +25,15 @@ export function NameOutro() {
           Open to research collaborations
         </motion.p>
 
-        {/* Set in viewport units so the word holds the same optical weight at
-            every width, with the tracking pulled in the way a display cut
-            wants it. `masked-name` clips an animated fill to the glyphs. */}
-        <motion.h2
-          initial={{ opacity: 0, y: 28 }}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="masked-name mt-3 select-none break-all text-[11vw] font-extrabold leading-[0.9] tracking-[-0.04em] sm:mt-4 sm:text-[9vw] lg:text-[8vw]"
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-5 sm:mt-6"
         >
-          {domain}
-        </motion.h2>
+          <DinoRunner className="h-[130px] sm:h-[160px]" />
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }}
@@ -92,6 +86,8 @@ export function NameOutro() {
             </a>
             <a
               href="/cv"
+              target="_blank"
+              rel="noreferrer"
               className="transition-colors hover:text-fg-default"
             >
               CV
