@@ -1,30 +1,56 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { BookOpen, Clock, ExternalLink, FileText, Link2, Users } from "lucide-react";
-import { publications, digitalLibraryLogos, type Publication } from "@/lib/data";
+import {
+  publications,
+  digitalLibraryLabels,
+  profile,
+  type Publication,
+} from "@/lib/data";
 import { SectionTitle, StatusPill } from "./ui";
 import { StaggerGroup, staggerItem } from "./fade-in";
-import { TiltCard } from "./tilt-card";
 import { PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
 import { Disclosure } from "./disclosure";
 
+/** Full byline, with Ratul's own name carrying the emphasis. */
+function Byline({ authors }: { authors: string[] }) {
+  return (
+    <p className="text-sm leading-relaxed text-fg-muted">
+      {authors.map((author, i) => (
+        <span key={author}>
+          <span
+            className={
+              author === profile.name
+                ? "font-semibold text-fg-default underline decoration-fg-subtle underline-offset-2"
+                : undefined
+            }
+          >
+            {author}
+          </span>
+          {i < authors.length - 1 && ", "}
+        </span>
+      ))}
+    </p>
+  );
+}
+
 function PublicationCard({ pub }: { pub: Publication }) {
-  const mark = pub.logo
-    ? { src: pub.logo }
-    : pub.digitalLibrary
-      ? digitalLibraryLogos[pub.digitalLibrary]
-      : undefined;
   // The status pill already says submitted / accepted / published, so the
   // headline only needs the year out of the full date.
   const year = pub.date.match(/\d{4}/)?.[0] ?? pub.date;
+  const library = pub.digitalLibrary
+    ? digitalLibraryLabels[pub.digitalLibrary]
+    : undefined;
 
   return (
-    <TiltCard
+    <motion.article
       variants={staggerItem}
-      className="shimmer rounded-md border border-border-default bg-canvas-subtle p-4 transition-colors hover:border-accent/50"
+      // Deliberately flat: a pure canvas panel inside a hard rule, so the
+      // only things carrying weight are the title, the status dot and the
+      // publisher mark.
+      className="rounded-md border border-border-strong bg-canvas p-4 transition-colors duration-300 hover:border-fg-subtle"
     >
       <Disclosure
         title="Show publication details"
@@ -41,74 +67,76 @@ function PublicationCard({ pub }: { pub: Publication }) {
                 className="peer absolute inset-0 z-20 rounded-md"
               />
             )}
-            <motion.span
-              whileHover={{ rotate: -10, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="mt-0.5 hidden h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border-default bg-canvas text-accent sm:col-start-1 sm:row-start-1 sm:flex"
-            >
-              {pub.type === "journal" ? <FileText size={16} /> : <BookOpen size={16} />}
-            </motion.span>
+            <span className="mt-0.5 hidden h-7 w-7 shrink-0 items-center justify-center rounded-sm border border-border-default text-fg-muted sm:col-start-1 sm:row-start-1 sm:flex">
+              {pub.type === "journal" ? <FileText size={14} /> : <BookOpen size={14} />}
+            </span>
 
-            <h3 className="min-w-0 text-[15px] font-semibold leading-snug text-fg-default transition-colors peer-hover:text-accent sm:col-start-2 sm:row-start-1 sm:text-base">
+            <h3 className="min-w-0 text-[15px] font-semibold leading-snug text-fg-default underline-offset-4 transition-colors peer-hover:underline sm:col-start-2 sm:row-start-1 sm:text-base">
               <PopWords text={pub.title} inView stagger={0.018} />
             </h3>
 
-            <div className="flex flex-wrap items-center gap-2 sm:col-start-2 sm:row-start-2">
+            <div className="sm:col-start-2 sm:row-start-2">
               <StatusPill status={pub.status} />
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border-default bg-canvas px-2.5 py-0.5 text-xs font-medium text-fg-muted">
-                <Users size={11} />
-                {pub.authorship}
-              </span>
             </div>
 
-            {/* Publisher and year: a row under the title on phones, a column
-                to the right of it once there is room. */}
-            <div className="flex items-center gap-3 sm:col-start-3 sm:row-span-2 sm:row-start-1 sm:flex-col sm:items-end sm:gap-1.5">
-              {mark && (
-                <span
-                  title={pub.digitalLibrary}
-                  className="relative flex h-7 w-24 items-center justify-start sm:h-9 sm:w-32 sm:justify-end"
-                >
-                  <Image
-                    src={mark.src}
-                    alt={pub.digitalLibrary ?? "Publisher"}
-                    fill
-                    sizes="(min-width: 640px) 128px, 96px"
-                    className={`object-contain object-left sm:object-right ${
-                      mark.whitenOnDark ? "dark:brightness-0 dark:invert" : ""
-                    }`}
-                  />
+            {/* Digital library and year, set as one typographic chip —
+                under the title on phones, to its right once there is room. */}
+            <div className="sm:col-start-3 sm:row-span-2 sm:row-start-1 sm:flex sm:justify-end">
+              <span
+                title={pub.digitalLibrary}
+                className="mono inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded border border-border-default bg-canvas-subtle px-2 py-1 text-[11px] font-medium uppercase tracking-[0.08em] text-fg-muted"
+              >
+                {library ?? pub.venue}
+                <span aria-hidden className="text-fg-subtle">
+                  ·
                 </span>
-              )}
-              <span className="mono text-[13px] text-fg-subtle">{year}</span>
+                <span className="text-fg-default">{year}</span>
+              </span>
             </div>
           </div>
         }
       >
-        <p className="text-sm italic text-fg-muted">{pub.venue}</p>
+        <div className="space-y-3 border-t border-border-default pt-3">
+          <div>
+            <p className="mono mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-fg-subtle">
+              <Users size={11} />
+              Authors
+            </p>
+            <Byline authors={pub.authors} />
+          </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-2">
-          {pub.status === "accepted" && (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-done/40 bg-done-subtle px-2.5 py-0.5 text-xs font-medium text-done">
-              <Clock size={11} />
-              To Be Published
-            </span>
-          )}
-          {pub.link && (
-            <a
-              href={pub.link}
-              target="_blank"
-              rel="noreferrer"
-              className="mono inline-flex items-center gap-1.5 rounded-full border border-success/30 bg-canvas px-2.5 py-0.5 text-[11px] font-semibold text-success transition-colors hover:border-success hover:bg-success-subtle"
-            >
-              <Link2 size={11} />
-              {pub.link.replace("https://doi.org/", "")}
-              <ExternalLink size={10} />
-            </a>
+          <div>
+            <p className="mono mb-1 text-[11px] font-semibold uppercase tracking-wider text-fg-subtle">
+              Venue
+            </p>
+            <p className="text-sm italic text-fg-muted">{pub.venue}</p>
+          </div>
+
+          {(pub.status === "accepted" || pub.link) && (
+            <div className="flex flex-wrap items-center gap-2">
+              {pub.status === "accepted" && (
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-status-accepted/50 px-2.5 py-0.5 text-xs font-medium text-status-accepted">
+                  <Clock size={11} />
+                  To Be Published
+                </span>
+              )}
+              {pub.link && (
+                <a
+                  href={pub.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mono inline-flex items-center gap-1.5 rounded-full border border-status-published/40 px-2.5 py-0.5 text-[11px] font-semibold text-status-published transition-colors hover:border-status-published"
+                >
+                  <Link2 size={11} />
+                  {pub.link.replace("https://doi.org/", "")}
+                  <ExternalLink size={10} />
+                </a>
+              )}
+            </div>
           )}
         </div>
       </Disclosure>
-    </TiltCard>
+    </motion.article>
   );
 }
 
