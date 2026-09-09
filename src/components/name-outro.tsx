@@ -29,14 +29,13 @@ export function NameOutro() {
 
         {/* Set in viewport units so the word holds the same optical weight at
             every width, with the tracking pulled in the way a display cut
-            wants it. Solid ink, deliberately — an animated gradient fill
-            leaves a word this large looking washed out mid-sweep. */}
+            wants it. `masked-name` clips an animated fill to the glyphs. */}
         <motion.h2
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-3 select-none text-[26vw] font-extrabold leading-[0.85] tracking-[-0.055em] text-fg-default sm:mt-4 sm:text-[22vw] lg:text-[19vw]"
+          className="masked-name mt-3 select-none text-[26vw] font-extrabold leading-[0.85] tracking-[-0.055em] sm:mt-4 sm:text-[22vw] lg:text-[19vw]"
         >
           {firstName}
         </motion.h2>

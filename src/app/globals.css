@@ -40,6 +40,10 @@
   --status-published: #1a7f37;
   --status-accepted: #0969da;
   --status-review: #bc4c00;
+  /* Ink stops for the masked wordmark; the mid stop is the sheen. */
+  --mask-a: #000000;
+  --mask-b: #2b2b2b;
+  --mask-c: #6b6b6b;
 }
 
 :root[data-theme="dark"] {
@@ -75,6 +79,9 @@
   --status-published: #3fb950;
   --status-accepted: #58a6ff;
   --status-review: #f0883e;
+  --mask-a: #ffffff;
+  --mask-b: #d4d4d4;
+  --mask-c: #8f8f8f;
 }
 
 @theme inline {
@@ -448,4 +455,52 @@ main > section.nav-flash::after {
 }
 :root[data-theme="dark"] .logo-plate {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+/* ---- Masked wordmark ---------------------------------------------------
+   The closing name is painted by clipping a background to the glyphs and
+   sliding that background across them, so the fill sweeps rather than sits
+   flat. A photo would be the obvious fill, but the only portrait on hand is
+   a cutout on white, which would leave most of the letters blank; a gradient
+   keeps the same effect and stays legible in both themes.
+   The plain colour below is the fallback for engines without background-clip,
+   where a transparent fill would erase the word entirely. */
+.masked-name {
+  color: var(--fg-default);
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .masked-name {
+    color: transparent;
+    background-image: linear-gradient(
+      115deg,
+      var(--mask-a) 0%,
+      var(--mask-b) 22%,
+      var(--mask-c) 45%,
+      var(--mask-b) 70%,
+      var(--mask-a) 100%
+    );
+    background-size: 200% 100%;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: mask-sweep 5s infinite alternate linear;
+  }
+}
+
+@keyframes mask-sweep {
+  0% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .masked-name {
+    animation: none;
+  }
 }
