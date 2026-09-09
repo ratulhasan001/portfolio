@@ -360,8 +360,8 @@ export const achievements = [
 export type LeadershipEntry = {
   org: string;
   roles: string[];
-  /** One line on what the role actually involved. */
-  description?: string;
+  /** What the role actually involved, a point at a time. */
+  points?: string[];
 };
 
 export const leadership: LeadershipEntry[] = [
@@ -379,13 +379,19 @@ export const leadership: LeadershipEntry[] = [
   {
     org: "Intra University Programming Contest, BAUET",
     roles: ["Problem Setter"],
-    description:
-      "Designed and reviewed algorithmic problems for the contest set — writing statements, preparing test data and reference solutions, and calibrating difficulty across the round.",
+    points: [
+      "Wrote and reviewed the problems that went into the contest set.",
+      "Prepared test cases and reference solutions for each problem.",
+      "Tuned the difficulty so there was something for every skill level.",
+    ],
   },
   {
     org: "HULT Prize, BAUET",
     roles: ["Officer of Documentation"],
-    description:
-      "Handled documentation for the on-campus round — maintaining team registrations and records, preparing event reports, and keeping submission material organised for the organising committee.",
+    points: [
+      "Looked after team registrations and records for the campus round.",
+      "Wrote up the event reports once each stage wrapped.",
+      "Kept submission material organised so the committee could find things fast.",
+    ],
   },
 ];
