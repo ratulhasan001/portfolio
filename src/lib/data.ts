@@ -11,7 +11,7 @@ export const profile = {
   orcid: "https://orcid.org/0009-0009-5429-7501",
   scholar: "https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en",
   tagline:
-    "Computer Science graduate with research experience in AI & Security",
+    "Computer Science graduate with research experience in Artificial Intelligence & Security",
   summary:
     "Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.",
   focusAreas: [
@@ -106,7 +106,7 @@ export const education: Education[] = [
     location: "Khulna, Bangladesh",
     period: "2019 - 2021",
     score: { label: "GPA", value: 5.0, scale: 5.0 },
-    logo: "/logo/hsc.jpg",
+    logo: "/logo/hsc.png",
   },
 ];
 

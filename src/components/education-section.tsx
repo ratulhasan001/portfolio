@@ -28,17 +28,19 @@ function EducationRow({ edu }: { edu: Education }) {
   return (
     <li className="px-4 py-4 sm:px-5 sm:py-5">
       <div className="flex gap-3 sm:gap-4">
-        <span className="logo-plate relative mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border-default shadow-sm">
+        {/* No plate, no rule, no crop: these are crests with fanned ribbons
+            that a rounded frame would clip, so the artwork stands on its own. */}
+        <span className="relative mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center">
           {edu.logo ? (
             <Image
               src={edu.logo}
               alt={edu.school}
               fill
-              sizes="40px"
-              className="mark-real object-contain p-0.5"
+              sizes="44px"
+              className="mark-real object-contain"
             />
           ) : (
-            <GraduationCap size={16} className="text-fg-muted" />
+            <GraduationCap size={18} className="text-fg-muted" />
           )}
         </span>
 
