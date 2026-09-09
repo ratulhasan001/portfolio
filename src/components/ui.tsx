@@ -85,18 +85,23 @@ export function StatusPill({
 }: {
   status: "published" | "accepted" | "under-review";
 }) {
+  // The pill itself stays monochrome and minimal; the dot is the one place
+  // colour is spent, so the three states separate at a glance.
   const map = {
     published: {
       text: "Published",
-      cls: "bg-success-subtle text-success border-success/30",
+      dot: "text-status-published",
+      cls: "border-fg-default/25 bg-canvas text-fg-default",
     },
     accepted: {
       text: "Accepted",
-      cls: "bg-accent/10 text-accent border-accent/30",
+      dot: "text-status-accepted",
+      cls: "border-fg-default/25 bg-canvas text-fg-default",
     },
     "under-review": {
       text: "Under Review",
-      cls: "bg-attention-subtle text-attention border-attention/30",
+      dot: "text-status-review",
+      cls: "border-dashed border-fg-subtle bg-canvas text-fg-muted",
     },
   } as const;
   const s = map[status];
@@ -107,7 +112,7 @@ export function StatusPill({
       <motion.span
         animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        className="flex"
+        className={`flex ${s.dot}`}
       >
         <Circle size={6} className="fill-current" />
       </motion.span>
