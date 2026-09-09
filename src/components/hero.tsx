@@ -152,7 +152,7 @@ export function Hero() {
 
       <motion.div
         style={{ opacity: heroOpacity, y: yShift }}
-        className="relative mx-auto max-w-6xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:pb-16 lg:pt-24"
+        className="relative mx-auto max-w-5xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:pb-16 lg:pt-24"
       >
         <FadeIn delay={0.1 + bootDelay}>
           <p className="mono text-base font-medium text-fg-muted">
