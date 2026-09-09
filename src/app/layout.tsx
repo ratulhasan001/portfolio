@@ -32,12 +32,12 @@ export const metadata: Metadata = {
     type: "website",
     url: profile.website,
     siteName: "Ratul Hasan",
-    title: "Ratul Hasan — AI & Security Research",
+    title: "Ratul Hasan",
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ratul Hasan — AI & Security Research",
+    title: "Ratul Hasan",
     description,
   },
 };
