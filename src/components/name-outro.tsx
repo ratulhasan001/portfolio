@@ -16,7 +16,7 @@ export function NameOutro() {
       id="contact"
       className="relative overflow-hidden border-t border-border-default px-4 pb-9 pt-14 sm:px-6 sm:pb-12 sm:pt-20"
     >
-      <div className="mx-auto max-w-6xl text-center">
+      <div className="mx-auto max-w-5xl text-center">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}

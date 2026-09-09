@@ -198,7 +198,7 @@ export function ResearchSection() {
   const journals = publications.filter((p) => p.type === "journal");
 
   return (
-    <section id="research" className="relative mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9">
+    <section id="research" className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9">
       <ParallaxLayer speed={35}>
         <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
       </ParallaxLayer>
