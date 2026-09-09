@@ -130,6 +130,9 @@ function IconLink({
   );
 }
 
+const [firstName, ...restOfName] = profile.name.split(" ");
+const lastName = restOfName.join(" ");
+
 export function Hero() {
   const bootDelay = getBootDelay(1.6);
   const sectionRef = useRef<HTMLElement>(null);
@@ -160,8 +163,15 @@ export function Hero() {
           </p>
         </FadeIn>
 
-        <h1 className="mt-1 text-4xl font-bold tracking-tight text-fg-default sm:text-6xl lg:text-7xl">
-          <PopWords text={profile.name} delay={0.22 + bootDelay} stagger={0.05} />
+        {/* Set as two stacked lines so the name reads as a display mark
+            rather than a run of text. */}
+        <h1 className="mt-2 text-[19vw] font-extrabold leading-[0.84] tracking-[-0.05em] text-fg-default sm:text-8xl lg:text-[9.5rem]">
+          <span className="block">
+            <PopWords text={firstName} delay={0.22 + bootDelay} stagger={0.05} />
+          </span>
+          <span className="block">
+            <PopWords text={lastName} delay={0.38 + bootDelay} stagger={0.05} />
+          </span>
         </h1>
 
         <FadeIn delay={0.5 + bootDelay}>

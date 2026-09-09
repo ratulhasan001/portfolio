@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { GitCommitHorizontal } from "lucide-react";
 import { experience } from "@/lib/data";
-import { SectionTitle, Chip } from "./ui";
+import { SectionTitle } from "./ui";
 import { PopWords } from "./pop-in";
 import { ParallaxLayer } from "./parallax-layer";
 import { TimelineLogo } from "./timeline-logo";
@@ -79,12 +79,6 @@ export function ExperienceSection() {
                 </li>
               ))}
             </ul>
-
-            <div className="mt-4 flex flex-wrap gap-1.5">
-              {exp.tags.map((tag) => (
-                <Chip key={tag}>{tag}</Chip>
-              ))}
-            </div>
           </motion.li>
         ))}
       </ol>

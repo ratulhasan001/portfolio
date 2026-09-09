@@ -237,10 +237,18 @@ export function SkillsSection() {
                   </div>
                 </div>
 
-                {entry.description && (
-                  <p className="mt-3 text-[14px] leading-relaxed text-fg-muted">
-                    {entry.description}
-                  </p>
+                {entry.points && entry.points.length > 0 && (
+                  <ul className="mt-3 space-y-1.5">
+                    {entry.points.map((point) => (
+                      <li
+                        key={point}
+                        className="flex gap-2.5 text-[14px] leading-relaxed text-fg-muted"
+                      >
+                        <span className="mt-[8px] h-1 w-1 shrink-0 rounded-full bg-fg-subtle" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 )}
 
                 {previous.length > 0 && (
