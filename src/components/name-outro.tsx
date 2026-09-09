@@ -32,7 +32,7 @@ export function NameOutro() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mt-5 sm:mt-6"
         >
-          <DinoRunner className="h-[130px] sm:h-[160px]" />
+          <DinoRunner />
         </motion.div>
 
         <motion.p
