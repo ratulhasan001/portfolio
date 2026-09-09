@@ -49,8 +49,10 @@ export function ProjectsSection() {
       <SectionTitle index="05" title="Pinned Projects" />
 
       {/* Five square tiles across on desktop so the whole set reads as one
-          row; they fall back to 2-up and 1-up as the viewport narrows. */}
-      <StaggerGroup className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
+          row; they fall back to 2-up and 1-up as the viewport narrows.
+          `items-start` matters: without it the grid stretches every tile to
+          match the tallest, so opening one card visibly grows all five. */}
+      <StaggerGroup className="grid grid-cols-1 items-start gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
         {projects.map((project) => {
           const mark = projectIcons[project.icon];
           return (

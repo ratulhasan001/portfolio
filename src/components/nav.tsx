@@ -12,7 +12,6 @@ import {
   FlaskConical,
   FolderGit2,
   Trophy,
-  Mail,
 } from "lucide-react";
 import { smoothScrollToId } from "@/lib/scroll";
 import { getBootDelay } from "@/lib/boot-delay";
@@ -24,7 +23,6 @@ const links = [
   { href: "#experience", label: "Experience", icon: Briefcase },
   { href: "#skills", label: "Skills", icon: Trophy },
   { href: "#projects", label: "Projects", icon: FolderGit2 },
-  { href: "#contact", label: "Contact", icon: Mail },
 ];
 
 function Logo({ compact = false }: { compact?: boolean }) {
@@ -109,8 +107,8 @@ export function Nav() {
         }}
         className={`safe-top sticky top-0 z-50 hidden overflow-hidden transition-[background-color,border-color,box-shadow] duration-500 lg:block ${
           scrolled
-            ? "border border-border-default bg-canvas/85 shadow-md backdrop-blur-md"
-            : "border-b border-transparent bg-canvas shadow-none"
+            ? "border border-border-strong bg-canvas/80 shadow-[0_10px_34px_-16px_rgba(0,0,0,0.45)] backdrop-blur-xl"
+            : "border-b border-border-strong bg-canvas shadow-none"
         }`}
       >
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -163,7 +161,7 @@ export function Nav() {
         transition={{ duration: 0.5, delay: 0.2 + bootDelay }}
         className="safe-top fixed right-4 top-4 z-50 lg:hidden"
       >
-        <div className="flex items-center gap-2 rounded-full border border-border-default bg-canvas/90 py-1.5 pl-1.5 pr-2 shadow-md backdrop-blur-md">
+        <div className="flex items-center gap-2 rounded-full border border-border-strong bg-canvas/90 py-1.5 pl-1.5 pr-2 shadow-[0_10px_30px_-14px_rgba(0,0,0,0.5)] backdrop-blur-xl">
           <Logo compact />
 
           <div className="h-4 w-px shrink-0 bg-border-default" />
@@ -202,7 +200,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="absolute right-0 top-full mt-2 w-64 rounded-2xl border border-border-default bg-canvas/95 shadow-lg backdrop-blur-md"
+              className="absolute right-0 top-full mt-2 w-64 rounded-2xl border border-border-strong bg-canvas/95 shadow-lg backdrop-blur-xl"
             >
               <div className="flex flex-col gap-1 p-3">
                 {links.map((link) => {

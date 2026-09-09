@@ -55,7 +55,6 @@ export function ExperienceSection() {
                   </div>
 
                   <p className="mt-1 text-[15px] font-medium text-fg-muted">
-                    <span className="text-fg-subtle">@ </span>
                     <PopWords text={exp.org} inView delay={0.1} stagger={0.04} />
                   </p>
 
