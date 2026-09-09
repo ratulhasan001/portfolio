@@ -7,7 +7,7 @@ import { ChevronDown, GraduationCap } from "lucide-react";
 import { education, type Education } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn } from "./fade-in";
-import { PopWords } from "./pop-in";
+import { WipeWords } from "./wipe-in";
 import { ParallaxLayer } from "./parallax-layer";
 
 /** Inline separator. Hidden on phones, where the meta row wraps onto
@@ -45,7 +45,7 @@ function EducationRow({ edu }: { edu: Education }) {
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1.5">
             <h3 className="min-w-0 flex-1 text-[17px] font-semibold leading-snug tracking-tight text-fg-default sm:text-xl">
-              <PopWords text={edu.degree} inView stagger={0.04} />
+              <WipeWords text={edu.degree} inView stagger={0.04} />
             </h3>
             <span className="mono mt-0.5 shrink-0 text-[10px] uppercase tracking-[0.16em] text-fg-muted sm:text-[11px]">
               {edu.period}
@@ -53,7 +53,7 @@ function EducationRow({ edu }: { edu: Education }) {
           </div>
 
           <p className="mt-1 text-[15px] font-medium text-fg-muted">
-            <PopWords text={edu.school} inView delay={0.1} stagger={0.04} />
+            <WipeWords text={edu.school} inView delay={0.1} stagger={0.04} />
           </p>
 
           <div className="mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-2">

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { GitCommitHorizontal } from "lucide-react";
 import { experience } from "@/lib/data";
 import { SectionTitle } from "./ui";
-import { PopWords } from "./pop-in";
+import { WipeWords } from "./wipe-in";
 import { ParallaxLayer } from "./parallax-layer";
 import { TimelineLogo } from "./timeline-logo";
 
@@ -42,7 +42,7 @@ export function ExperienceSection() {
                 in mono so the column of periods scans on its own. */}
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <h3 className="text-lg font-bold leading-tight tracking-tight text-fg-default sm:text-xl">
-                <PopWords text={exp.role} inView stagger={0.04} />
+                <WipeWords text={exp.role} inView stagger={0.04} />
               </h3>
               <span className="mono shrink-0 text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
                 {exp.period}
@@ -50,7 +50,7 @@ export function ExperienceSection() {
             </div>
 
             <p className="mt-1.5 text-[15px] text-fg-muted">
-              <PopWords text={exp.org} inView delay={0.1} stagger={0.04} />
+              <WipeWords text={exp.org} inView delay={0.1} stagger={0.04} />
             </p>
 
             <div className="mono mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-fg-subtle">

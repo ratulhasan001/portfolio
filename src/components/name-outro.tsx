@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import { profile } from "@/lib/data";
 
-const firstName = profile.name.split(" ")[0];
+/** The site's own domain, without the scheme, used as the closing mark. */
+const domain = profile.website.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 /**
- * Closing sign-off: the first name set oversized as a piece of type, with
- * the contact links folded into the line beneath it. Replaces the old
- * contact panel — the page ends on the name rather than on a form.
+ * Closing sign-off: the domain set oversized as a piece of type, with the
+ * contact links folded into the line beneath it. Replaces the old contact
+ * panel, so the page ends on the mark rather than on a form.
  */
 export function NameOutro() {
   return (
@@ -35,9 +36,9 @@ export function NameOutro() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="masked-name mt-3 select-none text-[26vw] font-extrabold leading-[0.85] tracking-[-0.055em] sm:mt-4 sm:text-[22vw] lg:text-[19vw]"
+          className="masked-name mt-3 select-none break-all text-[11vw] font-extrabold leading-[0.9] tracking-[-0.04em] sm:mt-4 sm:text-[9vw] lg:text-[8vw]"
         >
-          {firstName}
+          {domain}
         </motion.h2>
 
         <motion.p

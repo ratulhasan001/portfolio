@@ -19,7 +19,7 @@ export default function CvPage() {
             href="/"
             className="group flex min-w-0 items-center gap-2.5 text-fg-default"
           >
-            <span className="mono flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-fg-default bg-fg-default text-[13px] font-bold leading-none tracking-tight text-canvas transition-colors duration-200 group-hover:bg-canvas group-hover:text-fg-default">
+            <span className="mono flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-fg-default bg-fg-default text-[13px] font-bold leading-none tracking-tight text-canvas transition-colors duration-200 group-hover:bg-canvas group-hover:text-fg-default">
               RH
             </span>
             <span className="flex min-w-0 items-center gap-1.5 text-sm font-semibold tracking-tight">

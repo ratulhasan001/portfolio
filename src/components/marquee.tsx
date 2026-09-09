@@ -22,7 +22,6 @@ const items = [
   codechef && "3★ on Codechef",
   "ICPC Regionalist",
   ...profile.focusAreas,
-  "Trustworthy AI",
   "Post-Quantum Cryptography",
 ].filter(Boolean) as string[];
 
@@ -42,7 +41,7 @@ function Track({ ariaHidden }: { ariaHidden?: boolean }) {
           </span>
           <span
             aria-hidden
-            className="h-1 w-1 shrink-0 rotate-45 bg-fg-subtle"
+            className="h-1.5 w-1.5 shrink-0 rotate-45 bg-fg-subtle"
           />
         </li>
       ))}

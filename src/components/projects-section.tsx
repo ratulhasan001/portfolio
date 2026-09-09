@@ -12,7 +12,7 @@ import { projects } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { StaggerGroup, staggerItem } from "./fade-in";
 import { TiltCard } from "./tilt-card";
-import { PopWords } from "./pop-in";
+import { WipeWords } from "./wipe-in";
 import { ParallaxLayer } from "./parallax-layer";
 
 /**
@@ -81,7 +81,7 @@ export function ProjectsSection() {
                 </div>
 
                 <h3 className="mt-5 text-lg font-bold leading-snug tracking-tight text-fg-default">
-                  <PopWords text={project.name} inView stagger={0.04} />
+                  <WipeWords text={project.name} inView stagger={0.04} />
                 </h3>
 
                 <p className="mt-2 text-[14px] leading-relaxed text-fg-muted">

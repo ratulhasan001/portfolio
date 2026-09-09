@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { PopWords } from "./pop-in";
+import { WipeWords } from "./wipe-in";
 import { getBootDelay } from "@/lib/boot-delay";
 
 type Line = { prompt: string; output: string; pop?: boolean };
@@ -44,7 +44,7 @@ export function TypedLines() {
           </div>
           {line.pop ? (
             <p className="mt-1 pl-4 text-[13px] leading-relaxed text-fg-default sm:text-sm">
-              <PopWords
+              <WipeWords
                 text={line.output}
                 delay={0.55 + i * 0.35 + getBootDelay(1.6)}
                 stagger={0.035}

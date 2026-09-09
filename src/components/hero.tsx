@@ -7,7 +7,7 @@ import { profile } from "@/lib/data";
 import { FadeIn } from "./fade-in";
 import { CvIcon, GithubIcon, LinkedinIcon, ScholarIcon } from "./brand-icons";
 import { ParallaxLayer } from "./parallax-layer";
-import { PopWords } from "./pop-in";
+import { WhipWords } from "./wipe-in";
 import { Marquee } from "./marquee";
 import { getBootDelay } from "@/lib/boot-delay";
 
@@ -155,7 +155,7 @@ export function Hero() {
 
       <motion.div
         style={{ opacity: heroOpacity, y: yShift }}
-        className="relative mx-auto max-w-5xl px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 lg:pb-16 lg:pt-24"
+        className="relative mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:pb-14 lg:pt-12"
       >
         <FadeIn delay={0.1 + bootDelay}>
           <p className="mono text-base font-medium text-fg-muted">
@@ -164,13 +164,13 @@ export function Hero() {
         </FadeIn>
 
         {/* Set as two stacked lines so the name reads as a display mark
-            rather than a run of text. */}
+            rather than a run of text, each line whipped in on its own. */}
         <h1 className="mt-2 text-[19vw] font-extrabold leading-[0.84] tracking-[-0.05em] text-fg-default sm:text-8xl lg:text-[9.5rem]">
           <span className="block">
-            <PopWords text={firstName} delay={0.22 + bootDelay} stagger={0.05} />
+            <WhipWords text={firstName} delay={0.22 + bootDelay} />
           </span>
           <span className="block">
-            <PopWords text={lastName} delay={0.38 + bootDelay} stagger={0.05} />
+            <WhipWords text={lastName} delay={0.42 + bootDelay} />
           </span>
         </h1>
 
