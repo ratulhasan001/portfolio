@@ -40,10 +40,30 @@
   --status-published: #1a7f37;
   --status-accepted: #0969da;
   --status-review: #bc4c00;
-  /* Ink stops for the masked wordmark; the mid stop is the sheen. */
-  --mask-a: #000000;
-  --mask-b: #2b2b2b;
-  --mask-c: #6b6b6b;
+  /* The masked wordmark is the one place the page spends real colour. Two
+     identical hue cycles sit inside one gradient: the visible half of the
+     background is then always a full spectrum, and sliding by exactly one
+     cycle loops without a seam. */
+  --mask-gradient: linear-gradient(
+    115deg,
+    #ef4444 0%,
+    #f97316 6.25%,
+    #eab308 12.5%,
+    #22c55e 18.75%,
+    #06b6d4 25%,
+    #3b82f6 31.25%,
+    #8b5cf6 37.5%,
+    #ec4899 43.75%,
+    #ef4444 50%,
+    #f97316 56.25%,
+    #eab308 62.5%,
+    #22c55e 68.75%,
+    #06b6d4 75%,
+    #3b82f6 81.25%,
+    #8b5cf6 87.5%,
+    #ec4899 93.75%,
+    #ef4444 100%
+  );
 }
 
 :root[data-theme="dark"] {
@@ -79,9 +99,26 @@
   --status-published: #3fb950;
   --status-accepted: #58a6ff;
   --status-review: #f0883e;
-  --mask-a: #ffffff;
-  --mask-b: #d4d4d4;
-  --mask-c: #8f8f8f;
+  --mask-gradient: linear-gradient(
+    115deg,
+    #f87171 0%,
+    #fb923c 6.25%,
+    #facc15 12.5%,
+    #4ade80 18.75%,
+    #22d3ee 25%,
+    #60a5fa 31.25%,
+    #a78bfa 37.5%,
+    #f472b6 43.75%,
+    #f87171 50%,
+    #fb923c 56.25%,
+    #facc15 62.5%,
+    #4ade80 68.75%,
+    #22d3ee 75%,
+    #60a5fa 81.25%,
+    #a78bfa 87.5%,
+    #f472b6 93.75%,
+    #f87171 100%
+  );
 }
 
 @theme inline {
@@ -155,9 +192,12 @@ body {
    visible instead of leaving the page permanently blank. Any element whose
    animation actually ran already had its inline style rewritten by then, so
    this only ever affects genuinely stuck content. */
-html.force-visible [style*="opacity:0"] {
+html.force-visible [style*="opacity: 0"],
+html.force-visible [style*="opacity:0"],
+html.force-visible [style*="clip-path"] {
   opacity: 1 !important;
   transform: none !important;
+  clip-path: none !important;
 }
 
 ::selection {
@@ -472,29 +512,22 @@ main > section.nav-flash::after {
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
   .masked-name {
     color: transparent;
-    background-image: linear-gradient(
-      115deg,
-      var(--mask-a) 0%,
-      var(--mask-b) 22%,
-      var(--mask-c) 45%,
-      var(--mask-b) 70%,
-      var(--mask-a) 100%
-    );
+    background-image: var(--mask-gradient);
     background-size: 200% 100%;
     background-position: 0 50%;
     background-repeat: no-repeat;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: mask-sweep 5s infinite alternate linear;
+    animation: mask-sweep 2.5s linear infinite;
   }
 }
 
 @keyframes mask-sweep {
-  0% {
-    background-position: 0 50%;
+  from {
+    background-position: 0% 50%;
   }
-  100% {
+  to {
     background-position: 100% 50%;
   }
 }
