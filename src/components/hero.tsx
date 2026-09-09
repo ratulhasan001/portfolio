@@ -25,6 +25,7 @@ const contactIcons = [
     icon: CvIcon,
     label: "View CV",
     href: "/cv",
+    external: true,
     brand: "var(--color-accent)",
     onBrand: "var(--color-on-accent)",
   },
