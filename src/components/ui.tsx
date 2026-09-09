@@ -55,8 +55,13 @@ export function SectionTitle({
   subtitle?: string;
 }) {
   return (
-    <div className="mb-5 flex items-baseline gap-3">
-      <WipeIn as="span" inView className="mono text-base text-accent">
+    <div className="mb-5 flex items-start gap-3">
+      {/* `as="div"` on purpose: the span variant sets display:inline-block
+          inline, which would beat the flex centring on the circle. */}
+      <WipeIn
+        inView
+        className="mono mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border-strong text-[12px] text-fg-muted sm:h-10 sm:w-10 sm:text-[13px]"
+      >
         {index}
       </WipeIn>
       <div>
