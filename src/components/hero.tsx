@@ -9,7 +9,6 @@ import { CvIcon, GithubIcon, LinkedinIcon, ScholarIcon } from "./brand-icons";
 import { ParallaxLayer } from "./parallax-layer";
 import { WhipWords } from "./wipe-in";
 import { Marquee } from "./marquee";
-import { getBootDelay } from "@/lib/boot-delay";
 
 // The page itself is monochrome, so `brand` is the one place real colour is
 // allowed back in: it sweeps across the button while the cursor is on it.
@@ -135,7 +134,6 @@ const [firstName, ...restOfName] = profile.name.split(" ");
 const lastName = restOfName.join(" ");
 
 export function Hero() {
-  const bootDelay = getBootDelay(1.6);
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -158,7 +156,7 @@ export function Hero() {
         style={{ opacity: heroOpacity, y: yShift }}
         className="relative mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:pb-14 lg:pt-12"
       >
-        <FadeIn delay={0.1 + bootDelay}>
+        <FadeIn delay={0.1}>
           <p className="mono text-base font-medium text-fg-muted">
             Hi, I&apos;m
           </p>
@@ -168,27 +166,27 @@ export function Hero() {
             rather than a run of text, each line whipped in on its own. */}
         <h1 className="mt-2 text-[19vw] font-extrabold leading-[0.84] tracking-[-0.05em] text-fg-default sm:text-8xl lg:text-[9.5rem]">
           <span className="block">
-            <WhipWords text={firstName} delay={0.22 + bootDelay} />
+            <WhipWords text={firstName} delay={0.22} />
           </span>
           <span className="block">
-            <WhipWords text={lastName} delay={0.42 + bootDelay} />
+            <WhipWords text={lastName} delay={0.42} />
           </span>
         </h1>
 
-        <FadeIn delay={0.5 + bootDelay}>
+        <FadeIn delay={0.5}>
           <p className="mt-3 text-lg font-semibold text-fg-muted sm:text-xl">
             Aspiring Graduate Researcher
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.58 + bootDelay}>
+        <FadeIn delay={0.58}>
           <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-fg-subtle sm:text-base">
             {profile.tagline}
           </p>
         </FadeIn>
 
         <FadeIn
-          delay={0.62 + bootDelay}
+          delay={0.62}
           className="mt-6 flex flex-wrap items-center gap-2"
         >
           {contactIcons.map((item) => (

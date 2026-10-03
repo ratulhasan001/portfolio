@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { WipeIn, WipeWords } from "./wipe-in";
-import { getBootDelay } from "@/lib/boot-delay";
 
 export function Chip({ children }: { children: React.ReactNode }) {
   return (
@@ -34,7 +33,7 @@ export function FileHeader({
       {label && (
         <WipeIn
           as="span"
-          delay={0.3 + getBootDelay(1.6)}
+          delay={0.3}
           inView={false}
           className="ml-auto mono inline-flex items-center rounded border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[11px] font-medium text-accent"
         >
