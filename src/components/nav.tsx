@@ -14,7 +14,6 @@ import {
   Trophy,
 } from "lucide-react";
 import { smoothScrollToId } from "@/lib/scroll";
-import { getBootDelay } from "@/lib/boot-delay";
 
 const links = [
   { href: "#overview", label: "Overview", icon: LayoutDashboard },
@@ -72,7 +71,6 @@ export function Nav() {
     return () => observer.disconnect();
   }, []);
 
-  const bootDelay = getBootDelay(1.6);
   const activeLink = links.find((l) => l.href === active) ?? links[0];
   const ActiveIcon = activeLink.icon;
 
@@ -82,7 +80,7 @@ export function Nav() {
       <motion.header
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 + bootDelay }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         // The bar never changes shape on scroll. It carries no fill or rule of
         // its own; the page simply passes behind it out of focus, so the only
         // drawn edge on screen stays the rounded rail around the links.
@@ -137,7 +135,7 @@ export function Nav() {
       <motion.header
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 + bootDelay }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className="safe-top fixed right-4 top-4 z-50 lg:hidden"
       >
         <div className="flex items-center gap-2 rounded-full border border-border-strong bg-canvas/90 py-1.5 pl-1.5 pr-2 shadow-[0_10px_30px_-14px_rgba(0,0,0,0.5)] backdrop-blur-xl">

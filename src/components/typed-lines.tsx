@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { WipeWords } from "./wipe-in";
-import { getBootDelay } from "@/lib/boot-delay";
 
 type Line = { prompt: string; output: string; pop?: boolean };
 
@@ -46,7 +45,7 @@ export function TypedLines() {
             <p className="mt-1 pl-4 text-[13px] leading-relaxed text-fg-default sm:text-sm">
               <WipeWords
                 text={line.output}
-                delay={0.55 + i * 0.35 + getBootDelay(1.6)}
+                delay={0.55 + i * 0.35}
                 stagger={0.035}
                 className="text-accent font-semibold"
               />
