@@ -24,14 +24,26 @@ export const profile = {
   followersLabel: "Open to research collaboration",
 };
 
+export type Position = {
+  role: string;
+  period: string;
+  current?: boolean;
+  /** What this title covered; shown under it in the stacked flow. */
+  bullets?: string[];
+};
+
 export type Experience = {
   org: string;
   role: string;
   location: string;
   period: string;
   current?: boolean;
-  /** Earlier title held in the same role, shown as "Promoted from …". */
-  promotedFrom?: string;
+  /**
+   * Titles held at the same org, newest first. With more than one, the entry
+   * renders LinkedIn-style: the org as the heading and each title stacked on a
+   * small rail beneath it.
+   */
+  positions?: Position[];
   bullets: string[];
   tags: string[];
   /** Path under /public — falls back to the timeline dot when absent. */
@@ -41,16 +53,31 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     org: "ELITE Research Lab LLC",
-    role: "Research Assistant (Remote)",
-    location: "Queens, NY, USA",
+    role: "Research Assistant",
+    location: "Queens, NY, USA (Remote)",
     period: "May 2026 - Present",
     current: true,
-    promotedFrom: "Research Intern",
-    bullets: [
-      "Researching LLM bias and hallucination behavior across model families.",
-      "Ongoing research on LLM performance in mental health and depression contexts.",
+    positions: [
+      {
+        role: "Research Assistant",
+        period: "October 2026 - Present",
+        current: true,
+        bullets: [
+          "Studying attacker-controllable IoT device metadata as an indirect prompt-injection surface for LLM home agents in Home Assistant.",
+          "Measuring how often injected instructions drive unauthorised physical actions or private-state leaks, and evaluating defences such as provenance tagging, actuating-tool gating and action confirmation.",
+        ],
+      },
+      {
+        role: "Research Intern",
+        period: "May 2026 - September 2026",
+        bullets: [
+          "Conducted a PRISMA systematic review of 82 studies on LLMs in mental health, appraising their methodological rigour and how they evaluate hallucination, bias, safety and human judgement.",
+          "Studied federated continual learning for mental-health text classification, separating label-space shift from domain shift to show which kind of drift drives forgetting across seven training regimes.",
+        ],
+      },
     ],
-    tags: ["LLM", "NLP", "Research"],
+    bullets: [],
+    tags: ["LLM", "NLP", "IoT Security", "Prompt Injection", "Research"],
     logo: "/logo/elitelab.jpeg",
   },
   {
