@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import { profile } from "@/lib/data";
 
 const sans = Plus_Jakarta_Sans({
@@ -72,6 +74,7 @@ export default function RootLayout({
       </head>
       <body className="safe-bottom min-h-full flex flex-col bg-canvas text-fg-default">
         <ThemeProvider>
+          <SmoothScroll />
           <div
             aria-hidden
             className="bg-grid-fixed pointer-events-none fixed inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,#000_0%,transparent_75%)]"
