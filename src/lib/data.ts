@@ -30,6 +30,8 @@ export type Experience = {
   location: string;
   period: string;
   current?: boolean;
+  /** Earlier title held in the same role, shown as "Promoted from …". */
+  promotedFrom?: string;
   bullets: string[];
   tags: string[];
   /** Path under /public — falls back to the timeline dot when absent. */
@@ -39,10 +41,11 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     org: "ELITE Research Lab LLC",
-    role: "Research Intern (Remote)",
+    role: "Research Assistant (Remote)",
     location: "Queens, NY, USA",
     period: "May 2026 - Present",
     current: true,
+    promotedFrom: "Research Intern",
     bullets: [
       "Researching LLM bias and hallucination behavior across model families.",
       "Ongoing research on LLM performance in mental health and depression contexts.",

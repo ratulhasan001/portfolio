@@ -64,6 +64,12 @@ export function ExperienceSection() {
                   </span>
                 </>
               )}
+              {exp.promotedFrom && (
+                <>
+                  <span aria-hidden>·</span>
+                  <span>Promoted from {exp.promotedFrom}</span>
+                </>
+              )}
             </div>
 
             {/* Read straight through — the bullets are the substance of the
