@@ -2,7 +2,14 @@
 
 import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { BookOpen, ChevronDown, ExternalLink, FileText } from "lucide-react";
+import {
+  BookOpen,
+  ChevronDown,
+  ExternalLink,
+  FileText,
+  Mail,
+  ScrollText,
+} from "lucide-react";
 import {
   publications,
   digitalLibraryLabels,
@@ -18,7 +25,15 @@ const statusMeta = {
   published: { label: "Published", dot: "bg-status-published" },
   accepted: { label: "Accepted", dot: "bg-status-accepted" },
   "under-review": { label: "Under Review", dot: "bg-status-review" },
+  "under-submission": { label: "Under Submission", dot: "bg-status-review" },
+  preprint: { label: "Preprint", dot: "bg-fg-subtle" },
 } as const;
+
+/** Prefilled email asking for a copy of a manuscript that isn't public yet. */
+function preprintRequestHref(title: string) {
+  const subject = `Preprint request: ${title}`;
+  return `mailto:${profile.email}?subject=${encodeURIComponent(subject)}`;
+}
 
 /** Full byline, with Ratul's own name carrying the emphasis. */
 function Byline({ authors }: { authors: string[] }) {
@@ -97,6 +112,20 @@ function PublicationRow({ pub }: { pub: Publication }) {
             >
               {pub.link.replace("https://doi.org/", "doi ")}
               <ExternalLink size={11} />
+            </a>
+          </>
+        )}
+
+        {pub.preprintOnRequest && (
+          <>
+            <Dot />
+            <a
+              href={preprintRequestHref(pub.title)}
+              title="Email to request the preprint"
+              className="mono inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+            >
+              <Mail size={11} />
+              Preprint available upon request
             </a>
           </>
         )}
@@ -196,6 +225,7 @@ function PublicationGroup({
 export function ResearchSection() {
   const conferences = publications.filter((p) => p.type === "conference");
   const journals = publications.filter((p) => p.type === "journal");
+  const preprints = publications.filter((p) => p.type === "preprint");
 
   return (
     <section id="research" className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9">
@@ -212,9 +242,14 @@ export function ResearchSection() {
           items={conferences}
         />
         <PublicationGroup
-          label="Journal Papers"
+          label="Journal Manuscripts"
           icon={<FileText size={13} className="shrink-0" />}
           items={journals}
+        />
+        <PublicationGroup
+          label="Preprints"
+          icon={<ScrollText size={13} className="shrink-0" />}
+          items={preprints}
         />
       </div>
     </section>
