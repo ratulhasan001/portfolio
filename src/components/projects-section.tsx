@@ -88,6 +88,32 @@ export function ProjectsSection() {
                   {project.description}
                 </p>
 
+                {project.supervisors?.map((sup) => (
+                  <p
+                    key={sup.name}
+                    className="mt-3 text-[13px] leading-relaxed text-fg-muted"
+                  >
+                    <span className="mono mr-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                      {sup.role}
+                    </span>
+                    {sup.link ? (
+                      <a
+                        href={sup.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-medium text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+                      >
+                        {sup.name}
+                      </a>
+                    ) : (
+                      <span className="font-medium text-fg-default">
+                        {sup.name}
+                      </span>
+                    )}
+                    , {sup.title}
+                  </p>
+                ))}
+
                 <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
                   {project.tools.map((tool) => (
                     <span

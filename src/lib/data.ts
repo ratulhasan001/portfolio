@@ -109,6 +109,15 @@ export const experience: Experience[] = [
   },
 ];
 
+export type Supervisor = {
+  name: string;
+  /** "Supervisor" or "Co-supervisor". */
+  role: string;
+  title: string;
+  /** Google Scholar or faculty profile. */
+  link?: string;
+};
+
 export type Education = {
   school: string;
   degree: string;
@@ -117,6 +126,7 @@ export type Education = {
   detail?: string;
   merit?: string;
   score?: { label: string; value: number; scale: number };
+  supervisors?: Supervisor[];
   /** Path under /public — falls back to the timeline dot when absent. */
   logo?: string;
 };
@@ -130,6 +140,20 @@ export const education: Education[] = [
     detail:
       "Thesis: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
     score: { label: "CGPA", value: 3.82, scale: 4.0 },
+    supervisors: [
+      {
+        name: "Ananya Sarker",
+        role: "Supervisor",
+        title: "Associate Professor & Head, Dept. of CSE, BAUET",
+        link: "https://scholar.google.com/citations?user=Ugm8unoAAAAJ&hl=en",
+      },
+      {
+        name: "Md. Momenul Haque",
+        role: "Co-supervisor",
+        title: "Lecturer, Dept. of CSE, BAUET",
+        link: "https://scholar.google.com/citations?user=mqiCTO8AAAAJ&hl=en",
+      },
+    ],
     logo: "/logo/bsc.png",
   },
   {
@@ -311,6 +335,7 @@ export type Project = {
   language: string;
   languageColor: string;
   stars?: string;
+  supervisors?: Supervisor[];
 };
 
 export const projects: Project[] = [
@@ -323,6 +348,13 @@ export const projects: Project[] = [
     link: "https://github.com/ratulhasan001",
     language: "Solidity",
     languageColor: "#AA6746",
+    supervisors: [
+      {
+        name: "Mohammed Golam Sarwar Bhuyan",
+        role: "Supervisor",
+        title: "Professor & Dean, Faculty of ECE, BAUET",
+      },
+    ],
   },
   {
     name: "BAUET Project & Thesis Archive",
