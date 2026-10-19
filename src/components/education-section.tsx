@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, GraduationCap } from "lucide-react";
+import { ChevronDown, ExternalLink, GraduationCap } from "lucide-react";
 import { education, type Education } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn } from "./fade-in";
@@ -116,11 +116,38 @@ function EducationRow({ edu }: { edu: Education }) {
                 transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                 className="overflow-hidden"
               >
-                <div className="mt-4 border-t border-border-default pt-3">
-                  <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
-                    Thesis
-                  </p>
-                  <p className="text-sm leading-relaxed text-fg-muted">{thesis}</p>
+                <div className="mt-4 space-y-3 border-t border-border-default pt-3">
+                  <div>
+                    <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                      Thesis
+                    </p>
+                    <p className="text-sm leading-relaxed text-fg-muted">{thesis}</p>
+                  </div>
+                  {edu.supervisors?.map((sup) => (
+                    <div key={sup.name}>
+                      <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                        {sup.role}
+                      </p>
+                      <p className="text-sm leading-relaxed text-fg-muted">
+                        {sup.link ? (
+                          <a
+                            href={sup.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 font-medium text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+                          >
+                            {sup.name}
+                            <ExternalLink size={11} />
+                          </a>
+                        ) : (
+                          <span className="font-medium text-fg-default">
+                            {sup.name}
+                          </span>
+                        )}
+                        , {sup.title}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             )}

@@ -5,6 +5,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { EducationSection } from "@/components/education-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { SkillsSection } from "@/components/skills-section";
+import { ReferencesSection } from "@/components/references-section";
 import { NameOutro } from "@/components/name-outro";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ScrollRail } from "@/components/scroll-rail";
@@ -28,6 +29,8 @@ export default function Home() {
         <SkillsSection />
         <SectionConnector />
         <ProjectsSection />
+        <SectionConnector />
+        <ReferencesSection />
       </main>
       <NameOutro />
     </>
