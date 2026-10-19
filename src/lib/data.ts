@@ -55,7 +55,7 @@ export const experience: Experience[] = [
     org: "ELITE Research Lab LLC",
     role: "Research Assistant",
     location: "Queens, NY, USA (Remote)",
-    period: "May 2026 - Present",
+    period: "June 2026 - Present",
     current: true,
     positions: [
       {
@@ -63,21 +63,23 @@ export const experience: Experience[] = [
         period: "October 2026 - Present",
         current: true,
         bullets: [
-          "Studying attacker-controllable IoT device metadata as an indirect prompt-injection surface for LLM home agents in Home Assistant.",
-          "Measuring how often injected instructions drive unauthorised physical actions or private-state leaks, and evaluating defences such as provenance tagging, actuating-tool gating and action confirmation.",
+          "Working on a team journal project mapping attacker-controllable IoT metadata as an indirect prompt-injection surface for LLM home agents.",
+          "Measuring which Home Assistant device and integration text fields reach its built-in LLM conversation agents, and how often injected instructions trigger unauthorised physical actions or leak private state in a simulated home.",
+          "Evaluating how provenance tagging, actuating-tool gating and action confirmation reduce attack success, and their cost in benign-task utility.",
         ],
       },
       {
         role: "Research Intern",
-        period: "May 2026 - September 2026",
+        period: "June 2026 - September 2026",
         bullets: [
-          "Conducted a PRISMA systematic review of 82 studies on LLMs in mental health, appraising their methodological rigour and how they evaluate hallucination, bias, safety and human judgement.",
-          "Studied federated continual learning for mental-health text classification, separating label-space shift from domain shift to show which kind of drift drives forgetting across seven training regimes.",
+          "First-authored a systematic review of 82 studies on LLMs in mental health, appraising methodological rigour and risk reporting (hallucination, bias, safety, human evaluation) with a 24-field extraction instrument.",
+          "Studied catastrophic forgetting in federated continual learning for mental health text classification, separating label-space shift from domain shift on Reddit stress and depression data.",
+          "Benchmarked seven training regimes (FedAvg, FedProx, EWC, replay, centralized and joint baselines) across 10 clients and three seeds with a MiniLM encoder.",
         ],
       },
     ],
     bullets: [],
-    tags: ["LLM", "NLP", "IoT Security", "Prompt Injection", "Research"],
+    tags: ["LLM", "NLP", "LLM Security", "Federated Learning", "Research"],
     logo: "/logo/elitelab.jpeg",
   },
   {
@@ -86,11 +88,11 @@ export const experience: Experience[] = [
     location: "Natore, Bangladesh",
     period: "July 2024 - December 2025",
     bullets: [
-      "Conducted regular training sessions on C programming and competitive programming for undergraduate students.",
-      "Designed coding exercises and problem-solving sessions, and conducted practice contests.",
-      "Mentored students in programming fundamentals and competitive programming techniques to strengthen analytical and coding skills.",
+      "Conducted programming classes for undergraduate students covering C, C++ and basic data structures.",
+      "Led coding exercises and programming contest preparation sessions to strengthen students' problem-solving and analytical skills.",
+      "Explained programming concepts to students of varying skill levels and supported the development of their programming fundamentals.",
     ],
-    tags: ["C", "Competitive Programming", "Teaching"],
+    tags: ["C", "C++", "Data Structures", "Teaching"],
     logo: "/logo/bsc.png",
   },
   {
@@ -146,9 +148,16 @@ export type Publication = {
   authors: string[];
   venue: string;
   date: string;
-  status: "published" | "accepted" | "under-review";
+  status:
+    | "published"
+    | "accepted"
+    | "under-review"
+    | "under-submission"
+    | "preprint";
   link?: string;
-  type: "conference" | "journal";
+  type: "conference" | "journal" | "preprint";
+  /** Manuscript isn't public yet; offer the preprint by email instead. */
+  preprintOnRequest?: boolean;
   /** Key into `digitalLibraryLabels`. */
   digitalLibrary?: string;
 };
@@ -163,28 +172,59 @@ export const digitalLibraryLabels: Record<string, string> = {
   "ACM Digital Library": "ACM",
   "Springer Nature Link": "Scientific Reports",
   "PLOS ONE": "PLOS ONE",
+  "Frontiers in Digital Health": "Frontiers",
+  Qeios: "Qeios",
 };
 
 export const publications: Publication[] = [
   {
     title:
       "Entropy-assured post-quantum key generation on IoT edge devices: source independence, measured min-entropy and signature scheme selection",
-    authors: ["Ratul Hasan"],
+    authors: ["Ratul Hasan", "Md Arik Rayhan", "Md Ohiduzaman Pranto"],
     venue: "PLOS ONE",
     date: "Submitted 2026",
     status: "under-review",
     type: "journal",
     digitalLibrary: "PLOS ONE",
+    preprintOnRequest: true,
   },
   {
     title:
       "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
     authors: ["Ratul Hasan", "Md. Momenul Haque", "Ananya Sarker"],
-    venue: "Nature Scientific Reports",
+    venue: "Scientific Reports",
     date: "Submitted May 2026",
     status: "under-review",
     type: "journal",
     digitalLibrary: "Springer Nature Link",
+    preprintOnRequest: true,
+  },
+  {
+    title:
+      "Methodological Rigour and Risk Evaluation of Large Language Models in Mental Health: A Systematic Review",
+    authors: [
+      "Ratul Hasan",
+      "Mizanul Hoque",
+      "Moinul Hossain",
+      "Md Kishor Morol",
+      "Tze Hui Liew",
+    ],
+    venue: "Frontiers in Digital Health (Digital Mental Health section)",
+    date: "2026",
+    status: "under-submission",
+    type: "journal",
+    digitalLibrary: "Frontiers in Digital Health",
+    preprintOnRequest: true,
+  },
+  {
+    title:
+      "Disentangling Label-Space Shift from Domain Shift in Federated Continual Learning for Mental Health Text Classification",
+    authors: ["Ratul Hasan", "Mizanul Hoque"],
+    venue: "Qeios (preprint)",
+    date: "Submitted 2026",
+    status: "preprint",
+    type: "preprint",
+    digitalLibrary: "Qeios",
   },
 {
   title:
@@ -253,7 +293,7 @@ export const publications: Publication[] = [
     ],
     venue:
       "12th International Conference on Next Generation Computing, Communication, Systems and Security (NSysS '25), ACM, New York, NY, USA, 110-114",
-    date: "December 2025",
+    date: "2025",
     status: "published",
     link: "https://doi.org/10.1145/3777555.3777569",
     type: "conference",
@@ -345,15 +385,32 @@ export const stats = [
  */
 export const skills = {
   "Research Areas": [
-    "Artificial Intelligence",
-    "Cybersecurity",
+    "Deep Learning",
+    "NLP & LLMs",
+    "LLM Security",
+    "Federated & Continual Learning",
     "Computer Vision",
-    "Blockchain",
+    "Post-Quantum Cryptography",
+    "Blockchain & IoT Security",
   ],
-  Languages: ["Python", "C++", "C", "JavaScript", "SQL"],
-  "Frameworks & Libraries": ["Django", "Laravel", "REST", "Foundry"],
-  Databases: ["PostgreSQL", "MySQL"],
-  "Tools & Workflow": ["Git", "GitHub"],
+  Languages: ["Python", "C", "C++", "JavaScript", "SQL", "Solidity"],
+  "ML & Research": ["PyTorch", "Hugging Face"],
+  "Web & Blockchain": [
+    "Django",
+    "Django REST Framework",
+    "Laravel",
+    "React",
+    "Foundry",
+    "IPFS",
+  ],
+  "Tools & Databases": [
+    "Git",
+    "GitHub",
+    "Docker",
+    "Linux",
+    "PostgreSQL",
+    "MySQL",
+  ],
 };
 
 export const onlineJudges = [
