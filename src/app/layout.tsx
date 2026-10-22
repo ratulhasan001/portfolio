@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "lenis/dist/lenis.css";
@@ -22,6 +23,19 @@ const mono = JetBrains_Mono({
 
 const description = profile.tagline;
 
+// Link-preview scrapers (LinkedIn, WhatsApp, ...) cache images by URL, so the
+// URL carries a hash of the text drawn on the image: changing that text in
+// data.ts gives the image a new URL and forces a fresh fetch.
+const ogImage = {
+  url: `/og?v=${createHash("sha256")
+    .update([profile.name, profile.headline, profile.tagline, profile.website].join("\n"))
+    .digest("hex")
+    .slice(0, 12)}`,
+  width: 1200,
+  height: 630,
+  alt: `${profile.name} · ${profile.headline}`,
+};
+
 export const metadata: Metadata = {
   // Needed for link previews: without it the Open Graph image URL is resolved
   // against localhost, so scrapers cannot fetch it.
@@ -34,11 +48,13 @@ export const metadata: Metadata = {
     siteName: "Ratul Hasan",
     title: "Ratul Hasan",
     description,
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ratul Hasan",
     description,
+    images: [ogImage],
   },
 };
 

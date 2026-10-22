@@ -10,6 +10,7 @@ export const profile = {
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
   orcid: "https://orcid.org/0009-0009-5429-7501",
   scholar: "https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en",
+  headline: "Aspiring Graduate Researcher",
   tagline:
     "Computer Science graduate with research experience in Artificial Intelligence and Cybersecurity",
   summary:

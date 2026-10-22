@@ -1,10 +1,13 @@
 import { ImageResponse } from "next/og";
 import { profile } from "@/lib/data";
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const dynamic = "force-static";
 
-export default async function OpengraphImage() {
+const size = { width: 1200, height: 630 };
+
+// Served at /og rather than through the opengraph-image file convention so
+// the layout can version the URL by the text drawn here (see layout.tsx).
+export async function GET() {
   return new ImageResponse(
     (
       <div
@@ -53,7 +56,7 @@ export default async function OpengraphImage() {
             letterSpacing: "-0.02em",
           }}
         >
-          Aspiring Graduate Researcher
+          {profile.headline}
         </div>
 
         <div
