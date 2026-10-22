@@ -6,6 +6,10 @@ export const profile = {
   email: "ratulhasan.cs@gmail.com",
   phone: "+8801760972108",
   website: "https://ratulhasan.xyz",
+  // Used for link previews (Open Graph image and meta description).
+  previewTitle: "Aspiring Cloud & DevOps Engineer",
+  previewDescription:
+    "Computer Science graduate focused on Cloud & DevOps Engineering, with a strong foundation in software development and research experience in Artificial Intelligence and Cybersecurity.",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
   orcid: "https://orcid.org/0009-0009-5429-7501",
@@ -474,6 +478,47 @@ export const achievements = [
   "1x Champion, 1x 2nd Runners-up, Intra University Programming Contest (Team)",
   "1x Runners-up, Intra University Programming Contest (Solo)",
   "1x 1st Runners-up, Intra University Three Minute Thesis Presentation",
+];
+
+export type Certification = {
+  title: string;
+  issuer: string;
+  issued: string;
+  expired?: string;
+  credentialId: string;
+  link: string;
+};
+
+export const certifications: Certification[] = [
+  {
+    title: "Learning Linux Basics Course & Labs",
+    issuer: "KodeKloud",
+    issued: "Oct 2026",
+    credentialId: "aabb68ba-e4fa-4406-b8ba-d666f416785d",
+    link: "https://learn.kodekloud.com/certificate/aabb68ba-e4fa-4406-b8ba-d666f416785d",
+  },
+  {
+    title: "Certification: Blockchain Basics",
+    issuer: "Cyfrin",
+    issued: "Jun 2025",
+    expired: "Jun 2026",
+    credentialId: "BBCC-DGDYVBMXZR1E",
+    link: "https://updraft.cyfrin.io/courses/blockchain-basics/final/proficiency-exam",
+  },
+  {
+    title: "CSE Fundamentals with Phitron",
+    issuer: "Programming Hero",
+    issued: "Jan 2025",
+    credentialId: "PHBATCH32834351116",
+    link: "https://phitron.io/verification",
+  },
+  {
+    title: "Supervised Machine Learning: Regression and Classification",
+    issuer: "Coursera",
+    issued: "Jan 2025",
+    credentialId: "09NLSY4G7XI5",
+    link: "https://www.coursera.org/account/accomplishments/records/09NLSY4G7XI5",
+  },
 ];
 
 export type LeadershipEntry = {

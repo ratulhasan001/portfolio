@@ -18,6 +18,7 @@ import {
   Network,
   KeyRound,
   ShieldAlert,
+  BadgeCheck,
 } from "lucide-react";
 import {
   SiC,
@@ -38,7 +39,13 @@ import {
   SiDocker,
   SiLinux,
 } from "react-icons/si";
-import { skills, onlineJudges, achievements, leadership } from "@/lib/data";
+import {
+  skills,
+  onlineJudges,
+  achievements,
+  certifications,
+  leadership,
+} from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
 import { ParallaxLayer } from "./parallax-layer";
@@ -210,6 +217,45 @@ export function SkillsSection() {
             </motion.div>
           ))}
         </StaggerGroup>
+      </div>
+
+      <div className="mb-7">
+        <WipeIn inView>
+          <h3 className="mono mb-3 flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-fg-subtle">
+            <BadgeCheck size={13} />
+            Certifications
+          </h3>
+        </WipeIn>
+        <div className="grid gap-2.5 sm:grid-cols-2">
+          {certifications.map((cert, i) => (
+            <FadeIn key={cert.credentialId} delay={i * 0.08}>
+              <TiltLink
+                href={cert.link}
+                target="_blank"
+                rel="noreferrer"
+                className="h-full rounded-2xl border border-border-strong bg-canvas p-4 transition-colors hover:border-fg-subtle"
+              >
+                <p className="mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
+                  {cert.issuer}
+                </p>
+                <p className="mt-1 text-[15px] font-semibold leading-snug text-fg-default">
+                  <WipeWords text={cert.title} inView stagger={0.03} />
+                </p>
+                <p className="mt-2 text-[13px] text-fg-muted">
+                  Issued {cert.issued}
+                  {cert.expired && ` · Expired ${cert.expired}`}
+                </p>
+                <span className="mono mt-auto inline-flex items-center gap-1 pt-2 text-[11px] text-fg-subtle transition-colors group-hover:text-accent">
+                  <span className="truncate">ID {cert.credentialId}</span>
+                  <ExternalLink
+                    size={11}
+                    className="shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
+                  />
+                </span>
+              </TiltLink>
+            </FadeIn>
+          ))}
+        </div>
       </div>
 
       <div>
