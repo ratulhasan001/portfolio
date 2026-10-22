@@ -20,8 +20,7 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-const description =
-  "Computer Science graduate working on Artificial Intelligence and Security";
+const description = profile.previewDescription;
 
 export const metadata: Metadata = {
   // Needed for link previews: without it the Open Graph image URL is resolved
