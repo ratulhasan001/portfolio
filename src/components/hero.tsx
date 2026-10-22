@@ -175,7 +175,7 @@ export function Hero() {
 
         <FadeIn delay={0.5}>
           <p className="mt-3 text-lg font-semibold text-fg-muted sm:text-xl">
-            Aspiring Graduate Researcher
+            {profile.headline}
           </p>
         </FadeIn>
 
