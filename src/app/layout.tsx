@@ -20,7 +20,7 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-const description = profile.previewDescription;
+const description = profile.tagline;
 
 export const metadata: Metadata = {
   // Needed for link previews: without it the Open Graph image URL is resolved

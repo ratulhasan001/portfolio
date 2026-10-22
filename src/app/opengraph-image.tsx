@@ -47,13 +47,13 @@ export default async function OpengraphImage() {
           style={{
             display: "flex",
             marginTop: 48,
-            fontSize: 66,
+            fontSize: 76,
             fontWeight: 700,
             color: "#000000",
             letterSpacing: "-0.02em",
           }}
         >
-          {profile.previewTitle}
+          Aspiring Graduate Researcher
         </div>
 
         <div
@@ -61,12 +61,12 @@ export default async function OpengraphImage() {
             display: "flex",
             marginTop: 20,
             maxWidth: 1000,
-            fontSize: 28,
+            fontSize: 30,
             lineHeight: 1.4,
             color: "#525252",
           }}
         >
-          {profile.previewDescription}
+          {profile.tagline}
         </div>
 
         <div
