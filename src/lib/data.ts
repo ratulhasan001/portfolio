@@ -198,7 +198,7 @@ export const digitalLibraryLabels: Record<string, string> = {
   "Springer Nature Link": "Scientific Reports",
   "PLOS ONE": "PLOS ONE",
   "Frontiers in Digital Health": "Frontiers",
-  Qeios: "Qeios",
+  SSRN: "SSRN",
 };
 
 export const publications: Publication[] = [
@@ -245,11 +245,12 @@ export const publications: Publication[] = [
     title:
       "Disentangling Label-Space Shift from Domain Shift in Federated Continual Learning for Mental Health Text Classification",
     authors: ["Ratul Hasan", "Mizanul Hoque"],
-    venue: "Qeios (preprint)",
-    date: "Submitted 2026",
+    venue: "SSRN (preprint)",
+    date: "2026",
     status: "preprint",
+    link: "https://doi.org/10.2139/ssrn.7662638",
     type: "preprint",
-    digitalLibrary: "Qeios",
+    digitalLibrary: "SSRN",
   },
 {
   title:
@@ -330,23 +331,42 @@ export type Project = {
   name: string;
   description: string;
   tools: string[];
-  link: string;
+  /** External repo or live site; optional when `detailsHref` is set. */
+  link?: string;
   /** Key into `projectIcons` — the stack's real brand mark on the tile. */
   icon: string;
   language: string;
   languageColor: string;
   stars?: string;
   supervisors?: Supervisor[];
+  /** Work still in progress; the card carries a live "Ongoing" badge. */
+  ongoing?: boolean;
+  /** Short track label shown next to the ongoing badge, e.g. "DevOps". */
+  track?: string;
+  /** Internal case-study page; takes over the card footer from `link`. */
+  detailsHref?: string;
 };
 
 export const projects: Project[] = [
+  {
+    name: "Folionix",
+    icon: "kubernetes",
+    description:
+      "My hands-on DevOps learning project: my BAUET thesis archive rebuilt as a 5-service platform, which I am taking step by step through containers, CI/CD, Kubernetes, Terraform and observability.",
+    tools: ["Docker", "Kubernetes", "ArgoCD", "Terraform", "GitHub Actions"],
+    detailsHref: "/projects/folionix",
+    language: "DevOps",
+    languageColor: "#326CE5",
+    ongoing: true,
+    track: "DevOps",
+  },
   {
     name: "LedgerSeal",
     icon: "solidity",
     description:
       "A decentralized application (DApp) for constant-time document verification with dynamic access control on IPFS, built on a public blockchain.",
     tools: ["React JS", "Anvil EVM", "Foundry", "Metamask", "Pinata IPFS"],
-    link: "https://github.com/ratulhasan001",
+    link: "https://github.com/ratulhasan001/LedgerSeal",
     language: "Solidity",
     languageColor: "#AA6746",
     supervisors: [
@@ -363,7 +383,7 @@ export const projects: Project[] = [
     description:
       "A repository website built with Django (MVT & REST) that indexes and presents theses and projects from BAUET.",
     tools: ["HTML", "Tailwind CSS", "JavaScript", "Django", "PostgreSQL"],
-    link: "https://github.com/ratulhasan001",
+    link: "https://github.com/ratulhasan001/BAUET_archive_project",
     language: "Python",
     languageColor: "#3572A5",
   },
