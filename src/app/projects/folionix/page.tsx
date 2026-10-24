@@ -15,6 +15,7 @@ import {
   demoUrls,
   drills,
   folionix,
+  laterTools,
   milestones,
   requestFlow,
   services,
@@ -24,17 +25,35 @@ import {
 import { OngoingBadge } from "@/components/projects-section";
 import { PipelineDemo } from "@/components/pipeline-demo";
 import { FadeIn } from "@/components/fade-in";
+import { ogImage } from "@/lib/og";
+
+const title = "Folionix — Ratul Hasan";
+const description = `${folionix.title}: ${folionix.subtitle}. An ongoing DevOps learning project.`;
 
 export const metadata: Metadata = {
-  title: "Folionix — Ratul Hasan",
-  description: `${folionix.title}: ${folionix.subtitle}. An ongoing DevOps learning project.`,
+  title,
+  description,
+  openGraph: {
+    type: "article",
+    url: "/projects/folionix",
+    siteName: "Ratul Hasan",
+    title,
+    description,
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [ogImage],
+  },
 };
 
 const doneCount = milestones.filter((m) => m.state === "done").length;
 
 const stateLabel: Record<MilestoneState, string> = {
   done: "Done",
-  "in-progress": "Learning now",
+  "in-progress": "Starting now",
   planned: "Up next",
 };
 
@@ -316,18 +335,18 @@ export default function FolionixPage() {
         <Section
           index="04"
           title="The public demo (coming)"
-          subtitle="When the Kubernetes step is done, anyone will be able to try it. These addresses are not live yet."
+          subtitle="When the Kubernetes step is done, anyone will be able to try it. Links will be added here once it is live."
         >
           <div className="grid gap-3 sm:grid-cols-2">
             {demoUrls.map((u) => (
               <div
-                key={u.host}
+                key={u.name}
                 className="flex items-start gap-3 rounded-2xl border border-dashed border-border-strong bg-canvas p-4"
               >
                 <Globe size={18} className="mt-0.5 shrink-0 text-fg-subtle" />
                 <div className="min-w-0">
-                  <p className="mono break-all text-[13px] font-semibold text-fg-default">
-                    {u.host}
+                  <p className="text-[14px] font-semibold text-fg-default">
+                    {u.name}
                   </p>
                   <p className="mt-1 text-[13px] text-fg-muted">{u.what}</p>
                 </div>
@@ -381,6 +400,7 @@ export default function FolionixPage() {
         <Section
           index="06"
           title="Tools I'm learning through it"
+          subtitle="Dashed ones come in with the later steps."
         >
           <div className="grid gap-4 sm:grid-cols-2">
             {Object.entries(stack).map(([group, tools]) => (
@@ -392,7 +412,11 @@ export default function FolionixPage() {
                   {tools.map((t) => (
                     <span
                       key={t}
-                      className="rounded-full border border-border-default bg-canvas-subtle px-2.5 py-1 text-[13px] font-medium text-fg-muted"
+                      className={`rounded-full border px-2.5 py-1 text-[13px] font-medium ${
+                        laterTools.has(t)
+                          ? "border-dashed border-border-default text-fg-subtle"
+                          : "border-border-default bg-canvas-subtle text-fg-muted"
+                      }`}
                     >
                       {t}
                     </span>
@@ -424,7 +448,8 @@ export default function FolionixPage() {
             ))}
           </div>
           <p className="mt-3 text-[13px] text-fg-subtle">
-            Repositories will be made public as each step is finished.
+            Both repositories are private for now and will be made public as
+            the work progresses.
           </p>
         </Section>
 
