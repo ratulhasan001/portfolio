@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GitCommitHorizontal } from "lucide-react";
+import { ExternalLink, GitCommitHorizontal } from "lucide-react";
 import { experience, type Position } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { WipeWords } from "./wipe-in";
@@ -159,6 +159,34 @@ function PositionFlow({
               <p className="mono mt-0.5 text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
                 {pos.period}
               </p>
+              {pos.supervisors && pos.supervisors.length > 0 && (
+                <div className="mt-2 space-y-0.5">
+                  {pos.supervisors.map((sup) => (
+                    <p
+                      key={sup.role + sup.name}
+                      className="text-[13px] leading-relaxed text-fg-muted"
+                    >
+                      <span className="mono mr-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                        {sup.role}
+                      </span>
+                      {sup.link ? (
+                        <a
+                          href={sup.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 font-medium text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+                        >
+                          {sup.name}
+                          <ExternalLink size={11} />
+                        </a>
+                      ) : (
+                        <span className="font-medium text-fg-default">{sup.name}</span>
+                      )}
+                      , {sup.title}
+                    </p>
+                  ))}
+                </div>
+              )}
               {pos.bullets && pos.bullets.length > 0 && (
                 <ul className="mt-2.5 space-y-2">
                   {pos.bullets.map((b) => (
