@@ -31,6 +31,8 @@ export type Position = {
   current?: boolean;
   /** What this title covered; shown under it in the stacked flow. */
   bullets?: string[];
+  /** Supervisor / PI lines shown under the period. */
+  supervisors?: Supervisor[];
 };
 
 export type Experience = {
@@ -63,6 +65,20 @@ export const experience: Experience[] = [
         role: "Research Assistant",
         period: "October 2026 - Present",
         current: true,
+        supervisors: [
+          {
+            name: "Md Kishor Morol",
+            role: "Supervisor",
+            title: "PhD Student, Cornell University",
+            link: "https://scholar.google.com/citations?user=pjn3jg4AAAAJ",
+          },
+          {
+            name: "S M Musfequr Rahman",
+            role: "PI",
+            title: "PhD Student, Tampere University, Finland",
+            link: "https://scholar.google.com/citations?user=GdaEBwsAAAAJ&hl=en",
+          },
+        ],
         bullets: [
           "Working on a team journal project mapping attacker-controllable IoT metadata as an indirect prompt-injection surface for LLM home agents.",
           "Measuring which Home Assistant device and integration text fields reach its built-in LLM conversation agents, and how often injected instructions trigger unauthorised physical actions or leak private state in a simulated home.",
@@ -72,6 +88,20 @@ export const experience: Experience[] = [
       {
         role: "Research Intern",
         period: "June 2026 - September 2026",
+        supervisors: [
+          {
+            name: "Md Kishor Morol",
+            role: "Supervisor",
+            title: "PhD Student, Cornell University",
+            link: "https://scholar.google.com/citations?user=pjn3jg4AAAAJ",
+          },
+          {
+            name: "Shakib Sadat Shanto",
+            role: "PI",
+            title: "PhD Student, University of Maine, USA",
+            link: "https://scholar.google.com/citations?user=twShbgIAAAAJ&hl=en",
+          },
+        ],
         bullets: [
           "First-authored a systematic review of 82 studies on LLMs in mental health, appraising methodological rigour and risk reporting (hallucination, bias, safety, human evaluation) with a 24-field extraction instrument.",
           "Studied catastrophic forgetting in federated continual learning for mental health text classification, separating label-space shift from domain shift on Reddit stress and depression data.",
@@ -112,7 +142,7 @@ export const experience: Experience[] = [
 
 export type Supervisor = {
   name: string;
-  /** "Supervisor" or "Co-supervisor". */
+  /** "Supervisor", "Co-supervisor" or "PI". */
   role: string;
   title: string;
   /** Google Scholar or faculty profile. */
