@@ -147,6 +147,8 @@ export function ProjectsSection() {
                 {project.detailsHref ? (
                   <Link
                     href={project.detailsHref}
+                    target="_blank"
+                    rel="noreferrer"
                     className="group/link mono mt-4 flex items-center justify-between border-t border-border-default pt-4 text-[13px] text-fg-muted transition-colors hover:text-fg-default"
                   >
                     View details

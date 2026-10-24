@@ -24,7 +24,7 @@ export const folionix = {
     {
       repo: "folionix/platform",
       label: "Platform",
-      text: "Dockerfiles, CI/CD, Terraform, Helm, ArgoCD, observability, policies, runbooks and postmortems, written and run by me.",
+      text: "Dockerfiles, CI/CD, Terraform, Helm, ArgoCD, observability, policies, runbooks and postmortems, to be written and run by me.",
     },
   ],
 };
@@ -151,10 +151,10 @@ export const pipelineStages = [
 ] as const;
 
 export const demoUrls = [
-  { host: "demo.folionix.dev", what: "The live app, three one-click demo accounts" },
-  { host: "status.folionix.dev", what: "Public uptime and status page" },
-  { host: "grafana.folionix.dev", what: "Read-only dashboards: traffic, p95 latency, queues, SLOs" },
-  { host: "demo.folionix.dev/api/docs", what: "Interactive OpenAPI documentation" },
+  { name: "Live app", what: "Three one-click demo accounts" },
+  { name: "Status page", what: "Public uptime and incident history" },
+  { name: "Grafana", what: "Read-only dashboards: traffic, p95 latency, queues, SLOs" },
+  { name: "API docs", what: "Interactive OpenAPI documentation" },
 ];
 
 export const demoRules = [
@@ -186,3 +186,14 @@ export const stack = {
   "Observability": ["Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry"],
   "Security & policy": ["Kyverno", "Checkov", "gitleaks", "External Secrets", "Falco"],
 };
+
+/** Tools that only come in with the later roadmap steps (5 and 6, or EKS/AKS). */
+export const laterTools = new Set([
+  "EKS",
+  "AKS",
+  "Argo Rollouts",
+  "KEDA",
+  "Azure",
+  "Kyverno",
+  "Falco",
+]);

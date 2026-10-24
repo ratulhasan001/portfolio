@@ -1,4 +1,3 @@
-import { createHash } from "node:crypto";
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "lenis/dist/lenis.css";
@@ -6,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { profile } from "@/lib/data";
+import { ogImage } from "@/lib/og";
 
 const sans = Plus_Jakarta_Sans({
   variable: "--font-sans-family",
@@ -22,19 +22,6 @@ const mono = JetBrains_Mono({
 });
 
 const description = profile.tagline;
-
-// Link-preview scrapers (LinkedIn, WhatsApp, ...) cache images by URL, so the
-// URL carries a hash of the text drawn on the image: changing that text in
-// data.ts gives the image a new URL and forces a fresh fetch.
-const ogImage = {
-  url: `/og?v=${createHash("sha256")
-    .update([profile.name, profile.headline, profile.tagline, profile.website].join("\n"))
-    .digest("hex")
-    .slice(0, 12)}`,
-  width: 1200,
-  height: 630,
-  alt: `${profile.name} · ${profile.headline}`,
-};
 
 export const metadata: Metadata = {
   // Needed for link previews: without it the Open Graph image URL is resolved
