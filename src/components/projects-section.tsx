@@ -1,7 +1,9 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import {
+  SiKubernetes,
   SiSolidity,
   SiDjango,
   SiJavascript,
@@ -28,12 +30,26 @@ const projectIcons: Record<
     darkColor?: string;
   }
 > = {
+  kubernetes: { Icon: SiKubernetes, color: "#326CE5", darkColor: "#5B8DEF" },
   solidity: { Icon: SiSolidity, color: "#363636", darkColor: "#C9C9C9" },
   django: { Icon: SiDjango, color: "#092E20", darkColor: "#44B78B" },
   javascript: { Icon: SiJavascript, color: "#F7DF1E" },
   java: { Icon: SiOpenjdk, color: "#E76F00" },
   bootstrap: { Icon: SiBootstrap, color: "#7952B3" },
 };
+
+/** Pulsing dot + label, shared with the Folionix case-study page. */
+export function OngoingBadge({ track }: { track?: string }) {
+  return (
+    <span className="mono inline-flex items-center gap-1.5 rounded-full border border-status-review/40 bg-status-review/[0.08] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-status-review">
+      <span className="relative flex h-1.5 w-1.5">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-status-review opacity-60 motion-reduce:animate-none" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-status-review" />
+      </span>
+      Ongoing{track && ` · ${track}`}
+    </span>
+  );
+}
 
 export function ProjectsSection() {
   return (
@@ -75,9 +91,12 @@ export function ProjectsSection() {
                       <mark.Icon size={22} />
                     </span>
                   )}
-                  <span className="mono text-[11px] text-fg-subtle">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {project.ongoing && <OngoingBadge track={project.track} />}
+                    <span className="mono text-[11px] text-fg-subtle">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
                 </div>
 
                 <h3 className="mt-5 text-lg font-bold leading-snug tracking-tight text-fg-default">
@@ -125,20 +144,35 @@ export function ProjectsSection() {
                   ))}
                 </div>
 
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group/link mono mt-4 flex items-center justify-between border-t border-border-default pt-4 text-[13px] text-fg-muted transition-colors hover:text-fg-default"
-                >
-                  {project.link.includes("github.com")
-                    ? "View on GitHub"
-                    : "Visit site"}
-                  <ArrowUpRight
-                    size={16}
-                    className="shrink-0 transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
-                  />
-                </a>
+                {project.detailsHref ? (
+                  <Link
+                    href={project.detailsHref}
+                    className="group/link mono mt-4 flex items-center justify-between border-t border-border-default pt-4 text-[13px] text-fg-muted transition-colors hover:text-fg-default"
+                  >
+                    View details
+                    <ArrowRight
+                      size={16}
+                      className="shrink-0 transition-transform duration-200 group-hover/link:translate-x-0.5"
+                    />
+                  </Link>
+                ) : (
+                  project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group/link mono mt-4 flex items-center justify-between border-t border-border-default pt-4 text-[13px] text-fg-muted transition-colors hover:text-fg-default"
+                    >
+                      {project.link.includes("github.com")
+                        ? "View on GitHub"
+                        : "Visit site"}
+                      <ArrowUpRight
+                        size={16}
+                        className="shrink-0 transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
+                      />
+                    </a>
+                  )
+                )}
               </div>
             </TiltCard>
           );
