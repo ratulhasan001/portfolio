@@ -10,6 +10,7 @@ import { NameOutro } from "@/components/name-outro";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ScrollRail } from "@/components/scroll-rail";
 import { SectionConnector } from "@/components/section-connector";
+import { MascotDirector } from "@/components/mascot";
 
 export default function Home() {
   return (
@@ -33,6 +34,7 @@ export default function Home() {
         <ReferencesSection />
       </main>
       <NameOutro />
+      <MascotDirector />
     </>
   );
 }

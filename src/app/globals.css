@@ -103,6 +103,7 @@
   --color-status-review: var(--status-review);
   --font-sans: var(--font-sans-family);
   --font-mono: var(--font-mono-family);
+  --font-display: var(--font-display-family);
 }
 
 /* Must sit in @layer base: unlayered rules outrank Tailwind's layered
@@ -128,7 +129,6 @@ body {
   color: var(--fg-default);
   font-family: var(--font-sans-family), -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  font-feature-settings: "cv11" 1, "ss01" 1;
   letter-spacing: -0.011em;
   transition: background-color 0.2s ease, color 0.2s ease;
   overflow-x: clip;
@@ -451,4 +451,598 @@ main > section.nav-flash::after {
 }
 :root[data-theme="dark"] .logo-plate {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+/* ---- Mascots ------------------------------------------------------------
+   Robot mascots ported from the GMC Experts Hub ones: the same CSS-built
+   body, everything sized in em so --m-fs scales the whole robot. The bag
+   handle becomes per-stack hardware and the Google stripe a stack stripe.
+   Kept in @layer components so Tailwind utilities such as [--m-fs:38px]
+   can resize a robot; unlayered rules would beat every utility. */
+@layer components {
+  .mascot {
+    --c1: #a78bfa;
+    --c2: #6d28d9;
+    --hand: #5b21b6;
+    --tip: #22d3ee;
+    --strip: var(--tip);
+    --px: 0em;
+    --py: 0em;
+    --m-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    display: inline-block;
+    flex: none;
+    width: 1.7em;
+    height: 2.1em;
+    font-size: var(--m-fs, 56px);
+    line-height: 1;
+    vertical-align: bottom;
+    user-select: none;
+    contain: layout style;
+    animation: mascot-idle 3.2s ease-in-out infinite var(--blink-delay, 0s);
+  }
+  .mascot--django { --c1: #2f9a70; --c2: #0c4b33; --hand: #093a28; --tip: #44b78b; }
+  .mascot--python { --c1: #5a9fd4; --c2: #306998; --hand: #1f4f7a; --tip: #ffd43b; --strip: linear-gradient(90deg, #306998 0 50%, #ffd43b 50%); }
+  .mascot--linux { --c1: #475569; --c2: #0f172a; --hand: #1e293b; --tip: #f4b400; }
+  .mascot--rust { --c1: #f0855e; --c2: #b7410e; --hand: #8f330b; --tip: #f5a97f; }
+  .mascot--docker { --c1: #5cb8f5; --c2: #1d63c8; --hand: #154ea3; --tip: #ffffff; }
+  .mascot--react { --c1: #4b5563; --c2: #20232a; --hand: #15171c; --tip: #61dafb; }
+  .mascot--bash { --c1: #4b5563; --c2: #111827; --hand: #0b0f17; --tip: #22c55e; }
+  .mascot--kubernetes { --c1: #5b8def; --c2: #326ce5; --hand: #1f4fb8; --tip: #ffffff; }
+  .mascot--aws { --c1: #3b4a5e; --c2: #232f3e; --hand: #161e28; --tip: #ff9900; }
+  .mascot--azure { --c1: #3aa0ff; --c2: #0078d4; --hand: #005a9e; --tip: #50e6ff; }
+  .mascot--cpp { --c1: #4f8fd0; --c2: #00599c; --hand: #004482; --tip: #a8c8ec; }
+  .mascot--terraform { --c1: #a37de0; --c2: #7b42bc; --hand: #5c2d91; --tip: #e0d0ff; }
+  .mascot--git { --c1: #ff7a59; --c2: #f05032; --hand: #c23a20; --tip: #ffd2c4; }
+  .mascot--pytorch { --c1: #ff7a5c; --c2: #ee4c2c; --hand: #b8361b; --tip: #ffb199; }
+  .mascot--postgres { --c1: #5d8bbd; --c2: #336791; --hand: #244b6b; --tip: #cfe0f2; }
+  .mascot--javascript { --c1: #fff27a; --c2: #f7df1e; --hand: #b8a300; --tip: #323330; }
+  .mascot--typescript { --c1: #5a9be6; --c2: #3178c6; --hand: #235a99; --tip: #9cc4f2; }
+
+  .mascot__body {
+    position: absolute;
+    inset: 0.5em 0 0.26em;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 0.34em 0.34em 0.44em 0.44em;
+    background: linear-gradient(155deg, var(--c1), var(--c2));
+    box-shadow: inset 0 0.06em 0 rgba(255, 255, 255, 0.45),
+      inset 0 -0.22em 0.3em -0.2em rgba(0, 0, 0, 0.25),
+      0 0.3em 0.5em -0.25em rgba(10, 22, 51, 0.45);
+  }
+  .mascot__body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(118deg, rgba(255, 255, 255, 0.28), transparent 50%);
+  }
+  .mascot__body::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 0.12em;
+    background: var(--strip);
+  }
+  .mascot__eyes {
+    position: absolute;
+    left: 50%;
+    top: 0.36em;
+    z-index: 2;
+    display: flex;
+    gap: 0.14em;
+    transform: translateX(-50%);
+  }
+  .mascot__eyes i {
+    position: relative;
+    width: 0.3em;
+    height: 0.36em;
+    border-radius: 50%;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: inset 0 -0.03em 0 rgba(0, 0, 0, 0.12);
+    transform-origin: 50% 55%;
+    animation: mascot-blink 5s infinite var(--blink-delay, 0s);
+  }
+  .mascot__eyes b {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.16em;
+    height: 0.18em;
+    margin: -0.09em 0 0 -0.08em;
+    border-radius: 50%;
+    background: #0a1633;
+    transform: translate(var(--px), var(--py));
+    transition: transform 0.18s ease-out;
+  }
+  .mascot__eyes b::after {
+    content: "";
+    position: absolute;
+    right: 0.025em;
+    top: 0.025em;
+    width: 0.05em;
+    height: 0.05em;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .mascot--bash .mascot__eyes b { background: #16a34a; }
+  .mascot__cheeks {
+    position: absolute;
+    left: 0.16em;
+    right: 0.16em;
+    top: 0.72em;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+  }
+  .mascot__cheeks i {
+    width: 0.2em;
+    height: 0.1em;
+    border-radius: 50%;
+    background: rgba(255, 120, 150, 0.55);
+  }
+  .mascot__mouth {
+    position: absolute;
+    left: 50%;
+    top: 0.76em;
+    z-index: 2;
+    width: 0.24em;
+    height: 0.1em;
+    margin-left: -0.12em;
+    border: 0.05em solid #0a1633;
+    border-top: 0;
+    border-radius: 0 0 0.2em 0.2em;
+    transition: all 0.25s var(--m-ease);
+  }
+  /* Dark-bodied robots get a light mouth, or it disappears into the body. */
+  .mascot--linux .mascot__mouth,
+  .mascot--react .mascot__mouth,
+  .mascot--bash .mascot__mouth { border-color: #fff; }
+  /* AWS gets its trademark orange grin. */
+  .mascot--aws .mascot__mouth { width: 0.32em; margin-left: -0.16em; border-color: #ff9900; }
+  .mascot__badge {
+    position: absolute;
+    inset: auto 0 0.18em;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+  }
+  .mascot__badge b {
+    font-family: var(--font-mono-family), ui-monospace, monospace;
+    font-size: 0.19em;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.88);
+  }
+  .mascot--bash .mascot__badge b { color: #22c55e; }
+  .mascot--python .mascot__badge b { color: #ffd43b; }
+  .mascot--javascript .mascot__badge b { color: #323330; }
+  .mascot--aws .mascot__badge b { color: #ff9900; }
+  .mascot__feet {
+    position: absolute;
+    inset: auto 0.3em 0.04em;
+    height: 0.26em;
+    display: flex;
+    justify-content: space-between;
+  }
+  .mascot__feet i {
+    width: 0.34em;
+    height: 0.24em;
+    border-radius: 0.12em 0.12em 0.16em 0.16em;
+    background: #0a1633;
+  }
+  .mascot--linux .mascot__feet i { background: #f4b400; }
+  .mascot__arms i {
+    position: absolute;
+    top: 0.98em;
+    width: 0.14em;
+    height: 0.46em;
+    border-radius: 0.08em;
+    background: var(--hand);
+    transform-origin: 50% 0;
+  }
+  .mascot__arms i:first-child { left: -0.05em; transform: rotate(22deg); }
+  .mascot__arms i:last-child { right: -0.05em; transform: rotate(-22deg); }
+
+  /* Hardware: what sits on top tells you which stack the robot is. */
+  .mascot__antenna {
+    position: absolute;
+    left: 50%;
+    top: 0.16em;
+    width: 0.05em;
+    height: 0.36em;
+    margin-left: -0.025em;
+    background: var(--hand);
+  }
+  .mascot__antenna i,
+  .mascot__antennas i::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -0.1em;
+    width: 0.14em;
+    height: 0.14em;
+    margin-left: -0.07em;
+    border-radius: 50%;
+    background: var(--tip);
+    box-shadow: 0 0 0.15em var(--tip);
+    animation: mascot-antenna 1.6s ease-in-out infinite;
+  }
+  .mascot__antennas i {
+    position: absolute;
+    top: 0.18em;
+    width: 0.05em;
+    height: 0.36em;
+    background: var(--hand);
+    transform-origin: 50% 100%;
+  }
+  .mascot__antennas i:first-child { left: 30%; transform: rotate(-18deg); }
+  .mascot__antennas i:last-child { right: 30%; transform: rotate(18deg); }
+  .mascot__antennas i:last-child::after { animation-delay: -0.8s; }
+  .mascot__crates {
+    position: absolute;
+    left: 50%;
+    top: 0.06em;
+    width: 0.72em;
+    height: 0.46em;
+    margin-left: -0.36em;
+  }
+  .mascot__crates i {
+    position: absolute;
+    width: 0.22em;
+    height: 0.2em;
+    border-radius: 0.03em;
+    background: #fff;
+    box-shadow: inset 0 0 0 0.025em var(--hand);
+  }
+  .mascot__crates i:nth-child(1) { left: 0; bottom: 0; }
+  .mascot__crates i:nth-child(2) { left: 0.25em; bottom: 0; }
+  .mascot__crates i:nth-child(3) { left: 0.5em; bottom: 0; }
+  .mascot__crates i:nth-child(4) { left: 0.125em; bottom: 0.23em; }
+  .mascot__bolts i {
+    position: absolute;
+    top: 0.82em;
+    z-index: 2;
+    width: 0.18em;
+    height: 0.18em;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff4, transparent 40%), var(--tip);
+    box-shadow: inset 0 -0.03em 0 rgba(0, 0, 0, 0.25);
+  }
+  .mascot__bolts i:first-child { left: -0.08em; }
+  .mascot__bolts i:last-child { right: -0.08em; }
+  .mascot__bolts::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0.22em;
+    width: 0.36em;
+    height: 0.3em;
+    margin-left: -0.18em;
+    border-radius: 50% 50% 0 0;
+    background: var(--tip);
+    clip-path: polygon(0 100%, 15% 30%, 30% 70%, 50% 0, 70% 70%, 85% 30%, 100% 100%);
+  }
+  /* React's orbit: a back half behind the body and a front arc over it. */
+  .mascot__orbit {
+    position: absolute;
+    inset: 1.12em -0.2em auto;
+    height: 0.42em;
+    border: 0.05em solid var(--tip);
+    border-radius: 50%;
+    transform: rotate(-10deg);
+    animation: mascot-orbit 4s ease-in-out infinite;
+  }
+  .mascot__orbit--front {
+    z-index: 3;
+    border-top-color: transparent;
+  }
+  /* Kubernetes' helm wheel, slowly turning. */
+  .mascot__helm {
+    position: absolute;
+    left: 50%;
+    top: 0.02em;
+    width: 0.46em;
+    height: 0.46em;
+    margin-left: -0.23em;
+    border: 0.045em solid #fff;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0 16%, transparent 17%),
+      repeating-conic-gradient(from -4deg, #fff 0 8deg, var(--c2) 8deg 51.43deg);
+    box-shadow: 0 0 0 0.03em var(--hand);
+    animation: mascot-spin 8s linear infinite;
+  }
+  /* Azure's cloud, drifting just above the head. */
+  .mascot__cloud {
+    position: absolute;
+    left: 50%;
+    top: 0.26em;
+    width: 0.6em;
+    height: 0.2em;
+    margin-left: -0.3em;
+    border-radius: 0.1em;
+    background: #e8f4ff;
+    /* Drop shadows trace the whole puff outline, so it shows on white. */
+    filter: drop-shadow(0 0 0.025em var(--c2)) drop-shadow(0 0.03em 0.04em rgba(0, 90, 158, 0.4));
+    animation: mascot-drift 3s ease-in-out infinite;
+  }
+  .mascot__cloud::before,
+  .mascot__cloud::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: #e8f4ff;
+  }
+  .mascot__cloud::before { left: 0.08em; top: -0.13em; width: 0.26em; height: 0.26em; }
+  .mascot__cloud::after { left: 0.28em; top: -0.08em; width: 0.2em; height: 0.2em; }
+  /* PyTorch's flame. */
+  .mascot__flame {
+    position: absolute;
+    left: 50%;
+    top: 0.04em;
+    width: 0.28em;
+    height: 0.42em;
+    margin-left: -0.14em;
+    border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+    background: radial-gradient(circle at 50% 72%, #ffd166 0 22%, #ff7a3d 45%, #ee4c2c 75%);
+    transform-origin: 50% 100%;
+    animation: mascot-flicker 0.9s ease-in-out infinite alternate;
+  }
+  /* PostgreSQL's elephant ears. */
+  .mascot__ears i {
+    position: absolute;
+    top: 0.62em;
+    z-index: 2;
+    width: 0.34em;
+    height: 0.52em;
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(180deg, var(--c1), var(--hand));
+    transform-origin: 50% 0;
+    transition: transform 0.4s var(--m-ease);
+  }
+  .mascot__ears i:first-child { left: -0.14em; transform: rotate(24deg); }
+  .mascot__ears i:last-child { right: -0.14em; transform: rotate(-24deg); }
+  .mascot:hover .mascot__ears i:first-child { transform: rotate(40deg); }
+  .mascot:hover .mascot__ears i:last-child { transform: rotate(-40deg); }
+  .mascot__tux {
+    position: absolute;
+    inset: 0.14em 0.2em 0.3em;
+    border-radius: 0.34em 0.34em 0.44em 0.44em;
+    background: #f8fafc;
+  }
+  .mascot--linux .mascot__eyes i { box-shadow: 0 0 0 0.025em #cbd5e1; }
+  .mascot--linux .mascot__cheeks { top: 0.74em; }
+  .mascot--linux .mascot__mouth,
+  .mascot--linux:hover .mascot__mouth,
+  .mascot--linux.is-happy .mascot__mouth {
+    width: 0.22em;
+    height: 0.11em;
+    margin-left: -0.11em;
+    border: 0;
+    border-radius: 50% 50% 60% 60%;
+    background: #f4b400;
+  }
+
+  /* Speech bubble */
+  .mascot__say {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    z-index: 5;
+    padding: 7px 12px;
+    border-radius: 14px;
+    background: #fff;
+    color: #0a1633;
+    font-family: var(--font-sans-family), sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    box-shadow: 0 12px 30px -10px rgba(10, 22, 51, 0.35), 0 0 0 1px rgba(10, 22, 51, 0.06);
+    opacity: 0;
+    transform: translate(-50%, 8px) scale(0.85);
+    transform-origin: 50% 100%;
+    transition: opacity 0.25s, transform 0.4s var(--m-ease);
+    pointer-events: none;
+  }
+  .mascot__say::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    margin-left: -6px;
+    border: 6px solid transparent;
+    border-top-color: #fff;
+  }
+  .mascot.is-talking .mascot__say,
+  .mascot:hover .mascot__say {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  /* Moods */
+  .mascot:hover .mascot__mouth,
+  .mascot.is-happy .mascot__mouth {
+    height: 0.16em;
+    background: #0a1633;
+    border-radius: 0.04em 0.04em 0.2em 0.2em;
+  }
+  .mascot--aws:hover .mascot__mouth,
+  .mascot--aws.is-happy .mascot__mouth { background: #ff9900; }
+  .mascot--react:hover .mascot__mouth,
+  .mascot--react.is-happy .mascot__mouth,
+  .mascot--bash:hover .mascot__mouth,
+  .mascot--bash.is-happy .mascot__mouth { background: #fff; }
+  .mascot:hover .mascot__arms i:last-child,
+  .mascot.is-happy .mascot__arms i:last-child {
+    animation: mascot-wave 0.6s ease-in-out infinite;
+  }
+  .mascot.is-jump { animation: mascot-jump 0.7s var(--m-ease); }
+  .mascot.is-walking { animation: mascot-waddle 0.32s ease-in-out infinite alternate; }
+  .mascot.is-walking .mascot__feet i:first-child { animation: mascot-step 0.32s ease-in-out infinite alternate; }
+  .mascot.is-walking .mascot__feet i:last-child { animation: mascot-step 0.32s ease-in-out infinite alternate-reverse; }
+
+  @keyframes mascot-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.08); } }
+  @keyframes mascot-idle { 0%, 100% { transform: translateY(0) scale(1, 1); } 50% { transform: translateY(-0.04em) scale(1.01, 0.99); } }
+  @keyframes mascot-antenna { 50% { opacity: 0.3; box-shadow: none; } }
+  @keyframes mascot-orbit { 50% { transform: rotate(-16deg) scaleX(1.04); } }
+  @keyframes mascot-spin { to { transform: rotate(360deg); } }
+  @keyframes mascot-drift { 50% { transform: translateY(-0.05em); } }
+  @keyframes mascot-flicker { to { transform: scale(0.88, 1.08) rotate(3deg); } }
+  @keyframes mascot-wave { 0%, 100% { transform: rotate(-150deg); } 50% { transform: rotate(-110deg); } }
+  @keyframes mascot-jump {
+    0% { transform: translateY(0) scale(1, 1); }
+    15% { transform: translateY(0) scale(1.12, 0.86); }
+    45% { transform: translateY(-0.7em) scale(0.95, 1.06); }
+    70% { transform: translateY(0) scale(1.08, 0.92); }
+    100% { transform: translateY(0) scale(1, 1); }
+  }
+  @keyframes mascot-step { to { transform: translateY(-0.1em); } }
+  @keyframes mascot-waddle {
+    from { transform: rotate(-4deg) translateY(0); }
+    to { transform: rotate(4deg) translateY(-0.06em); }
+  }
+
+  /* The big robot beside the name. On phones its bubble sits above it,
+     right-aligned into the empty end of the "Hi, I'm" row; from sm up it
+     moves to the robot's left, pointing at the name. */
+  .hero-bot { --m-fs: 36px; z-index: 2; }
+  .hero-bot .mascot__say {
+    left: auto;
+    right: -4px;
+    width: max-content;
+    max-width: 150px;
+    white-space: normal;
+    font-size: 12px;
+    padding: 6px 10px;
+    transform: translateY(8px) scale(0.85);
+    transform-origin: 85% 100%;
+  }
+  .hero-bot .mascot.is-talking .mascot__say,
+  .hero-bot .mascot:hover .mascot__say { transform: none; }
+  .hero-bot .mascot__say::after { left: auto; right: 22px; margin-left: 0; }
+  @media (min-width: 640px) {
+    .hero-bot { --m-fs: 76px; }
+    .hero-bot .mascot__say {
+      right: calc(100% + 14px);
+      bottom: 52%;
+      max-width: none;
+      white-space: nowrap;
+      font-size: 16px;
+      padding: 9px 15px;
+      transform: translate(8px, 0) scale(0.85);
+      transform-origin: 100% 60%;
+    }
+    .hero-bot .mascot__say::after {
+      left: 100%;
+      right: auto;
+      top: 60%;
+      margin: -6px 0 0;
+      border-top-color: transparent;
+      border-left-color: #fff;
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-bot { --m-fs: 104px; }
+  }
+
+  /* On a dark page the navy AWS robot and the dark feet sink into the
+     background, so dark mode lifts them to slate and adds a faint orange
+     halo. */
+  :root[data-theme="dark"] .mascot--aws { --c1: #7a8ba3; --c2: #46566d; --hand: #33415a; }
+  :root[data-theme="dark"] .mascot__feet i { background: #3b4a61; }
+  :root[data-theme="dark"] .hero-bot .mascot__body {
+    box-shadow: inset 0 0.06em 0 rgba(255, 255, 255, 0.5),
+      inset 0 -0.22em 0.3em -0.2em rgba(0, 0, 0, 0.25),
+      0 0 0.45em rgba(255, 153, 0, 0.22);
+  }
+
+  /* The theme switch: a robot that sleeps in dark mode. Its bubble drops
+     below it, since above would be off the top of the screen. */
+  .theme-bot { --m-fs: 18px; }
+  /* A night-time palette: indigo-slate with moon-gold tips, lifted a shade
+     in dark mode so it doesn't sink into the page. */
+  .theme-bot .mascot { --c1: #5b6b91; --c2: #26314d; --hand: #1c2540; --tip: #f5c242; }
+  :root[data-theme="dark"] .theme-bot .mascot { --c1: #8d9cc2; --c2: #4f5d82; --hand: #3d4a6c; }
+  /* Right-aligned under the robot, since it sits at the right edge of the
+     nav and a centred bubble would run off a phone screen. */
+  .theme-bot .mascot__say {
+    left: auto;
+    right: -6px;
+    bottom: auto;
+    top: calc(100% + 10px);
+    font-size: 12px;
+    transform: translateY(-6px) scale(0.85);
+    transform-origin: 90% 0;
+  }
+  .theme-bot .mascot__say::after {
+    left: auto;
+    right: 12px;
+    top: auto;
+    bottom: 100%;
+    margin-left: 0;
+    border-top-color: transparent;
+    border-bottom-color: #fff;
+  }
+  .theme-bot .mascot:hover .mascot__say,
+  .theme-bot .mascot.is-talking .mascot__say { transform: none; }
+  .mascot.is-asleep { animation-duration: 4.8s; }
+  .mascot.is-asleep .mascot__eyes i {
+    animation: none;
+    transform: scaleY(0.12);
+  }
+  .mascot.is-asleep .mascot__mouth,
+  .mascot.is-asleep:hover .mascot__mouth {
+    width: 0.12em;
+    height: 0.12em;
+    margin-left: -0.06em;
+    border: 0.04em solid #0a1633;
+    border-radius: 50%;
+    background: none;
+  }
+  .mascot.is-asleep:hover .mascot__arms i:last-child { animation: none; }
+  .mascot.is-asleep .mascot__antennas i::after {
+    animation: none;
+    opacity: 0.3;
+    box-shadow: none;
+  }
+  .theme-bot__zzz {
+    position: absolute;
+    right: -2px;
+    top: -4px;
+    pointer-events: none;
+  }
+  .theme-bot__zzz i {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font: 700 9px/1 var(--font-mono-family), monospace;
+    font-style: normal;
+    color: var(--fg-muted);
+    opacity: 0;
+    animation: theme-bot-z 2.4s ease-out infinite;
+  }
+  .theme-bot__zzz i:nth-child(2) { animation-delay: 0.8s; font-size: 8px; }
+  .theme-bot__zzz i:nth-child(3) { animation-delay: 1.6s; font-size: 7px; }
+  @keyframes theme-bot-z {
+    0% { opacity: 0; transform: translate(0, 6px); }
+    30% { opacity: 1; }
+    100% { opacity: 0; transform: translate(6px, -10px); }
+  }
+
+  .confetti {
+    position: fixed;
+    z-index: 1002;
+    width: 8px;
+    height: 12px;
+    border-radius: 2px;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mascot,
+    .mascot * { animation: none !important; }
+    .theme-bot__zzz { display: none; }
+  }
 }
