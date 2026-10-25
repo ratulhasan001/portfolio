@@ -12,7 +12,7 @@ export const folionix = {
   origin:
     "Originally built as the BAUET Project & Thesis Archive (CSE-3110), re-engineered as a cloud-native platform.",
   pitch:
-    "Folionix is a 5-service platform where students submit theses, supervisors review them and curators publish them to a searchable archive. The application is finished; the project now is everything around it: containers, CI/CD, GitOps on Kubernetes, Terraform-managed cloud, observability and documented failure drills.",
+    "Folionix is a 5-service platform where students submit theses, supervisors review them and curators publish them to a searchable archive. The application is finished; what I am working on now is everything around it, starting with containers and CI/CD.",
   journey:
     "I have just started my DevOps journey and I am in the learning phase. Folionix is where I practise what I learn, so I will work on it from time to time and tick off the steps below one by one.",
   ownership: [
@@ -24,7 +24,7 @@ export const folionix = {
     {
       repo: "folionix/platform",
       label: "Platform",
-      text: "Dockerfiles, CI/CD, Terraform, Helm, ArgoCD, observability, policies, runbooks and postmortems, to be written and run by me.",
+      text: "Dockerfiles, CI/CD and, step by step, the infrastructure around it, written by me as I learn.",
     },
   ],
 };
@@ -57,43 +57,27 @@ export const milestones: {
   },
   {
     when: "Step 3",
-    title: "Public demo on Kubernetes",
+    title: "Deploy to Kubernetes",
     state: "planned",
-    items: [
-      "k3s on Oracle Cloud ARM behind Cloudflare Tunnel",
-      "Helm chart deployed by ArgoCD (GitOps)",
-      "Nightly reset CronJob, public status page",
-    ],
+    items: ["Run it on a small Kubernetes cluster and open a public demo"],
   },
   {
     when: "Step 4",
-    title: "Terraform & AWS",
+    title: "Infrastructure as code",
     state: "planned",
-    items: [
-      "All infrastructure as code: dev, demo and prod environments",
-      "Cost guardrails, GitHub OIDC (no long-lived keys)",
-      "Drift detection, secret rotation, database disaster recovery",
-    ],
+    items: ["Manage the cloud setup with Terraform"],
   },
   {
     when: "Step 5",
-    title: "Reliability & scaling",
+    title: "Monitoring & reliability",
     state: "planned",
-    items: [
-      "Canary releases with automated rollback (Argo Rollouts)",
-      "KEDA queue-based autoscaling, NetworkPolicies, SLO alerts",
-      "Full cluster rebuild from zero in under 30 minutes",
-    ],
+    items: ["Metrics, logs and alerts, then practise breaking and fixing it"],
   },
   {
     when: "Step 6",
-    title: "Platform engineering",
+    title: "Going further",
     state: "planned",
-    items: [
-      "AWS → Azure failover, signed-image admission (Kyverno)",
-      "Runtime security (Falco), cost reporting (OpenCost)",
-      "Backstage golden-path template for new services",
-    ],
+    items: ["Security, scaling and other advanced topics, chosen when I get there"],
   },
 ];
 
@@ -150,50 +134,16 @@ export const pipelineStages = [
   { name: "ArgoCD sync", detail: "GitOps rollout to the cluster", gate: "release" },
 ] as const;
 
-export const demoUrls = [
-  { name: "Live app", what: "Three one-click demo accounts" },
-  { name: "Status page", what: "Public uptime and incident history" },
-  { name: "Grafana", what: "Read-only dashboards: traffic, p95 latency, queues, SLOs" },
-  { name: "API docs", what: "Interactive OpenAPI documentation" },
+/** Tools split by whether I am using them yet; later ones render dashed. */
+export const stack = [
+  {
+    group: "Learning now (Step 2)",
+    later: false,
+    tools: ["Docker", "GitHub Actions", "Trivy", "Syft", "cosign", "GHCR"],
+  },
+  {
+    group: "Later steps",
+    later: true,
+    tools: ["Kubernetes", "Helm", "ArgoCD", "Terraform", "AWS", "Prometheus", "Grafana"],
+  },
 ];
-
-export const demoRules = [
-  "Fictional data only, reset every night",
-  "One-click student, supervisor and curator accounts",
-  "PDF uploads only, ≤ 5 MB, strict rate limits",
-  "No real email is sent",
-];
-
-export const drills: { id: string; title: string }[] = [
-  { id: "S-1", title: "Zero-downtime rolling deploy under k6 load" },
-  { id: "S-2", title: "Expand/contract database migration across 3 releases" },
-  { id: "S-3", title: "Terraform drift detection and state recovery" },
-  { id: "S-5", title: "Secret leak drill: detect with gitleaks, rotate without downtime" },
-  { id: "S-24", title: "Database + object-storage disaster recovery, measured RTO/RPO" },
-  { id: "S-6", title: "Canary release with automated rollback on error rate" },
-  { id: "S-7", title: "KEDA: 1,000 PDF uploads scale workers on queue depth" },
-  { id: "S-10", title: "SLO burn-rate alert → trace → fix → postmortem" },
-  { id: "S-12", title: "Poison message → dead-letter queue → replay" },
-  { id: "S-15", title: "Delete the whole cluster, rebuild with Terraform + ArgoCD < 30 min" },
-  { id: "S-16", title: "AWS → Azure failover with DNS health checks" },
-  { id: "S-17", title: "Admit only signed images without critical CVEs (Kyverno)" },
-];
-
-export const stack = {
-  "Containers & CI/CD": ["Docker", "GitHub Actions", "Trivy", "Syft", "cosign", "GHCR"],
-  "Kubernetes & GitOps": ["k3s", "EKS", "AKS", "Helm", "ArgoCD", "Argo Rollouts", "KEDA"],
-  "Infrastructure": ["Terraform", "AWS", "Azure", "Oracle Cloud", "Cloudflare"],
-  "Observability": ["Prometheus", "Grafana", "Loki", "Tempo", "OpenTelemetry"],
-  "Security & policy": ["Kyverno", "Checkov", "gitleaks", "External Secrets", "Falco"],
-};
-
-/** Tools that only come in with the later roadmap steps (5 and 6, or EKS/AKS). */
-export const laterTools = new Set([
-  "EKS",
-  "AKS",
-  "Argo Rollouts",
-  "KEDA",
-  "Azure",
-  "Kyverno",
-  "Falco",
-]);

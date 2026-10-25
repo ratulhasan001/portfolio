@@ -383,7 +383,7 @@ export const projects: Project[] = [
     icon: "kubernetes",
     description:
       "My hands-on DevOps learning project: my BAUET thesis archive rebuilt as a 5-service platform, which I am taking step by step through containers, CI/CD, Kubernetes, Terraform and observability.",
-    tools: ["Docker", "Kubernetes", "ArgoCD", "Terraform", "GitHub Actions"],
+    tools: ["Docker", "GitHub Actions", "Trivy", "Django", "FastAPI"],
     detailsHref: "/projects/folionix",
     language: "DevOps",
     languageColor: "#326CE5",
