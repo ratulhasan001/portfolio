@@ -1,34 +1,72 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useTheme } from "./theme-provider";
+import { Mascot } from "./mascot";
 
+/** Light-mode nudges toward dark mode, shown one after another: mostly
+ *  practical, with a light touch of humour. */
+const PLEAS = [
+  "Lights out? 🌙",
+  "Try dark mode",
+  "Easier on the eyes at night",
+  "Bugs hate the dark 🐛",
+  "Real devs code in the dark",
+];
+
+const SHOW_MS = 6000;
+const SWAP_MS = 300;
+
+/**
+ * The theme switch is a robot that sleeps when the lights go out. In light
+ * mode it keeps a quiet line going about dark mode, changing it every few
+ * seconds; in dark mode it sleeps, eyes shut with a few z's drifting up.
+ */
 export function ThemeToggle() {
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";
+  const [plea, setPlea] = useState(0);
+  const [swapping, setSwapping] = useState(false);
+
+  useEffect(() => {
+    if (isDark) return;
+    let swap = 0;
+    const tick = window.setInterval(() => {
+      if (document.hidden) return;
+      // Hide the bubble, change the line while it's hidden, then bring it
+      // back, so each new plea pops in rather than the text jumping.
+      setSwapping(true);
+      swap = window.setTimeout(() => {
+        setPlea((p) => (p + 1) % PLEAS.length);
+        setSwapping(false);
+      }, SWAP_MS);
+    }, SHOW_MS);
+    return () => {
+      window.clearInterval(tick);
+      window.clearTimeout(swap);
+    };
+  }, [isDark]);
+
+  // Awake: always talking (it only waves on hover). Asleep: quiet.
+  const mood = isDark ? "is-asleep" : swapping ? "" : "is-talking";
 
   return (
     <motion.button
       onClick={toggle}
-      aria-label="Toggle theme"
-      whileHover={{ scale: 1.12, y: -2, rotate: 12 }}
-      whileTap={{ scale: 0.88, rotate: 0 }}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      whileTap={{ scale: 0.88 }}
       transition={{ type: "spring", stiffness: 420, damping: 16 }}
-      className="relative flex h-8 w-8 items-center justify-center rounded-md border border-border-default bg-canvas-subtle text-fg-muted shadow-sm transition-[border-color,color,box-shadow] duration-300 hover:border-accent hover:text-fg-default hover:shadow-[0_8px_18px_-8px_var(--color-accent)] cursor-pointer"
+      className="theme-bot relative flex h-10 w-9 cursor-pointer items-end justify-center"
     >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={isDark ? "moon" : "sun"}
-          initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-          animate={{ opacity: 1, rotate: 0, scale: 1 }}
-          exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-          transition={{ duration: 0.25 }}
-          className="flex items-center justify-center"
-        >
-          {isDark ? <Moon size={15} /> : <Sun size={15} />}
-        </motion.span>
-      </AnimatePresence>
+      <Mascot kind="ai" plain say={isDark ? "Wake me up ☀️" : PLEAS[plea]} className={mood} />
+      {isDark && (
+        <span aria-hidden className="theme-bot__zzz">
+          <i>z</i>
+          <i>z</i>
+          <i>z</i>
+        </span>
+      )}
     </motion.button>
   );
 }
