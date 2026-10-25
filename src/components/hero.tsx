@@ -157,7 +157,7 @@ export function Hero() {
         style={{ opacity: heroOpacity, y: yShift }}
         className="relative mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:pb-14 lg:pt-12"
       >
-        <HeroBot className="absolute right-4 top-[9.5rem] sm:right-6 sm:top-28 lg:top-14" />
+        <HeroBot className="absolute right-4 top-[10.25rem] sm:right-6 sm:top-28 lg:top-14" />
 
         <FadeIn delay={0.1}>
           <p className="mono text-base font-medium text-fg-muted">
