@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { profile } from "@/lib/data";
 import { DinoRunner } from "./dino-runner";
+import { EagleMark } from "./eagle-mark";
 
 /**
  * Closing sign-off: a decorative endless runner in place of a sign-off mark,
@@ -96,6 +97,25 @@ export function NameOutro() {
               © {new Date().getFullYear()}
             </span>
           </div>
+        </motion.div>
+
+        {/* Watermark: the eagle mark and its words, fading out toward the
+            page's edge. Decorative, so it stays out of the a11y tree. */}
+        <motion.div
+          aria-hidden
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-none mt-12 select-none sm:mt-16"
+        >
+          <EagleMark className="mx-auto h-16 w-16 text-fg-default/25 sm:h-20 sm:w-20" />
+          <p className="mt-3 font-display text-[11px] font-bold uppercase tracking-[0.6em] text-fg-default/25 sm:mt-4 sm:text-sm">
+            The
+          </p>
+          <p className="mt-1 whitespace-nowrap bg-gradient-to-b from-fg-default/20 to-fg-default/0 bg-clip-text pb-1 font-display text-[7.4vw] font-bold uppercase leading-none tracking-[0.08em] text-transparent lg:text-[4.6rem]">
+            Silent Architect
+          </p>
         </motion.div>
       </div>
     </section>
