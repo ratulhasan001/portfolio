@@ -1,21 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Clock,
-  Globe,
-  GraduationCap,
-  ShieldAlert,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, GraduationCap } from "lucide-react";
 import {
   backing,
-  demoRules,
-  demoUrls,
-  drills,
   folionix,
-  laterTools,
   milestones,
   requestFlow,
   services,
@@ -331,79 +319,14 @@ export default function FolionixPage() {
           </div>
         </Section>
 
-        {/* ---- Public demo ---- */}
-        <Section
-          index="04"
-          title="The public demo (coming)"
-          subtitle="When the Kubernetes step is done, anyone will be able to try it. Links will be added here once it is live."
-        >
-          <div className="grid gap-3 sm:grid-cols-2">
-            {demoUrls.map((u) => (
-              <div
-                key={u.name}
-                className="flex items-start gap-3 rounded-2xl border border-dashed border-border-strong bg-canvas p-4"
-              >
-                <Globe size={18} className="mt-0.5 shrink-0 text-fg-subtle" />
-                <div className="min-w-0">
-                  <p className="text-[14px] font-semibold text-fg-default">
-                    {u.name}
-                  </p>
-                  <p className="mt-1 text-[13px] text-fg-muted">{u.what}</p>
-                </div>
-                <span className="mono ml-auto inline-flex shrink-0 items-center gap-1 text-[10px] uppercase tracking-[0.08em] text-fg-subtle">
-                  <Clock size={11} />
-                  Soon
-                </span>
-              </div>
-            ))}
-          </div>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {demoRules.map((r) => (
-              <li
-                key={r}
-                className="rounded-full border border-border-default bg-canvas-subtle px-3 py-1 text-[13px] text-fg-muted"
-              >
-                {r}
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        {/* ---- Drills ---- */}
-        <Section
-          index="05"
-          title="Failure drills I plan to run"
-          subtitle="Break it on purpose, fix it, and write up what happened. Each one will get its own write-up and recording."
-        >
-          <div className="grid gap-2.5 sm:grid-cols-2">
-            {drills.map((d) => (
-              <div
-                key={d.id}
-                className="flex items-start gap-3 rounded-xl border border-border-default bg-canvas p-3"
-              >
-                <span className="mono flex h-7 min-w-[2.75rem] shrink-0 items-center justify-center rounded-md border border-border-strong bg-canvas-subtle text-[11px] font-semibold text-fg-muted">
-                  {d.id}
-                </span>
-                <p className="text-[14px] leading-snug text-fg-muted">
-                  {d.title}
-                </p>
-                <ShieldAlert
-                  size={14}
-                  className="ml-auto mt-0.5 shrink-0 text-fg-subtle"
-                />
-              </div>
-            ))}
-          </div>
-        </Section>
-
         {/* ---- Stack ---- */}
         <Section
-          index="06"
+          index="04"
           title="Tools I'm learning through it"
-          subtitle="Dashed ones come in with the later steps."
+          subtitle="Only the first group is in use so far; the rest come with later steps."
         >
           <div className="grid gap-4 sm:grid-cols-2">
-            {Object.entries(stack).map(([group, tools]) => (
+            {stack.map(({ group, later, tools }) => (
               <div key={group}>
                 <p className="mono text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
                   {group}
@@ -413,7 +336,7 @@ export default function FolionixPage() {
                     <span
                       key={t}
                       className={`rounded-full border px-2.5 py-1 text-[13px] font-medium ${
-                        laterTools.has(t)
+                        later
                           ? "border-dashed border-border-default text-fg-subtle"
                           : "border-border-default bg-canvas-subtle text-fg-muted"
                       }`}
@@ -428,7 +351,7 @@ export default function FolionixPage() {
         </Section>
 
         {/* ---- Ownership ---- */}
-        <Section index="07" title="Who builds what">
+        <Section index="05" title="Who builds what">
           <div className="grid gap-3 sm:grid-cols-2">
             {folionix.ownership.map((o) => (
               <div
