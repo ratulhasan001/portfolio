@@ -69,7 +69,7 @@ export const experience: Experience[] = [
           {
             name: "Md Kishor Morol",
             role: "Supervisor",
-            title: "PhD Student, Cornell University",
+            title: "PhD Student, Cornell University, USA",
             link: "https://scholar.google.com/citations?user=pjn3jg4AAAAJ",
           },
           {
@@ -92,7 +92,7 @@ export const experience: Experience[] = [
           {
             name: "Md Kishor Morol",
             role: "Supervisor",
-            title: "PhD Student, Cornell University",
+            title: "PhD Student, Cornell University, USA",
             link: "https://scholar.google.com/citations?user=pjn3jg4AAAAJ",
           },
           {
