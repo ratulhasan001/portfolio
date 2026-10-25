@@ -227,7 +227,7 @@ export function SkillsSection() {
         </WipeIn>
         <div className="grid gap-2.5 sm:grid-cols-2">
           {certifications.map((cert, i) => (
-            <FadeIn key={cert.credentialId} delay={i * 0.08}>
+            <FadeIn key={cert.credentialId} delay={i * 0.08} className="min-w-0">
               <TiltLink
                 href={cert.link}
                 target="_blank"
@@ -244,8 +244,8 @@ export function SkillsSection() {
                   Issued {cert.issued}
                   {cert.expired && ` · Expired ${cert.expired}`}
                 </p>
-                <span className="mono mt-auto inline-flex items-center gap-1 pt-2 text-[11px] text-fg-subtle transition-colors group-hover:text-accent">
-                  <span className="truncate">ID {cert.credentialId}</span>
+                <span className="mono mt-auto inline-flex max-w-full items-center gap-1 pt-2 text-[11px] text-fg-subtle transition-colors group-hover:text-accent">
+                  <span className="min-w-0 truncate">ID {cert.credentialId}</span>
                   <ExternalLink
                     size={11}
                     className="shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
