@@ -63,21 +63,6 @@ export function CodechefIcon({ size = 16, className }: { size?: number; classNam
   );
 }
 
-export function LeetcodeIcon({ size = 16, className }: { size?: number; className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="currentColor"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M5 4h6v6h8v10H5V4z" />
-    </svg>
-  );
-}
-
 export function OrcidIcon({ size = 16, className }: { size?: number; className?: string }) {
   return (
     <svg

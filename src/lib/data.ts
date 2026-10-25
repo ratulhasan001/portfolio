@@ -458,7 +458,6 @@ export const stats = [
     suffix: "",
   },
   { label: "Research Projects", value: projects.length, suffix: "" },
-  { label: "Problems Solved", value: 1000, suffix: "+" },
   { label: "Programming Awards", value: 6, suffix: "+" },
 ];
 
@@ -508,12 +507,6 @@ export const onlineJudges = [
     stat: "Max Rating 1676 (3 Star)",
     handle: "ratulhasan2108",
     link: "https://www.codechef.com/users/ratulhasan2108",
-  },
-  {
-    platform: "LeetCode",
-    stat: "50+ problems solved",
-    handle: "ratulhasan001",
-    link: "https://leetcode.com/u/ratulhasan001/",
   },
 ];
 

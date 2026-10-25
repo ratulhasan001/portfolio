@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Cinzel } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
@@ -7,17 +7,25 @@ import { SmoothScroll } from "@/components/smooth-scroll";
 import { profile } from "@/lib/data";
 import { ogImage } from "@/lib/og";
 
-const sans = Plus_Jakarta_Sans({
+// Geist and Geist Mono: a matched pair, so the mono labels sit with the
+// body text instead of reading as a second voice. Both are variable fonts.
+const sans = Geist({
   variable: "--font-sans-family",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
+const mono = Geist_Mono({
   variable: "--font-mono-family",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+/** Trajan-style capitals, used only for the footer's house words. */
+const display = Cinzel({
+  variable: "--font-display-family",
+  subsets: ["latin"],
+  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -67,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${mono.variable} h-full antialiased`}
+      className={`${sans.variable} ${mono.variable} ${display.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

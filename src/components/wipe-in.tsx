@@ -121,15 +121,16 @@ export function WipeWords({
 }
 
 /**
- * PowerPoint's Whip entrance: the word is flung in around its leading edge
- * and snaps flat, so it lands with a crack rather than a glide. Reserved for
- * the name in the hero.
+ * Rise, letter by letter: each letter slides up from behind its word's
+ * baseline, as if pushed through a slot. Only `transform` animates, so the
+ * browser composites it on the GPU and the large hero type stays smooth.
+ * Reserved for the name in the hero.
  */
-export function WhipWords({
+export function RiseLetters({
   text,
   className,
   delay = 0,
-  stagger = 0.08,
+  stagger = 0.035,
 }: {
   text: string;
   className?: string;
@@ -146,31 +147,31 @@ export function WhipWords({
         hidden: {},
         show: { transition: { staggerChildren: stagger, delayChildren: delay } },
       }}
+      aria-label={text}
       className={className}
     >
       {words.map((word, i) => (
-        <span key={i}>
-          <motion.span
-            variants={{
-              hidden: { opacity: 0, rotateY: -92, skewX: 26, x: -48 },
-              show: {
-                opacity: 1,
-                rotateY: 0,
-                skewX: 0,
-                x: 0,
-                transition: {
-                  type: "spring",
-                  stiffness: 320,
-                  damping: 17,
-                  mass: 0.7,
-                },
-              },
-            }}
-            style={{ transformPerspective: 900, transformOrigin: "left center" }}
-            className="inline-block"
-          >
-            {word}
-          </motion.span>
+        <span key={i} aria-hidden>
+          {/* The padding/negative margin pair widens the mask past the tight
+              display leading so ascenders and descenders aren't clipped. */}
+          <span className="-my-[0.14em] inline-block overflow-hidden py-[0.14em] align-bottom">
+            {Array.from(word).map((letter, j) => (
+              <motion.span
+                key={j}
+                variants={{
+                  hidden: { y: "110%" },
+                  show: {
+                    y: "0%",
+                    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                  },
+                }}
+                style={{ willChange: "transform" }}
+                className="inline-block"
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </span>
           {i < words.length - 1 ? " " : ""}
         </span>
       ))}

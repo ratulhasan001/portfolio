@@ -7,8 +7,9 @@ import { profile } from "@/lib/data";
 import { FadeIn } from "./fade-in";
 import { CvIcon, GithubIcon, LinkedinIcon, ScholarIcon } from "./brand-icons";
 import { ParallaxLayer } from "./parallax-layer";
-import { WhipWords } from "./wipe-in";
+import { RiseLetters } from "./wipe-in";
 import { Marquee } from "./marquee";
+import { HeroBot } from "./mascot";
 
 // The page itself is monochrome, so `brand` is the one place real colour is
 // allowed back in: it sweeps across the button while the cursor is on it.
@@ -156,6 +157,8 @@ export function Hero() {
         style={{ opacity: heroOpacity, y: yShift }}
         className="relative mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:pb-14 lg:pt-12"
       >
+        <HeroBot className="absolute right-4 top-[9.5rem] sm:right-6 sm:top-28 lg:top-14" />
+
         <FadeIn delay={0.1}>
           <p className="mono text-base font-medium text-fg-muted">
             Hi, I&apos;m
@@ -163,13 +166,13 @@ export function Hero() {
         </FadeIn>
 
         {/* Set as two stacked lines so the name reads as a display mark
-            rather than a run of text, each line whipped in on its own. */}
+            rather than a run of text, each line rising in on its own. */}
         <h1 className="mt-2 text-[19vw] font-extrabold leading-[0.84] tracking-[-0.05em] text-fg-default sm:text-8xl lg:text-[9.5rem]">
           <span className="block">
-            <WhipWords text={firstName} delay={0.22} />
+            <RiseLetters text={firstName} delay={0.2} />
           </span>
           <span className="block">
-            <WhipWords text={lastName} delay={0.42} />
+            <RiseLetters text={lastName} delay={0.32} />
           </span>
         </h1>
 
