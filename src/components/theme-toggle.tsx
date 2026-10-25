@@ -20,14 +20,24 @@ const SWAP_MS = 300;
 
 /**
  * The theme switch is a robot that sleeps when the lights go out. In light
- * mode it keeps a quiet line going about dark mode, changing it every few
- * seconds; in dark mode it sleeps, eyes shut with a few z's drifting up.
+ * mode, near the top of the page, it keeps a quiet line going about dark
+ * mode, changing it every few seconds; in dark mode it sleeps, eyes shut
+ * with a few z's drifting up.
  */
 export function ThemeToggle() {
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";
   const [plea, setPlea] = useState(0);
   const [swapping, setSwapping] = useState(false);
+  const [atTop, setAtTop] = useState(true);
+
+  // The nav (and this robot) follows the reader down the page, so it only
+  // talks unprompted near the top; further down it'd sit over the content.
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 120);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (isDark) return;
@@ -48,8 +58,9 @@ export function ThemeToggle() {
     };
   }, [isDark]);
 
-  // Awake: always talking (it only waves on hover). Asleep: quiet.
-  const mood = isDark ? "is-asleep" : swapping ? "" : "is-talking";
+  // Awake: talking near the top of the page (it only waves on hover).
+  // Asleep: quiet.
+  const mood = isDark ? "is-asleep" : swapping || !atTop ? "" : "is-talking";
 
   return (
     <motion.button
