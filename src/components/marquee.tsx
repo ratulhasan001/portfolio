@@ -1,29 +1,20 @@
 "use client";
 
-import { profile, publications, onlineJudges } from "@/lib/data";
+import { publications } from "@/lib/data";
 
 const accepted = publications.filter(
   (p) => p.status === "published" || p.status === "accepted"
 ).length;
-const underReview = publications.filter((p) => p.status === "under-review");
-const journalsUnderReview = underReview.filter(
-  (p) => p.type === "journal"
-).length;
 
-const codeforces = onlineJudges.find((j) => j.platform === "Codeforces");
-const codechef = onlineJudges.find((j) => j.platform === "Codechef");
-
-/** Credentials first, then the research areas they were earned in. */
+/** Kept short: three credentials, then three fields, a word or two each. */
 const items = [
-  codeforces && "Expert on Codeforces",
   `${accepted} Publications`,
-  journalsUnderReview > 0 &&
-    `${journalsUnderReview} Journals Under Review`,
-  codechef && "3★ on Codechef",
+  "Codeforces Expert",
   "ICPC Regionalist",
-  ...profile.focusAreas,
-  "Post-Quantum Cryptography",
-].filter(Boolean) as string[];
+  "AI",
+  "Cybersecurity",
+  "Blockchain",
+];
 
 function Track({ ariaHidden }: { ariaHidden?: boolean }) {
   return (
