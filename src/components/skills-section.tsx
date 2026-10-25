@@ -51,12 +51,11 @@ import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
 import { ParallaxLayer } from "./parallax-layer";
 import { TiltLink } from "./tilt-card";
 import { WipeWords, WipeIn } from "./wipe-in";
-import { CodeforcesIcon, CodechefIcon, LeetcodeIcon } from "./brand-icons";
+import { CodeforcesIcon, CodechefIcon } from "./brand-icons";
 
 const judgeIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Codeforces: CodeforcesIcon,
   Codechef: CodechefIcon,
-  LeetCode: LeetcodeIcon,
 };
 
 const skillIcons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -107,7 +106,7 @@ export function SkillsSection() {
             Competitive Programming
           </h3>
         </WipeIn>
-        <div className="grid gap-2.5 sm:grid-cols-3">
+        <div className="grid gap-2.5 sm:grid-cols-2">
           {onlineJudges.map((judge, i) => {
             const Icon = judgeIcons[judge.platform];
             return (
