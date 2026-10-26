@@ -449,18 +449,6 @@ export const projects: Project[] = [
   },
 ];
 
-export const stats = [
-  {
-    label: "Publications",
-    value: publications.filter(
-      (p) => p.status === "accepted" || p.status === "published"
-    ).length,
-    suffix: "",
-  },
-  { label: "Research Projects", value: projects.length, suffix: "" },
-  { label: "Programming Awards", value: 6, suffix: "+" },
-];
-
 /**
  * Ordered from the most transferable to the most specialised, so the grid
  * reads languages -> what they are built with -> where the work sits.

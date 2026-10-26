@@ -51,20 +51,21 @@ export function TiltCard({
   className?: string;
   variants?: Variants;
 }) {
-  const t = useTilt<HTMLDivElement>();
+  const { ref, rotateX, rotateY, scale, glow, handleMouseMove, handleMouseLeave, handleMouseEnter } =
+    useTilt<HTMLDivElement>();
   return (
     <motion.div
-      ref={t.ref}
+      ref={ref}
       variants={variants}
-      onMouseMove={t.handleMouseMove}
-      onMouseLeave={t.handleMouseLeave}
-      onMouseEnter={t.handleMouseEnter}
-      style={{ rotateX: t.rotateX, rotateY: t.rotateY, scale: t.scale, transformPerspective: 800 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      style={{ rotateX, rotateY, scale, transformPerspective: 800 }}
       className={`group relative ${className ?? ""}`}
     >
       <motion.span
         aria-hidden
-        style={{ background: t.glow }}
+        style={{ background: glow }}
         className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-[0.12]"
       />
       <div className="relative z-10 h-full">{children}</div>
@@ -87,23 +88,24 @@ export function TiltLink({
   rel?: string;
   variants?: Variants;
 }) {
-  const t = useTilt<HTMLAnchorElement>();
+  const { ref, rotateX, rotateY, scale, glow, handleMouseMove, handleMouseLeave, handleMouseEnter } =
+    useTilt<HTMLAnchorElement>();
   return (
     <motion.a
-      ref={t.ref}
+      ref={ref}
       href={href}
       target={target}
       rel={rel}
       variants={variants}
-      onMouseMove={t.handleMouseMove}
-      onMouseLeave={t.handleMouseLeave}
-      onMouseEnter={t.handleMouseEnter}
-      style={{ rotateX: t.rotateX, rotateY: t.rotateY, scale: t.scale, transformPerspective: 800 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      style={{ rotateX, rotateY, scale, transformPerspective: 800 }}
       className={`group relative block ${className ?? ""}`}
     >
       <motion.span
         aria-hidden
-        style={{ background: t.glow }}
+        style={{ background: glow }}
         className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-[0.12]"
       />
       <div className="relative z-10 flex h-full flex-col">{children}</div>
