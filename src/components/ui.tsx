@@ -3,47 +3,6 @@
 import { motion } from "framer-motion";
 import { WipeIn, WipeWords } from "./wipe-in";
 
-export function Chip({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.span
-      whileHover={{ y: -2, scale: 1.05, borderColor: "var(--color-accent)", color: "var(--color-accent)" }}
-      transition={{ type: "spring", stiffness: 400, damping: 20 }}
-      className="chip inline-flex items-center rounded-full border border-border-default bg-canvas-subtle px-2.5 py-1 text-[13px] font-medium text-fg-muted"
-    >
-      {children}
-    </motion.span>
-  );
-}
-
-export function FileHeader({
-  filename,
-  label,
-}: {
-  filename: string;
-  label?: string;
-}) {
-  return (
-    <div className="flex items-center gap-2 rounded-t-md border border-b-0 border-border-default bg-canvas-subtle px-4 py-2.5">
-      <div className="flex gap-1.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-danger/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-attention/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
-      </div>
-      <span className="mono ml-2 text-xs text-fg-muted">{filename}</span>
-      {label && (
-        <WipeIn
-          as="span"
-          delay={0.3}
-          inView={false}
-          className="ml-auto mono inline-flex items-center rounded border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[11px] font-medium text-accent"
-        >
-          {label}
-        </WipeIn>
-      )}
-    </div>
-  );
-}
-
 export function SectionTitle({
   index,
   title,
