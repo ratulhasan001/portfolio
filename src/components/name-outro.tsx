@@ -43,7 +43,7 @@ export function NameOutro() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mono mt-1 text-[10px] uppercase tracking-[0.3em] text-fg-subtle sm:text-[11px]"
         >
-          {profile.role}
+          {profile.tagline}
         </motion.p>
 
         <motion.div
