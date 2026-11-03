@@ -4,7 +4,7 @@
 
 ### Computer Science Graduate · Aspiring Graduate Researcher
 
-Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.
+Computer Science graduate with research experience in machine learning, LLM safety and security, and healthcare AI. Published in peer-reviewed conference proceedings, with research interests in large language models, trustworthy AI, and MLOps. Aspiring to pursue graduate research in Artificial Intelligence while building hands-on DevOps skills through real projects.
 
 📍 Khulna, Bangladesh
 
@@ -24,11 +24,11 @@ Computer Science graduate with research experience in machine learning, healthca
 
 <div align="center">
 
-![Healthcare AI](https://img.shields.io/badge/Healthcare_AI-4493f8?style=for-the-badge)
-![LLMs](https://img.shields.io/badge/Large_Language_Models_%28LLMs%29-ab7df8?style=for-the-badge)
-![Explainable AI](https://img.shields.io/badge/Explainable_AI_%28XAI%29-3fb950?style=for-the-badge)
-![Computer Vision](https://img.shields.io/badge/Computer_Vision-4493f8?style=for-the-badge)
-![Blockchain](https://img.shields.io/badge/Blockchain_%26_Decentralized_Systems-ab7df8?style=for-the-badge)
+![Deep Learning](https://img.shields.io/badge/Deep_Learning-4493f8?style=for-the-badge)
+![LLMs](https://img.shields.io/badge/NLP_%26_Large_Language_Models-ab7df8?style=for-the-badge)
+![LLM Safety](https://img.shields.io/badge/LLM_Safety_%26_Security-3fb950?style=for-the-badge)
+![MLOps](https://img.shields.io/badge/MLOps_%26_DevOps_for_ML_Systems-4493f8?style=for-the-badge)
+![Cloud](https://img.shields.io/badge/Cloud_Infrastructure_%26_CI%2FCD-ab7df8?style=for-the-badge)
 
 </div>
 
@@ -40,7 +40,7 @@ Computer Science graduate with research experience in machine learning, healthca
 
 ## 🎓 Education
 
-**B.Sc in Computer Science and Engineering**, Bangladesh Army University of Engineering & Technology (BAUET), 2022–2026. CGPA 3.82 / 4.00.
+**B.Sc. in Computer Science and Engineering**, Bangladesh Army University of Engineering & Technology (BAUET), 2022–July 2026. CGPA 3.82 / 4.00.
 Thesis: *Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease*.
 
 ## 📄 Publications
