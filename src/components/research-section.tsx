@@ -24,8 +24,9 @@ import { ParallaxLayer } from "./parallax-layer";
 const statusMeta = {
   published: { label: "Published", dot: "bg-status-published" },
   accepted: { label: "Accepted", dot: "bg-status-accepted" },
+  presented: { label: "Presented", dot: "bg-status-accepted" },
   "under-review": { label: "Under Review", dot: "bg-status-review" },
-  "under-submission": { label: "Under Submission", dot: "bg-status-review" },
+  "under-submission": { label: "Submitted", dot: "bg-status-review" },
   preprint: { label: "Preprint", dot: "bg-fg-subtle" },
 } as const;
 
