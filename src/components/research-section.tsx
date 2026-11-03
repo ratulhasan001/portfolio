@@ -88,6 +88,11 @@ function PublicationRow({ pub }: { pub: Publication }) {
         </span>
       </div>
 
+      {/* Always visible: author order is the first thing a committee reads. */}
+      <div className="mt-2">
+        <Byline authors={pub.authors} />
+      </div>
+
       <div className="mt-3 flex flex-wrap items-center gap-x-2.5 gap-y-2">
         <span className="mono rounded-full border border-border-default px-3 py-1 text-[10px] uppercase tracking-[0.1em] text-fg-muted sm:text-[11px]">
           {pub.date}
@@ -136,8 +141,8 @@ function PublicationRow({ pub }: { pub: Publication }) {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls={panelId}
-          aria-label={open ? "Hide details" : "Show details"}
-          title={open ? "Hide details" : "Show details"}
+          aria-label={open ? "Hide venue" : "Show venue"}
+          title={open ? "Hide venue" : "Show venue"}
           className={`ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors ${
             open
               ? "border-fg-default bg-fg-default text-canvas"
@@ -166,12 +171,6 @@ function PublicationRow({ pub }: { pub: Publication }) {
             className="overflow-hidden"
           >
             <div className="mt-4 space-y-3 border-t border-border-default pt-3">
-              <div>
-                <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
-                  Authors
-                </p>
-                <Byline authors={pub.authors} />
-              </div>
               <div>
                 <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
                   Venue

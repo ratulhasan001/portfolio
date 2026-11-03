@@ -1,9 +1,7 @@
 "use client";
 
-import { useId, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ExternalLink, GraduationCap } from "lucide-react";
+import { ExternalLink, GraduationCap } from "lucide-react";
 import { education, type Education } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn } from "./fade-in";
@@ -21,8 +19,6 @@ function Dot() {
 }
 
 function EducationRow({ edu }: { edu: Education }) {
-  const [open, setOpen] = useState(false);
-  const panelId = useId();
   const thesis = edu.detail?.replace(/^Thesis:\s*/, "");
 
   return (
@@ -80,42 +76,10 @@ function EducationRow({ edu }: { edu: Education }) {
               </>
             )}
 
-            {thesis && (
-              <button
-                type="button"
-                onClick={() => setOpen((v) => !v)}
-                aria-expanded={open}
-                aria-controls={panelId}
-                aria-label={open ? "Hide thesis" : "Show thesis"}
-                title={open ? "Hide thesis" : "Show thesis"}
-                className={`ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                  open
-                    ? "border-fg-default bg-fg-default text-canvas"
-                    : "border-border-default text-fg-muted hover:border-fg-subtle hover:text-fg-default"
-                }`}
-              >
-                <motion.span
-                  animate={{ rotate: open ? 180 : 0 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="flex"
-                >
-                  <ChevronDown size={14} />
-                </motion.span>
-              </button>
-            )}
           </div>
 
-          <AnimatePresence initial={false}>
-            {open && thesis && (
-              <motion.div
-                id={panelId}
-                key="panel"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                className="overflow-hidden"
-              >
+          {thesis && (
+            <div>
                 <div className="mt-4 space-y-3 border-t border-border-default pt-3">
                   <div>
                     <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
@@ -149,9 +113,8 @@ function EducationRow({ edu }: { edu: Education }) {
                     </div>
                   ))}
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+            </div>
+          )}
         </div>
       </div>
     </li>
