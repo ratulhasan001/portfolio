@@ -5,7 +5,7 @@ export const profile = {
   location: "Khulna, Bangladesh",
   email: "ratulhasan.cs@gmail.com",
   phone: "+8801760972108",
-  website: "https://ratulhasan.xyz",
+  website: "https://ratulhasan.dev",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
   orcid: "https://orcid.org/0009-0009-5429-7501",
