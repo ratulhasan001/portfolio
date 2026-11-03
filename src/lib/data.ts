@@ -13,14 +13,15 @@ export const profile = {
   headline: "Aspiring Graduate Researcher",
   tagline:
     "Computer Science graduate with research experience in Artificial Intelligence and LLM security, now building hands-on DevOps and MLOps skills",
+  /** Research statement shown in the hero; ties the publication record into one thread. */
   summary:
-    "Computer Science graduate with research experience in machine learning, LLM safety and security, and healthcare AI. Published in peer-reviewed conference proceedings, with research interests in large language models, trustworthy AI, and MLOps. Aspiring to pursue graduate research in Artificial Intelligence while building hands-on DevOps skills through real projects.",
+    "My research sits where security meets machine learning: how LLM agents, IoT devices and clinical models can be attacked, and how to make them trustworthy. I have first-authored peer-reviewed work on post-quantum firmware updates and blockchain document verification, and I now study prompt-injection attacks on LLM-based home agents and their defences. I am preparing for graduate research in AI security and trustworthy machine learning.",
   focusAreas: [
-    "Artificial Intelligence",
-    "Large Language Models",
     "LLM Safety & Security",
-    "MLOps & DevOps",
-    "Cloud Infrastructure & CI/CD",
+    "Trustworthy ML",
+    "IoT & Post-Quantum Security",
+    "Healthcare AI",
+    "MLOps",
   ],
   followersLabel: "Open to research collaboration",
 };
@@ -380,18 +381,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: "Folionix",
-    icon: "kubernetes",
-    description:
-      "My hands-on DevOps learning project: my BAUET thesis archive rebuilt as a 5-service platform, which I am taking step by step through containers, CI/CD, Kubernetes, Terraform and observability.",
-    tools: ["Docker", "GitHub Actions", "Trivy", "Django", "FastAPI"],
-    detailsHref: "/projects/folionix",
-    language: "DevOps",
-    languageColor: "#326CE5",
-    ongoing: true,
-    track: "DevOps",
-  },
-  {
     name: "LedgerSeal",
     icon: "solidity",
     description:
@@ -409,6 +398,18 @@ export const projects: Project[] = [
     ],
   },
   {
+    name: "Folionix",
+    icon: "kubernetes",
+    description:
+      "My hands-on DevOps learning project: my BAUET thesis archive rebuilt as a 5-service platform, which I am taking step by step through containers, CI/CD, Kubernetes, Terraform and observability.",
+    tools: ["Docker", "GitHub Actions", "Trivy", "Django", "FastAPI"],
+    detailsHref: "/projects/folionix",
+    language: "DevOps",
+    languageColor: "#326CE5",
+    ongoing: true,
+    track: "DevOps",
+  },
+  {
     name: "BAUET Project & Thesis Archive",
     icon: "django",
     description:
@@ -417,36 +418,6 @@ export const projects: Project[] = [
     link: "https://github.com/ratulhasan001/BAUET_archive_project",
     language: "Python",
     languageColor: "#3572A5",
-  },
-  {
-    name: "PheroTube",
-    icon: "javascript",
-    description:
-      "A basic JavaScript project for API fetching that mimics video streaming platform functionality with dynamic content loading.",
-    tools: ["HTML", "CSS", "JavaScript", "API Integration"],
-    link: "https://ratul-phero-tube.netlify.app/",
-    language: "JavaScript",
-    languageColor: "#F1E05A",
-  },
-  {
-    name: "Library Management System",
-    icon: "java",
-    description:
-      "A library management desktop application with comprehensive book and user management features.",
-    tools: ["Java Swing", "MySQL"],
-    link: "https://github.com/ratulhasan001/LMS",
-    language: "Java",
-    languageColor: "#B07219",
-  },
-  {
-    name: "Fashion Quest",
-    icon: "bootstrap",
-    description:
-      "A basic static website using CSS showcasing fashion trends and styles with modern responsive design and elegant layouts.",
-    tools: ["HTML", "CSS", "Bootstrap", "Responsive Design"],
-    link: "https://ratul-fashion-quest.netlify.app/",
-    language: "Bootstrap",
-    languageColor: "#7952B3",
   },
 ];
 
