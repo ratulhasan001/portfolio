@@ -188,8 +188,31 @@ export function Hero() {
           </p>
         </FadeIn>
 
+        {/* Research statement: the one paragraph a committee reads, so it
+            sits above the contact row rather than in a section further down. */}
+        <FadeIn delay={0.64}>
+          <div className="mt-6 max-w-2xl border-l-2 border-fg-default pl-4">
+            <p className="mono text-[10px] font-semibold uppercase tracking-[0.16em] text-fg-subtle sm:text-[11px]">
+              Research
+            </p>
+            <p className="mt-1.5 text-[15px] leading-relaxed text-fg-muted sm:text-base">
+              {profile.summary}
+            </p>
+            <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Research focus areas">
+              {profile.focusAreas.map((area) => (
+                <li
+                  key={area}
+                  className="mono rounded-full border border-border-default px-2.5 py-1 text-[10px] uppercase tracking-[0.1em] text-fg-muted sm:text-[11px]"
+                >
+                  {area}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </FadeIn>
+
         <FadeIn
-          delay={0.62}
+          delay={0.7}
           className="mt-6 flex flex-wrap items-center gap-2"
         >
           {contactIcons.map((item) => (
