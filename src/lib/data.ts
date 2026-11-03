@@ -12,15 +12,15 @@ export const profile = {
   scholar: "https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en",
   headline: "Aspiring Graduate Researcher",
   tagline:
-    "Computer Science graduate with research experience in Artificial Intelligence and Cybersecurity",
+    "Computer Science graduate with research experience in Artificial Intelligence and LLM security, now building hands-on DevOps and MLOps skills",
   summary:
-    "Computer Science graduate with research experience in machine learning, healthcare AI, blockchain, and cybersecurity. Published in peer-reviewed conference proceedings, with research interests in trustworthy AI, large language models, and AI for healthcare. Aspiring to pursue graduate research in Artificial Intelligence.",
+    "Computer Science graduate with research experience in machine learning, LLM safety and security, and healthcare AI. Published in peer-reviewed conference proceedings, with research interests in large language models, trustworthy AI, and MLOps. Aspiring to pursue graduate research in Artificial Intelligence while building hands-on DevOps skills through real projects.",
   focusAreas: [
     "Artificial Intelligence",
-    "Machine Learning",
-    "Computer Vision",
     "Large Language Models",
-    "Blockchain & Decentralized Systems",
+    "LLM Safety & Security",
+    "MLOps & DevOps",
+    "Cloud Infrastructure & CI/CD",
   ],
   followersLabel: "Open to research collaboration",
 };
@@ -80,8 +80,8 @@ export const experience: Experience[] = [
           },
         ],
         bullets: [
-          "Working on a team journal project mapping attacker-controllable IoT metadata as an indirect prompt-injection surface for LLM home agents.",
-          "Measuring which Home Assistant device and integration text fields reach its built-in LLM conversation agents, and how often injected instructions trigger unauthorised physical actions or leak private state in a simulated home.",
+          "Contributing to a journal study that maps attacker-controllable IoT metadata as an indirect prompt-injection surface for LLM-based home agents.",
+          "Measuring which Home Assistant device and integration text fields reach its built-in LLM conversation agents, and how often injected instructions trigger unauthorized physical actions or leak private state in a simulated home.",
           "Evaluating how provenance tagging, actuating-tool gating and action confirmation reduce attack success, and their cost in benign-task utility.",
         ],
       },
@@ -105,7 +105,7 @@ export const experience: Experience[] = [
         bullets: [
           "First-authored a systematic review of 82 studies on LLMs in mental health, appraising methodological rigour and risk reporting (hallucination, bias, safety, human evaluation) with a 24-field extraction instrument.",
           "Studied catastrophic forgetting in federated continual learning for mental health text classification, separating label-space shift from domain shift on Reddit stress and depression data.",
-          "Benchmarked seven training regimes (FedAvg, FedProx, EWC, replay, centralized and joint baselines) across 10 clients and three seeds with a MiniLM encoder.",
+          "Benchmarked seven training regimes, including FedAvg, FedProx, EWC, replay and centralized baselines, across 10 clients and three seeds with a MiniLM encoder.",
         ],
       },
     ],
@@ -165,9 +165,9 @@ export type Education = {
 export const education: Education[] = [
   {
     school: "Bangladesh Army University of Engineering & Technology (BAUET)",
-    degree: "B.Sc in Computer Science and Engineering",
+    degree: "B.Sc. in Computer Science and Engineering",
     location: "Natore, Bangladesh",
-    period: "2022 - 2026",
+    period: "2022 - July 2026",
     detail:
       "Thesis: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
     score: { label: "CGPA", value: 3.82, scale: 4.0 },
@@ -206,6 +206,7 @@ export type Publication = {
   status:
     | "published"
     | "accepted"
+    | "presented"
     | "under-review"
     | "under-submission"
     | "preprint";
@@ -296,8 +297,8 @@ export const publications: Publication[] = [
   ],
   venue:
     "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
-  date: "Expected 2026",
-  status: "accepted",
+  date: "Presented 2026 · proceedings pending",
+  status: "presented",
   type: "conference",
   digitalLibrary: "IEEE Xplore Digital Library",
 },
@@ -314,8 +315,8 @@ export const publications: Publication[] = [
   ],
   venue:
     "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
-  date: "Expected 2026",
-  status: "accepted",
+  date: "Presented 2026 · proceedings pending",
+  status: "presented",
   type: "conference",
   digitalLibrary: "IEEE Xplore Digital Library",
 },
@@ -394,8 +395,8 @@ export const projects: Project[] = [
     name: "LedgerSeal",
     icon: "solidity",
     description:
-      "A decentralized application (DApp) for constant-time document verification with dynamic access control on IPFS, built on a public blockchain.",
-    tools: ["React JS", "Anvil EVM", "Foundry", "Metamask", "Pinata IPFS"],
+      "A decentralized application (DApp) for constant-time document verification with dynamic access control on IPFS, built on an EVM-compatible blockchain.",
+    tools: ["React", "Anvil EVM", "Foundry", "MetaMask", "Pinata IPFS"],
     link: "https://github.com/ratulhasan001/LedgerSeal",
     language: "Solidity",
     languageColor: "#AA6746",
@@ -454,14 +455,12 @@ export const projects: Project[] = [
  * reads languages -> what they are built with -> where the work sits.
  */
 export const skills = {
-  "Research Areas": [
+  "Research Interests": [
     "Deep Learning",
-    "NLP & LLMs",
-    "LLM Security",
-    "Federated & Continual Learning",
-    "Computer Vision",
-    "Post-Quantum Cryptography",
-    "Blockchain & IoT Security",
+    "NLP & Large Language Models",
+    "LLM Safety & Security",
+    "MLOps & DevOps for ML Systems",
+    "Cloud Infrastructure & CI/CD Automation",
   ],
   Languages: ["Python", "C", "C++", "JavaScript", "SQL", "Solidity"],
   "ML & Research": ["PyTorch", "Hugging Face"],
@@ -473,10 +472,12 @@ export const skills = {
     "Foundry",
     "IPFS",
   ],
-  "Tools & Databases": [
+  "DevOps & Databases": [
     "Git",
     "GitHub",
+    "GitHub Actions",
     "Docker",
+    "Trivy",
     "Linux",
     "PostgreSQL",
     "MySQL",
