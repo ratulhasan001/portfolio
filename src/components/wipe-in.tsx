@@ -122,9 +122,13 @@ export function WipeWords({
 
 /**
  * Rise, letter by letter: each letter slides up from behind its word's
- * baseline, as if pushed through a slot. Only `transform` animates, so the
- * browser composites it on the GPU and the large hero type stays smooth.
- * Reserved for the name in the hero.
+ * baseline, as if pushed through a slot. This one is a plain CSS keyframe
+ * rather than a Framer Motion animation on purpose: the name plays while
+ * the rest of the page is still hydrating, and a JS-driven transform drops
+ * frames whenever the main thread is busy. A CSS animation on `transform`
+ * runs on the compositor thread, so it stays smooth regardless, and it
+ * starts from the server-rendered HTML with no flash. Reserved for the
+ * name in the hero. Styles live in globals.css under `.rise-letter`.
  */
 export function RiseLetters({
   text,
@@ -138,43 +142,31 @@ export function RiseLetters({
   stagger?: number;
 }) {
   const words = text.split(" ");
+  let index = 0;
 
   return (
-    <motion.span
-      initial="hidden"
-      animate="show"
-      variants={{
-        hidden: {},
-        show: { transition: { staggerChildren: stagger, delayChildren: delay } },
-      }}
-      aria-label={text}
-      className={className}
-    >
+    <span aria-label={text} className={className}>
       {words.map((word, i) => (
         <span key={i} aria-hidden>
           {/* The padding/negative margin pair widens the mask past the tight
               display leading so ascenders and descenders aren't clipped. */}
           <span className="-my-[0.14em] inline-block overflow-hidden py-[0.14em] align-bottom">
-            {Array.from(word).map((letter, j) => (
-              <motion.span
-                key={j}
-                variants={{
-                  hidden: { y: "110%" },
-                  show: {
-                    y: "0%",
-                    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-                  },
-                }}
-                style={{ willChange: "transform" }}
-                className="inline-block"
-              >
-                {letter}
-              </motion.span>
-            ))}
+            {Array.from(word).map((letter, j) => {
+              const letterDelay = delay + stagger * index++;
+              return (
+                <span
+                  key={j}
+                  className="rise-letter"
+                  style={{ "--rise-delay": `${letterDelay}s` } as React.CSSProperties}
+                >
+                  {letter}
+                </span>
+              );
+            })}
           </span>
           {i < words.length - 1 ? " " : ""}
         </span>
       ))}
-    </motion.span>
+    </span>
   );
 }

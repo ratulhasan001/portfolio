@@ -10,7 +10,7 @@ Computer Science graduate with research experience in machine learning, LLM safe
 
 <br/>
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-4493f8?style=for-the-badge&logo=vercel&logoColor=white)](https://ratulhasan.xyz)
+[![Portfolio](https://img.shields.io/badge/Portfolio-4493f8?style=for-the-badge&logo=vercel&logoColor=white)](https://ratulhasan.dev)
 [![Google Scholar](https://img.shields.io/badge/Google_Scholar-4285F4?style=for-the-badge&logo=googlescholar&logoColor=white)](https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en)
 [![ORCID](https://img.shields.io/badge/ORCID-A6CE39?style=for-the-badge&logo=orcid&logoColor=white)](https://orcid.org/0009-0009-5429-7501)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/ratul-hasan-linked-in)
@@ -45,8 +45,8 @@ Thesis: *Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal
 
 ## 📄 Publications
 
-Publications, preprints, and work under review are listed on my [portfolio](https://ratulhasan.xyz) and [Google Scholar](https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en).
+Publications, preprints, and work under review are listed on my [portfolio](https://ratulhasan.dev) and [Google Scholar](https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en).
 
 ---
 
-<sub>This repository is the source of [ratulhasan.xyz](https://ratulhasan.xyz), built with Next.js, React, and Tailwind CSS.</sub>
+<sub>This repository is the source of [ratulhasan.dev](https://ratulhasan.dev), built with Next.js, React, and Tailwind CSS.</sub>
