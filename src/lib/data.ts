@@ -456,9 +456,9 @@ export const projects: Project[] = [
  */
 export const skills = {
   "Research Interests": [
-    "AI in Medical Imaging",
+    "AI in Healthcare",
+    "Cybersecurity",
     "Cloud Infrastructure",
-    "DevOps",
   ],
   Languages: ["Python", "C", "C++", "JavaScript", "SQL", "Solidity"],
   "ML & Research": ["PyTorch", "Hugging Face"],
