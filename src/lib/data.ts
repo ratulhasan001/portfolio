@@ -339,6 +339,8 @@ export const publications: Publication[] = [
     link: "https://doi.org/10.1109/PECCII70991.2026.11662071",
     type: "conference",
     digitalLibrary: "IEEE Xplore Digital Library",
+    certificate:
+      "/certificates/peccii2026-gas-optimized-blockchain-presentation-certificate.pdf",
   },
   {
     title:
