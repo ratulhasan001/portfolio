@@ -8,7 +8,6 @@ import { SkillsSection } from "@/components/skills-section";
 import { ReferencesSection } from "@/components/references-section";
 import { NameOutro } from "@/components/name-outro";
 import { ScrollProgress } from "@/components/scroll-progress";
-import { ScrollRail } from "@/components/scroll-rail";
 import { SectionConnector } from "@/components/section-connector";
 import { MascotDirector } from "@/components/mascot";
 
@@ -16,7 +15,6 @@ export default function Home() {
   return (
     <>
       <ScrollProgress />
-      <ScrollRail />
       <Nav />
       <main className="flex-1">
         <Hero />
