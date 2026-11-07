@@ -112,7 +112,7 @@ export function Nav() {
         // The bar never changes shape on scroll. It carries no fill or rule of
         // its own; the page simply passes behind it out of focus, so the only
         // drawn edge on screen stays the rounded rail around the links.
-        className="safe-top sticky top-0 z-50 hidden bg-canvas/50 backdrop-blur-xl backdrop-saturate-150 lg:block"
+        className="safe-top sticky top-0 z-50 hidden bg-canvas/85 backdrop-blur-md lg:block"
       >
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
           <Logo />
@@ -166,7 +166,7 @@ export function Nav() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="safe-top fixed right-4 top-4 z-50 lg:hidden"
       >
-        <div className="flex items-center gap-2 rounded-full border border-border-strong bg-canvas/90 py-1.5 pl-1.5 pr-2 shadow-[0_10px_30px_-14px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+        <div className="flex items-center gap-2 rounded-full border border-border-strong bg-canvas/90 py-1.5 pl-1.5 pr-2 shadow-[0_10px_30px_-14px_rgba(0,0,0,0.5)] backdrop-blur-md">
           <Logo compact />
 
           <div className="h-4 w-px shrink-0 bg-border-default" />

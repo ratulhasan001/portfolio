@@ -24,6 +24,9 @@ export type Position = {
   bullets?: string[];
   /** Supervisor / PI lines shown under the period. */
   supervisors?: Supervisor[];
+  /** Path under `public/` to proof of this title, shown after the bullets. */
+  certificate?: string;
+  certificateLabel?: string;
 };
 
 export type Experience = {
@@ -64,6 +67,8 @@ export const experience: Experience[] = [
         role: "Research Assistant",
         period: "October 2026 - Present",
         current: true,
+        certificate: "/certificates/elite-research-assistant-certificate.pdf",
+        certificateLabel: "Recognition certificate",
         supervisors: [
           {
             name: "Md Kishor Morol",
@@ -85,6 +90,8 @@ export const experience: Experience[] = [
       {
         role: "Research Intern",
         period: "June 2026 - September 2026",
+        certificate: "/certificates/elite-research-intern-certificate.pdf",
+        certificateLabel: "Completion certificate",
         supervisors: [
           {
             name: "Md Kishor Morol",

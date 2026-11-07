@@ -197,6 +197,26 @@ html.force-visible [style*="clip-path"] {
   }
 }
 
+/* Hero entrance: a one-off bottom-up wipe in CSS, so it never depends on
+   JavaScript running each frame. */
+.hero-reveal {
+  animation: hero-reveal 0.55s cubic-bezier(0.33, 0, 0.2, 1) both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+@keyframes hero-reveal {
+  from {
+    clip-path: inset(100% 0% 0% 0%);
+  }
+  to {
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal {
+    animation: none;
+  }
+}
+
 .mono {
   font-family: var(--font-mono-family), ui-monospace, SFMono-Regular, monospace;
   font-feature-settings: "tnum" 1;
