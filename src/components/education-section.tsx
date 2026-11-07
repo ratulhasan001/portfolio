@@ -107,7 +107,7 @@ function EducationRow({ edu }: { edu: Education }) {
                             {sup.name}
                           </span>
                         )}
-                        , {sup.title}
+                        {sup.title && `, ${sup.title}`}
                       </p>
                     </div>
                   ))}
