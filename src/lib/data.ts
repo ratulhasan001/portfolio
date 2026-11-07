@@ -68,13 +68,11 @@ export const experience: Experience[] = [
           {
             name: "Md Kishor Morol",
             role: "Supervisor",
-            title: "PhD Student, Cornell University, USA",
             link: "https://scholar.google.com/citations?user=pjn3jg4AAAAJ",
           },
           {
             name: "S M Musfequr Rahman",
             role: "PI",
-            title: "PhD Student, Tampere University, Finland",
             link: "https://scholar.google.com/citations?user=GdaEBwsAAAAJ&hl=en",
           },
         ],
@@ -91,13 +89,11 @@ export const experience: Experience[] = [
           {
             name: "Md Kishor Morol",
             role: "Supervisor",
-            title: "PhD Student, Cornell University, USA",
             link: "https://scholar.google.com/citations?user=pjn3jg4AAAAJ",
           },
           {
             name: "Shakib Sadat Shanto",
             role: "PI",
-            title: "PhD Student, University of Maine, USA",
             link: "https://scholar.google.com/citations?user=twShbgIAAAAJ&hl=en",
           },
         ],
@@ -150,7 +146,8 @@ export type Supervisor = {
   name: string;
   /** "Supervisor", "Co-supervisor" or "PI". */
   role: string;
-  title: string;
+  /** Position and affiliation; optional, the name alone is shown when absent. */
+  title?: string;
   /** Google Scholar or faculty profile. */
   link?: string;
 };
