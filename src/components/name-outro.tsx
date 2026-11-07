@@ -84,7 +84,7 @@ export function NameOutro() {
               CV
             </a>
             <span className="text-fg-subtle/60">
-              © {new Date().getFullYear()}
+              © {new Date().getFullYear()} {profile.name}
             </span>
           </div>
         </motion.div>
@@ -100,11 +100,8 @@ export function NameOutro() {
           className="pointer-events-none mt-12 select-none sm:mt-16"
         >
           <EagleMark className="mx-auto h-16 w-16 text-fg-default/25 sm:h-20 sm:w-20" />
-          <p className="mt-3 font-display text-[11px] font-bold uppercase tracking-[0.6em] text-fg-default/25 sm:mt-4 sm:text-sm">
-            The
-          </p>
-          <p className="mt-1 whitespace-nowrap bg-gradient-to-b from-fg-default/20 to-fg-default/0 bg-clip-text pb-1 font-display text-[7.4vw] font-bold uppercase leading-none tracking-[0.08em] text-transparent lg:text-[4.6rem]">
-            Silent Architect
+          <p className="mt-3 whitespace-nowrap bg-gradient-to-b from-fg-default/20 to-fg-default/0 bg-clip-text pb-1 font-display text-[7.4vw] font-bold uppercase leading-none tracking-[0.08em] text-transparent lg:text-[4.6rem]">
+            {profile.name}
           </p>
         </motion.div>
       </div>
