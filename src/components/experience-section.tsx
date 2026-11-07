@@ -6,6 +6,43 @@ import { experience, type Position } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { WipeWords } from "./wipe-in";
 import { TimelineLogo } from "./timeline-logo";
+import { GithubIcon, LinkedinIcon } from "./brand-icons";
+
+const socialMeta = {
+  linkedin: { label: "LinkedIn", Icon: LinkedinIcon },
+  github: { label: "GitHub", Icon: GithubIcon },
+} as const;
+
+/** Proof-of-role link, kept near the top of each role so it is seen. */
+function CertificateLink({ href, label }: { href: string; label?: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="mono inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+    >
+      <Award size={11} />
+      {label ?? "Certificate"}
+    </a>
+  );
+}
+
+/** Organisation name, linked to its site when one is given. */
+function OrgName({ name, website }: { name: string; website?: string }) {
+  if (!website) return <>{name}</>;
+  return (
+    <a
+      href={website}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center gap-1.5 underline decoration-fg-subtle decoration-1 underline-offset-4 transition-colors hover:decoration-fg-default"
+    >
+      {name}
+      <ExternalLink size={14} className="shrink-0 text-fg-subtle" />
+    </a>
+  );
+}
 
 export function ExperienceSection() {
   return (
@@ -42,11 +79,11 @@ export function ExperienceSection() {
                   the titles stack beneath it. */}
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-lg font-bold leading-tight tracking-tight text-fg-default sm:text-xl">
-                  <WipeWords
-                    text={stacked ? exp.org : exp.role}
-                    inView
-                    stagger={0.04}
-                  />
+                  {stacked ? (
+                    <OrgName name={exp.org} website={exp.website} />
+                  ) : (
+                    <WipeWords text={exp.role} inView stagger={0.04} />
+                  )}
                 </h3>
                 <span className="mono shrink-0 text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
                   {exp.period}
@@ -55,7 +92,7 @@ export function ExperienceSection() {
 
               {!stacked && (
                 <p className="mt-1.5 text-[15px] text-fg-muted">
-                  <WipeWords text={exp.org} inView delay={0.1} stagger={0.04} />
+                  <OrgName name={exp.org} website={exp.website} />
                 </p>
               )}
 
@@ -70,7 +107,31 @@ export function ExperienceSection() {
                     </span>
                   </>
                 )}
+                {exp.socials?.map(({ kind, href }) => {
+                  const { label, Icon } = socialMeta[kind];
+                  return (
+                    <span key={kind} className="inline-flex items-center gap-x-2">
+                      <span aria-hidden>·</span>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${exp.org} on ${label}`}
+                        className="inline-flex items-center gap-1 transition-colors hover:text-fg-default"
+                      >
+                        <Icon size={11} />
+                        {label}
+                      </a>
+                    </span>
+                  );
+                })}
               </div>
+
+              {exp.certificate && (
+                <div className="mt-2">
+                  <CertificateLink href={exp.certificate} label={exp.certificateLabel} />
+                </div>
+              )}
 
               {/* Contact points a reviewer can use to confirm the role. */}
               {exp.contacts && exp.contacts.length > 0 && (
@@ -114,17 +175,6 @@ export function ExperienceSection() {
                 </ul>
               )}
 
-              {exp.certificate && (
-                <a
-                  href={exp.certificate}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mono mt-3 inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
-                >
-                  <Award size={11} />
-                  {exp.certificateLabel ?? "Certificate"}
-                </a>
-              )}
             </motion.li>
           );
         })}
@@ -191,9 +241,14 @@ function PositionFlow({
               <p className="mono mt-0.5 text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
                 {pos.period}
               </p>
+              {pos.certificate && !pos.supervisors?.length && (
+                <div className="mt-2">
+                  <CertificateLink href={pos.certificate} label={pos.certificateLabel} />
+                </div>
+              )}
               {pos.supervisors && pos.supervisors.length > 0 && (
                 <div className="mt-2 space-y-0.5">
-                  {pos.supervisors.map((sup) => (
+                  {pos.supervisors.map((sup, k) => (
                     <p
                       key={sup.role + sup.name}
                       className="text-[13px] leading-relaxed text-fg-muted"
@@ -215,6 +270,17 @@ function PositionFlow({
                         <span className="font-medium text-fg-default">{sup.name}</span>
                       )}
                       {sup.title && `, ${sup.title}`}
+                      {k === 0 && pos.certificate && (
+                        <>
+                          <span aria-hidden className="mx-2 text-fg-subtle">
+                            ·
+                          </span>
+                          <CertificateLink
+                            href={pos.certificate}
+                            label={pos.certificateLabel}
+                          />
+                        </>
+                      )}
                     </p>
                   ))}
                 </div>
@@ -231,17 +297,6 @@ function PositionFlow({
                     </li>
                   ))}
                 </ul>
-              )}
-              {pos.certificate && (
-                <a
-                  href={pos.certificate}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mono mt-3 inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
-                >
-                  <Award size={11} />
-                  {pos.certificateLabel ?? "Certificate"}
-                </a>
               )}
             </div>
           </motion.li>
