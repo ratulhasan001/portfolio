@@ -31,6 +31,10 @@ export type Position = {
 
 export type Experience = {
   org: string;
+  /** Organisation's site; the org name links to it. */
+  website?: string;
+  /** The organisation's own social pages, shown beside its location. */
+  socials?: { kind: "linkedin" | "github"; href: string }[];
   role: string;
   location: string;
   period: string;
@@ -58,6 +62,11 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     org: "ELITE Research Lab LLC",
+    website: "https://elitelab.ai/",
+    socials: [
+      { kind: "linkedin", href: "https://www.linkedin.com/company/elite-lab-ai/" },
+      { kind: "github", href: "https://github.com/eliteresearchlab" },
+    ],
     role: "Research Assistant",
     location: "Queens, NY, USA (Remote)",
     period: "June 2026 - Present",
@@ -117,7 +126,7 @@ export const experience: Experience[] = [
     contacts: [
       // Lab account ID (also the portal login), not a mailbox, so it is shown as plain text.
       { label: "Lab Member ID", value: "ratul.hasan@elitelab.ai" },
-      { label: "Verification", value: "info@elitelab.ai", email: true },
+      { label: "Lab Contact", value: "info@elitelab.ai", email: true },
     ],
   },
   {
