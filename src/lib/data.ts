@@ -84,11 +84,6 @@ export const experience: Experience[] = [
             role: "Supervisor",
             link: "https://www.linkedin.com/in/kishormorol/",
           },
-          {
-            name: "S M Musfequr Rahman",
-            role: "PI",
-            link: "https://scholar.google.com/citations?user=GdaEBwsAAAAJ&hl=en",
-          },
         ],
         bullets: [
           "Contributing to a journal study on prompt-injection security risks in LLM-based smart-home agents.",
@@ -106,11 +101,6 @@ export const experience: Experience[] = [
             name: "Md Kishor Morol",
             role: "Supervisor",
             link: "https://www.linkedin.com/in/kishormorol/",
-          },
-          {
-            name: "Shakib Sadat Shanto",
-            role: "PI",
-            link: "https://scholar.google.com/citations?user=twShbgIAAAAJ&hl=en",
           },
         ],
         bullets: [
