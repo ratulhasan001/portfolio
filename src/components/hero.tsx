@@ -145,7 +145,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="overview"
-      className="relative overflow-hidden border-b border-border-default"
+      className="relative overflow-hidden"
     >
 
       <motion.div
