@@ -36,16 +36,6 @@ export function NameOutro() {
           <DinoRunner />
         </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mono mt-1 text-[10px] uppercase tracking-[0.3em] text-fg-subtle sm:text-[11px]"
-        >
-          {profile.tagline}
-        </motion.p>
-
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
