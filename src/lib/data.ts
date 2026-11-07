@@ -120,7 +120,7 @@ export const experience: Experience[] = [
     ],
   },
   {
-    org: "BAUET Computer Society, Dept. of CSE, BAUET",
+    org: "BAUET Computer Society, Dept. of CSE",
     role: "Programming Instructor",
     location: "Natore, Bangladesh",
     period: "July 2024 - December 2025",
