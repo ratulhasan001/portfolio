@@ -48,6 +48,20 @@ export function WipeIn({
   inView?: boolean;
   viewportMargin?: string;
 }) {
+  // Scroll-triggered wipes render static: animating clip-path while the page
+  // scrolls repainted on every frame and made scrolling stutter.
+  if (inView) {
+    const Tag = as;
+    return (
+      <Tag
+        className={className}
+        style={as === "span" ? { display: "inline-block" } : undefined}
+      >
+        {children}
+      </Tag>
+    );
+  }
+
   const MotionTag = as === "span" ? motion.span : motion.div;
 
   return (
@@ -88,6 +102,9 @@ export function WipeWords({
   inView?: boolean;
   viewportMargin?: string;
 }) {
+  // Static when scroll-triggered; see WipeIn.
+  if (inView) return <span className={className}>{text}</span>;
+
   const words = text.split(" ");
   const trigger = inView
     ? {

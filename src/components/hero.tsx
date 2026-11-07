@@ -4,7 +4,7 @@ import { useState, useRef, type ComponentType } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Mail } from "lucide-react";
 import { profile } from "@/lib/data";
-import { FadeIn } from "./fade-in";
+import { HeroReveal } from "./fade-in";
 import { CvIcon, GithubIcon, LinkedinIcon, ScholarIcon } from "./brand-icons";
 import { RiseLetters } from "./wipe-in";
 import { HeroBot } from "./mascot";
@@ -154,11 +154,11 @@ export function Hero() {
       >
         <HeroBot className="absolute right-4 top-[10.25rem] sm:right-6 sm:top-28 lg:top-14" />
 
-        <FadeIn delay={0.1}>
+        <HeroReveal delay={0.1}>
           <p className="mono text-base font-medium text-fg-muted">
             Hi, I&apos;m
           </p>
-        </FadeIn>
+        </HeroReveal>
 
         {/* Set as two stacked lines so the name reads as a display mark
             rather than a run of text, each line rising in on its own. */}
@@ -171,26 +171,26 @@ export function Hero() {
           </span>
         </h1>
 
-        <FadeIn delay={0.5}>
+        <HeroReveal delay={0.5}>
           <p className="mt-3 text-lg font-semibold text-fg-muted sm:text-xl">
             {profile.headline}
           </p>
-        </FadeIn>
+        </HeroReveal>
 
-        <FadeIn delay={0.58}>
+        <HeroReveal delay={0.58}>
           <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-fg-subtle sm:text-base">
             {profile.tagline}
           </p>
-        </FadeIn>
+        </HeroReveal>
 
-        <FadeIn
+        <HeroReveal
           delay={0.7}
           className="mt-6 flex flex-wrap items-center gap-2"
         >
           {contactIcons.map((item) => (
             <IconLink key={item.label} {...item} />
           ))}
-        </FadeIn>
+        </HeroReveal>
       </motion.div>
     </section>
   );

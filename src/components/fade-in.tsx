@@ -1,14 +1,45 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 /**
- * PowerPoint's Wipe entrance: the block is revealed from its bottom edge
- * upward. Nothing moves and nothing fades, so surrounding layout never
- * shifts while it plays. Named FadeIn still because every call site treats
- * it as "the standard entrance".
+ * Scroll-triggered entrances were dropped for performance: animating
+ * clip-path repaints on every frame, and with dozens of blocks revealing as
+ * the page scrolled it caused visible stutter. These wrappers keep their old
+ * call sites working but now render content as-is.
  */
 export function FadeIn({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  /** Kept for call-site compatibility; no longer used. */
+  delay?: number;
+  className?: string;
+}) {
+  return <div className={className}>{children}</div>;
+}
+
+export function StaggerGroup({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  /** Kept for call-site compatibility; no longer used. */
+  stagger?: number;
+}) {
+  return <div className={className}>{children}</div>;
+}
+
+/** Empty variants: children of a StaggerGroup render in their final state. */
+export const staggerItem = {
+  hidden: {},
+  show: {},
+};
+
+/**
+ * On-load entrance for the hero only: a bottom-up wipe driven by a CSS
+ * keyframe, so it runs once without JavaScript per frame. Styles live in
+ * globals.css under `.hero-reveal`.
+ */
+export function HeroReveal({
   children,
   delay = 0,
   className,
@@ -18,48 +49,11 @@ export function FadeIn({
   className?: string;
 }) {
   return (
-    <motion.div
-      initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
-      whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, delay, ease: [0.33, 0, 0.2, 1] }}
-      className={className}
+    <div
+      className={`hero-reveal${className ? ` ${className}` : ""}`}
+      style={{ "--reveal-delay": `${delay}s` } as React.CSSProperties}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
-
-export function StaggerGroup({
-  children,
-  className,
-  stagger = 0.08,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  stagger?: number;
-}) {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
-      variants={{
-        hidden: {},
-        show: { transition: { staggerChildren: stagger } },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-/** The same wipe, applied one grid/list item after the next. */
-export const staggerItem = {
-  hidden: { clipPath: "inset(100% 0% 0% 0%)" },
-  show: {
-    clipPath: "inset(0% 0% 0% 0%)",
-    transition: { duration: 0.5, ease: [0.33, 0, 0.2, 1] as const },
-  },
-};
