@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, ExternalLink, GitCommitHorizontal } from "lucide-react";
+import { Award, ExternalLink, GitCommitHorizontal, Mail } from "lucide-react";
 import { experience, type Position } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { WipeWords } from "./wipe-in";
@@ -71,6 +71,30 @@ export function ExperienceSection() {
                   </>
                 )}
               </div>
+
+              {/* Contact points a reviewer can use to confirm the role. */}
+              {exp.contacts && exp.contacts.length > 0 && (
+                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+                  {exp.contacts.map((c) => (
+                    <p key={c.label} className="text-[13px] leading-relaxed text-fg-muted">
+                      <span className="mono mr-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                        {c.label}
+                      </span>
+                      {c.email ? (
+                        <a
+                          href={`mailto:${c.value}`}
+                          className="mono inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+                        >
+                          <Mail size={11} />
+                          {c.value}
+                        </a>
+                      ) : (
+                        <span className="mono text-[12px] text-fg-default">{c.value}</span>
+                      )}
+                    </p>
+                  ))}
+                </div>
+              )}
 
               {stacked && <PositionFlow positions={exp.positions!} delay={i * 0.1} />}
 
