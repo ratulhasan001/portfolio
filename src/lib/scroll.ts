@@ -1,16 +1,5 @@
 import { animate } from "framer-motion";
-import type Lenis from "lenis";
-
 const NAV_OFFSET = 56;
-
-/** The page's Lenis instance, while smooth scrolling is running. */
-let lenis: Lenis | null = null;
-
-export function setLenis(instance: Lenis | null) {
-  lenis = instance;
-}
-
-const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
 export function smoothScrollToId(id: string) {
   if (typeof window === "undefined") return;
@@ -37,13 +26,6 @@ export function smoothScrollToId(id: string) {
       history.pushState(null, "", id);
     }
   };
-
-  // Lenis owns the scroll position while it runs, so a jump has to go through
-  // it; driving window.scrollTo underneath would fight its interpolation.
-  if (lenis) {
-    lenis.scrollTo(targetY, { duration, easing: easeOutExpo, onComplete });
-    return;
-  }
 
   animate(startY, targetY, {
     duration,

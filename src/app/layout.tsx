@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Cinzel } from "next/font/google";
-import "lenis/dist/lenis.css";
 import "./globals.css";
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
-import { SmoothScroll } from "@/components/smooth-scroll";
 import { profile } from "@/lib/data";
 import { ogImage } from "@/lib/og";
 
@@ -84,7 +82,6 @@ export default function RootLayout({
       </head>
       <body className="safe-bottom min-h-full flex flex-col bg-canvas text-fg-default">
         <ThemeProvider>
-          <SmoothScroll />
           {children}
         </ThemeProvider>
       </body>
