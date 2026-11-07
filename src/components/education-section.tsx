@@ -6,7 +6,6 @@ import { education, type Education } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn } from "./fade-in";
 import { WipeWords } from "./wipe-in";
-import { ParallaxLayer } from "./parallax-layer";
 
 /** Inline separator. Hidden on phones, where the meta row wraps onto
  *  several lines and the dots would be left dangling at the line ends. */
@@ -127,9 +126,6 @@ export function EducationSection() {
       id="education"
       className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9"
     >
-      <ParallaxLayer speed={35}>
-        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
-      </ParallaxLayer>
 
       <SectionTitle index="02" title="Education" />
 

@@ -6,9 +6,7 @@ import { Mail } from "lucide-react";
 import { profile } from "@/lib/data";
 import { FadeIn } from "./fade-in";
 import { CvIcon, GithubIcon, LinkedinIcon, ScholarIcon } from "./brand-icons";
-import { ParallaxLayer } from "./parallax-layer";
 import { RiseLetters } from "./wipe-in";
-import { Marquee } from "./marquee";
 import { HeroBot } from "./mascot";
 
 // The page itself is monochrome, so `brand` is the one place real colour is
@@ -149,9 +147,6 @@ export function Hero() {
       id="overview"
       className="relative overflow-hidden border-b border-border-default"
     >
-      <ParallaxLayer speed={30}>
-        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_15%,#000_10%,transparent_75%)]" />
-      </ParallaxLayer>
 
       <motion.div
         style={{ opacity: heroOpacity, y: yShift }}
@@ -167,7 +162,7 @@ export function Hero() {
 
         {/* Set as two stacked lines so the name reads as a display mark
             rather than a run of text, each line rising in on its own. */}
-        <h1 className="mt-2 text-[19vw] font-extrabold leading-[0.84] tracking-[-0.05em] text-fg-default sm:text-8xl lg:text-[9.5rem]">
+        <h1 id="hero-name" className="mt-2 text-[19vw] font-extrabold leading-[0.84] tracking-[-0.05em] text-fg-default sm:text-8xl lg:text-[9.5rem]">
           <span className="block">
             <RiseLetters text={firstName} delay={0.2} />
           </span>
@@ -197,8 +192,6 @@ export function Hero() {
           ))}
         </FadeIn>
       </motion.div>
-
-      <Marquee />
     </section>
   );
 }

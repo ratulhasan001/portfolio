@@ -5,7 +5,6 @@ import { Award, ExternalLink, GitCommitHorizontal } from "lucide-react";
 import { experience, type Position } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { WipeWords } from "./wipe-in";
-import { ParallaxLayer } from "./parallax-layer";
 import { TimelineLogo } from "./timeline-logo";
 
 export function ExperienceSection() {
@@ -14,9 +13,6 @@ export function ExperienceSection() {
       id="experience"
       className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9"
     >
-      <ParallaxLayer speed={35}>
-        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
-      </ParallaxLayer>
 
       <SectionTitle index="03" title="Experience" />
 

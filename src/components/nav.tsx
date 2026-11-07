@@ -24,7 +24,26 @@ const links = [
   { href: "#projects", label: "Projects", icon: FolderGit2 },
 ];
 
+/** True once the big hero name has scrolled out of view, so the nav doesn't
+ *  repeat the name while the display version is still on screen. */
+function useHeroNameHidden() {
+  const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    const el = document.getElementById("hero-name");
+    if (!el) return;
+    // Offset by the nav's height so the name appears as the heading slides under the bar.
+    const observer = new IntersectionObserver(
+      ([entry]) => setHidden(!entry.isIntersecting),
+      { rootMargin: "-56px 0px 0px 0px", threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return hidden;
+}
+
 function Logo({ compact = false }: { compact?: boolean }) {
+  const showName = useHeroNameHidden();
   return (
     <a
       href="#overview"
@@ -38,11 +57,20 @@ function Logo({ compact = false }: { compact?: boolean }) {
       <span className="mono flex h-8 w-8 items-center justify-center rounded-full border border-fg-default bg-fg-default text-[13px] font-bold leading-none tracking-tight text-canvas transition-colors duration-200 group-hover:bg-canvas group-hover:text-fg-default">
         RH
       </span>
-      {!compact && (
-        <span className="text-sm font-semibold tracking-tight">
-          Ratul Hasan
-        </span>
-      )}
+      <AnimatePresence initial={false}>
+        {!compact && showName && (
+          <motion.span
+            key="nav-name"
+            initial={{ opacity: 0, x: -6 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -6 }}
+            transition={{ duration: 0.2 }}
+            className="whitespace-nowrap text-sm font-semibold tracking-tight"
+          >
+            Ratul Hasan
+          </motion.span>
+        )}
+      </AnimatePresence>
     </a>
   );
 }

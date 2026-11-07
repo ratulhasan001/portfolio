@@ -197,18 +197,6 @@ html.force-visible [style*="clip-path"] {
   }
 }
 
-.bg-dot-grid {
-  background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
-  background-size: 22px 22px;
-}
-
-.bg-grid-fixed {
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 44px 44px;
-}
-
 .mono {
   font-family: var(--font-mono-family), ui-monospace, SFMono-Regular, monospace;
   font-feature-settings: "tnum" 1;
@@ -407,54 +395,6 @@ main > section.nav-flash::after {
   100% {
     opacity: 0;
     box-shadow: inset 0 0 0 0 color-mix(in srgb, var(--color-accent) 0%, transparent);
-  }
-}
-
-/* ---- Hero marquee ------------------------------------------------------
-   Two identical tracks sit side by side; shifting the pair left by exactly
-   half its width lands the second copy where the first started, so the loop
-   is seamless. Hovering pauses it, and reduced-motion stops it outright. */
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee {
-  mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 8%,
-    #000 92%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 8%,
-    #000 92%,
-    transparent
-  );
-}
-
-.marquee-track {
-  animation: marquee-scroll var(--marquee-duration, 38s) linear infinite;
-  will-change: transform;
-}
-
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-  .marquee {
-    overflow-x: auto;
   }
 }
 
@@ -981,79 +921,6 @@ main > section.nav-flash::after {
       0 0 0.45em rgba(255, 153, 0, 0.22);
   }
 
-  /* The theme switch: a robot that sleeps in dark mode. Its bubble drops
-     below it, since above would be off the top of the screen. */
-  .theme-bot { --m-fs: 18px; }
-  /* A night-time palette: indigo-slate with moon-gold tips, lifted a shade
-     in dark mode so it doesn't sink into the page. */
-  .theme-bot .mascot { --c1: #5b6b91; --c2: #26314d; --hand: #1c2540; --tip: #f5c242; }
-  :root[data-theme="dark"] .theme-bot .mascot { --c1: #8d9cc2; --c2: #4f5d82; --hand: #3d4a6c; }
-  /* Right-aligned under the robot, since it sits at the right edge of the
-     nav and a centred bubble would run off a phone screen. */
-  .theme-bot .mascot__say {
-    left: auto;
-    right: -6px;
-    bottom: auto;
-    top: calc(100% + 10px);
-    font-size: 12px;
-    transform: translateY(-6px) scale(0.85);
-    transform-origin: 90% 0;
-  }
-  .theme-bot .mascot__say::after {
-    left: auto;
-    right: 12px;
-    top: auto;
-    bottom: 100%;
-    margin-left: 0;
-    border-top-color: transparent;
-    border-bottom-color: #fff;
-  }
-  .theme-bot .mascot:hover .mascot__say,
-  .theme-bot .mascot.is-talking .mascot__say { transform: none; }
-  .mascot.is-asleep { animation-duration: 4.8s; }
-  .mascot.is-asleep .mascot__eyes i {
-    animation: none;
-    transform: scaleY(0.12);
-  }
-  .mascot.is-asleep .mascot__mouth,
-  .mascot.is-asleep:hover .mascot__mouth {
-    width: 0.12em;
-    height: 0.12em;
-    margin-left: -0.06em;
-    border: 0.04em solid #0a1633;
-    border-radius: 50%;
-    background: none;
-  }
-  .mascot.is-asleep:hover .mascot__arms i:last-child { animation: none; }
-  .mascot.is-asleep .mascot__antennas i::after {
-    animation: none;
-    opacity: 0.3;
-    box-shadow: none;
-  }
-  .theme-bot__zzz {
-    position: absolute;
-    right: -2px;
-    top: -4px;
-    pointer-events: none;
-  }
-  .theme-bot__zzz i {
-    position: absolute;
-    right: 0;
-    top: 0;
-    font: 700 9px/1 var(--font-mono-family), monospace;
-    font-style: normal;
-    color: var(--fg-muted);
-    opacity: 0;
-    animation: theme-bot-z 2.4s ease-out infinite;
-  }
-  .theme-bot__zzz i:nth-child(2) { animation-delay: 0.8s; font-size: 8px; }
-  .theme-bot__zzz i:nth-child(3) { animation-delay: 1.6s; font-size: 7px; }
-  @keyframes theme-bot-z {
-    0% { opacity: 0; transform: translate(0, 6px); }
-    30% { opacity: 1; }
-    100% { opacity: 0; transform: translate(6px, -10px); }
-  }
-
   .confetti {
     position: fixed;
     z-index: 1002;
@@ -1066,6 +933,5 @@ main > section.nav-flash::after {
   @media (prefers-reduced-motion: reduce) {
     .mascot,
     .mascot * { animation: none !important; }
-    .theme-bot__zzz { display: none; }
   }
 }

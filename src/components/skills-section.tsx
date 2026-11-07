@@ -48,7 +48,6 @@ import {
 } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
-import { ParallaxLayer } from "./parallax-layer";
 import { TiltLink } from "./tilt-card";
 import { WipeWords, WipeIn } from "./wipe-in";
 import { CodeforcesIcon, CodechefIcon } from "./brand-icons";
@@ -117,9 +116,6 @@ export function SkillsSection() {
       id="skills"
       className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9"
     >
-      <ParallaxLayer speed={45}>
-        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
-      </ParallaxLayer>
       <SectionTitle index="04" title="Skills & Achievements" />
 
       <div className="mb-7">

@@ -15,7 +15,6 @@ import { SectionTitle } from "./ui";
 import { StaggerGroup, staggerItem } from "./fade-in";
 import { TiltCard } from "./tilt-card";
 import { WipeWords } from "./wipe-in";
-import { ParallaxLayer } from "./parallax-layer";
 
 /**
  * Each project's stack mark in its real brand colour. Solidity and Django
@@ -57,9 +56,6 @@ export function ProjectsSection() {
       id="projects"
       className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9"
     >
-      <ParallaxLayer speed={35}>
-        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
-      </ParallaxLayer>
 
       <SectionTitle index="05" title="Pinned Projects" />
 

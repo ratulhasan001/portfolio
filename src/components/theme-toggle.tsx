@@ -1,83 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "./theme-provider";
-import { Mascot } from "./mascot";
-
-/** Light-mode nudges toward dark mode, shown one after another: mostly
- *  practical, with a light touch of humour. */
-const PLEAS = [
-  "Lights out? 🌙",
-  "Try dark mode",
-  "Easier on the eyes at night",
-  "Bugs hate the dark 🐛",
-  "Real devs code in the dark",
-];
-
-const SHOW_MS = 6000;
-const SWAP_MS = 300;
 
 /**
- * The theme switch is a robot that sleeps when the lights go out. In light
- * mode, near the top of the page, it keeps a quiet line going about dark
- * mode, changing it every few seconds; in dark mode it sleeps, eyes shut
- * with a few z's drifting up.
+ * Theme switch: a moon in light mode (go dark), a sun in dark mode (go light).
+ * The icon rotates in on change so the swap reads as a toggle, not a jump.
  */
 export function ThemeToggle() {
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";
-  const [plea, setPlea] = useState(0);
-  const [swapping, setSwapping] = useState(false);
-  const [atTop, setAtTop] = useState(true);
-
-  // The nav (and this robot) follows the reader down the page, so it only
-  // talks unprompted near the top; further down it'd sit over the content.
-  useEffect(() => {
-    const onScroll = () => setAtTop(window.scrollY < 120);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isDark) return;
-    let swap = 0;
-    const tick = window.setInterval(() => {
-      if (document.hidden) return;
-      // Hide the bubble, change the line while it's hidden, then bring it
-      // back, so each new plea pops in rather than the text jumping.
-      setSwapping(true);
-      swap = window.setTimeout(() => {
-        setPlea((p) => (p + 1) % PLEAS.length);
-        setSwapping(false);
-      }, SWAP_MS);
-    }, SHOW_MS);
-    return () => {
-      window.clearInterval(tick);
-      window.clearTimeout(swap);
-    };
-  }, [isDark]);
-
-  // Awake: talking near the top of the page (it only waves on hover).
-  // Asleep: quiet.
-  const mood = isDark ? "is-asleep" : swapping || !atTop ? "" : "is-talking";
 
   return (
     <motion.button
+      type="button"
       onClick={toggle}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      title={isDark ? "Light mode" : "Dark mode"}
       whileTap={{ scale: 0.88 }}
-      transition={{ type: "spring", stiffness: 420, damping: 16 }}
-      className="theme-bot relative flex h-10 w-9 cursor-pointer items-end justify-center"
+      className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border-default text-fg-muted transition-colors duration-200 hover:border-fg-default hover:text-fg-default"
     >
-      <Mascot kind="ai" plain say={isDark ? "Wake me up ☀️" : PLEAS[plea]} className={mood} />
-      {isDark && (
-        <span aria-hidden className="theme-bot__zzz">
-          <i>z</i>
-          <i>z</i>
-          <i>z</i>
-        </span>
-      )}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={isDark ? "sun" : "moon"}
+          initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+          animate={{ rotate: 0, opacity: 1, scale: 1 }}
+          exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
+          transition={{ duration: 0.2 }}
+          className="flex"
+        >
+          {isDark ? <Sun size={15} /> : <Moon size={15} />}
+        </motion.span>
+      </AnimatePresence>
     </motion.button>
   );
 }
