@@ -88,6 +88,29 @@ const skillIcons: Record<string, React.ComponentType<{ size?: number; className?
   "Blockchain & IoT Security": Blocks,
 };
 
+/** Small inline link to a scanned certificate under /public/certificates. */
+function CertificateLink({
+  href,
+  label = "Certificate",
+  className = "",
+}: {
+  href: string;
+  label?: string;
+  className?: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={`mono inline-flex items-center gap-1 whitespace-nowrap text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default ${className}`}
+    >
+      <Award size={11} />
+      {label}
+    </a>
+  );
+}
+
 export function SkillsSection() {
   return (
     <section
@@ -161,7 +184,7 @@ export function SkillsSection() {
             <ul className="divide-y divide-border-default">
               {achievements.map((a, i) => (
                 <motion.li
-                  key={a}
+                  key={a.text}
                   initial={{ opacity: 0, x: -8 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -171,7 +194,16 @@ export function SkillsSection() {
                   <span className="mono w-5 shrink-0 text-[11px] text-fg-subtle">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="min-w-0">{a}</span>
+                  <span className="min-w-0">
+                    {a.text}
+                    {a.certificate && (
+                      <CertificateLink
+                        href={a.certificate}
+                        label={a.certificateLabel}
+                        className="ml-2"
+                      />
+                    )}
+                  </span>
                 </motion.li>
               ))}
             </ul>
@@ -331,6 +363,12 @@ export function SkillsSection() {
                         </span>
                       ))}
                     </div>
+                  </div>
+                )}
+
+                {entry.certificate && (
+                  <div className="mt-auto pt-3">
+                    <CertificateLink href={entry.certificate} />
                   </div>
                 )}
               </motion.div>

@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  Award,
   BookOpen,
   ChevronDown,
   ExternalLink,
@@ -118,6 +119,22 @@ function PublicationRow({ pub }: { pub: Publication }) {
             >
               {pub.link.replace("https://doi.org/", "doi ")}
               <ExternalLink size={11} />
+            </a>
+          </>
+        )}
+
+        {pub.certificate && (
+          <>
+            <Dot />
+            <a
+              href={pub.certificate}
+              target="_blank"
+              rel="noreferrer"
+              title="Certificate of presentation issued by the conference"
+              className="mono inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+            >
+              <Award size={11} />
+              Presentation certificate
             </a>
           </>
         )}

@@ -13,16 +13,6 @@ export const profile = {
   headline: "Aspiring Graduate Researcher",
   tagline:
     "Computer Science graduate with research experience in Artificial Intelligence and LLM security, now building hands-on DevOps and MLOps skills",
-  /** Research statement shown in the hero; ties the publication record into one thread. */
-  summary:
-    "My research sits where security meets machine learning: how LLM agents, IoT devices and clinical models can be attacked, and how to make them trustworthy. I have first-authored peer-reviewed work on post-quantum firmware updates and blockchain document verification, and I now study prompt-injection attacks on LLM-based home agents and their defences. I am preparing for graduate research in AI security and trustworthy machine learning.",
-  focusAreas: [
-    "LLM Safety & Security",
-    "Trustworthy ML",
-    "IoT & Post-Quantum Security",
-    "Healthcare AI",
-    "MLOps",
-  ],
   followersLabel: "Open to research collaboration",
 };
 
@@ -52,6 +42,9 @@ export type Experience = {
   tags: string[];
   /** Path under /public — falls back to the timeline dot when absent. */
   logo?: string;
+  /** Path under `public/` to an experience letter or certificate for the role. */
+  certificate?: string;
+  certificateLabel?: string;
 };
 
 export const experience: Experience[] = [
@@ -81,9 +74,9 @@ export const experience: Experience[] = [
           },
         ],
         bullets: [
-          "Contributing to a journal study that maps attacker-controllable IoT metadata as an indirect prompt-injection surface for LLM-based home agents.",
-          "Measuring which Home Assistant device and integration text fields reach its built-in LLM conversation agents, and how often injected instructions trigger unauthorized physical actions or leak private state in a simulated home.",
-          "Evaluating how provenance tagging, actuating-tool gating and action confirmation reduce attack success, and their cost in benign-task utility.",
+          "Contributing to a journal study on prompt-injection security risks in LLM-based smart-home agents.",
+          "Designing and running experiments to measure how such attacks affect agent behaviour in a simulated home environment.",
+          "Evaluating defences and their trade-off between security and task performance.",
         ],
       },
       {
@@ -112,7 +105,7 @@ export const experience: Experience[] = [
     ],
     bullets: [],
     tags: ["LLM", "NLP", "LLM Security", "Federated Learning", "Research"],
-    logo: "/logo/elitelab.jpeg",
+    logo: "/logo/elitelab.png",
   },
   {
     org: "BAUET Computer Society, Dept. of CSE, BAUET",
@@ -126,6 +119,8 @@ export const experience: Experience[] = [
     ],
     tags: ["C", "C++", "Data Structures", "Teaching"],
     logo: "/logo/bsc.png",
+    certificate: "/certificates/bauet-cse-programming-instructor-experience-letter.pdf",
+    certificateLabel: "Experience letter",
   },
   {
     org: "Lab AR",
@@ -217,6 +212,8 @@ export type Publication = {
   preprintOnRequest?: boolean;
   /** Key into `digitalLibraryLabels`. */
   digitalLibrary?: string;
+  /** Path under `public/` to proof of presentation, for papers whose proceedings aren't out yet. */
+  certificate?: string;
 };
 
 /**
@@ -267,8 +264,8 @@ export const publications: Publication[] = [
       "Tze Hui Liew",
     ],
     venue: "Frontiers in Digital Health (Digital Mental Health section)",
-    date: "2026",
-    status: "under-submission",
+    date: "Submitted 2026",
+    status: "under-review",
     type: "journal",
     digitalLibrary: "Frontiers in Digital Health",
     preprintOnRequest: true,
@@ -302,6 +299,8 @@ export const publications: Publication[] = [
   status: "presented",
   type: "conference",
   digitalLibrary: "IEEE Xplore Digital Library",
+  certificate:
+    "/certificates/spicscon2026-splitsafe-ultra-presentation-certificate.pdf",
 },
 {
   title:
@@ -320,6 +319,8 @@ export const publications: Publication[] = [
   status: "presented",
   type: "conference",
   digitalLibrary: "IEEE Xplore Digital Library",
+  certificate:
+    "/certificates/spicscon2026-activisionnet-fusion-presentation-certificate.pdf",
 },
   {
     title:
@@ -470,14 +471,48 @@ export const onlineJudges = [
   },
 ];
 
-export const achievements = [
-  "1x ICPC Regionalist (Team: BAUET_Rong_Answer)",
-  "1x National Collegiate Programming Contest by JU — Rank 149 (Team: BAUET_PARADIGM)",
-  "2x Inter University Programming Contest — Best Rank 45 at IUT (Team: BAUET_Twisted_Minds)",
-  "Ranked 10th, Independence Day Programming Contest, Military Institute of Science & Technology",
-  "1x Champion, 1x 2nd Runners-up, Intra University Programming Contest (Team)",
-  "1x Runners-up, Intra University Programming Contest (Solo)",
-  "1x 1st Runners-up, Intra University Three Minute Thesis Presentation",
+export type Achievement = {
+  text: string;
+  /** Path under `public/` to the certificate backing this line. */
+  certificate?: string;
+  /** Link text when the certificate proves less than the line claims, e.g. participation only. */
+  certificateLabel?: string;
+};
+
+export const achievements: Achievement[] = [
+  { text: "1x ICPC Regionalist (Team: BAUET_Rong_Answer)" },
+  {
+    text: "1x National Collegiate Programming Contest by JU — Rank 149 (Team: BAUET_PARADIGM)",
+  },
+  {
+    text: "2x Inter University Programming Contest — Best Rank 45 at IUT (Team: BAUET_Twisted_Minds)",
+    certificate: "/certificates/iut-national-ict-fest-2024-participation-certificate.pdf",
+    certificateLabel: "Participation certificate",
+  },
+  {
+    text: "Ranked 10th, Independence Day Programming Contest, Military Institute of Science & Technology",
+    certificate:
+      "/certificates/mist-independence-day-programming-contest-2023-10th-place-certificate.pdf",
+  },
+  {
+    text: "1x Champion, Intra University Programming Contest (Team)",
+    certificate:
+      "/certificates/intra-bauet-programming-contest-2023-team-champion-certificate.pdf",
+  },
+  {
+    text: "1x 2nd Runners-up, MIND STORM 4.0 Programming Contest, BAUET",
+    certificate: "/certificates/mind-storm-4-programming-contest-2nd-runner-up-certificate.pdf",
+  },
+  {
+    text: "1x Runners-up, Intra University Programming Contest (Solo)",
+    certificate:
+      "/certificates/intra-bauet-programming-contest-2023-individual-1st-runner-up-certificate.pdf",
+  },
+  {
+    text: "1x 1st Runners-up, Intra University Three Minute Thesis Presentation",
+    certificate:
+      "/certificates/bauet-tech-fair-2025-three-minute-thesis-1st-runner-up-certificate.pdf",
+  },
 ];
 
 export type Certification = {
@@ -526,6 +561,8 @@ export type LeadershipEntry = {
   roles: string[];
   /** What the role actually involved, a point at a time. */
   points?: string[];
+  /** Path under `public/` to the certificate for the senior role. */
+  certificate?: string;
 };
 
 export const leadership: LeadershipEntry[] = [
@@ -539,6 +576,7 @@ export const leadership: LeadershipEntry[] = [
       "Deputy IT and Skill Development Secretary",
       "Deputy Editorial Secretary",
     ],
+    certificate: "/certificates/bauet-computer-society-president-certificate.pdf",
   },
   {
     org: "Intra University Programming Contest, BAUET",
@@ -557,5 +595,6 @@ export const leadership: LeadershipEntry[] = [
       "Wrote up the event reports once each stage wrapped.",
       "Kept submission material organised so the committee could find things fast.",
     ],
+    certificate: "/certificates/hult-prize-bauet-officer-of-documentation-certificate.pdf",
   },
 ];
