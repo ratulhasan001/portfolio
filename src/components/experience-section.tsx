@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, GitCommitHorizontal } from "lucide-react";
+import { Award, ExternalLink, GitCommitHorizontal } from "lucide-react";
 import { experience, type Position } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { WipeWords } from "./wipe-in";
@@ -92,6 +92,18 @@ export function ExperienceSection() {
                     </li>
                   ))}
                 </ul>
+              )}
+
+              {exp.certificate && (
+                <a
+                  href={exp.certificate}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mono mt-3 inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+                >
+                  <Award size={11} />
+                  {exp.certificateLabel ?? "Certificate"}
+                </a>
               )}
             </motion.li>
           );
