@@ -45,6 +45,11 @@ export type Experience = {
   /** Path under `public/` to an experience letter or certificate for the role. */
   certificate?: string;
   certificateLabel?: string;
+  /**
+   * Verification details shown under the org. `email` renders as a mailto
+   * link; leave it out for identifiers that only look like an address.
+   */
+  contacts?: { label: string; value: string; email?: boolean }[];
 };
 
 export const experience: Experience[] = [
@@ -106,6 +111,11 @@ export const experience: Experience[] = [
     bullets: [],
     tags: ["LLM", "NLP", "LLM Security", "Federated Learning", "Research"],
     logo: "/logo/elitelab.png",
+    contacts: [
+      // Lab account ID (also the portal login), not a mailbox, so it is shown as plain text.
+      { label: "Lab Member ID", value: "ratul.hasan@elitelab.ai" },
+      { label: "Verification", value: "info@elitelab.ai", email: true },
+    ],
   },
   {
     org: "BAUET Computer Society, Dept. of CSE, BAUET",
