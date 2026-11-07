@@ -12,7 +12,7 @@ export const profile = {
   scholar: "https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en",
   headline: "Aspiring Graduate Researcher",
   tagline:
-    "Computer Science graduate with research experience in Artificial Intelligence and LLM security, now building hands-on DevOps and MLOps skills",
+    "Computer Science graduate with research experience in Artificial Intelligence and Cybersecurity, now building hands-on DevOps skills",
   followersLabel: "Open to research collaboration",
 };
 
@@ -68,7 +68,7 @@ export const experience: Experience[] = [
           {
             name: "Md Kishor Morol",
             role: "Supervisor",
-            link: "https://scholar.google.com/citations?user=pjn3jg4AAAAJ",
+            link: "https://www.linkedin.com/in/kishormorol/",
           },
           {
             name: "S M Musfequr Rahman",
@@ -89,7 +89,7 @@ export const experience: Experience[] = [
           {
             name: "Md Kishor Morol",
             role: "Supervisor",
-            link: "https://scholar.google.com/citations?user=pjn3jg4AAAAJ",
+            link: "https://www.linkedin.com/in/kishormorol/",
           },
           {
             name: "Shakib Sadat Shanto",
@@ -119,9 +119,8 @@ export const experience: Experience[] = [
     location: "Natore, Bangladesh",
     period: "July 2024 - December 2025",
     bullets: [
-      "Conducted programming classes for undergraduate students covering C, C++ and basic data structures.",
-      "Led coding exercises and programming contest preparation sessions to strengthen students' problem-solving and analytical skills.",
-      "Explained programming concepts to students of varying skill levels and supported the development of their programming fundamentals.",
+      "Taught C, C++ and basic data structures to undergraduate students as a volunteer instructor over three semesters.",
+      "Ran coding exercises and programming contest practice sessions.",
     ],
     tags: ["C", "C++", "Data Structures", "Teaching"],
     logo: "/logo/bsc.png",
@@ -135,7 +134,7 @@ export const experience: Experience[] = [
     period: "July 2025 - August 2025",
     bullets: [
       "Led a team project to develop a web-based Property Management System.",
-      "Contributed to backend development using Laravel (PHP) and collaborated on feature implementation.",
+      "Built backend features in Laravel (PHP).",
     ],
     tags: ["Laravel", "PHP", "Backend"],
     logo: "/logo/labar.jpeg",
@@ -221,6 +220,8 @@ export type Publication = {
   digitalLibrary?: string;
   /** Path under `public/` to proof of presentation, for papers whose proceedings aren't out yet. */
   certificate?: string;
+  /** Paragraphs separated by a blank line ("\n\n"). */
+  abstract?: string;
 };
 
 /**
@@ -243,9 +244,11 @@ export const publications: Publication[] = [
       "Entropy-assured post-quantum key generation on IoT edge devices: source independence, measured min-entropy and signature scheme selection",
     authors: ["Ratul Hasan", "Md Arik Rayhan", "Md Ohiduzaman Pranto"],
     venue: "PLOS ONE",
-    date: "Submitted 2026",
+    date: "Submitted September 2026",
     status: "under-review",
     type: "journal",
+    abstract:
+      "Post-quantum key generation rests on an assumption that is rarely measured: that the random seed behind the key carried enough entropy. FIPS 204 makes the dependence exact, since ML-DSA key generation is a deterministic function of a 32-byte seed. The post-quantum Internet-of-Things literature has nonetheless concentrated on scheme performance rather than on where that seed comes from. We characterise a seven-source hardware entropy module, comprising six analogue sensor channels and a watchdog-oscillator jitter source, under NIST SP 800-90B with 10⁶ raw samples per analogue source, and connect the measured source to FIPS 204 ML-DSA-87 key generation on a Raspberry Pi 4 gateway. Three results follow. Per-source min-entropy varies by a factor of 3.4 across the array, from 0.214 to 0.726 bits per sample, so a single aggregate figure misrepresents the source. Three nominally independent sensor channels prove strongly dependent, with Pearson correlation up to +0.966 on raw sample values; treating them as independent inflates the entropy budget from a corrected 203 to 412 bits per block to a nominal 680, and under the most conservative grouping the budget falls below the 256 bits an ML-DSA seed requires. Correlation measured on least significant bits alone conceals two of the three dependent pairs, so the test a multi-source design would most naturally apply is the one least able to detect the problem. Finally, an eight-scheme benchmark on a Cortex-A72 grounds the selection of ML-DSA-87 against Falcon and SLH-DSA, and corrects a previously published sub-millisecond verification figure by two orders of magnitude. We argue that inter-source independence testing belongs in the validation path of any multi-source entropy design, and that entropy provenance should be recorded alongside the keys it produces.",
     digitalLibrary: "PLOS ONE",
     preprintOnRequest: true,
   },
@@ -257,6 +260,8 @@ export const publications: Publication[] = [
     date: "Submitted May 2026",
     status: "under-review",
     type: "journal",
+    abstract:
+      "Accurate prediction of longitudinal hippocampal atrophy is essential for the monitoring of Alzheimer's disease (AD) progression. While Recurrent Neural Networks (RNNs) excel at time-series forecasting, traditional data-driven models make predictions across the volume that do not align with the known disease mechanisms of neurodegeneration and thus cannot generally be relied upon in clinical practice. In this paper, we propose a novel Biology-Informed RNN framework that mathematically incorporates physiological constraints in the optimization of the network. Hippocampal volumes were extracted from 382 ADNI subjects (99 AD, 148 MCI, 135 CN) using FastSurfer, spanning 36 months of longitudinal follow-up. Using this data, we formulated a custom objective function that enforces three biological constraints: monotonic decline, bounded growth within MRI noise limits, and plausible atrophy rates. We integrated this physiological corridor into standard architectures and compared their predictive performance against eight model variants spanning statistical (ARIMA), ensemble (XGBoost), and standard recurrent (GRU, LSTM, Bi-LSTM) baselines. The results demonstrate that embedding biological rules actively guides the network toward more generalizable loss minima. Unconstrained architectures exhibited both elevated prediction error and systematic biological implausibility: the standard LSTM yielded a Mean Absolute Error (MAE) of 140.13 mm³ with a 7.79% biological violation rate, while the standard Bi-LSTM reached 9.10% violations. The Bio-Informed LSTM reduced MAE to 119.56 mm³ and eliminated all biological violations (0.00%), consistent with the atrophic hippocampal patterns typical of AD/MCI population. The Bio-Informed GRU achieved the best overall predictive performance (MAE: 115.00 mm³; Pearson r: 0.9938; violation rate: 0.00%). By harmonizing empirical risk minimization with domain-specific neurological constraints, our proposed approach offers a highly accurate and clinically trustworthy deep learning framework for longitudinal biomarker tracking, achieving Pearson correlations exceeding 0.993 across all Biology-Informed recurrent architectures.",
     digitalLibrary: "Springer Nature Link",
     preprintOnRequest: true,
   },
@@ -274,6 +279,8 @@ export const publications: Publication[] = [
     date: "Submitted 2026",
     status: "under-review",
     type: "journal",
+    abstract:
+      "Background. Large language models (LLMs) are being applied to a range of mental health tasks. Seven systematic or scoping reviews retrieved by this search are organised around application areas rather than methodology and each closed its search before the majority of the studies included here were published.\n\nObjective. To synthesise, compare and critically appraise the research methodologies used in the included LLM-based mental health studies and to characterise their evidential standards rather than their reported performance.\n\nMethods. Methodology-only extraction was performed across 82 studies using a uniform 24-field instrument. Four fields were dedicated to risk reporting: hallucination, bias, safety and human evaluation. Absence was recorded as data, with “Not Reported” distinguished from “not applicable”. Results were deliberately excluded from extraction. Findings were synthesised narratively; no quantitative pooling was attempted.\n\nResults. Studies clustered into corpus construction, model adaptation, benchmark construction, human and clinical evaluation and risk assurance. Clinical data underpinned 4 of 13 corpus-building studies. Of 82 studies, 35 (43%) reported inferential statistics and 24 (29%) any reliability coefficient; 51 of the 74 studies using human evaluation reported no agreement statistic. Risk coverage was high but shallow: 74 studies addressed safety yet 22 tested output behaviour and 69 addressed bias yet 8 applied a recognisable bias method. Decoding parameters were absent from 66 of 82 studies and 2 studies were preregistered. One underpowered exploratory trial constituted the prospective evidence base within the corpus.\n\nConclusions. Constraints on interpretation are the scarcity of reported agreement statistics, the gap between nominal and substantive risk evaluation and the absence of powered clinical trials among the included studies. Reliability reporting and output-safety testing are more common among the more recently published studies, though decoding-parameter reporting and preregistration are not.",
     digitalLibrary: "Frontiers in Digital Health",
     preprintOnRequest: true,
   },
@@ -286,6 +293,8 @@ export const publications: Publication[] = [
     status: "preprint",
     link: "https://doi.org/10.2139/ssrn.7662638",
     type: "preprint",
+    abstract:
+      "A deployed mental-health classifier faces two quite different kinds of change. The annotation scheme may be revised, or the data source may change. Federated continual learning is usually evaluated with a single forgetting number that mixes the two, so a practitioner cannot tell which change to prepare for. We separate them by construction. The first two stages of our stream use the same 3,553 Reddit posts, first under a binary stress label space and then under a four-class depression severity scale. The join was verified at a 100% match rate, so the text is fixed and only the label space moves. A third stage brings in a different corpus and a different task. We run seven training regimes over three seeds. In four of the five methods where the two terms can be compared, the label-space change alone accounts for most of the forgetting on the first task, and the later stage that adds a new corpus costs little more. For three methods it partially restores first-task performance. The mitigations disagree about which drift they handle. Replay gives the lowest label-shift forgetting (+0.066 macro-F1) but the largest additional cost from the new corpus (+0.096), and elastic weight consolidation behaves the other way round. Federation raises average macro-F1 by 0.071 over local-only training and lowers the weakest client by 0.089. No new algorithm is proposed here. The contribution is the controlled decomposition, and what it shows about when each existing mitigation is worth using.",
     digitalLibrary: "SSRN",
   },
 {
@@ -301,8 +310,8 @@ export const publications: Publication[] = [
     "Md. Ekramul Hamid",
   ],
   venue:
-    "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
-  date: "Presented 2026 · proceedings pending",
+    "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026), IEEE Proceedings",
+  date: "Presented 2026",
   status: "presented",
   type: "conference",
   digitalLibrary: "IEEE Xplore Digital Library",
@@ -321,8 +330,8 @@ export const publications: Publication[] = [
     "Md. Ekramul Hamid",
   ],
   venue:
-    "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026) — IEEE Proceedings",
-  date: "Presented 2026 · proceedings pending",
+    "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026), IEEE Proceedings",
+  date: "Presented 2026",
   status: "presented",
   type: "conference",
   digitalLibrary: "IEEE Xplore Digital Library",
@@ -340,11 +349,13 @@ export const publications: Publication[] = [
       "Md Arik Rayhan",
     ],
     venue:
-      "International Conference on Power, Electronics, Communications, Computing, and Intelligent Infrastructure (PECCII 2026) — IEEE Proceedings",
+      "International Conference on Power, Electronics, Communications, Computing, and Intelligent Infrastructure (PECCII 2026), IEEE Proceedings",
     date: "2026",
     status: "published",
     link: "https://doi.org/10.1109/PECCII70991.2026.11662071",
     type: "conference",
+    abstract:
+      "Existing blockchain-based document verification systems suffer from scalability bottlenecks and high gas costs due to unrestricted uploads, duplicate on-chain storage, and inefficient transaction processing. To address these limitations, this paper proposes a decentralized framework integrating IPFS for off-chain document storage and Ethereum smart contracts for secure on-chain state management. An owner-controlled dynamic access mechanism using OpenZeppelin AccessControl restricts uploads to authorized entities, proactively reverts duplicate hash entries, and employs direct Solidity state-mapping for constant-time, dataset-independent cryptographic lookups. The system’s operational scalability is confirmed through performance analysis in the 1,000 fuzzed transaction executions and 10,000-document batch load test run using the Foundry testing suite. In the architecture, the duplication of gas usage is avoided actively by reverting uploads, average 41,317 gas is spent on the baseline document storage. More importantly, a batch-processing also helps to keep the amortized cost to 32,297 gas per document, and it gives 21.8% efficiency improvement. The verification process is also very lightweight in terms of read cost at the average read cost of 1,471 gas, and the highest read cost of 36 gas was recorded over all fuzzed inputs. These findings illustrate that a dynamic permissioning approach, active de-duplication and batch optimization is a feasible and less expensive solution to the problem of applications that need to have a robust document provenance, namely, enterprise credentialing and legal workflows.",
     digitalLibrary: "IEEE Xplore Digital Library",
     certificate:
       "/certificates/peccii2026-gas-optimized-blockchain-presentation-certificate.pdf",
@@ -365,6 +376,8 @@ export const publications: Publication[] = [
     status: "published",
     link: "https://doi.org/10.1145/3777555.3777569",
     type: "conference",
+    abstract:
+      "The advent of quantum computing necessitates a paradigm shift in securing Firmware-Over-The-Air (FOTA) updates for Internet of Things (IoT) devices. To address this issue, we propose and evaluate a novel quantum-resistant FOTA architecture that integrates three key technologies: the CRYSTALS-Dilithium-5 signature scheme for post-quantum authentication, leveraging an Ethereum smart contract for immutable firmware registration, and the InterPlanetary File System (IPFS) for resilient distribution. Our prototype, benchmarked over 1,000 iterations in a browser environment, validates the practicality of this approach. We measured an average signature verification time of 0.1214 ms for Dilithium, providing 192-bit post-quantum security while incurring a manageable 1.5× performance overhead compared to the quantum-vulnerable ECDSA P-256 standard. While publisher-side signing incurs a 7.7× overhead, yet the sub-millisecond verification confirms client-side feasibility. This paper presents the full system design, a comprehensive performance analysis, and discusses adapting this model to embedded Linux platforms (e.g., Raspberry Pi) and the challenges for resource-constrained microcontrollers.",
     digitalLibrary: "ACM Digital Library",
   },
 ];
@@ -437,11 +450,9 @@ export const projects: Project[] = [
  */
 export const skills = {
   "Research Interests": [
-    "Deep Learning",
-    "NLP & Large Language Models",
-    "LLM Safety & Security",
-    "MLOps & DevOps for ML Systems",
-    "Cloud Infrastructure & CI/CD Automation",
+    "AI in Medical Imaging",
+    "Cloud Infrastructure",
+    "DevOps",
   ],
   Languages: ["Python", "C", "C++", "JavaScript", "SQL", "Solidity"],
   "ML & Research": ["PyTorch", "Hugging Face"],
@@ -453,12 +464,9 @@ export const skills = {
     "Foundry",
     "IPFS",
   ],
-  "DevOps & Databases": [
+  "Tools & Databases": [
     "Git",
     "GitHub",
-    "GitHub Actions",
-    "Docker",
-    "Trivy",
     "Linux",
     "PostgreSQL",
     "MySQL",
@@ -491,10 +499,10 @@ export type Achievement = {
 export const achievements: Achievement[] = [
   { text: "1x ICPC Regionalist (Team: BAUET_Rong_Answer)" },
   {
-    text: "1x National Collegiate Programming Contest by JU — Rank 149 (Team: BAUET_PARADIGM)",
+    text: "1x National Collegiate Programming Contest (JU): Rank 149 (Team: BAUET_PARADIGM)",
   },
   {
-    text: "2x Inter University Programming Contest — Best Rank 45 at IUT (Team: BAUET_Twisted_Minds)",
+    text: "2x Inter-University Programming Contest: Best Rank 45 at IUT (Team: BAUET_Twisted_Minds)",
     certificate: "/certificates/iut-national-ict-fest-2024-participation-certificate.pdf",
     certificateLabel: "Participation certificate",
   },
@@ -504,21 +512,21 @@ export const achievements: Achievement[] = [
       "/certificates/mist-independence-day-programming-contest-2023-10th-place-certificate.pdf",
   },
   {
-    text: "1x Champion, Intra University Programming Contest (Team)",
+    text: "1x Champion, Intra-University Programming Contest (Team)",
     certificate:
       "/certificates/intra-bauet-programming-contest-2023-team-champion-certificate.pdf",
   },
   {
-    text: "1x 2nd Runners-up, MIND STORM 4.0 Programming Contest, BAUET",
+    text: "1x 2nd Runner-up, MIND STORM 4.0 Programming Contest, BAUET",
     certificate: "/certificates/mind-storm-4-programming-contest-2nd-runner-up-certificate.pdf",
   },
   {
-    text: "1x Runners-up, Intra University Programming Contest (Solo)",
+    text: "1x Runner-up, Intra-University Programming Contest (Solo)",
     certificate:
       "/certificates/intra-bauet-programming-contest-2023-individual-1st-runner-up-certificate.pdf",
   },
   {
-    text: "1x 1st Runners-up, Intra University Three Minute Thesis Presentation",
+    text: "1x 1st Runner-up, Intra-University Three Minute Thesis (3MT) Presentation",
     certificate:
       "/certificates/bauet-tech-fair-2025-three-minute-thesis-1st-runner-up-certificate.pdf",
   },
@@ -588,22 +596,12 @@ export const leadership: LeadershipEntry[] = [
     certificate: "/certificates/bauet-computer-society-president-certificate.pdf",
   },
   {
-    org: "Intra University Programming Contest, BAUET",
+    org: "Intra-University Programming Contest, BAUET",
     roles: ["Problem Setter"],
-    points: [
-      "Wrote and reviewed the problems that went into the contest set.",
-      "Prepared test cases and reference solutions for each problem.",
-      "Tuned the difficulty so there was something for every skill level.",
-    ],
   },
   {
-    org: "HULT Prize, BAUET",
+    org: "Hult Prize, BAUET",
     roles: ["Officer of Documentation"],
-    points: [
-      "Looked after team registrations and records for the campus round.",
-      "Wrote up the event reports once each stage wrapped.",
-      "Kept submission material organised so the committee could find things fast.",
-    ],
     certificate: "/certificates/hult-prize-bauet-officer-of-documentation-certificate.pdf",
   },
 ];
