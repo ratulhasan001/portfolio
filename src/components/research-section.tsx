@@ -20,7 +20,6 @@ import {
 import { SectionTitle } from "./ui";
 import { FadeIn } from "./fade-in";
 import { WipeWords } from "./wipe-in";
-import { ParallaxLayer } from "./parallax-layer";
 
 const statusMeta = {
   published: { label: "Published", dot: "bg-status-published" },
@@ -246,9 +245,6 @@ export function ResearchSection() {
 
   return (
     <section id="research" className="relative mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-9">
-      <ParallaxLayer speed={35}>
-        <div className="bg-dot-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_10%,transparent_70%)]" />
-      </ParallaxLayer>
 
       <SectionTitle index="01" title="Research & Publications" />
 

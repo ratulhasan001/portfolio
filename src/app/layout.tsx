@@ -85,10 +85,6 @@ export default function RootLayout({
       <body className="safe-bottom min-h-full flex flex-col bg-canvas text-fg-default">
         <ThemeProvider>
           <SmoothScroll />
-          <div
-            aria-hidden
-            className="bg-grid-fixed pointer-events-none fixed inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,#000_0%,transparent_75%)]"
-          />
           {children}
         </ThemeProvider>
       </body>
