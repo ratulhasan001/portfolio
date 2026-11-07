@@ -232,6 +232,17 @@ function PositionFlow({
                   ))}
                 </ul>
               )}
+              {pos.certificate && (
+                <a
+                  href={pos.certificate}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mono mt-3 inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+                >
+                  <Award size={11} />
+                  {pos.certificateLabel ?? "Certificate"}
+                </a>
+              )}
             </div>
           </motion.li>
         );
