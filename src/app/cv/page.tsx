@@ -6,7 +6,7 @@ import { profile } from "@/lib/data";
 const CV_FILE = "/Ratul_Hasan_CV.pdf";
 
 export const metadata: Metadata = {
-  title: "CV — Ratul Hasan",
+  title: "CV | Ratul Hasan",
   description: `Curriculum vitae of ${profile.name}.`,
 };
 

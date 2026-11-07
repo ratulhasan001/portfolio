@@ -21,15 +21,6 @@ import { SectionTitle } from "./ui";
 import { FadeIn } from "./fade-in";
 import { WipeWords } from "./wipe-in";
 
-const statusMeta = {
-  published: { label: "Published", dot: "bg-status-published" },
-  accepted: { label: "Accepted", dot: "bg-status-accepted" },
-  presented: { label: "Presented", dot: "bg-status-accepted" },
-  "under-review": { label: "Under Review", dot: "bg-status-review" },
-  "under-submission": { label: "Submitted", dot: "bg-status-review" },
-  preprint: { label: "Preprint", dot: "bg-fg-subtle" },
-} as const;
-
 /** Prefilled email asking for a copy of a manuscript that isn't public yet. */
 function preprintRequestHref(title: string) {
   const subject = `Preprint request: ${title}`;
@@ -71,22 +62,16 @@ function Dot() {
 function PublicationRow({ pub }: { pub: Publication }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
-  const status = statusMeta[pub.status];
   const library = pub.digitalLibrary
     ? digitalLibraryLabels[pub.digitalLibrary]
     : undefined;
+  const detailsLabel = pub.abstract ? "abstract and venue" : "venue";
 
   return (
     <li className="px-4 py-4 sm:px-5 sm:py-5">
-      <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1.5">
-        <h3 className="min-w-0 flex-1 text-[17px] font-semibold leading-snug tracking-tight text-fg-default sm:text-xl">
-          <WipeWords text={pub.title} inView stagger={0.018} />
-        </h3>
-        <span className="mono mt-0.5 flex shrink-0 items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-fg-muted sm:text-[11px]">
-          <span className={`h-1.5 w-1.5 rounded-full ${status.dot}`} />
-          {status.label}
-        </span>
-      </div>
+      <h3 className="text-[17px] font-semibold leading-snug tracking-tight text-fg-default sm:text-xl">
+        <WipeWords text={pub.title} inView stagger={0.018} />
+      </h3>
 
       {/* Always visible: author order is the first thing a committee reads. */}
       <div className="mt-2">
@@ -157,8 +142,8 @@ function PublicationRow({ pub }: { pub: Publication }) {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls={panelId}
-          aria-label={open ? "Hide venue" : "Show venue"}
-          title={open ? "Hide venue" : "Show venue"}
+          aria-label={open ? `Hide ${detailsLabel}` : `Show ${detailsLabel}`}
+          title={open ? `Hide ${detailsLabel}` : `Show ${detailsLabel}`}
           className={`ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors ${
             open
               ? "border-fg-default bg-fg-default text-canvas"
@@ -187,6 +172,18 @@ function PublicationRow({ pub }: { pub: Publication }) {
             className="overflow-hidden"
           >
             <div className="mt-4 space-y-3 border-t border-border-default pt-3">
+              {pub.abstract && (
+                <div>
+                  <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                    Abstract
+                  </p>
+                  <div className="space-y-2 text-sm leading-relaxed text-fg-muted">
+                    {pub.abstract.split("\n\n").map((para, i) => (
+                      <p key={i}>{para}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div>
                 <p className="mono mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
                   Venue
