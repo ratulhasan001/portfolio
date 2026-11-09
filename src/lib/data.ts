@@ -604,10 +604,12 @@ export const leadership: LeadershipEntry[] = [
   {
     org: "Intra-University Programming Contest, BAUET",
     roles: ["Problem Setter"],
+    points: ["Wrote contest problems with test data and reference solutions."],
   },
   {
     org: "Hult Prize, BAUET",
     roles: ["Officer of Documentation"],
+    points: ["Kept records, minutes and reports for the campus program."],
     certificate: "/certificates/hult-prize-bauet-officer-of-documentation-certificate.pdf",
   },
 ];
