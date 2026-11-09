@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Mail } from "lucide-react";
 import { profile } from "@/lib/data";
 import { HeroReveal } from "./fade-in";
-import { CvIcon, GithubIcon, LinkedinIcon, ScholarIcon } from "./brand-icons";
+import { CvIcon, GithubIcon, LinkedinIcon, OrcidIcon } from "./brand-icons";
 import { RiseLetters } from "./wipe-in";
 import Image from "next/image";
 
@@ -44,11 +44,11 @@ const contactIcons = [
     onBrand: "#ffffff",
   },
   {
-    icon: ScholarIcon,
-    label: "Google Scholar",
-    href: profile.scholar,
+    icon: OrcidIcon,
+    label: "ORCID",
+    href: profile.orcid,
     external: true,
-    brand: "#4285F4",
+    brand: "#A6CE39",
     onBrand: "#ffffff",
   },
 ];
