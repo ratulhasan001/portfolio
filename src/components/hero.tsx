@@ -199,8 +199,8 @@ export function Hero() {
           <Image
             src="/ratul-hasan.jpg"
             alt={`Portrait of ${profile.name}`}
-            width={465}
-            height={600}
+            width={531}
+            height={650}
             priority
             className="h-28 w-28 rounded-full border border-border-default object-cover object-top shadow-sm sm:h-auto sm:w-52 sm:rounded-3xl lg:w-60"
           />
