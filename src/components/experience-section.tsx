@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Award, ExternalLink, GitCommitHorizontal, Mail } from "lucide-react";
-import { experience, type Position } from "@/lib/data";
+import { experience, type Experience, type Position } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { WipeWords } from "./wipe-in";
 import { TimelineLogo } from "./timeline-logo";
@@ -44,6 +44,31 @@ function OrgName({ name, website }: { name: string; website?: string }) {
   );
 }
 
+/** The org's own LinkedIn / GitHub, shown as small icon links beside its name. */
+function OrgSocials({ exp }: { exp: Experience }) {
+  if (!exp.socials?.length) return null;
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      {exp.socials.map(({ kind, href }) => {
+        const { label, Icon } = socialMeta[kind];
+        return (
+          <a
+            key={kind}
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${exp.org} on ${label}`}
+            title={label}
+            className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-border-default text-fg-subtle transition-colors hover:border-fg-subtle hover:text-fg-default"
+          >
+            <Icon size={13} />
+          </a>
+        );
+      })}
+    </span>
+  );
+}
+
 export function ExperienceSection() {
   return (
     <section
@@ -80,7 +105,10 @@ export function ExperienceSection() {
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="text-lg font-bold leading-tight tracking-tight text-fg-default sm:text-xl">
                   {stacked ? (
-                    <OrgName name={exp.org} website={exp.website} />
+                    <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <OrgName name={exp.org} website={exp.website} />
+                      <OrgSocials exp={exp} />
+                    </span>
                   ) : (
                     <WipeWords text={exp.role} inView stagger={0.04} />
                   )}
@@ -91,40 +119,14 @@ export function ExperienceSection() {
               </div>
 
               {!stacked && (
-                <p className="mt-1.5 text-[15px] text-fg-muted">
+                <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-fg-muted">
                   <OrgName name={exp.org} website={exp.website} />
+                  <OrgSocials exp={exp} />
                 </p>
               )}
 
               <div className="mono mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-fg-subtle">
                 <span>{exp.location}</span>
-                {exp.current && (
-                  <>
-                    <span aria-hidden>·</span>
-                    <span className="inline-flex items-center gap-1.5 uppercase tracking-[0.1em] text-status-published">
-                      <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-current" />
-                      Current
-                    </span>
-                  </>
-                )}
-                {exp.socials?.map(({ kind, href }) => {
-                  const { label, Icon } = socialMeta[kind];
-                  return (
-                    <span key={kind} className="inline-flex items-center gap-x-2">
-                      <span aria-hidden>·</span>
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${exp.org} on ${label}`}
-                        className="inline-flex items-center gap-1 transition-colors hover:text-fg-default"
-                      >
-                        <Icon size={11} />
-                        {label}
-                      </a>
-                    </span>
-                  );
-                })}
               </div>
 
               {exp.certificate && (
