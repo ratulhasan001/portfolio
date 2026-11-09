@@ -7,7 +7,7 @@ import { profile } from "@/lib/data";
 import { HeroReveal } from "./fade-in";
 import { CvIcon, GithubIcon, LinkedinIcon, ScholarIcon } from "./brand-icons";
 import { RiseLetters } from "./wipe-in";
-import { HeroBot } from "./mascot";
+import Image from "next/image";
 
 // The page itself is monochrome, so `brand` is the one place real colour is
 // allowed back in: it sweeps across the button while the cursor is on it.
@@ -152,8 +152,10 @@ export function Hero() {
         style={{ opacity: heroOpacity, y: yShift }}
         className="relative mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:pb-14 lg:pt-12"
       >
-        <HeroBot className="absolute right-4 top-[10.25rem] sm:right-6 sm:top-28 lg:top-14" />
-
+        {/* Text on the left, headshot on the right; on phones the photo
+            sits above the greeting instead. */}
+        <div className="flex flex-col-reverse gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+        <div className="min-w-0">
         <HeroReveal delay={0.1}>
           <p className="mono text-base font-medium text-fg-muted">
             Hi, I&apos;m
@@ -191,6 +193,19 @@ export function Hero() {
             <IconLink key={item.label} {...item} />
           ))}
         </HeroReveal>
+        </div>
+
+        <HeroReveal delay={0.4} className="shrink-0">
+          <Image
+            src="/ratul-hasan.jpg"
+            alt={`Portrait of ${profile.name}`}
+            width={465}
+            height={600}
+            priority
+            className="h-28 w-28 rounded-full border border-border-default object-cover object-top shadow-sm sm:h-auto sm:w-52 sm:rounded-3xl lg:w-60"
+          />
+        </HeroReveal>
+        </div>
       </motion.div>
     </section>
   );
