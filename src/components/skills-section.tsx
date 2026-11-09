@@ -295,7 +295,7 @@ export function SkillsSection() {
         {/* Every card takes the same shape — org label, the senior role as
             the headline, then any earlier roles as chips — so the six-role
             entry no longer dwarfs the single-role ones. */}
-        <StaggerGroup className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup className="grid items-start gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {leadership.map((entry) => {
             const [lead, ...previous] = entry.roles;
             return (
