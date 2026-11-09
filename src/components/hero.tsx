@@ -162,7 +162,7 @@ export function Hero() {
 
         {/* Set as two stacked lines so the name reads as a display mark
             rather than a run of text, each line rising in on its own. */}
-        <h1 id="hero-name" className="mt-2 text-[19vw] font-extrabold leading-[0.84] tracking-[-0.05em] text-fg-default sm:text-8xl lg:text-[9.5rem]">
+        <h1 id="hero-name" className="mt-2 text-[16vw] font-extrabold leading-[0.84] tracking-[-0.05em] text-fg-default sm:text-7xl lg:text-[8rem]">
           <span className="block">
             <RiseLetters text={firstName} delay={0.2} />
           </span>
