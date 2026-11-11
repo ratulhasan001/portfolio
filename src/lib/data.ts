@@ -113,11 +113,6 @@ export const experience: Experience[] = [
     bullets: [],
     tags: ["LLM", "NLP", "LLM Security", "Federated Learning", "Research"],
     logo: "/logo/elitelab.png",
-    contacts: [
-      // Lab account ID (also the portal login), not a mailbox, so it is shown as plain text.
-      { label: "Lab Member ID", value: "ratul.hasan@elitelab.ai" },
-      { label: "Lab Contact", value: "info@elitelab.ai", email: true },
-    ],
   },
   {
     org: "BAUET Computer Society, Dept. of CSE",
@@ -163,6 +158,8 @@ export type Education = {
   location: string;
   period: string;
   detail?: string;
+  /** What the thesis did and found, shown under its title. */
+  thesisPoints?: string[];
   merit?: string;
   score?: { label: string; value: number; scale: number };
   supervisors?: Supervisor[];
@@ -178,6 +175,10 @@ export const education: Education[] = [
     period: "2022 - July 2026",
     detail:
       "Thesis: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
+    thesisPoints: [
+      "Designed a biology-informed loss constraining LSTM/GRU forecasts to monotonic decline, noise-bounded growth and plausible atrophy rates, using FastSurfer hippocampal volumes of 382 ADNI subjects over 36 months.",
+      "Bio-Informed GRU outperformed ARIMA, XGBoost and unconstrained RNN baselines (MAE 115.0 mm³, r = 0.994) with 0% biologically implausible predictions on the held-out test set, vs. 3.9–13.0% for baselines.",
+    ],
     score: { label: "CGPA", value: 3.82, scale: 4.0 },
     supervisors: [
       {
@@ -282,7 +283,7 @@ export const publications: Publication[] = [
       "Tze Hui Liew",
     ],
     venue: "Frontiers in Digital Health (Digital Mental Health section)",
-    date: "Submitted 2026",
+    date: "Submitted Nov 2026",
     status: "under-review",
     type: "journal",
     abstract:
@@ -413,8 +414,8 @@ export const projects: Project[] = [
     name: "LedgerSeal",
     icon: "solidity",
     description:
-      "A decentralized application (DApp) for constant-time document verification with dynamic access control on IPFS, built on an EVM-compatible blockchain.",
-    tools: ["React", "Anvil EVM", "Foundry", "MetaMask", "Pinata IPFS"],
+      "A DApp that stores documents on IPFS and verifies them via constant-time on-chain hash lookups, with role-based upload control on an EVM-compatible blockchain. Batch uploads cut amortized storage cost by 21.8% (41,317 → 32,297 gas per document), validated with 1,000 fuzz runs and a 10,000-document load test.",
+    tools: ["Solidity", "Foundry", "React", "MetaMask", "Pinata IPFS"],
     link: "https://github.com/ratulhasan001/LedgerSeal",
     language: "Solidity",
     languageColor: "#AA6746",
