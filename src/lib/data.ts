@@ -249,7 +249,14 @@ export const publications: Publication[] = [
   {
     title:
       "Entropy-assured post-quantum key generation on IoT edge devices: source independence, measured min-entropy and signature scheme selection",
-    authors: ["Ratul Hasan", "Md Arik Rayhan", "Md Ohiduzaman Pranto"],
+    authors: [
+      "Ratul Hasan",
+      "Md Arik Rayhan",
+      "Md. Ohiduzaman Pranto",
+      "Md. Momenul Haque",
+      "Yousuf Oley",
+      "Samiha Farjana",
+    ],
     venue: "PLOS ONE",
     date: "Submitted September 2026",
     status: "under-review",
@@ -262,7 +269,7 @@ export const publications: Publication[] = [
   {
     title:
       "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
-    authors: ["Ratul Hasan", "Md. Momenul Haque", "Ananya Sarker"],
+    authors: ["Ratul Hasan", "Md. Momenul Haque", "Ananya Sarker", "Yousuf Oley"],
     venue: "Scientific Reports",
     date: "Submitted May 2026",
     status: "under-review",
