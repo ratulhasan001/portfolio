@@ -85,6 +85,13 @@ function EducationRow({ edu }: { edu: Education }) {
                       Thesis
                     </p>
                     <p className="text-sm leading-relaxed text-fg-muted">{thesis}</p>
+                    {edu.thesisPoints && edu.thesisPoints.length > 0 && (
+                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-fg-muted marker:text-fg-subtle">
+                        {edu.thesisPoints.map((pt) => (
+                          <li key={pt}>{pt}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                   {edu.supervisors?.map((sup) => (
                     <div key={sup.name}>
