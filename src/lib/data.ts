@@ -261,6 +261,19 @@ export const digitalLibraryLabels: Record<string, string> = {
 export const publications: Publication[] = [
   {
     title:
+      "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
+    authors: ["Ratul Hasan", "Md. Momenul Haque", "Ananya Sarker", "Yousuf Oley"],
+    venue: "Scientific Reports",
+    date: "Submitted May 2026",
+    status: "under-review",
+    type: "journal",
+    abstract:
+      "Accurate prediction of longitudinal hippocampal atrophy is essential for the monitoring of Alzheimer's disease (AD) progression. While Recurrent Neural Networks (RNNs) excel at time-series forecasting, traditional data-driven models make predictions across the volume that do not align with the known disease mechanisms of neurodegeneration and thus cannot generally be relied upon in clinical practice. In this paper, we propose a novel Biology-Informed RNN framework that mathematically incorporates physiological constraints in the optimization of the network. Hippocampal volumes were extracted from 382 ADNI subjects (99 AD, 148 MCI, 135 CN) using FastSurfer, spanning 36 months of longitudinal follow-up. Using this data, we formulated a custom objective function that enforces three biological constraints: monotonic decline, bounded growth within MRI noise limits, and plausible atrophy rates. We integrated this physiological corridor into standard architectures and compared their predictive performance against eight model variants spanning statistical (ARIMA), ensemble (XGBoost), and standard recurrent (GRU, LSTM, Bi-LSTM) baselines. The results demonstrate that embedding biological rules actively guides the network toward more generalizable loss minima. Unconstrained architectures exhibited both elevated prediction error and systematic biological implausibility: the standard LSTM yielded a Mean Absolute Error (MAE) of 140.13 mm³ with a 7.79% biological violation rate, while the standard Bi-LSTM reached 9.10% violations. The Bio-Informed LSTM reduced MAE to 119.56 mm³ and eliminated all biological violations (0.00%), consistent with the atrophic hippocampal patterns typical of AD/MCI population. The Bio-Informed GRU achieved the best overall predictive performance (MAE: 115.00 mm³; Pearson r: 0.9938; violation rate: 0.00%). By harmonizing empirical risk minimization with domain-specific neurological constraints, our proposed approach offers a highly accurate and clinically trustworthy deep learning framework for longitudinal biomarker tracking, achieving Pearson correlations exceeding 0.993 across all Biology-Informed recurrent architectures.",
+    digitalLibrary: "Springer Nature Link",
+    preprintOnRequest: true,
+  },
+  {
+    title:
       "Entropy-assured post-quantum key generation on IoT edge devices: source independence, measured min-entropy and signature scheme selection",
     authors: [
       "Ratul Hasan",
@@ -277,19 +290,6 @@ export const publications: Publication[] = [
     abstract:
       "Post-quantum key generation rests on an assumption that is rarely measured: that the random seed behind the key carried enough entropy. FIPS 204 makes the dependence exact, since ML-DSA key generation is a deterministic function of a 32-byte seed. The post-quantum Internet-of-Things literature has nonetheless concentrated on scheme performance rather than on where that seed comes from. We characterise a seven-source hardware entropy module, comprising six analogue sensor channels and a watchdog-oscillator jitter source, under NIST SP 800-90B with 10⁶ raw samples per analogue source, and connect the measured source to FIPS 204 ML-DSA-87 key generation on a Raspberry Pi 4 gateway. Three results follow. Per-source min-entropy varies by a factor of 3.4 across the array, from 0.214 to 0.726 bits per sample, so a single aggregate figure misrepresents the source. Three nominally independent sensor channels prove strongly dependent, with Pearson correlation up to +0.966 on raw sample values; treating them as independent inflates the entropy budget from a corrected 203 to 412 bits per block to a nominal 680, and under the most conservative grouping the budget falls below the 256 bits an ML-DSA seed requires. Correlation measured on least significant bits alone conceals two of the three dependent pairs, so the test a multi-source design would most naturally apply is the one least able to detect the problem. Finally, an eight-scheme benchmark on a Cortex-A72 grounds the selection of ML-DSA-87 against Falcon and SLH-DSA, and corrects a previously published sub-millisecond verification figure by two orders of magnitude. We argue that inter-source independence testing belongs in the validation path of any multi-source entropy design, and that entropy provenance should be recorded alongside the keys it produces.",
     digitalLibrary: "PLOS ONE",
-    preprintOnRequest: true,
-  },
-  {
-    title:
-      "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
-    authors: ["Ratul Hasan", "Md. Momenul Haque", "Ananya Sarker", "Yousuf Oley"],
-    venue: "Scientific Reports",
-    date: "Submitted May 2026",
-    status: "under-review",
-    type: "journal",
-    abstract:
-      "Accurate prediction of longitudinal hippocampal atrophy is essential for the monitoring of Alzheimer's disease (AD) progression. While Recurrent Neural Networks (RNNs) excel at time-series forecasting, traditional data-driven models make predictions across the volume that do not align with the known disease mechanisms of neurodegeneration and thus cannot generally be relied upon in clinical practice. In this paper, we propose a novel Biology-Informed RNN framework that mathematically incorporates physiological constraints in the optimization of the network. Hippocampal volumes were extracted from 382 ADNI subjects (99 AD, 148 MCI, 135 CN) using FastSurfer, spanning 36 months of longitudinal follow-up. Using this data, we formulated a custom objective function that enforces three biological constraints: monotonic decline, bounded growth within MRI noise limits, and plausible atrophy rates. We integrated this physiological corridor into standard architectures and compared their predictive performance against eight model variants spanning statistical (ARIMA), ensemble (XGBoost), and standard recurrent (GRU, LSTM, Bi-LSTM) baselines. The results demonstrate that embedding biological rules actively guides the network toward more generalizable loss minima. Unconstrained architectures exhibited both elevated prediction error and systematic biological implausibility: the standard LSTM yielded a Mean Absolute Error (MAE) of 140.13 mm³ with a 7.79% biological violation rate, while the standard Bi-LSTM reached 9.10% violations. The Bio-Informed LSTM reduced MAE to 119.56 mm³ and eliminated all biological violations (0.00%), consistent with the atrophic hippocampal patterns typical of AD/MCI population. The Bio-Informed GRU achieved the best overall predictive performance (MAE: 115.00 mm³; Pearson r: 0.9938; violation rate: 0.00%). By harmonizing empirical risk minimization with domain-specific neurological constraints, our proposed approach offers a highly accurate and clinically trustworthy deep learning framework for longitudinal biomarker tracking, achieving Pearson correlations exceeding 0.993 across all Biology-Informed recurrent architectures.",
-    digitalLibrary: "Springer Nature Link",
     preprintOnRequest: true,
   },
   {
@@ -324,47 +324,26 @@ export const publications: Publication[] = [
       "A deployed mental-health classifier faces two quite different kinds of change. The annotation scheme may be revised, or the data source may change. Federated continual learning is usually evaluated with a single forgetting number that mixes the two, so a practitioner cannot tell which change to prepare for. We separate them by construction. The first two stages of our stream use the same 3,553 Reddit posts, first under a binary stress label space and then under a four-class depression severity scale. The join was verified at a 100% match rate, so the text is fixed and only the label space moves. A third stage brings in a different corpus and a different task. We run seven training regimes over three seeds. In four of the five methods where the two terms can be compared, the label-space change alone accounts for most of the forgetting on the first task, and the later stage that adds a new corpus costs little more. For three methods it partially restores first-task performance. The mitigations disagree about which drift they handle. Replay gives the lowest label-shift forgetting (+0.066 macro-F1) but the largest additional cost from the new corpus (+0.096), and elastic weight consolidation behaves the other way round. Federation raises average macro-F1 by 0.071 over local-only training and lowers the weakest client by 0.089. No new algorithm is proposed here. The contribution is the controlled decomposition, and what it shows about when each existing mitigation is worth using.",
     digitalLibrary: "SSRN",
   },
-{
-  title:
-    "SplitSafe Ultra: A Moving-Target Defense Framework for Entropy-Aware Encrypted File Persistence on IPFS",
-  authors: [
-    "Md. Ahnaf Muhaimin",
-    "Ratul Hasan",
-    "Yousuf Oley",
-    "Samiha Farjana",
-    "Bristi Rani Roy",
-    "Subrata Kumer Paul",
-    "Md. Ekramul Hamid",
-  ],
-  venue:
-    "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026), IEEE Proceedings",
-  date: "Presented 2026",
-  status: "presented",
-  type: "conference",
-  digitalLibrary: "IEEE Xplore Digital Library",
-  certificate:
-    "/certificates/spicscon2026-splitsafe-ultra-presentation-certificate.pdf",
-},
-{
-  title:
-    "ActiVisionNet-Fusion: A Dual-Stream Explainable Deep Learning Framework for Driver Drowsiness Detection",
-  authors: [
-    "Nasim Ahmed",
-    "Ratul Hasan",
-    "Subrata Kumer Paul",
-    "Dewan Nafiul Islam Noor",
-    "Md. Momenul Haque",
-    "Md. Ekramul Hamid",
-  ],
-  venue:
-    "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026), IEEE Proceedings",
-  date: "Presented 2026",
-  status: "presented",
-  type: "conference",
-  digitalLibrary: "IEEE Xplore Digital Library",
-  certificate:
-    "/certificates/spicscon2026-activisionnet-fusion-presentation-certificate.pdf",
-},
+  {
+    title:
+      "Quantum-Resistant FOTA: End-to-End Decentralized Firmware Updates for IoT Using Blockchain and CRYSTALS-Dilithium",
+    authors: [
+      "Ratul Hasan",
+      "Md. Momenul Haque",
+      "Redoanul Haque",
+      "Yousuf Oley",
+      "Ruhani Akter",
+    ],
+    venue:
+      "12th International Conference on Next Generation Computing, Communication, Systems and Security (NSysS '25), ACM, New York, NY, USA, 110-114",
+    date: "2025",
+    status: "published",
+    link: "https://doi.org/10.1145/3777555.3777569",
+    type: "conference",
+    abstract:
+      "The advent of quantum computing necessitates a paradigm shift in securing Firmware-Over-The-Air (FOTA) updates for Internet of Things (IoT) devices. To address this issue, we propose and evaluate a novel quantum-resistant FOTA architecture that integrates three key technologies: the CRYSTALS-Dilithium-5 signature scheme for post-quantum authentication, leveraging an Ethereum smart contract for immutable firmware registration, and the InterPlanetary File System (IPFS) for resilient distribution. Our prototype, benchmarked over 1,000 iterations in a browser environment, validates the practicality of this approach. We measured an average signature verification time of 0.1214 ms for Dilithium, providing 192-bit post-quantum security while incurring a manageable 1.5× performance overhead compared to the quantum-vulnerable ECDSA P-256 standard. While publisher-side signing incurs a 7.7× overhead, yet the sub-millisecond verification confirms client-side feasibility. This paper presents the full system design, a comprehensive performance analysis, and discusses adapting this model to embedded Linux platforms (e.g., Raspberry Pi) and the challenges for resource-constrained microcontrollers.",
+    digitalLibrary: "ACM Digital Library",
+  },
   {
     title:
       "A Gas-Optimized Blockchain Framework for Scalable Document Verification Using Dynamic Access Control and IPFS",
@@ -389,23 +368,44 @@ export const publications: Publication[] = [
   },
   {
     title:
-      "Quantum-Resistant FOTA: End-to-End Decentralized Firmware Updates for IoT Using Blockchain and CRYSTALS-Dilithium",
+      "SplitSafe Ultra: A Moving-Target Defense Framework for Entropy-Aware Encrypted File Persistence on IPFS",
     authors: [
+      "Md. Ahnaf Muhaimin",
       "Ratul Hasan",
-      "Md. Momenul Haque",
-      "Redoanul Haque",
       "Yousuf Oley",
-      "Ruhani Akter",
+      "Samiha Farjana",
+      "Bristi Rani Roy",
+      "Subrata Kumer Paul",
+      "Md. Ekramul Hamid",
     ],
     venue:
-      "12th International Conference on Next Generation Computing, Communication, Systems and Security (NSysS '25), ACM, New York, NY, USA, 110-114",
-    date: "2025",
-    status: "published",
-    link: "https://doi.org/10.1145/3777555.3777569",
+      "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026), IEEE Proceedings",
+    date: "Presented 2026",
+    status: "presented",
     type: "conference",
-    abstract:
-      "The advent of quantum computing necessitates a paradigm shift in securing Firmware-Over-The-Air (FOTA) updates for Internet of Things (IoT) devices. To address this issue, we propose and evaluate a novel quantum-resistant FOTA architecture that integrates three key technologies: the CRYSTALS-Dilithium-5 signature scheme for post-quantum authentication, leveraging an Ethereum smart contract for immutable firmware registration, and the InterPlanetary File System (IPFS) for resilient distribution. Our prototype, benchmarked over 1,000 iterations in a browser environment, validates the practicality of this approach. We measured an average signature verification time of 0.1214 ms for Dilithium, providing 192-bit post-quantum security while incurring a manageable 1.5× performance overhead compared to the quantum-vulnerable ECDSA P-256 standard. While publisher-side signing incurs a 7.7× overhead, yet the sub-millisecond verification confirms client-side feasibility. This paper presents the full system design, a comprehensive performance analysis, and discusses adapting this model to embedded Linux platforms (e.g., Raspberry Pi) and the challenges for resource-constrained microcontrollers.",
-    digitalLibrary: "ACM Digital Library",
+    digitalLibrary: "IEEE Xplore Digital Library",
+    certificate:
+      "/certificates/spicscon2026-splitsafe-ultra-presentation-certificate.pdf",
+  },
+  {
+    title:
+      "ActiVisionNet-Fusion: A Dual-Stream Explainable Deep Learning Framework for Driver Drowsiness Detection",
+    authors: [
+      "Nasim Ahmed",
+      "Ratul Hasan",
+      "Subrata Kumer Paul",
+      "Dewan Nafiul Islam Noor",
+      "Md. Momenul Haque",
+      "Md. Ekramul Hamid",
+    ],
+    venue:
+      "5th IEEE International Conference on Signal Processing, Information, Communication and Systems (SPICSCON 2026), IEEE Proceedings",
+    date: "Presented 2026",
+    status: "presented",
+    type: "conference",
+    digitalLibrary: "IEEE Xplore Digital Library",
+    certificate:
+      "/certificates/spicscon2026-activisionnet-fusion-presentation-certificate.pdf",
   },
 ];
 
