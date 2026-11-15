@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Trophy,
   Code2,
@@ -19,6 +20,7 @@ import {
   KeyRound,
   ShieldAlert,
   BadgeCheck,
+  ChevronDown,
 } from "lucide-react";
 import {
   SiC,
@@ -45,6 +47,7 @@ import {
   achievements,
   certifications,
   leadership,
+  type Certification,
 } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { FadeIn, StaggerGroup, staggerItem } from "./fade-in";
@@ -107,6 +110,90 @@ function CertificateLink({
       <Award size={11} />
       {label}
     </a>
+  );
+}
+
+function CertificationCard({ cert, delay }: { cert: Certification; delay: number }) {
+  return (
+    <FadeIn delay={delay} className="min-w-0">
+      <TiltLink
+        href={cert.link}
+        target="_blank"
+        rel="noreferrer"
+        className="h-full rounded-2xl border border-border-strong bg-canvas p-4 transition-colors hover:border-fg-subtle"
+      >
+        <p className="mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
+          {cert.issuer}
+        </p>
+        <p className="mt-1 text-[15px] font-semibold leading-snug text-fg-default">
+          <WipeWords text={cert.title} inView stagger={0.03} />
+        </p>
+        <p className="mt-2 text-[13px] text-fg-muted">
+          Issued {cert.issued}
+          {cert.expired && ` · Expired ${cert.expired}`}
+        </p>
+        <span className="mono mt-auto inline-flex max-w-full items-center gap-1 pt-2 text-[11px] text-fg-subtle transition-colors group-hover:text-accent">
+          <span className="min-w-0 truncate">ID {cert.credentialId}</span>
+          <ExternalLink
+            size={11}
+            className="shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
+          />
+        </span>
+      </TiltLink>
+    </FadeIn>
+  );
+}
+
+/** Featured certifications, with the rest behind a "show more" toggle. */
+function CertificationList() {
+  const [expanded, setExpanded] = useState(false);
+  const featured = certifications.filter((c) => c.featured);
+  const rest = certifications.filter((c) => !c.featured);
+
+  return (
+    <>
+      <div className="grid gap-2.5 sm:grid-cols-2">
+        {featured.map((cert, i) => (
+          <CertificationCard key={cert.credentialId} cert={cert} delay={i * 0.08} />
+        ))}
+      </div>
+
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            id="more-certifications"
+            key="more-certifications"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="overflow-hidden"
+          >
+            <div className="grid gap-2.5 pt-2.5 sm:grid-cols-2">
+              {rest.map((cert, i) => (
+                <CertificationCard key={cert.credentialId} cert={cert} delay={i * 0.05} />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {rest.length > 0 && (
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+          aria-controls="more-certifications"
+          className="mono mt-3 inline-flex items-center gap-1.5 rounded-full border border-border-strong px-3.5 py-1.5 text-[12px] text-fg-muted transition-colors hover:border-fg-subtle hover:text-fg-default"
+        >
+          {expanded ? "Show less" : `Show ${rest.length} more`}
+          <ChevronDown
+            size={13}
+            className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
+          />
+        </button>
+      )}
+    </>
   );
 }
 
@@ -253,36 +340,7 @@ export function SkillsSection() {
             Certifications
           </h3>
         </WipeIn>
-        <div className="grid gap-2.5 sm:grid-cols-2">
-          {certifications.map((cert, i) => (
-            <FadeIn key={cert.credentialId} delay={i * 0.08} className="min-w-0">
-              <TiltLink
-                href={cert.link}
-                target="_blank"
-                rel="noreferrer"
-                className="h-full rounded-2xl border border-border-strong bg-canvas p-4 transition-colors hover:border-fg-subtle"
-              >
-                <p className="mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
-                  {cert.issuer}
-                </p>
-                <p className="mt-1 text-[15px] font-semibold leading-snug text-fg-default">
-                  <WipeWords text={cert.title} inView stagger={0.03} />
-                </p>
-                <p className="mt-2 text-[13px] text-fg-muted">
-                  Issued {cert.issued}
-                  {cert.expired && ` · Expired ${cert.expired}`}
-                </p>
-                <span className="mono mt-auto inline-flex max-w-full items-center gap-1 pt-2 text-[11px] text-fg-subtle transition-colors group-hover:text-accent">
-                  <span className="min-w-0 truncate">ID {cert.credentialId}</span>
-                  <ExternalLink
-                    size={11}
-                    className="shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
-                  />
-                </span>
-              </TiltLink>
-            </FadeIn>
-          ))}
-        </div>
+        <CertificationList />
       </div>
 
       <div>
