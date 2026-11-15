@@ -185,7 +185,7 @@ export const education: Education[] = [
     school: "Bangladesh Army University of Engineering & Technology (BAUET)",
     degree: "B.Sc. in Computer Science and Engineering",
     location: "Natore, Bangladesh",
-    period: "2022 - July 2026",
+    period: "June 2022 - July 2026",
     detail:
       "Thesis: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
     thesisPoints: [
@@ -434,7 +434,7 @@ export const projects: Project[] = [
     name: "LedgerSeal",
     icon: "solidity",
     description:
-      "A DApp that stores documents on IPFS and verifies them via constant-time on-chain hash lookups, with role-based upload control on an EVM-compatible blockchain. Batch uploads cut amortized storage cost by 21.8% (41,317 → 32,297 gas per document), validated with 1,000 fuzz runs and a 10,000-document load test.",
+      "A DApp that stores documents on IPFS and verifies them via constant-time on-chain hash lookups, with role-based upload control on an EVM-compatible blockchain. In the paper's benchmark, batch uploads and duplicate-hash reverts cut amortized storage cost by 21.8% (41,317 → 32,297 gas per document), validated with 1,000 fuzz runs and a 10,000-document load test.",
     tools: ["Solidity", "Foundry", "React", "MetaMask", "Pinata IPFS"],
     link: "https://github.com/ratulhasan001/LedgerSeal",
     language: "Solidity",
