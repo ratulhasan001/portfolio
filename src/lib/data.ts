@@ -211,7 +211,7 @@ export const education: Education[] = [
   },
   {
     school: "Govt. Majeed Memorial City College",
-    degree: "Higher Secondary School Certificate",
+    degree: "Higher Secondary Certificate",
     location: "Khulna, Bangladesh",
     period: "2019 - 2021",
     score: { label: "GPA", value: 5.0, scale: 5.0 },
@@ -465,7 +465,7 @@ export const projects: Project[] = [
     description:
       "A repository website built with Django (MVT & REST) that indexes and presents theses and projects from BAUET.",
     tools: ["HTML", "Tailwind CSS", "JavaScript", "Django", "PostgreSQL"],
-    link: "https://github.com/ratulhasan001/BAUET_archive_project",
+    link: "https://github.com/ratulhasan001/bauet-thesis-archive",
     language: "Python",
     languageColor: "#3572A5",
   },
