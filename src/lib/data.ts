@@ -29,7 +29,16 @@ export type Position = {
   certificateLabel?: string;
 };
 
+/** Which sub-list of the Experience section a role sits in; mirrors the CV. */
+export type ExperienceKind = "research" | "teaching-industry";
+
+export const experienceGroups: { kind: ExperienceKind; label: string }[] = [
+  { kind: "research", label: "Research Experience" },
+  { kind: "teaching-industry", label: "Teaching & Industry Experience" },
+];
+
 export type Experience = {
+  kind: ExperienceKind;
   org: string;
   /** Organisation's site; the org name links to it. */
   website?: string;
@@ -61,6 +70,7 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
+    kind: "research",
     org: "ELITE Research Lab LLC",
     website: "https://elitelab.ai/",
     socials: [
@@ -115,6 +125,7 @@ export const experience: Experience[] = [
     logo: "/logo/elitelab.png",
   },
   {
+    kind: "teaching-industry",
     org: "BAUET Computer Society, Dept. of CSE",
     role: "Programming Instructor",
     location: "Natore, Bangladesh",
@@ -129,6 +140,7 @@ export const experience: Experience[] = [
     certificateLabel: "Experience letter",
   },
   {
+    kind: "teaching-industry",
     org: "Lab AR",
     role: "Industrial Attachment (Software Engineering)",
     location: "Dhaka, Bangladesh",

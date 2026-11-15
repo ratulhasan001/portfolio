@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Award, ExternalLink, GitCommitHorizontal, Mail } from "lucide-react";
-import { experience, type Experience, type Position } from "@/lib/data";
+import { experience, experienceGroups, type Experience, type Position } from "@/lib/data";
 import { SectionTitle } from "./ui";
 import { WipeWords } from "./wipe-in";
 import { TimelineLogo } from "./timeline-logo";
@@ -78,109 +78,122 @@ export function ExperienceSection() {
 
       <SectionTitle index="03" title="Experience" />
 
-      <ol className="relative ml-5 border-l border-border-default pl-8 sm:ml-6 sm:pl-10">
-        {experience.map((exp, i) => {
-          const stacked = (exp.positions?.length ?? 0) > 1;
-          return (
-            <motion.li
-              key={exp.org}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-9 last:mb-0"
-            >
-              <TimelineLogo
-                src={exp.logo}
-                alt={exp.org}
-                current={exp.current}
-                delay={i * 0.1 + 0.15}
-                fallback={<GitCommitHorizontal size={12} />}
-              />
+      {/* Split as on the CV: research first, so a reviewer finds it without
+          reading past the industry and teaching roles. */}
+      {experienceGroups.map((group) => {
+        const items = experience.filter((e) => e.kind === group.kind);
+        if (items.length === 0) return null;
+        return (
+          <div key={group.kind} className="mb-10 last:mb-0">
+            <h3 className="mono mb-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-subtle">
+              {group.label}
+            </h3>
+            <ol className="relative ml-5 border-l border-border-default pl-8 sm:ml-6 sm:pl-10">
+              {items.map((exp, i) => {
+                const stacked = (exp.positions?.length ?? 0) > 1;
+                return (
+                  <motion.li
+                    key={exp.org}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    className="mb-9 last:mb-0"
+                  >
+                    <TimelineLogo
+                      src={exp.logo}
+                      alt={exp.org}
+                      current={exp.current}
+                      delay={i * 0.1 + 0.15}
+                      fallback={<GitCommitHorizontal size={12} />}
+                    />
 
-              {/* Role carries the weight; the dates sit out at the right margin
-                  in mono so the column of periods scans on its own. When the
-                  org held several titles, the org takes the heading instead and
-                  the titles stack beneath it. */}
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-lg font-bold leading-tight tracking-tight text-fg-default sm:text-xl">
-                  {stacked ? (
-                    <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <OrgName name={exp.org} website={exp.website} />
-                      <OrgSocials exp={exp} />
-                    </span>
-                  ) : (
-                    <WipeWords text={exp.role} inView stagger={0.04} />
-                  )}
-                </h3>
-                <span className="mono shrink-0 text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
-                  {exp.period}
-                </span>
-              </div>
-
-              {!stacked && (
-                <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-fg-muted">
-                  <OrgName name={exp.org} website={exp.website} />
-                  <OrgSocials exp={exp} />
-                </p>
-              )}
-
-              <div className="mono mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-fg-subtle">
-                <span>{exp.location}</span>
-              </div>
-
-              {exp.certificate && (
-                <div className="mt-2">
-                  <CertificateLink href={exp.certificate} label={exp.certificateLabel} />
-                </div>
-              )}
-
-              {/* Contact points a reviewer can use to confirm the role. */}
-              {exp.contacts && exp.contacts.length > 0 && (
-                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
-                  {exp.contacts.map((c) => (
-                    <p key={c.label} className="text-[13px] leading-relaxed text-fg-muted">
-                      <span className="mono mr-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
-                        {c.label}
+                    {/* Role carries the weight; the dates sit out at the right margin
+                        in mono so the column of periods scans on its own. When the
+                        org held several titles, the org takes the heading instead and
+                        the titles stack beneath it. */}
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <h4 className="text-lg font-bold leading-tight tracking-tight text-fg-default sm:text-xl">
+                        {stacked ? (
+                          <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <OrgName name={exp.org} website={exp.website} />
+                            <OrgSocials exp={exp} />
+                          </span>
+                        ) : (
+                          <WipeWords text={exp.role} inView stagger={0.04} />
+                        )}
+                      </h4>
+                      <span className="mono shrink-0 text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
+                        {exp.period}
                       </span>
-                      {c.email ? (
-                        <a
-                          href={`mailto:${c.value}`}
-                          className="mono inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
-                        >
-                          <Mail size={11} />
-                          {c.value}
-                        </a>
-                      ) : (
-                        <span className="mono text-[12px] text-fg-default">{c.value}</span>
-                      )}
-                    </p>
-                  ))}
-                </div>
-              )}
+                    </div>
 
-              {stacked && <PositionFlow positions={exp.positions!} delay={i * 0.1} />}
+                    {!stacked && (
+                      <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-fg-muted">
+                        <OrgName name={exp.org} website={exp.website} />
+                        <OrgSocials exp={exp} />
+                      </p>
+                    )}
 
-              {/* Read straight through — the bullets are the substance of the
-                  role, so they are not tucked behind a toggle. */}
-              {exp.bullets.length > 0 && (
-                <ul className="mt-4 space-y-2.5">
-                  {exp.bullets.map((b) => (
-                    <li
-                      key={b}
-                      className="flex gap-3 text-[15px] leading-relaxed text-fg-muted"
-                    >
-                      <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-fg-subtle" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              )}
+                    <div className="mono mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-fg-subtle">
+                      <span>{exp.location}</span>
+                    </div>
 
-            </motion.li>
-          );
-        })}
-      </ol>
+                    {exp.certificate && (
+                      <div className="mt-2">
+                        <CertificateLink href={exp.certificate} label={exp.certificateLabel} />
+                      </div>
+                    )}
+
+                    {/* Contact points a reviewer can use to confirm the role. */}
+                    {exp.contacts && exp.contacts.length > 0 && (
+                      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+                        {exp.contacts.map((c) => (
+                          <p key={c.label} className="text-[13px] leading-relaxed text-fg-muted">
+                            <span className="mono mr-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                              {c.label}
+                            </span>
+                            {c.email ? (
+                              <a
+                                href={`mailto:${c.value}`}
+                                className="mono inline-flex items-center gap-1 text-[12px] text-fg-default underline decoration-fg-subtle underline-offset-4 transition-colors hover:decoration-fg-default"
+                              >
+                                <Mail size={11} />
+                                {c.value}
+                              </a>
+                            ) : (
+                              <span className="mono text-[12px] text-fg-default">{c.value}</span>
+                            )}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+
+                    {stacked && <PositionFlow positions={exp.positions!} delay={i * 0.1} />}
+
+                    {/* Read straight through — the bullets are the substance of the
+                        role, so they are not tucked behind a toggle. */}
+                    {exp.bullets.length > 0 && (
+                      <ul className="mt-4 space-y-2.5">
+                        {exp.bullets.map((b) => (
+                          <li
+                            key={b}
+                            className="flex gap-3 text-[15px] leading-relaxed text-fg-muted"
+                          >
+                            <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-fg-subtle" />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                  </motion.li>
+                );
+              })}
+            </ol>
+          </div>
+        );
+      })}
     </section>
   );
 }
