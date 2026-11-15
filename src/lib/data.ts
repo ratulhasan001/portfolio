@@ -566,15 +566,41 @@ export type Certification = {
   expired?: string;
   credentialId: string;
   link: string;
+  /** Shown before the "show more" toggle; the rest stay collapsed. */
+  featured?: boolean;
 };
 
+/** Featured entries first, then the rest newest first. */
 export const certifications: Certification[] = [
+  {
+    title: "Supervised Machine Learning: Regression and Classification",
+    issuer: "Coursera",
+    issued: "Jan 2025",
+    credentialId: "09NLSY4G7XI5",
+    link: "https://www.coursera.org/account/accomplishments/records/09NLSY4G7XI5",
+    featured: true,
+  },
   {
     title: "Learning Linux Basics Course & Labs",
     issuer: "KodeKloud",
     issued: "Oct 2026",
     credentialId: "aabb68ba-e4fa-4406-b8ba-d666f416785d",
     link: "https://learn.kodekloud.com/certificate/aabb68ba-e4fa-4406-b8ba-d666f416785d",
+    featured: true,
+  },
+  {
+    title: "GIT for Beginners",
+    issuer: "KodeKloud",
+    issued: "Nov 2026",
+    credentialId: "417bacf6-e153-478c-a073-efc9f1da9bba",
+    link: "https://learn.kodekloud.com/certificate/417bacf6-e153-478c-a073-efc9f1da9bba",
+  },
+  {
+    title: "Shell Scripts for Beginners",
+    issuer: "KodeKloud",
+    issued: "Nov 2026",
+    credentialId: "80e38b65-96ec-43ea-9741-c72e2c225ea9",
+    link: "https://learn.kodekloud.com/certificate/80e38b65-96ec-43ea-9741-c72e2c225ea9",
   },
   {
     title: "Certification: Blockchain Basics",
@@ -590,13 +616,6 @@ export const certifications: Certification[] = [
     issued: "Jan 2025",
     credentialId: "PHBATCH32834351116",
     link: "https://phitron.io/verification",
-  },
-  {
-    title: "Supervised Machine Learning: Regression and Classification",
-    issuer: "Coursera",
-    issued: "Jan 2025",
-    credentialId: "09NLSY4G7XI5",
-    link: "https://www.coursera.org/account/accomplishments/records/09NLSY4G7XI5",
   },
 ];
 
