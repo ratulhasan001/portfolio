@@ -198,7 +198,7 @@ export const education: Education[] = [
     logo: "/logo/bsc.png",
   },
   {
-    school: "Govt. Majid Memorial City College",
+    school: "Govt. Majeed Memorial City College",
     degree: "Higher Secondary School Certificate",
     location: "Khulna, Bangladesh",
     period: "2019 - 2021",
