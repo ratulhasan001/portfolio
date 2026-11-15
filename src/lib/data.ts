@@ -130,10 +130,11 @@ export const experience: Experience[] = [
   },
   {
     org: "Lab AR",
-    role: "Software Engineering Intern",
+    role: "Industrial Attachment (Software Engineering)",
     location: "Dhaka, Bangladesh",
     period: "July 2025 - August 2025",
     bullets: [
+      "One-month attachment, completed as part of the B.Sc. CSE curriculum.",
       "Led a team project to develop a web-based Property Management System.",
       "Built backend features in Laravel (PHP).",
     ],
