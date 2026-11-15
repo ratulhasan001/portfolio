@@ -96,9 +96,11 @@ export const experience: Experience[] = [
           },
         ],
         bullets: [
-          "Contributing to a journal study on prompt-injection security risks in LLM-based smart-home agents.",
-          "Designing and running experiments to measure how such attacks affect agent behaviour in a simulated home environment.",
-          "Evaluating defences and their trade-off between security and task performance.",
+          "Journal study mapping attacker-controllable IoT metadata (device, entity, area and media names) as an indirect prompt-injection surface for LLM home agents.",
+          "Tracing which of these fields reach Home Assistant's LLM agent prompt, and who can set them: owner, vendor, network party or third-party service.",
+          "Testbed: Home Assistant on a Raspberry Pi 4B with an MQTT broker and an ESP32 that announces an attacker-chosen name; Gemini, DeepSeek and a local Ollama model as LLM back-ends.",
+          "Measuring unauthorised device actions and private-data leaks, then testing provenance tagging, tool gating, owner confirmation and a small learned gate against their cost in task success, false blocks and latency.",
+          "Reviewed smart-home agent and prompt-injection literature to frame the research questions.",
         ],
       },
       {
