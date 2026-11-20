@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 import { profile } from "@/lib/data";
+import { CvViewer } from "@/components/cv-viewer";
 
 const CV_FILE = "/Ratul_Hasan_CV.pdf";
 
@@ -63,14 +64,7 @@ export default function CvPage() {
           </p>
         </div>
 
-        {/* An iframe renders the PDF far more reliably than <object> across
-            browsers; the link below covers viewers that block embedding
-            (most mobile browsers) and doubles as a plain "open it" escape. */}
-        <iframe
-          src={`${CV_FILE}#view=FitH`}
-          title={`Curriculum vitae of ${profile.name}`}
-          className="h-[78dvh] min-h-[520px] w-full rounded-md border border-border-strong bg-canvas-subtle"
-        />
+        <CvViewer src={CV_FILE} title={`Curriculum vitae of ${profile.name}`} />
 
         <p className="mt-3 text-[13px] text-fg-subtle">
           Not seeing the document?{" "}
