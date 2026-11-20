@@ -197,7 +197,7 @@ export function Hero() {
 
         <HeroReveal delay={0.4} className="shrink-0">
           <Image
-            src="/ratul-hasan.jpg"
+            src={profile.photo}
             alt={`Portrait of ${profile.name}`}
             width={531}
             height={650}

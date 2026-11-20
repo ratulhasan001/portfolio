@@ -6,6 +6,8 @@ export const profile = {
   email: "ratulhasan.cs@gmail.com",
   phone: "+8801760972108",
   website: "https://ratulhasan.dev",
+  /** Portrait under public/: shown in the hero and given to search engines. */
+  photo: "/ratul-hasan.jpg",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
   orcid: "https://orcid.org/0009-0009-5429-7501",
