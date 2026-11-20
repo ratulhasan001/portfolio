@@ -9,10 +9,18 @@ import { ReferencesSection } from "@/components/references-section";
 import { NameOutro } from "@/components/name-outro";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { MascotDirector } from "@/components/mascot";
+import { homeJsonLd } from "@/lib/structured-data";
 
 export default function Home() {
   return (
     <>
+      {/* `<` is escaped so no string in data.ts can close the script tag. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homeJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <ScrollProgress />
       <Nav />
       <main className="flex-1">
