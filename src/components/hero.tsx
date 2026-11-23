@@ -152,9 +152,10 @@ export function Hero() {
         style={{ opacity: heroOpacity, y: yShift }}
         className="relative mx-auto max-w-5xl px-4 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:pb-14 lg:pt-12"
       >
-        {/* Text on the left, headshot on the right; on phones the photo
-            sits above the greeting instead. */}
-        <div className="flex flex-col-reverse gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+        {/* Text on the left, headshot on the right. On phones the photo is
+            pinned to the top-right corner beside the name, sized so it ends
+            above the headline and the text below keeps the full width. */}
+        <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
         <div className="min-w-0">
         <HeroReveal delay={0.1}>
           <p className="mono text-base font-medium text-fg-muted">
@@ -195,14 +196,15 @@ export function Hero() {
         </HeroReveal>
         </div>
 
-        <HeroReveal delay={0.4} className="shrink-0">
+        <HeroReveal delay={0.4} className="absolute right-0 top-0 shrink-0 sm:static">
           <Image
             src={profile.photo}
             alt={`Portrait of ${profile.name}`}
-            width={531}
-            height={650}
+            width={827}
+            height={1063}
             priority
-            className="h-28 w-28 rounded-full border border-border-default object-cover object-top shadow-sm sm:h-auto sm:w-52 sm:rounded-3xl lg:w-60"
+            sizes="(min-width: 1024px) 240px, (min-width: 640px) 208px, 104px"
+            className="h-auto w-[25vw] max-w-[6.5rem] rounded-2xl border border-border-default shadow-sm sm:w-52 sm:max-w-none sm:rounded-3xl lg:w-60"
           />
         </HeroReveal>
         </div>
