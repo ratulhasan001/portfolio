@@ -1,109 +1,87 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Mail } from "lucide-react";
 import { profile } from "@/lib/data";
-import { DinoRunner } from "./dino-runner";
-import { EagleMark } from "./eagle-mark";
+
+const reveal = {
+  initial: { opacity: 0, y: 12 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+};
 
 /**
- * Closing sign-off: a decorative endless runner in place of a sign-off mark,
- * with the contact links folded into the line beneath it.
+ * Closing call to action: what the visitor can reach out about, the ways to
+ * do it, then a one-line footer.
  */
 export function NameOutro() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-t border-border-default px-4 pb-9 pt-14 sm:px-6 sm:pb-12 sm:pt-20"
+      className="border-t border-border-default px-4 pb-10 pt-16 sm:px-6 sm:pb-12 sm:pt-24"
     >
       <div className="mx-auto max-w-5xl text-center">
         <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          {...reveal}
           transition={{ duration: 0.5 }}
-          className="mono text-[10px] uppercase tracking-[0.34em] text-fg-subtle sm:text-[11px]"
+          className="mono text-[11px] uppercase tracking-[0.3em] text-fg-subtle"
         >
-          Open to research collaborations
+          Get in touch
+        </motion.p>
+
+        <motion.h2
+          {...reveal}
+          transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto mt-4 max-w-2xl text-3xl font-extrabold tracking-[-0.03em] text-fg-default sm:text-5xl"
+        >
+          Open to research and project collaborations
+        </motion.h2>
+
+        <motion.p
+          {...reveal}
+          transition={{ duration: 0.6, delay: 0.12 }}
+          className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-fg-muted sm:text-base"
+        >
+          Have a research idea, a dataset or a project you want to build
+          together? I&apos;d be glad to hear about it.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-5 sm:mt-6"
-        >
-          <DinoRunner />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-7 flex flex-col items-center gap-3 border-t border-border-default pt-5"
+          {...reveal}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
           <a
             href={`mailto:${profile.email}`}
-            className="mono text-[13px] text-fg-muted underline-offset-4 transition-colors hover:text-fg-default hover:underline"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-on-accent shadow-sm transition-transform hover:-translate-y-0.5"
+          >
+            <Mail size={16} />
+            Email me
+          </a>
+        </motion.div>
+
+        <div className="mono mt-16 flex flex-col items-center gap-3 border-t border-border-default pt-6 text-[11px] sm:mx-6 uppercase tracking-[0.12em] text-fg-subtle sm:flex-row sm:justify-between">
+          <a
+            href={`mailto:${profile.email}`}
+            className="normal-case tracking-normal text-[13px] text-fg-muted transition-colors hover:text-fg-default"
           >
             {profile.email}
           </a>
-
-          <div className="mono flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noreferrer"
-              className="transition-colors hover:text-fg-default"
-            >
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <a href={profile.github} target="_blank" rel="noreferrer" className="transition-colors hover:text-fg-default">
               GitHub
             </a>
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="transition-colors hover:text-fg-default"
-            >
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="transition-colors hover:text-fg-default">
               LinkedIn
             </a>
-            <a
-              href={profile.scholar}
-              target="_blank"
-              rel="noreferrer"
-              className="transition-colors hover:text-fg-default"
-            >
+            <a href={profile.scholar} target="_blank" rel="noreferrer" className="transition-colors hover:text-fg-default">
               Scholar
-            </a>
-            <a
-              href="/cv"
-              target="_blank"
-              rel="noreferrer"
-              className="transition-colors hover:text-fg-default"
-            >
-              CV
             </a>
             <span className="text-fg-subtle/60">
               © {new Date().getFullYear()} {profile.name}
             </span>
           </div>
-        </motion.div>
-
-        {/* Watermark: the eagle mark and its words, fading out toward the
-            page's edge. Decorative, so it stays out of the a11y tree. */}
-        <motion.div
-          aria-hidden
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none mt-12 select-none sm:mt-16"
-        >
-          <EagleMark className="mx-auto h-16 w-16 text-fg-default/25 sm:h-20 sm:w-20" />
-          <p className="mt-3 whitespace-nowrap bg-gradient-to-b from-fg-default/20 to-fg-default/0 bg-clip-text pb-1 font-display text-[7.4vw] font-bold uppercase leading-none tracking-[0.08em] text-transparent lg:text-[4.6rem]">
-            {profile.name}
-          </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
