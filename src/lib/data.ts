@@ -3,7 +3,7 @@ export const profile = {
   handle: "ratulhasan001",
   role: "Computer Science Graduate · Aspiring Graduate Researcher",
   location: "Khulna, Bangladesh",
-  email: "ratulhasan.cs@gmail.com",
+  email: "ratul@ratulhasan.dev",
   phone: "+8801760972108",
   website: "https://ratulhasan.dev",
   /** Portrait under public/: shown in the hero and given to search engines. */

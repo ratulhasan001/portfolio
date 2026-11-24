@@ -14,7 +14,7 @@ Computer Science graduate with research experience in machine learning, LLM safe
 [![Google Scholar](https://img.shields.io/badge/Google_Scholar-4285F4?style=for-the-badge&logo=googlescholar&logoColor=white)](https://scholar.google.com/citations?user=EfwUJ2cAAAAJ&hl=en)
 [![ORCID](https://img.shields.io/badge/ORCID-A6CE39?style=for-the-badge&logo=orcid&logoColor=white)](https://orcid.org/0009-0009-5429-7501)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/ratul-hasan-linked-in)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ratulhasan.cs@gmail.com)
+[![Email](https://img.shields.io/badge/Email-ratul%40ratulhasan.dev-D14836?style=for-the-badge)](mailto:ratul@ratulhasan.dev)
 
 </div>
 
