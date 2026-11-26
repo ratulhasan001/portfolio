@@ -14,6 +14,12 @@ import { OngoingBadge } from "@/components/projects-section";
 import { PipelineDemo } from "@/components/pipeline-demo";
 import { FadeIn } from "@/components/fade-in";
 import { ogImage } from "@/lib/og";
+import { WorkPlan } from "@/components/work-plan";
+import { DrillReports } from "@/components/drill-reports";
+import { publicProgress } from "@/lib/server/content";
+
+// The work plan's progress comes from the admin panel: cached, and refreshed the moment a status changes there.
+export const revalidate = 3600;
 
 const title = "Folionix — Ratul Hasan";
 const description = `${folionix.title}: ${folionix.subtitle}. An ongoing DevOps learning project.`;
@@ -97,7 +103,8 @@ function StepNode({ state }: { state: MilestoneState }) {
   );
 }
 
-export default function FolionixPage() {
+export default async function FolionixPage() {
+  const progress = await publicProgress();
   return (
     <div className="flex min-h-dvh flex-col bg-canvas">
       <header className="safe-top sticky top-0 z-10 border-b border-border-default bg-canvas/85 backdrop-blur-md">
@@ -375,6 +382,27 @@ export default function FolionixPage() {
             the work progresses.
           </p>
         </Section>
+
+        {/* ---- Drill reports and work plan (live from the admin panel) ---- */}
+        <div id="drill-reports" className="scroll-mt-20">
+          <Section
+            index="06"
+            title="Drill reports"
+            subtitle="Failures I caused on purpose and fixed, with the measured numbers and the proof: write-ups, recordings and graphs."
+          >
+            <DrillReports progress={progress} />
+          </Section>
+        </div>
+
+        <div id="work-plan" className="scroll-mt-20">
+          <Section
+            index="07"
+            title="Work plan"
+            subtitle="Every task and break-and-fix drill I plan to do, with where I am right now. Updated as I go."
+          >
+            <WorkPlan progress={progress} />
+          </Section>
+        </div>
 
         <div className="mt-14 border-t border-border-default pt-6">
           <Link

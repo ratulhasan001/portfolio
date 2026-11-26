@@ -1,4 +1,16 @@
-export const profile = {
+import overrides from "./content-overrides.json";
+
+/**
+ * Every section below has a built-in default. The admin panel (admin.ratulhasan.dev) saves edited sections in the
+ * database; scripts/pull-content.mjs writes them into content-overrides.json before each build, and pick() prefers
+ * them. Publishing from the admin panel starts a new build, so the site stays fully static.
+ */
+const saved = overrides as Record<string, unknown>;
+function pick<T>(key: string, fallback: T): T {
+  return key in saved ? (saved[key] as T) : fallback;
+}
+
+const defaultProfile = {
   name: "Ratul Hasan",
   handle: "ratulhasan001",
   role: "Computer Science Graduate · Aspiring Graduate Researcher",
@@ -34,7 +46,7 @@ export type Position = {
 /** Which sub-list of the Experience section a role sits in; mirrors the CV. */
 export type ExperienceKind = "research" | "teaching-industry";
 
-export const experienceGroups: { kind: ExperienceKind; label: string }[] = [
+const defaultExperienceGroups: { kind: ExperienceKind; label: string }[] = [
   { kind: "research", label: "Research Experience" },
   { kind: "teaching-industry", label: "Teaching & Industry Experience" },
 ];
@@ -70,7 +82,7 @@ export type Experience = {
   contacts?: { label: string; value: string; email?: boolean }[];
 };
 
-export const experience: Experience[] = [
+const defaultExperience: Experience[] = [
   {
     kind: "research",
     org: "ELITE Research Lab LLC",
@@ -184,7 +196,7 @@ export type Education = {
   logo?: string;
 };
 
-export const education: Education[] = [
+const defaultEducation: Education[] = [
   {
     school: "Bangladesh Army University of Engineering & Technology (BAUET)",
     degree: "B.Sc. in Computer Science and Engineering",
@@ -253,7 +265,7 @@ export type Publication = {
  * carry publisher artwork; a mono wordmark keeps the section quiet and reads
  * the same in both themes.
  */
-export const digitalLibraryLabels: Record<string, string> = {
+const defaultDigitalLibraryLabels: Record<string, string> = {
   "IEEE Xplore Digital Library": "IEEE Xplore",
   "ACM Digital Library": "ACM",
   "Springer Nature Link": "Scientific Reports",
@@ -262,7 +274,7 @@ export const digitalLibraryLabels: Record<string, string> = {
   SSRN: "SSRN",
 };
 
-export const publications: Publication[] = [
+const defaultPublications: Publication[] = [
   {
     title:
       "BI-RNN: Biology-Informed Recurrent Neural Networks for Longitudinal Hippocampal Atrophy Forecasting in Alzheimer's Disease",
@@ -433,7 +445,7 @@ export type Project = {
   detailsHref?: string;
 };
 
-export const projects: Project[] = [
+const defaultProjects: Project[] = [
   {
     name: "LedgerSeal",
     icon: "solidity",
@@ -479,7 +491,7 @@ export const projects: Project[] = [
  * Ordered from the most transferable to the most specialised, so the grid
  * reads languages -> what they are built with -> where the work sits.
  */
-export const skills = {
+const defaultSkills = {
   "Research Interests": [
     "AI in Healthcare",
     "Cybersecurity",
@@ -504,7 +516,7 @@ export const skills = {
   ],
 };
 
-export const onlineJudges = [
+const defaultOnlineJudges = [
   {
     platform: "Codeforces",
     stat: "Max Rating 1650 (Expert)",
@@ -527,7 +539,7 @@ export type Achievement = {
   certificateLabel?: string;
 };
 
-export const achievements: Achievement[] = [
+const defaultAchievements: Achievement[] = [
   { text: "1x ICPC Regionalist (Team: BAUET_Rong_Answer)" },
   {
     text: "1x National Collegiate Programming Contest (JU): Rank 149 (Team: BAUET_PARADIGM)",
@@ -575,7 +587,7 @@ export type Certification = {
 };
 
 /** Featured entries first, then the rest newest first. */
-export const certifications: Certification[] = [
+const defaultCertifications: Certification[] = [
   {
     title: "Supervised Machine Learning: Regression and Classification",
     issuer: "Coursera",
@@ -632,7 +644,7 @@ export type LeadershipEntry = {
   certificate?: string;
 };
 
-export const leadership: LeadershipEntry[] = [
+const defaultLeadership: LeadershipEntry[] = [
   {
     org: "BAUET Computer Society",
     roles: [
@@ -657,3 +669,34 @@ export const leadership: LeadershipEntry[] = [
     certificate: "/certificates/hult-prize-bauet-officer-of-documentation-certificate.pdf",
   },
 ];
+
+// ---- Published values: the admin panel's saved version of a section, or the default above ----
+
+/** The built-in content, for the admin panel (it shows these until a section is first saved). */
+export const dataDefaults = {
+  profile: defaultProfile,
+  experienceGroups: defaultExperienceGroups,
+  experience: defaultExperience,
+  education: defaultEducation,
+  digitalLibraryLabels: defaultDigitalLibraryLabels,
+  publications: defaultPublications,
+  projects: defaultProjects,
+  skills: defaultSkills,
+  onlineJudges: defaultOnlineJudges,
+  achievements: defaultAchievements,
+  certifications: defaultCertifications,
+  leadership: defaultLeadership,
+};
+
+export const profile = pick("profile", defaultProfile);
+export const experienceGroups = pick("experienceGroups", defaultExperienceGroups);
+export const experience = pick("experience", defaultExperience);
+export const education = pick("education", defaultEducation);
+export const digitalLibraryLabels = pick("digitalLibraryLabels", defaultDigitalLibraryLabels);
+export const publications = pick("publications", defaultPublications);
+export const projects = pick("projects", defaultProjects);
+export const skills = pick("skills", defaultSkills);
+export const onlineJudges = pick("onlineJudges", defaultOnlineJudges);
+export const achievements = pick("achievements", defaultAchievements);
+export const certifications = pick("certifications", defaultCertifications);
+export const leadership = pick("leadership", defaultLeadership);

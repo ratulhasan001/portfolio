@@ -1,3 +1,15 @@
+import overrides from "./content-overrides.json";
+
+/**
+ * Every section below has a built-in default. The admin panel (admin.ratulhasan.dev) saves edited sections in the
+ * database; scripts/pull-content.mjs writes them into content-overrides.json before each build, and pick() prefers
+ * them. Publishing from the admin panel starts a new build, so the site stays fully static.
+ */
+const saved = overrides as Record<string, unknown>;
+function pick<T>(key: string, fallback: T): T {
+  return key in saved ? (saved[key] as T) : fallback;
+}
+
 /**
  * Content for the Folionix case-study page (/projects/folionix). Kept apart
  * from data.ts because none of it is shared with the home page.
@@ -5,7 +17,7 @@
 
 export type MilestoneState = "done" | "in-progress" | "planned";
 
-export const folionix = {
+const defaultFolionix = {
   title: "Folionix",
   subtitle: "Cloud-Native DevOps & Platform Engineering",
   tagline: "Research & thesis repository platform",
@@ -29,7 +41,7 @@ export const folionix = {
   ],
 };
 
-export const milestones: {
+const defaultMilestones: {
   when: string;
   title: string;
   state: MilestoneState;
@@ -81,7 +93,7 @@ export const milestones: {
   },
 ];
 
-export const services = [
+const defaultServices = [
   {
     name: "frontend",
     tech: "React · Vite · TypeScript",
@@ -109,10 +121,10 @@ export const services = [
   },
 ];
 
-export const backing = ["PostgreSQL 17", "Redis 7.4", "S3 / R2 storage", "Mailpit"];
+const defaultBacking = ["PostgreSQL 17", "Redis 7.4", "S3 / R2 storage", "Mailpit"];
 
 /** One submission's path through the system, used for the flow strip. */
-export const requestFlow = [
+const defaultRequestFlow = [
   "Browser",
   "core-api",
   "Object storage",
@@ -122,7 +134,7 @@ export const requestFlow = [
   "search-svc",
 ];
 
-export const pipelineStages = [
+const defaultPipelineStages = [
   { name: "Lint & unit tests", detail: "ruff, eslint, pytest, vitest", gate: "pr" },
   { name: "Build images", detail: "multi-arch, multi-stage", gate: "pr" },
   { name: "Trivy scan", detail: "fail on critical CVEs", gate: "pr" },
@@ -135,7 +147,7 @@ export const pipelineStages = [
 ] as const;
 
 /** Tools split by whether I am using them yet; later ones render dashed. */
-export const stack = [
+const defaultStack = [
   {
     group: "Learning now (Step 2)",
     later: false,
@@ -147,3 +159,24 @@ export const stack = [
     tools: ["Kubernetes", "Helm", "ArgoCD", "Terraform", "AWS", "Prometheus", "Grafana"],
   },
 ];
+
+// ---- Published values: the admin panel's saved version of a section, or the default above ----
+
+/** The built-in content, for the admin panel (it shows these until a section is first saved). */
+export const folionixDefaults = {
+  folionix: defaultFolionix,
+  milestones: defaultMilestones,
+  services: defaultServices,
+  backing: defaultBacking,
+  requestFlow: defaultRequestFlow,
+  pipelineStages: defaultPipelineStages,
+  stack: defaultStack,
+};
+
+export const folionix = pick("folionix", defaultFolionix);
+export const milestones = pick("milestones", defaultMilestones);
+export const services = pick("services", defaultServices);
+export const backing = pick("backing", defaultBacking);
+export const requestFlow = pick("requestFlow", defaultRequestFlow);
+export const pipelineStages = pick("pipelineStages", defaultPipelineStages);
+export const stack = pick("stack", defaultStack);

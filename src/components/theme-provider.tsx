@@ -45,14 +45,4 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const themeInitScript = `
-(function() {
-  try {
-    var stored = window.localStorage.getItem('theme');
-    var theme = stored === 'dark' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', theme);
-  } catch (e) {
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
-})();
-`;
+export { themeInitScript } from "@/lib/inline-scripts";

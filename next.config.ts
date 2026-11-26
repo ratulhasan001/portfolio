@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
 
+const ADMIN_HOST = "admin.ratulhasan.dev";
+// Files uploaded from the admin panel (Cloudflare R2), shown as images, PDFs and links on the site.
+const FILES = new URL(process.env.NEXT_PUBLIC_FILES_BASE || "https://files.ratulhasan.dev").origin;
+
 const isDev = process.env.NODE_ENV === "development";
 
 // The site is fully static, so the policy uses no nonces: Next's inline
@@ -10,10 +14,10 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  `img-src 'self' data: blob: ${FILES}`,
   "font-src 'self'",
-  "connect-src 'self'",
-  "frame-src 'self'",
+  `connect-src 'self' ${FILES}`,
+  `frame-src 'self' ${FILES}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -33,12 +37,27 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // logos and photos uploaded from the admin panel are served from R2's public domain
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: new URL(FILES).hostname, pathname: "/f/**" }],
+  },
   turbopack: {
     root: __dirname,
   },
   async headers() {
     return [
-      { source: "/:path*", headers: securityHeaders },
+      // The admin panel (admin.ratulhasan.dev, or /admin, /login and the APIs on other addresses) gets its own,
+      // stricter policy with nonces from src/proxy.ts, so this one stays off it.
+      {
+        source: "/((?!admin(?:/|$)|login(?:/|$)|api/).*)",
+        missing: [{ type: "host", value: ADMIN_HOST }],
+        headers: securityHeaders,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: ADMIN_HOST }],
+        headers: securityHeaders.filter((h) => h.key !== "Content-Security-Policy"),
+      },
       // Chrome's PDF viewer counts as a plugin, so `object-src 'none'` leaves
       // the CV and certificates blank. PDFs keep only the framing rule.
       {

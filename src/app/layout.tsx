@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Cinzel } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider";
+import { forceVisibleScript, themeInitScript } from "@/lib/inline-scripts";
 import { profile } from "@/lib/data";
 import { ogImage } from "@/lib/og";
 
@@ -57,13 +58,6 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const forceVisibleScript = `
-(function() {
-  setTimeout(function() {
-    document.documentElement.classList.add('force-visible');
-  }, 2500);
-})();
-`;
 
 export default function RootLayout({
   children,

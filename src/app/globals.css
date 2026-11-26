@@ -101,6 +101,20 @@
   --color-status-published: var(--status-published);
   --color-status-accepted: var(--status-accepted);
   --color-status-review: var(--status-review);
+  /* Names used by the admin panel's login and security screens (shared with another project): mapped onto the
+     portfolio's own palette so they follow its light and dark themes. */
+  --color-ink: var(--fg-default);
+  --color-body: var(--fg-muted);
+  --color-muted: var(--fg-muted);
+  --color-faint: var(--fg-subtle);
+  --color-line: var(--border-default);
+  --color-soft: var(--canvas-subtle);
+  --color-brand: var(--accent);
+  --color-brand-600: var(--accent-emphasis);
+  --color-deep: var(--accent);
+  --color-mint: var(--canvas-inset);
+  --color-lime: var(--status-published);
+  --color-aqua: var(--status-accepted);
   --font-sans: var(--font-sans-family);
   --font-mono: var(--font-mono-family);
   --font-display: var(--font-display-family);
@@ -954,4 +968,75 @@ main > section.nav-flash::after {
     .mascot,
     .mascot * { animation: none !important; }
   }
+}
+
+/* ---- Admin panel: toasts and the RH Console sign-in animations ---- */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-toast {
+  animation: toast-in 0.22s ease-out;
+}
+
+@keyframes rh-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15%,
+  55% {
+    transform: translateX(-10px);
+  }
+  35%,
+  75% {
+    transform: translateX(10px);
+  }
+  90% {
+    transform: translateX(-4px);
+  }
+}
+.animate-rh-shake {
+  animation: rh-shake 0.5s ease-in-out;
+}
+
+@keyframes rh-unlock {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  40% {
+    transform: scale(1.18) rotate(-10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+.animate-rh-unlock {
+  animation: rh-unlock 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes rh-wobble {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-12deg);
+  }
+  75% {
+    transform: rotate(12deg);
+  }
+}
+.animate-rh-wobble {
+  animation: rh-wobble 0.3s ease-in-out 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-toast, .animate-rh-shake, .animate-rh-unlock, .animate-rh-wobble { animation: none; }
 }

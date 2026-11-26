@@ -1,0 +1,1930 @@
+{
+ "groups": [
+  {
+   "id": "g0",
+   "kind": "task",
+   "title": "Phase 0 · Set up (by 31 October)"
+  },
+  {
+   "id": "g1",
+   "kind": "task",
+   "title": "Phase 1 · Week 1 — Understand and secure"
+  },
+  {
+   "id": "g2",
+   "kind": "task",
+   "title": "Phase 2 · Week 2 — Containers"
+  },
+  {
+   "id": "g3",
+   "kind": "task",
+   "title": "Phase 3 · Week 3 — CI/CD"
+  },
+  {
+   "id": "g4",
+   "kind": "task",
+   "title": "Phase 4 · Weeks 3–4 — Live demo v1: Compose on one VPS"
+  },
+  {
+   "id": "g5",
+   "kind": "task",
+   "title": "Phase 5 · Weeks 5–6 — AWS by hand"
+  },
+  {
+   "id": "g6",
+   "kind": "task",
+   "title": "Phase 5b · During AWS SAA study (5–25 Dec) — AWS beyond the basics"
+  },
+  {
+   "id": "g7",
+   "kind": "task",
+   "title": "Phase 6 · Weeks 7–8 — Terraform and your own AWS account"
+  },
+  {
+   "id": "g8",
+   "kind": "task",
+   "title": "Phase 7 · Weeks 8–10 — Kubernetes on k3d"
+  },
+  {
+   "id": "g9",
+   "kind": "task",
+   "title": "Phase 8 · Week 11 — Live demo v2: 3-node k3s + GitOps"
+  },
+  {
+   "id": "g10",
+   "kind": "task",
+   "title": "Phase 9 · Week 11 — Observability"
+  },
+  {
+   "id": "g11",
+   "kind": "task",
+   "title": "Phase 10 · Week 12 — Azure"
+  },
+  {
+   "id": "g12",
+   "kind": "task",
+   "title": "Phase 11 · Week 13 — Drills and portfolio"
+  },
+  {
+   "id": "g13",
+   "kind": "task",
+   "title": "Phase 12 · February–April — Advanced"
+  },
+  {
+   "id": "g14",
+   "kind": "task",
+   "title": "Phase 13 · Job-ready and interview tasks (from February, keep going)"
+  },
+  {
+   "id": "g15",
+   "kind": "drill",
+   "title": "Build and release"
+  },
+  {
+   "id": "g16",
+   "kind": "drill",
+   "title": "Kubernetes runtime"
+  },
+  {
+   "id": "g17",
+   "kind": "drill",
+   "title": "Data and state"
+  },
+  {
+   "id": "g18",
+   "kind": "drill",
+   "title": "Network and edge"
+  },
+  {
+   "id": "g19",
+   "kind": "drill",
+   "title": "Security"
+  },
+  {
+   "id": "g20",
+   "kind": "drill",
+   "title": "Cloud and cost"
+  },
+  {
+   "id": "g21",
+   "kind": "drill",
+   "title": "Observability"
+  },
+  {
+   "id": "g22",
+   "kind": "drill",
+   "title": "Disaster recovery"
+  },
+  {
+   "id": "g23",
+   "kind": "drill",
+   "title": "AWS"
+  },
+  {
+   "id": "g24",
+   "kind": "drill",
+   "title": "Docker"
+  },
+  {
+   "id": "g25",
+   "kind": "drill",
+   "title": "Linux and networking"
+  },
+  {
+   "id": "g26",
+   "kind": "drill",
+   "title": "Kubernetes access"
+  },
+  {
+   "id": "g27",
+   "kind": "drill",
+   "title": "Terraform"
+  },
+  {
+   "id": "g28",
+   "kind": "drill",
+   "title": "Databases"
+  },
+  {
+   "id": "g29",
+   "kind": "drill",
+   "title": "Application security"
+  },
+  {
+   "id": "g30",
+   "kind": "drill",
+   "title": "Azure"
+  },
+  {
+   "id": "g31",
+   "kind": "drill",
+   "title": "Git and web servers"
+  }
+ ],
+ "tasks": [
+  {
+   "id": "F-01",
+   "group": "g0",
+   "title": "Confirm the freeze point",
+   "how": "in ~/Desktop/All_In_One/DevOps run git status, git log --oneline -5 and git tag --list 'app-v*'; note the tag in ENGINEERING_LOG.md.",
+   "done": "main is clean and tagged. From now on the app changes only through PRs."
+  },
+  {
+   "id": "F-02",
+   "group": "g0",
+   "title": "Rebuild the Linux VM",
+   "how": "free the Mac to ≥ 100 GB of disk; create a fresh Ubuntu 24.04 LTS ARM64 VM in Parallels (6 vCPU, 10–12 GB RAM, 80 GB disk); connect with VS Code Remote-SSH; delete the 23.04 VM once the new one works.",
+   "done": "lsb_release -a shows 24.04 and you can SSH in with a key."
+  },
+  {
+   "id": "F-03",
+   "group": "g0",
+   "title": "Install the toolchain in the VM",
+   "how": "from each tool's official repository or release page: Docker Engine + buildx + compose plugin, kubectl, k3d, Helm, k9s, Terraform, AWS CLI, Azure CLI, ArgoCD CLI, k6, gitleaks, pre-commit, Trivy, hadolint, shellcheck, jq and yq. Add your user to the docker group.",
+   "done": "every --version works and the versions are listed in ENGINEERING_LOG.md."
+  },
+  {
+   "id": "F-04",
+   "group": "g0",
+   "title": "Domain and Cloudflare",
+   "how": "create a Cloudflare account; buy the domain at Cloudflare Registrar (at-cost price, and the DNS is already on Cloudflare); turn on DNSSEC.",
+   "done": "the zone shows \"Active\" in Cloudflare."
+  },
+  {
+   "id": "F-05",
+   "group": "g0",
+   "title": "Open the other accounts",
+   "how": "OVHcloud (identity and card checks can take a day or two — you order the first server in week 3), Tailscale and healthchecks.io (§5). AWS waits until week 7 and Azure until week 12.",
+   "done": "you can log in to each one."
+  },
+  {
+   "id": "F-06",
+   "group": "g1",
+   "title": "Learn how Folionix runs",
+   "how": "read Learning Guide Parts 1–4, 5.10–5.11 and 12–16; run make deps && make dev; open the app, /api/docs/, Mailpit and the MinIO console; run make test and make e2e.",
+   "done": "you can explain, without notes, what each of the 11 processes does and how one upload flows through the system (Learning Guide 1.3)."
+  },
+  {
+   "id": "F-07",
+   "group": "g1",
+   "title": "Write the service inventory",
+   "how": "in ENGINEERING_LOG.md, one table row per process: image, command, port, env vars (from .env.example), health endpoints, dependencies, the data it keeps, stateless or stateful.",
+   "done": "all 11 processes are covered. This table is the source for every Dockerfile, Compose service and Kubernetes manifest you write."
+  },
+  {
+   "id": "F-08",
+   "group": "g1",
+   "title": "Create the GitHub org and repos",
+   "how": "create the org folionix and require 2FA for members. First scan the app's full history with gitleaks git (older versions: gitleaks detect) — it must report no leaks. Then push the app to folionix/app and create folionix/platform with the folder layout in spec §B7 and a README.",
+   "done": "both repos exist and the history scan was clean."
+  },
+  {
+   "id": "F-09",
+   "group": "g1",
+   "title": "Guard rails on both repos",
+   "how": "pre-commit with gitleaks, trailing-whitespace, end-of-file and YAML lint (later add hadolint, terraform fmt and shellcheck); GitHub secret scanning with push protection (free on public repos); Dependabot alerts; a ruleset on main — PR required, no force-push, linear history (required checks come in F-23); CODEOWNERS as in spec §B8 (0 required approvals while you are the only maintainer).",
+   "done": "a direct push to main is rejected and the hook blocks a commit containing a fake token."
+  },
+  {
+   "id": "F-10",
+   "group": "g1",
+   "title": "Ops scripts (platform/scripts/)",
+   "how": "healthcheck.sh calls every health endpoint, prints a table and exits non-zero on any failure; pg-backup.sh runs pg_dump -Fc to a timestamped file; pg-restore.sh restores into a scratch database and counts rows in the key tables; disk-cleanup.sh. All of them pass shellcheck.",
+   "done": "a backup → restore round trip shows identical row counts."
+  },
+  {
+   "id": "F-11",
+   "group": "g2",
+   "title": "Architecture diagram",
+   "how": "in Excalidraw or draw.io, from the F-07 table: browser → frontend → core-api → search-svc / ai-svc, plus Postgres, Redis, object storage and Meilisearch, with ports. Keep the source file and a PNG in docs/.",
+   "done": "someone else can follow a request through it."
+  },
+  {
+   "id": "F-12",
+   "group": "g2",
+   "title": "12-factor audit",
+   "how": "check config, logs, processes, backing services, disposability and dev/prod parity against the app; record what you find; open app issues for real gaps.",
+   "done": "the audit is in ENGINEERING_LOG.md."
+  },
+  {
+   "id": "F-13",
+   "group": "g2",
+   "title": "Dockerfile for core-api and worker (one image)",
+   "how": "multi-stage: install dependencies with uv in a builder stage, then copy only the virtualenv and the code into a slim Python 3.13 runtime; a pinned base image tag and a .dockerignore (no .git, .venv, node_modules, .env or test output); runs as a non-root user with a fixed UID; no compilers or build tools in the final image; one image, two commands: web (gunicorn with uvicorn workers) and worker (celery). Migrations are not in the entrypoint — they run as a one-off command; PYTHONUNBUFFERED=1 and logs to stdout; decide how Django's static files are served (check settings.py, Learning Guide 5.1)",
+   "done": "hadolint is clean, the image is under ~300 MB, and docker run with an env file answers /healthz."
+  },
+  {
+   "id": "F-14",
+   "group": "g2",
+   "title": "Dockerfiles for search-svc and ai-svc",
+   "how": "the same rules, with a uvicorn entrypoint.",
+   "done": "both answer their health endpoints from a container."
+  },
+  {
+   "id": "F-15",
+   "group": "g2",
+   "title": "Dockerfile for the frontend",
+   "how": "a Node build stage, then an unprivileged nginx image serving the built files; SPA fallback to index.html; long cache headers for hashed assets and no cache for index.html; runtime config injected when the container starts, so one image works in every environment; /api proxied to core-api so the browser stays on one origin.",
+   "done": "the same image works with two different API settings without a rebuild."
+  },
+  {
+   "id": "F-16",
+   "group": "g2",
+   "title": "compose.yaml",
+   "how": "every process from F-07; a healthcheck on each service plus depends_on with condition: service_healthy; named volumes for Postgres, MinIO and Meilisearch; a one-off migrate service (or docker compose run --rm for migrations); a one-off bucket-setup job that also sets the CORS rule; Ollama only under profiles: [ai]; memory limits; secrets from a git-ignored .env (commit only .env.example).",
+   "done": "docker compose up -d from a fresh clone brings everything to healthy."
+  },
+  {
+   "id": "F-17",
+   "group": "g2",
+   "title": "Seed, reset and repair in containers",
+   "how": "make seed-quick, restore-snapshot, reconcile and replay-dlq work against the containers (Make targets that call docker compose run --rm …).",
+   "done": "the golden snapshot restores into the Compose stack."
+  },
+  {
+   "id": "F-18",
+   "group": "g2",
+   "title": "Multi-arch images",
+   "how": "docker buildx create --use, then build with --platform linux/amd64,linux/arm64; check with docker buildx imagetools inspect on each image.",
+   "done": "every image lists both platforms."
+  },
+  {
+   "id": "F-19",
+   "group": "g2",
+   "title": "Prove it",
+   "how": "run the Playwright smoke test and make k6-smoke against the containers; scan each image with trivy image --severity CRITICAL --ignore-unfixed.",
+   "done": "the tests pass and no critical CVEs are left."
+  },
+  {
+   "id": "F-19a",
+   "group": "g2",
+   "title": "Docker in depth",
+   "how": "exec-form entrypoints so the app is PID 1 (or docker run --init / tini); STOPSIGNAL and stop_grace_period so Celery finishes its task; BuildKit cache mounts for uv and npm, and --mount=type=secret for any build-time token (never ARG or ENV); compare slim and distroless for one service (size, CVEs, how you debug it); inspect layers with docker history and dive; a compose.override.yaml for development (bind mounts, hot reload) separate from the production file; network drivers (bridge, host, none) and how Compose DNS works; limits for CPU, memory and PIDs, watched with docker stats; debugging with logs, exec, inspect, events, cp and nicolaka/netshoot attached with --network container:<name>.",
+   "done": "docker stop on the worker finishes the running task inside the grace period, you can explain every layer of the core-api image, and you have done drills P-58 to P-62."
+  },
+  {
+   "id": "F-20",
+   "group": "g3",
+   "title": "pr.yml (spec §D1)",
+   "how": "on pull_request: lint (ruff, eslint) → unit tests with Postgres and Redis service containers → multi-arch build without pushing → Trivy (fail on critical) → gitleaks → the Playwright smoke test against Compose on the runner. Read-only permissions and no secrets; dependency and buildx caching; superseded runs cancelled.",
+   "done": "a PR shows every check green in under ~15 minutes."
+  },
+  {
+   "id": "F-21",
+   "group": "g3",
+   "title": "release.yml",
+   "how": "on pushes to main and tags v*: build both platforms (tip: amd64 on ubuntu-24.04 and arm64 natively on the free ubuntu-24.04-arm runner, then merge the manifests) → Trivy → push to ghcr.io/folionix/* tagged with the short commit SHA (plus the version on tags). Never deploy latest.",
+   "done": "merging to main produces images for both platforms in GHCR."
+  },
+  {
+   "id": "F-22",
+   "group": "g3",
+   "title": "Supply-chain hygiene",
+   "how": "pin third-party actions to a commit SHA; Dependabot or Renovate for pip, npm, Docker base images and GitHub Actions (weekly); a scheduled weekly Trivy scan of the deployed tags.",
+   "done": "the first dependency PR arrives and passes CI."
+  },
+  {
+   "id": "F-23",
+   "group": "g3",
+   "title": "Make the checks required",
+   "how": "add the pr.yml jobs as required status checks in the main ruleset.",
+   "done": "a PR with a failing test cannot be merged."
+  },
+  {
+   "id": "F-23a",
+   "group": "g3",
+   "title": "Code, app and IaC scanning",
+   "how": "CodeQL (free on public repos) or Semgrep for Python and TypeScript; an OWASP ZAP baseline scan against the Compose stack in CI (report only at first, then fail on high findings); Checkov or trivy config on Dockerfiles and compose now, Terraform and Helm later; a SECURITY.md.",
+   "done": "a PR that adds an SQL-injection pattern is blocked (P-80), and every run attaches the ZAP report."
+  },
+  {
+   "id": "F-24",
+   "group": "g4",
+   "title": "Order and harden the server",
+   "how": "order one OVHcloud VPS-3 with Ubuntu 24.04 (§5). Create a sudo user; SSH keys only (PasswordAuthentication no, PermitRootLogin no); unattended-upgrades; time zone UTC. Install Tailscale and SSH only over Tailscale, then close port 22 to the internet (OVH Edge Network Firewall plus ufw default deny incoming).",
+   "done": "a port scan from outside finds nothing open and you can still SSH in over Tailscale."
+  },
+  {
+   "id": "F-25",
+   "group": "g4",
+   "title": "Docker on the server",
+   "how": "Docker Engine and the compose plugin; log rotation in /etc/docker/daemon.json (max-size 10m, max-file 3).",
+   "done": "docker run hello-world works and logs rotate."
+  },
+  {
+   "id": "F-26",
+   "group": "g4",
+   "title": "Cloudflare Tunnel",
+   "how": "in Cloudflare Zero Trust create a tunnel; run cloudflared with its token as a Compose service; route demo.<domain> to the frontend container; turn on \"Always Use HTTPS\".",
+   "done": "the demo loads from your phone on mobile data and the server still has no inbound port open."
+  },
+  {
+   "id": "F-27",
+   "group": "g4",
+   "title": "Object storage for the demo",
+   "how": "one private Cloudflare R2 bucket for files and a second for backups; an R2 API token limited to those buckets; a CORS rule for the demo origin (PUT, GET and the headers the upload needs); S3_PUBLIC_ENDPOINT_URL set to the R2 endpoint.",
+   "done": "an upload on the demo reaches done and its thumbnail loads."
+  },
+  {
+   "id": "F-28",
+   "group": "g4",
+   "title": "Secrets on the server",
+   "how": "generate each secret with openssl rand -base64 32 into .env, owned by the deploy user with mode 600; keep a copy in your password manager; never put it in Git.",
+   "done": "ls -l .env shows -rw-------."
+  },
+  {
+   "id": "F-29",
+   "group": "g4",
+   "title": "Deploy and roll back with one command",
+   "how": "platform/scripts/deploy.sh takes a tag: it records the current tag as \"previous\", pulls the images for the new tag, runs migrations as a one-off, runs docker compose up -d, waits until healthy, runs healthcheck.sh and prints the version. To roll back, run it with the previous tag.",
+   "done": "you have deployed two versions and rolled back once, with every step in the log."
+  },
+  {
+   "id": "F-30",
+   "group": "g4",
+   "title": "Demo mode and the nightly reset",
+   "how": "DEMO_MODE=true (banner, demo accounts, OTP shown on screen); a systemd timer at 03:00 UTC restores the golden snapshot into the containers and logs the result; the job pings healthchecks.io when it succeeds (P-46).",
+   "done": "the reset has run once on its own and its healthchecks.io check is green."
+  },
+  {
+   "id": "F-31",
+   "group": "g4",
+   "title": "Off-box backups",
+   "how": "nightly pg-backup.sh to the R2 backup bucket with a 14-day lifecycle rule; once a week restore the latest dump into a scratch database and compare row counts.",
+   "done": "one restore test is in the log."
+  },
+  {
+   "id": "F-32",
+   "group": "g4",
+   "title": "External status page",
+   "how": "Upptime (a free GitHub repo using Actions and Pages) or Gatus on separate infrastructure; check the demo page and the API health endpoint every 5 minutes; publish it at status.<domain>; email alerts. It must never run on the server it watches.",
+   "done": "stopping the app turns the status page red within ~10 minutes."
+  },
+  {
+   "id": "F-33",
+   "group": "g4",
+   "title": "First runbook: \"site is down\"",
+   "how": "docs/runbooks/site-down.md — check the status page → the Cloudflare tunnel health → docker compose ps → logs → disk and memory → restart order → roll back.",
+   "done": "you have followed it once in a drill (P-28)."
+  },
+  {
+   "id": "F-34",
+   "group": "g4",
+   "title": "Show it",
+   "how": "add the live link, status page and architecture diagram to the README and your portfolio page.",
+   "done": "checkpoint Sat 28 Nov passes."
+  },
+  {
+   "id": "F-34a",
+   "group": "g4",
+   "title": "Linux troubleshooting toolkit",
+   "how": "learn the commands per resource and note them in docs/runbooks/linux-triage.md — CPU and load (uptime, top/htop, pidstat, mpstat), memory (free, vmstat, dmesg for the OOM killer), disk (df -h, df -i, du, iostat -x, lsof +L1), network (ip, ss -tlnp, dig, resolvectl, curl -v, nc, mtr, tcpdump), processes and services (ps, systemctl, journalctl, strace, /proc/<pid>/limits) and TLS (openssl s_client, openssl x509 -noout -dates); learn the USE method and Brendan Gregg's \"Linux performance analysis in 60 seconds\". Break things on a scratch VM, or on the Compose server at a quiet hour.",
+   "done": "the triage runbook exists and you have done P-63 to P-70 at least once each."
+  },
+  {
+   "id": "F-35",
+   "group": "g5",
+   "title": "Build it by clicking",
+   "how": "a VPC with 2 public and 2 private subnets across 2 AZs; an ALB in the public subnets in front of EC2 in the private subnets running the Compose stack; RDS Postgres (private); S3 for files (private, presigned URLs); security groups chained ALB → EC2 → RDS; a CloudWatch alarm on ALB 5xx that emails you through SNS.",
+   "done": "the app works through the ALB address."
+  },
+  {
+   "id": "F-36",
+   "group": "g5",
+   "title": "Document it, then tear it down",
+   "how": "docs/aws-manual-build.md with screenshots and the diagram, plus the hourly cost of each piece from the AWS Pricing Calculator; then delete everything.",
+   "done": "the document exists — it is the \"before\" picture for the Terraform version."
+  },
+  {
+   "id": "F-36a",
+   "group": "g6",
+   "title": "Auto Scaling and private-subnet access",
+   "how": "a launch template (ARM AMI, user-data that starts the Compose stack, IMDSv2 required, an instance profile); an Auto Scaling group across both private subnets, min 2 / max 4, ALB health checks, target tracking at 50% CPU; a NAT gateway for outbound traffic; no SSH and no bastion — connect with SSM Session Manager; roll out a new launch template version with an instance refresh; a mixed instances policy (Spot + On-Demand) with capacity rebalancing; scheduled and predictive scaling; a lifecycle hook; know placement groups and the EC2 purchase options.",
+   "done": "you terminate an instance and the ASG replaces it; a k6 load test scales it out and back in; you open a shell with port 22 closed."
+  },
+  {
+   "id": "F-36b",
+   "group": "g6",
+   "title": "Private networking in depth",
+   "how": "an S3 gateway endpoint and interface endpoints for SSM, ECR and Secrets Manager, then remove the NAT gateway and prove the app still works; VPC Flow Logs to CloudWatch Logs; block a port with a NACL and compare it with a security group (stateless vs stateful); peer a second VPC and fix the routes; use Reachability Analyzer once; make the VPC dual-stack (IPv6) and note the public IPv4 charge it avoids; learn when to use Transit Gateway, PrivateLink, Site-to-Site VPN and Direct Connect.",
+   "done": "EC2 reaches S3 with no NAT gateway; a flow log shows a REJECT you caused; you can draw the peering routes from memory."
+  },
+  {
+   "id": "F-36c",
+   "group": "g6",
+   "title": "Storage and data protection",
+   "how": "S3 versioning, Block Public Access, a bucket policy that denies non-TLS requests, a lifecycle rule (Standard → Standard-IA after 30 days → Glacier Flexible Retrieval after 90; expire old versions), cross-region replication to a second bucket; a gp3 EBS volume, a snapshot and a restore; an AWS Backup plan for EC2 and RDS; RDS automated backups with a point-in-time restore to a new instance, and a read replica; EFS mounted on two instances.",
+   "done": "you restore a deleted S3 object from its old version, and a point-in-time restore holds the data from 5 minutes before you dropped a table."
+  },
+  {
+   "id": "F-36d",
+   "group": "g6",
+   "title": "Secrets, encryption and least privilege",
+   "how": "a customer-managed KMS key (read its key policy) used for S3 SSE-KMS, EBS and RDS; the database password in Secrets Manager with rotation on; non-secret settings in SSM Parameter Store; an instance role that can read only its own secret and bucket (no *); check it with the IAM policy simulator and IAM Access Analyzer; a permissions boundary on a test role.",
+   "done": "no password appears in user-data, launch templates or env files, and any request outside the role's scope gets AccessDenied."
+  },
+  {
+   "id": "F-36e",
+   "group": "g6",
+   "title": "Event-driven and serverless",
+   "how": "S3 upload → event notification (or EventBridge) → SQS queue with a dead-letter queue → a Lambda that reads the file's metadata and writes it to DynamoDB; an SNS topic that fans out to two SQS queues; an API Gateway HTTP API in front of a Lambda that reads from DynamoDB; Lambda logs and metrics in CloudWatch; a Step Functions state machine that chains two Lambdas with a retry.",
+   "done": "an upload creates an item in DynamoDB, a bad file lands in the DLQ after 3 tries, and the API returns the item."
+  },
+  {
+   "id": "F-36f",
+   "group": "g6",
+   "title": "DNS, TLS and the edge",
+   "how": "delegate a subdomain (aws.folionix.dev) from Cloudflare to a Route 53 hosted zone with NS records; an ACM certificate validated by DNS; an HTTPS listener on the ALB with an HTTP → HTTPS redirect; CloudFront in front of the frontend in S3 (origin access control), with /api/* routed to the ALB; a Route 53 health check with a failover record, plus a weighted record (90/10); AWS WAF on CloudFront with the managed core rule set and a rate limit; know Global Accelerator, S3 Transfer Acceleration and Shield Advanced and when each is worth it.",
+   "done": "https://aws.folionix.dev serves the app through CloudFront, the bucket is not public, and a k6 burst is blocked by the rate-limit rule."
+  },
+  {
+   "id": "F-36g",
+   "group": "g6",
+   "title": "Containers without Kubernetes (ECS on Fargate)",
+   "how": "push images to ECR (scan on push, a lifecycle policy); an ECS cluster with a Fargate service for core-api behind the ALB; the task role vs the execution role; secrets injected from Secrets Manager; logs to CloudWatch; service auto scaling; rolling deploys with the deployment circuit breaker.",
+   "done": "a deploy with a broken image rolls back automatically, and you can explain when you would pick ECS over EKS."
+  },
+  {
+   "id": "F-36h",
+   "group": "g6",
+   "title": "Monitoring and audit on AWS",
+   "how": "the CloudWatch agent sends app logs and memory metrics; Logs Insights queries for the top errors and p95 latency; a metric filter on ERROR → alarm → SNS email; a composite alarm; a CloudWatch dashboard; a CloudTrail trail to S3 and an Athena query that finds who deleted a resource; AWS Config with two managed rules (encrypted volumes, no public S3 buckets).",
+   "done": "you can answer \"who changed this security group, and when?\" from CloudTrail in under 5 minutes."
+  },
+  {
+   "id": "F-36i",
+   "group": "g6",
+   "title": "Migrating to AWS",
+   "how": "move the demo database from the VPS into RDS with AWS DMS (full load + ongoing replication, then a cutover) and the files into S3 with aws s3 sync (S3 Batch Operations by name); measure the downtime; know the 7 Rs of migration, Application Migration Service, DataSync, Storage Gateway, Transfer Family and the Snow family.",
+   "done": "the app runs on RDS with the copied data, the write-up states the cutover downtime, and you can say which migration tool fits which case."
+  },
+  {
+   "id": "F-36j",
+   "group": "g6",
+   "title": "Users, logs and security services",
+   "how": "a Cognito user pool with the hosted UI protecting an admin path through the ALB's authenticate action; ALB and WAF logs streamed by Amazon Data Firehose to S3, catalogued by a Glue crawler and queried in Athena (top IPs, 5xx by path); Amazon Inspector scanning ECR images and EC2; Macie run once on the uploads bucket; S3 Object Lock and AWS Backup Vault Lock against ransomware; IAM Access Analyzer unused-access findings.",
+   "done": "the admin path asks for a Cognito login, an Athena query lists the top 5xx paths, and Inspector findings match your Trivy results."
+  },
+  {
+   "id": "F-37",
+   "group": "g7",
+   "title": "Secure the AWS account",
+   "how": "root MFA and no root access keys; an IAM Identity Center (or IAM) admin user with MFA for daily work; AWS Budgets at $20/month (alerts at 50%, 80% and 100% actual, and 100% forecast — alerts only warn you; they don't stop charges, and billing data can lag by a day); Cost Anomaly Detection; one EU region for everything.",
+   "done": "a test budget alert reaches your inbox."
+  },
+  {
+   "id": "F-38",
+   "group": "g7",
+   "title": "Bootstrap (terraform/envs/bootstrap)",
+   "how": "the state bucket (versioning, encryption, public access blocked, prevent_destroy); every backend uses use_lockfile = true; the GitHub OIDC provider; a read-only plan role trusted for pull requests (repo:folionix/platform:pull_request) and an apply role trusted only for repo:folionix/platform:ref:refs/heads/main.",
+   "done": "terraform plan runs in CI with no stored AWS keys."
+  },
+  {
+   "id": "F-39",
+   "group": "g7",
+   "title": "Modules and the dev environment",
+   "how": "modules network (no NAT gateway in dev — one costs ~$35–40/month), database (RDS Postgres db.t4g.micro, private), compute (ARM EC2 running the Compose stack from user-data, behind an ALB) and storage (S3); terraform/envs/dev wires them together with default_tags (project, env, owner, expires).",
+   "done": "apply builds the Step 9 setup and the app answers through the ALB."
+  },
+  {
+   "id": "F-40",
+   "group": "g7",
+   "title": "make cloud-up and make cloud-down",
+   "how": "cloud-down destroys the environment, then lists anything chargeable still tagged project=folionix (NAT gateways, load balancers, unattached EBS volumes, Elastic IPs, RDS instances and snapshots, EKS clusters) and exits non-zero if it finds any.",
+   "done": "the spec §C4 completion test passes — up → tags visible → down → zero leftovers."
+  },
+  {
+   "id": "F-41",
+   "group": "g7",
+   "title": "Terraform in CI",
+   "how": "on every PR run terraform fmt -check, validate, tflint and trivy config, then post the plan as a PR comment; apply only through a manual workflow with environment approval.",
+   "done": "a PR shows its plan as a comment."
+  },
+  {
+   "id": "F-42",
+   "group": "g7",
+   "title": "The demo as code (terraform/envs/demo)",
+   "how": "bring what you can under Terraform with import blocks — Cloudflare DNS records and tunnel routes (Cloudflare provider) and, if the ovh provider can import your VPS, the server too; everything else goes into a bootstrap script in platform/scripts/.",
+   "done": "plan shows no changes."
+  },
+  {
+   "id": "F-43",
+   "group": "g7",
+   "title": "Drill S-3 (P-26)",
+   "how": "drift, import and a stuck lock, as described in §4.",
+   "done": "the write-up is in docs/scenarios/."
+  },
+  {
+   "id": "F-43a",
+   "group": "g7",
+   "title": "Multi-account and security baseline",
+   "how": "AWS Organizations with management, dev and prod (or sandbox) accounts; IAM Identity Center for logging in to each; SCPs that deny regions outside your EU region, leaving the organization and stopping CloudTrail; an organization CloudTrail; GuardDuty, Security Hub and IAM Access Analyzer turned on (note when each free trial ends and switch off what you do not keep); cost allocation tags activated.",
+   "done": "launching EC2 in us-east-1 from the dev account is denied by the SCP, and a GuardDuty sample finding reaches your email."
+  },
+  {
+   "id": "F-43b",
+   "group": "g7",
+   "title": "Terraform the extras",
+   "how": "modules for everything from F-36a–h (asg, endpoints, kms, secrets, dns + acm, cdn + waf, events: sqs/lambda/dynamodb, ecs); the Lambda packaged in CI; Checkov in CI; terraform test for one module.",
+   "done": "make cloud-up builds the full F-36 setup and make cloud-down leaves nothing behind."
+  },
+  {
+   "id": "F-43c",
+   "group": "g7",
+   "title": "Deploy to AWS from CI",
+   "how": "GitHub Actions with OIDC deploys a new image to ECS (render the task definition → deploy → wait for stability), and the EC2 version through an ASG instance refresh; a manual approval for prod with GitHub environments.",
+   "done": "merging to main updates dev, with no AWS keys stored anywhere."
+  },
+  {
+   "id": "F-43d",
+   "group": "g7",
+   "title": "AWS CLI, scripting and cost",
+   "how": "everyday CLI with --query and jq; a boto3 script that lists untagged and idle resources (unattached EBS volumes, old snapshots, idle load balancers, unused Elastic IPs) — rewrite it during Python Basics; Cost Explorer grouped by tag and by usage type (find NAT and data-transfer charges); know Savings Plans vs Reserved Instances vs Spot, Compute Optimizer and Trusted Advisor.",
+   "done": "the script runs weekly in GitHub Actions and posts its findings, and you can explain the three biggest lines on your bill."
+  },
+  {
+   "id": "F-43e",
+   "group": "g7",
+   "title": "Terraform beyond the basics",
+   "how": "for_each over maps vs count (and when count is fine); dynamic blocks; locals and validation blocks on variables; sharing outputs between stacks with terraform_remote_state or data sources; refactoring with moved blocks and terraform state mv / rm; lifecycle create_before_destroy, ignore_changes and replace_triggered_by; terraform plan -replace; modules pinned to Git tags; provider pins with a committed .terraform.lock.hcl and Renovate updates; sensitive outputs and keeping secrets out of state (RDS manage_master_user_password); know workspaces vs directories, and Terragrunt and Atlantis by name.",
+   "done": "you refactor the network module from count to for_each and the plan shows only moves, no replacements; P-73 to P-76 are written up."
+  },
+  {
+   "id": "F-43f",
+   "group": "g7",
+   "title": "CloudFormation and CDK",
+   "how": "build the S3 → SQS → Lambda part once in CloudFormation and once with the CDK (Python); deploy through change sets from CI; stack drift detection, rollback and termination protection; SAM for packaging the Lambda; an ADR comparing them with Terraform.",
+   "done": "the stack deploys from CI through a change set, and the ADR says when you would choose each tool."
+  },
+  {
+   "id": "F-43g",
+   "group": "g7",
+   "title": "Cross-account, tracing and automation",
+   "how": "cross-account roles (aws sts assume-role from dev into a read-only role in prod; CI role chaining); the AWS Distro for OpenTelemetry sending core-api traces to X-Ray; a CloudWatch Synthetics canary on the login page; AWS Health events → EventBridge → SNS; EventBridge Scheduler stopping dev EC2 and RDS every night.",
+   "done": "you can follow one slow request in X-Ray, the canary alarms when login breaks, and dev stops itself at night."
+  },
+  {
+   "id": "F-44",
+   "group": "g8",
+   "title": "Local cluster",
+   "how": "k3d cluster create folionix --agents 2 -p \"8080:80@loadbalancer\"; namespaces folionix and monitoring.",
+   "done": "kubectl get nodes shows 3 Ready nodes."
+  },
+  {
+   "id": "F-45",
+   "group": "g8",
+   "title": "Plain manifests",
+   "how": "Deployments (core-api ×2, worker, search-svc, ai-svc at 0 replicas, frontend ×2), ClusterIP Services and an Ingress for the frontend and /api; ConfigMaps for settings; Secrets created with kubectl create secret generic … --from-env-file (never committed); StatefulSets with PVCs for Postgres and Meilisearch; Redis with append-only persistence.",
+   "done": "the app works at http://localhost:8080."
+  },
+  {
+   "id": "F-46",
+   "group": "g8",
+   "title": "Make the pods production-grade",
+   "how": "a startupProbe for Django's slow start, readinessProbe → /readyz, livenessProbe → /healthz only (never check the database in liveness — P-14); requests and limits from measured kubectl top values; a securityContext (runAsNonRoot, readOnlyRootFilesystem where possible, drop ALL capabilities, no privilege escalation); PodDisruptionBudgets and topology spread for core-api and frontend; the namespace label pod-security.kubernetes.io/enforce=restricted.",
+   "done": "the restricted Pod Security level admits every pod."
+  },
+  {
+   "id": "F-47",
+   "group": "g8",
+   "title": "Jobs",
+   "how": "migrations as a Job (later a Helm pre-upgrade hook); seed and snapshot restore as Jobs.",
+   "done": "a fresh cluster goes from empty to seeded using Jobs only."
+  },
+  {
+   "id": "F-48",
+   "group": "g8",
+   "title": "Drill S-9: NetworkPolicies",
+   "how": "default-deny ingress and egress in folionix; allow DNS to kube-dns on UDP/TCP 53 first (P-16); then allow only the paths in your diagram; test each with kubectl exec … -- nc -zv <service> <port>.",
+   "done": "ai-svc → Postgres is blocked and everything else works; recorded."
+  },
+  {
+   "id": "F-48a",
+   "group": "g8",
+   "title": "RBAC, quotas and Pod Security",
+   "how": "one ServiceAccount per workload, with automountServiceAccountToken: false where the API is not needed; a namespaced Role for a \"developer\" (read pods and logs, exec in folionix only) and a read-only role for CI checks; check them with kubectl auth can-i --list --as=…; a user with a client certificate (CKA style), and how OIDC users work on EKS and AKS; a ResourceQuota and a LimitRange on folionix; the Pod Security Admission label restricted on folionix.",
+   "done": "the developer can read logs but cannot read Secrets or delete Deployments, and a pod without requests gets the LimitRange defaults."
+  },
+  {
+   "id": "F-49",
+   "group": "g8",
+   "title": "Helm chart (helm/folionix)",
+   "how": "templates for every service; values-dev.yaml, values-demo.yaml and values-prod.yaml; a values.schema.json; helm lint plus helm template | kubeconform -strict in platform CI; upgrades with --rollback-on-failure (Helm 4; --atomic in Helm 3), --wait and --timeout 10m.",
+   "done": "helm install on a fresh k3d cluster brings up the whole app and Playwright passes against it."
+  },
+  {
+   "id": "F-49a",
+   "group": "g8",
+   "title": "Kustomize",
+   "how": "a base and overlays (dev, demo) for one service or for the platform add-ons; patches, configMapGenerator and the images transformer; sync it with ArgoCD; an ADR on when you use Helm and when Kustomize.",
+   "done": "kubectl kustomize overlays/demo renders cleanly and ArgoCD syncs it."
+  },
+  {
+   "id": "F-50",
+   "group": "g8",
+   "title": "Autoscaling",
+   "how": "an HPA on core-api (CPU 70% to start); load it with k6 browse.js; watch kubectl get hpa -w.",
+   "done": "replicas rise under load and fall back afterwards."
+  },
+  {
+   "id": "F-51",
+   "group": "g8",
+   "title": "CronJobs",
+   "how": "the nightly demo reset and a nightly pg_dump to object storage (the start of S-24), with concurrencyPolicy: Forbid, startingDeadlineSeconds and history limits.",
+   "done": "both run on schedule and failures show in kubectl get jobs."
+  },
+  {
+   "id": "F-52",
+   "group": "g8",
+   "title": "CKA side task",
+   "how": "on a 3-VM kubeadm cluster (spec §C1), practise an etcd snapshot + restore and a minor-version upgrade.",
+   "done": "both are in your notes with the exact commands."
+  },
+  {
+   "id": "F-53",
+   "group": "g9",
+   "title": "Build the cluster (§5)",
+   "how": "order 3 new VPS-3 nodes in the same datacentre (Terraform or the console); keep the Compose server running. Harden each node as in F-24 and open the k3s ports only between the three nodes. Install k3s as an HA cluster with embedded etcd — --cluster-init on the first server and --server https://<node-1>:6443 on the other two — all with --flannel-backend=wireguard-native so pod traffic between nodes is encrypted; turn on etcd snapshots to R2.",
+   "done": "kubectl get nodes shows 3 Ready control-plane nodes and an etcd snapshot exists in R2."
+  },
+  {
+   "id": "F-54",
+   "group": "g9",
+   "title": "ArgoCD",
+   "how": "install a minimal ArgoCD; change the admin password and store it; reach the UI only with kubectl port-forward or at argocd.<domain> behind Cloudflare Access (Zero Trust, free) — never on the open internet without a login.",
+   "done": "the UI asks for Cloudflare Access before the ArgoCD login."
+  },
+  {
+   "id": "F-55",
+   "group": "g9",
+   "title": "App-of-apps (platform/argocd/)",
+   "how": "one root app that creates child apps — sealed-secrets, cloudflared (2 replicas), CloudNativePG and its cluster, kube-prometheus-stack, and folionix (values-demo.yaml); sync waves so operators and CRDs come first; automated sync with prune and selfHeal.",
+   "done": "a resource you delete by hand is recreated from Git."
+  },
+  {
+   "id": "F-56",
+   "group": "g9",
+   "title": "Secrets the GitOps way",
+   "how": "install Sealed Secrets; encrypt each secret with kubeseal and commit only the SealedSecret YAML; back up the controller key straight away, encrypted, in your password manager (P-36).",
+   "done": "a sealed secret still decrypts after you restart the controller."
+  },
+  {
+   "id": "F-57",
+   "group": "g9",
+   "title": "A highly available database",
+   "how": "a CloudNativePG cluster with 3 instances (one per node, anti-affinity) on local-path volumes; scheduled base backups and WAL archiving to R2.",
+   "done": "deleting the primary pod promotes a replica and the app reconnects, and a backup shows up in R2."
+  },
+  {
+   "id": "F-57a",
+   "group": "g9",
+   "title": "Postgres operations",
+   "how": "pg_stat_statements on; a slow-query log (log_min_duration_statement = 250ms); EXPLAIN (ANALYZE, BUFFERS) on the three slowest queries; an index added with CREATE INDEX CONCURRENTLY through a Django migration; autovacuum and table bloat basics; lock_timeout and statement_timeout for migrations; PgBouncer through the CloudNativePG Pooler; replication lag and synchronous vs asynchronous replicas; a major-version upgrade (17 → 18) rehearsed on a copy, with timings.",
+   "done": "a Grafana panel shows the top queries, the upgrade write-up states the downtime, and P-77 to P-79 are done."
+  },
+  {
+   "id": "F-58",
+   "group": "g9",
+   "title": "The release flow",
+   "how": "at the end of release.yml, mint a token from the folionix-deployer GitHub App and open a PR in folionix/platform that changes image.tag in values-demo.yaml; auto-merge it after the checks; ArgoCD syncs.",
+   "done": "one merge in app reaches the live demo with no manual step."
+  },
+  {
+   "id": "F-59",
+   "group": "g9",
+   "title": "Cut over from Compose",
+   "how": "deploy to a temporary hostname (k3s.<domain>); run Playwright and a k6 smoke test against it; switch the demo.<domain> tunnel route to the cluster; keep the Compose server stopped but intact for a week, then cancel it.",
+   "done": "the status page shows no downtime during the switch."
+  },
+  {
+   "id": "F-60",
+   "group": "g9",
+   "title": "Drill S-1: zero-downtime deploys (P-06)",
+   "how": "maxUnavailable 0 and maxSurge 1; readiness on /readyz; a preStop sleep of about 10 s; gunicorn's graceful timeout shorter than terminationGracePeriodSeconds; run k6 during a release.",
+   "done": "k6 reports 0% failed requests during the rollout; recorded."
+  },
+  {
+   "id": "F-61",
+   "group": "g9",
+   "title": "Update the runbooks for Kubernetes",
+   "how": "rewrite \"site is down\" with kubectl, argocd, cloudflared and CloudNativePG commands.",
+   "done": "a teammate could follow it without you."
+  },
+  {
+   "id": "F-62",
+   "group": "g10",
+   "title": "kube-prometheus-stack",
+   "how": "through ArgoCD, with demo-sized values — 7-day retention, a 10 GB volume, a 30 s scrape interval; Grafana with an anonymous read-only viewer at grafana.<domain>; admin access only behind Cloudflare Access.",
+   "done": "the public dashboard loads with no login and the admin page asks for Cloudflare Access."
+  },
+  {
+   "id": "F-63",
+   "group": "g10",
+   "title": "Scrape the app",
+   "how": "ServiceMonitors for the /metrics endpoints of core-api, search-svc and ai-svc (with no public route — P-34), plus Celery queue metrics.",
+   "done": "every target shows \"up\" in Prometheus."
+  },
+  {
+   "id": "F-64",
+   "group": "g10",
+   "title": "Dashboards as code",
+   "how": "RED (rate, errors, duration) per service, Celery queues, nodes, CloudNativePG and SLOs; the JSON lives in Git and the Grafana sidecar loads it.",
+   "done": "a fresh Grafana shows every dashboard with no clicking."
+  },
+  {
+   "id": "F-65",
+   "group": "g10",
+   "title": "Alerts that matter",
+   "how": "high 5xx rate, p95 latency, crash looping, volumes > 80%, node disk and memory, a CronJob failed or late, the newest backup older than 26 h, the tunnel down; a Watchdog alert sent to healthchecks.io as a dead-man's switch (P-40); email or Telegram notifications; a runbook link on every alert.",
+   "done": "each alert has fired once in a drill."
+  },
+  {
+   "id": "F-66",
+   "group": "g10",
+   "title": "Drill S-10: SLOs",
+   "how": "availability 99.5% and browse p95 < 400 ms; multi-window burn-rate alerts (Google SRE Workbook, chapter 5); trigger them with CHAOS_LATENCY_MS; write the postmortem.",
+   "done": "the alert fired and the postmortem is in docs/postmortems/."
+  },
+  {
+   "id": "F-66a",
+   "group": "g10",
+   "title": "DORA metrics",
+   "how": "measure deployment frequency, lead time for changes (commit → running on the demo), change failure rate (deploys that needed a rollback or a hotfix) and time to restore (alert → resolved); collect them from the GitHub API and ArgoCD with a small scheduled script, and chart them in Grafana.",
+   "done": "the README shows all four numbers for the last 30 days and explains how each is measured."
+  },
+  {
+   "id": "F-66b",
+   "group": "g10",
+   "title": "On-call and incident process",
+   "how": "severity levels (SEV1–3) with examples; critical alerts reach your phone (PagerDuty's free plan or ntfy); an incident template with roles (incident commander, communications, scribe — even when all three are you), status page updates and a timeline; a blameless postmortem; one week \"on call\" answering every alert and logging the time to acknowledge; one game day where a friend breaks something without telling you.",
+   "done": "docs/incidents/ holds a full incident record with acknowledgement time, timeline, status updates and the postmortem."
+  },
+  {
+   "id": "F-67",
+   "group": "g11",
+   "title": "Azure account",
+   "how": "create it now (the free credit lasts 30 days); budget alert first; MFA; one region.",
+   "done": "the budget alert is set."
+  },
+  {
+   "id": "F-68",
+   "group": "g11",
+   "title": "AKS with Terraform",
+   "how": "an aks module and an Azure environment in terraform/envs/ (VNet, AKS free tier, Key Vault); a GitHub OIDC federated credential; state stays in the S3 backend.",
+   "done": "apply gives you a working cluster."
+  },
+  {
+   "id": "F-69",
+   "group": "g11",
+   "title": "Deploy, record, destroy",
+   "how": "install ArgoCD on AKS pointing at values-prod.yaml; smoke test; record a 2-minute video; terraform destroy.",
+   "done": "az resource list --tag project=folionix -o table is empty."
+  },
+  {
+   "id": "F-69a",
+   "group": "g11",
+   "title": "Identity and governance",
+   "how": "Entra ID users, groups and an app registration; Azure RBAC role assignments at management group, subscription and resource group scope (and the difference from Entra roles); a custom role; managed identities (system- and user-assigned); Azure Policy that requires tags and allowed regions; resource locks; budgets; Microsoft Defender for Cloud free tier and its secure score.",
+   "done": "a user in a group can manage only one resource group, Policy denies a resource without tags, and a delete lock blocks a delete."
+  },
+  {
+   "id": "F-69b",
+   "group": "g11",
+   "title": "Networking",
+   "how": "a hub-and-spoke VNet layout with peering; NSGs and application security groups; a NAT gateway; private endpoints with private DNS zones, compared with service endpoints; Azure DNS with az.folionix.dev delegated from Cloudflare; Application Gateway with WAF in front of the app, and Azure Front Door for global routing; Azure Load Balancer; Azure Bastion instead of public SSH; Network Watcher (IP flow verify, effective security rules, connection troubleshoot); VPN Gateway and ExpressRoute as theory.",
+   "done": "the app answers at https://az.folionix.dev through Application Gateway, storage is reachable only through its private endpoint, and IP flow verify explains a block you created."
+  },
+  {
+   "id": "F-69c",
+   "group": "g11",
+   "title": "Compute and containers without AKS (optional — AWS first)",
+   "how": "a VM Scale Set with cloud-init running the Compose stack and autoscale rules; Azure Container Registry with image scanning; core-api on Azure Container Apps (revisions, traffic split, scale rules, secrets from Key Vault); know when App Service fits better.",
+   "done": "a new Container Apps revision takes 10% of traffic and you can roll it back in one command."
+  },
+  {
+   "id": "F-69d",
+   "group": "g11",
+   "title": "Storage, databases and secrets",
+   "how": "a storage account (LRS, ZRS, GRS — know when each), Blob lifecycle rules (hot → cool → cold → archive), soft delete and versioning, a user-delegation SAS, Azure Files; Azure Database for PostgreSQL Flexible Server with zone-redundant HA, point-in-time restore and a read replica; Azure Managed Redis or Azure Cache for Redis by name; Key Vault with RBAC and a firewall, read by a managed identity.",
+   "done": "the app runs against Flexible Server with no password in config, and you restore a deleted blob and a dropped table."
+  },
+  {
+   "id": "F-69e",
+   "group": "g11",
+   "title": "Event-driven and serverless (optional — AWS first)",
+   "how": "Blob upload → Event Grid → Service Bus queue with dead-lettering → an Azure Function that writes the file's metadata to Cosmos DB (serverless); compare with the AWS version (S3 → SQS → Lambda → DynamoDB).",
+   "done": "an upload creates a Cosmos DB item and a bad file lands in the dead-letter queue."
+  },
+  {
+   "id": "F-69f",
+   "group": "g11",
+   "title": "Monitoring, backup and audit",
+   "how": "Azure Monitor with a Log Analytics workspace; diagnostic settings on every resource; KQL queries for top errors and p95 latency; Application Insights for core-api (OpenTelemetry); alerts with action groups; workbooks; the Activity Log to find who changed what; Azure Backup for the VM and Postgres; Azure Site Recovery as theory.",
+   "done": "a KQL query answers \"who deleted this resource, and when?\" in under 5 minutes."
+  },
+  {
+   "id": "F-69g",
+   "group": "g11",
+   "title": "AKS the way companies run it (optional — AWS first)",
+   "how": "extend F-68: Entra ID integration with Azure RBAC for Kubernetes; Workload Identity so core-api reads Blob and Key Vault with no keys; the Key Vault Secrets Store CSI driver; ACR attached with AcrPull; Azure CNI Overlay; the cluster autoscaler and node pools (system, user, spot); the application routing add-on or Application Gateway for Containers; Container Insights; planned maintenance and upgrades.",
+   "done": "the app runs on AKS with no static credentials anywhere, and an az aks upgrade of the node pool finishes with zero failed k6 requests."
+  },
+  {
+   "id": "F-69h",
+   "group": "g11",
+   "title": "Azure from CI and cost (optional — AWS first)",
+   "how": "GitHub Actions with OIDC (federated credentials) runs terraform plan on PRs and deploys to Container Apps and AKS; Cost Management by tag, Azure Advisor, reservations vs savings plans vs spot; a script that lists untagged or idle Azure resources (unattached disks, unused public IPs, idle gateways).",
+   "done": "merging to main updates the Azure environment with no stored secrets, and the cleanup script runs weekly."
+  },
+  {
+   "id": "F-70",
+   "group": "g12",
+   "title": "Drill S-15 on EKS (P-43)",
+   "how": "an eks module with a managed node group of 2 ARM nodes; Terraform → bootstrap ArgoCD → restore the Sealed Secrets key → sync → smoke test; time it from zero; record; make cloud-down.",
+   "done": "the app is green, the actual rebuild time is recorded (target < 30 minutes), and the leftover check found nothing."
+  },
+  {
+   "id": "F-70a",
+   "group": "g12",
+   "title": "EKS the way companies run it",
+   "how": "EKS access entries (not the old aws-auth ConfigMap); EKS Pod Identity (or IRSA) so core-api reaches S3 with no keys; the AWS Load Balancer Controller for ALB Ingress; ExternalDNS writing to Route 53; External Secrets reading Secrets Manager; the EBS CSI driver with a gp3 StorageClass; Container Insights; managed add-on upgrades.",
+   "done": "the app runs on EKS with no static AWS credentials anywhere, and the ALB and DNS record are created from the Ingress alone."
+  },
+  {
+   "id": "F-71",
+   "group": "g12",
+   "title": "Drill S-24 (lite) (P-21)",
+   "how": "restore the database and files into a restore-test namespace; check row counts, foreign keys and file sha256 against the File table; note the RTO and RPO.",
+   "done": "the numbers are in the write-up."
+  },
+  {
+   "id": "F-72",
+   "group": "g12",
+   "title": "Drill S-5 (P-03)",
+   "how": "commit a fake secret → gitleaks blocks it → rotate the real secret with no downtime.",
+   "done": "the write-up shows the rotation timeline."
+  },
+  {
+   "id": "F-73",
+   "group": "g12",
+   "title": "Rollback drill (P-05)",
+   "how": "release with CHAOS_ERROR_RATE=0.2 → the alert fires → revert the tag in Git → recovered.",
+   "done": "the timeline and postmortem are written."
+  },
+  {
+   "id": "F-74",
+   "group": "g12",
+   "title": "Node drill on the live demo (P-18)",
+   "how": "kubectl drain one node under k6 load — the PDBs hold and CloudNativePG fails over if needed; kubectl uncordon; then a rolling k3s upgrade, one node at a time.",
+   "done": "k6 shows no failed requests, or a measured blip you can explain."
+  },
+  {
+   "id": "F-75",
+   "group": "g12",
+   "title": "Cost page",
+   "how": "docs/costs.md — the demo per month, each drill per hour, R2, the domain, and how to cut each one.",
+   "done": "every number has a source."
+  },
+  {
+   "id": "F-76",
+   "group": "g12",
+   "title": "Runbooks",
+   "how": "site down, database restore, high latency, node lost and tunnel down — each with symptoms, dashboards, commands and a rollback.",
+   "done": "each has been used at least once in a drill."
+  },
+  {
+   "id": "F-77",
+   "group": "g12",
+   "title": "README and docs (spec Part E)",
+   "how": "the pitch, live links, architecture and pipeline diagrams, a scenario table with links, costs, ADRs (why Compose first, why k3s HA on VPSes, why ArgoCD pull, why Sealed Secrets, why CloudNativePG, why R2, why S3-native locking) and a 3-minute demo video.",
+   "done": "a stranger understands the project in 60 seconds from the top of the README."
+  },
+  {
+   "id": "F-78",
+   "group": "g12",
+   "title": "CV, LinkedIn and portfolio page",
+   "how": "update all three with your measured numbers.",
+   "done": "every claim links to evidence."
+  },
+  {
+   "id": "F-79",
+   "group": "g13",
+   "title": "S-6: canary releases with Argo Rollouts and Prometheus analysis (automatic rollback)",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-80",
+   "group": "g13",
+   "title": "S-7: KEDA — workers scale on queue length, core-api on requests per second",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-81",
+   "group": "g13",
+   "title": "S-8: OOMKilled → fix the limits; VPA in recommendation mode (P-12)",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-82",
+   "group": "g13",
+   "title": "S-2: expand/contract migration across 3 releases under load (P-07)",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-83",
+   "group": "g13",
+   "title": "S-4: policy as code — Checkov / conftest block an insecure change",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-84",
+   "group": "g13",
+   "title": "S-11 dependency failures, S-12 poison message → DLQ → replay, S-13 lost search index → reindex, S-14 RDS Multi-AZ failover (P-23 to P-25)",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-85",
+   "group": "g13",
+   "title": "S-16: AWS → Azure failover with DNS health checks",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-86",
+   "group": "g13",
+   "title": "Loki + Tempo + OpenTelemetry Collector (or Grafana Cloud's free tier) — S-10 with traces",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-87",
+   "group": "g13",
+   "title": "S-17: SBOM (Syft) + cosign keyless signing in release.yml; Kyverno admits only signed images without critical CVEs",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-88",
+   "group": "g13",
+   "title": "S-19 Falco alert on kubectl exec; S-18 Karpenter + spot on EKS; S-20 EKS upgrade (check removed APIs with pluto first — P-45); S-21 OpenCost; S-22 Backstage template",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-89",
+   "group": "g13",
+   "title": "S-23: multi-institution with an ApplicationSet, then your Go operator (an Institution resource that creates its namespace, database and bucket)",
+   "how": "",
+   "done": ""
+  },
+  {
+   "id": "F-79a",
+   "group": "g13",
+   "title": "Blue/green and feature flags",
+   "how": "the Argo Rollouts blueGreen strategy with a preview Service, analysis and a manual promote; feature flags with OpenFeature and flagd (or Unleash): roll a UI change out to 10% and then 100%, and keep a kill switch; know when to use flags, canary or blue/green.",
+   "done": "a blue/green release is promoted with zero failed k6 requests, and a flag turns a feature off without a deploy."
+  },
+  {
+   "id": "F-89a",
+   "group": "g13",
+   "title": "Disaster recovery across regions",
+   "how": "build two of the four strategies: backup and restore (AWS Backup copies and RDS snapshots copied to a second region, S3 cross-region replication) and pilot light (a small RDS cross-region replica, with the rest ready in Terraform); Route 53 failover between the regions; measure RTO and RPO; know when warm standby and active-active are worth their cost.",
+   "done": "the app runs in the second region within your RTO target, and the write-up states the measured RPO."
+  },
+  {
+   "id": "F-89b",
+   "group": "g13",
+   "title": "Swap in managed services",
+   "how": "in the AWS environment, replace the self-run pieces: Redis → ElastiCache, Postgres → Aurora Serverless v2, and optionally Meilisearch → OpenSearch; compare cost, failover time and effort in an ADR.",
+   "done": "the ADR answers \"why not use the managed service?\" with numbers."
+  },
+  {
+   "id": "F-89c",
+   "group": "g13",
+   "title": "Fleet operations and golden images",
+   "how": "a golden AMI built in CI with Packer or EC2 Image Builder; SSM Patch Manager with a maintenance window; Run Command across the ASG; SSM Inventory.",
+   "done": "a new AMI rolls out through an instance refresh with no downtime."
+  },
+  {
+   "id": "F-89d",
+   "group": "g13",
+   "title": "Hybrid networking",
+   "how": "a Site-to-Site VPN from the AWS VPC to an OVHcloud VPS running strongSwan; a Transit Gateway joining two VPCs and the VPN; Direct Connect stays theory.",
+   "done": "a private IP in the VPC reaches the VPS through the tunnel. Destroy the VPN and Transit Gateway the same day — both bill by the hour."
+  },
+  {
+   "id": "F-89e",
+   "group": "g13",
+   "title": "Well-Architected review",
+   "how": "run the AWS Well-Architected Tool on the Folionix AWS environment across all six pillars; record the high-risk items and fix the top three.",
+   "done": "docs/well-architected.md lists the findings and what you changed."
+  },
+  {
+   "id": "F-89f",
+   "group": "g13",
+   "title": "Ansible for the servers",
+   "how": "an inventory of the VPS nodes built from Terraform output; roles for base hardening (users, SSH, ufw, unattended-upgrades, fail2ban, time sync), Docker, k3s server and agent, and node_exporter; ansible-vault for secrets; ansible-lint and a Molecule test in CI; replace the manual steps of F-24 and F-53.",
+   "done": "one playbook run turns a fresh VPS into a k3s node, and a second run reports zero changes."
+  },
+  {
+   "id": "F-89g",
+   "group": "g13",
+   "title": "Optional one-day labs",
+   "how": "(1) port pr.yml to Jenkins (a Jenkinsfile with a Kubernetes agent) or GitLab CI; (2) Linkerd with mTLS between services and a traffic split; (3) HashiCorp Vault or OpenBao issuing dynamic Postgres credentials, compared with External Secrets; (4) Gateway API: replace the Ingress with a Gateway and HTTPRoutes; (5) the AWS → Azure failover (S-16) once both clouds are done.",
+   "done": "each lab has a one-page write-up saying what you would choose in a real job and why."
+  },
+  {
+   "id": "F-90",
+   "group": "g14",
+   "title": "The 10-minute live demo",
+   "how": "script it — architecture (1 min) → the live app (2) → Grafana and the status history (1) → break something with a chaos switch (1) → the alert fires → roll back through Git (2) → the postmortem and the cost page (2). Rehearse until you need no notes; record it.",
+   "done": "you can do it without notes."
+  },
+  {
+   "id": "F-91",
+   "group": "g14",
+   "title": "Rebuild from zero, live",
+   "how": "run S-15 (EKS) or rebuild the demo cluster while explaining each step; know what an hour of the EKS environment costs.",
+   "done": "you can narrate the rebuild without stopping."
+  },
+  {
+   "id": "F-92",
+   "group": "g14",
+   "title": "Defend every decision",
+   "how": "2 minutes per ADR, plus \"why not X?\" — Compose vs Kubernetes, k3s vs EKS, ArgoCD vs Flux vs push deploys, Sealed Secrets vs External Secrets, CloudNativePG vs RDS, R2 vs S3, Prometheus vs CloudWatch.",
+   "done": "you can answer each one without notes."
+  },
+  {
+   "id": "F-93",
+   "group": "g14",
+   "title": "Whiteboard from memory (5 minutes each)",
+   "how": "the Folionix architecture; the CI/CD + GitOps flow; the path of one request (DNS → Cloudflare → tunnel → Traefik → Service → Pod → Postgres); the 3-tier AWS VPC; the EKS drill setup.",
+   "done": "you can draw each one from memory in 5 minutes."
+  },
+  {
+   "id": "F-94",
+   "group": "g14",
+   "title": "Live troubleshooting",
+   "how": "once a week a friend (or a script that picks one at random) breaks your k3d cluster with a §4 problem you don't know about; fix it in < 20 minutes while talking aloud. Add sadservers.com Linux scenarios and KodeKloud/killer.sh-style labs.",
+   "done": "you solve 5 in a row inside the time."
+  },
+  {
+   "id": "F-95",
+   "group": "g14",
+   "title": "STAR stories",
+   "how": "8 stories from your drills and postmortems — an outage, a bad deploy, a leaked secret, a cost leak, a zero-downtime release, a restore, high latency, a time you were wrong — each with numbers.",
+   "done": "each one takes about 2 minutes to tell."
+  },
+  {
+   "id": "F-96",
+   "group": "g14",
+   "title": "Question bank",
+   "how": "answer every question in the table below with a Folionix example; say the answers aloud and record yourself.",
+   "done": "you have recorded answers to all 41."
+  },
+  {
+   "id": "F-97",
+   "group": "g14",
+   "title": "System design with Folionix",
+   "how": "30 minutes each on a whiteboard — \"scale to 100 universities and 1 million PDFs\", \"make it multi-region\", \"add SSO\", \"cut the bill by half\".",
+   "done": "you have done all four."
+  },
+  {
+   "id": "F-98",
+   "group": "g14",
+   "title": "Timed take-home practice",
+   "how": "2–3 hours each — containerise a repo + CI; write a Helm chart; Terraform a VPC + a service; debug a broken cluster.",
+   "done": "you have finished one of each."
+  },
+  {
+   "id": "F-99",
+   "group": "g14",
+   "title": "Mock interviews",
+   "how": "2 a week with peers or DevOps communities; record them and review.",
+   "done": "you have done 5."
+  },
+  {
+   "id": "F-100",
+   "group": "g14",
+   "title": "Job-ready check",
+   "how": "check every item — the demo has run 30+ days at ≥ 99.5% on the status page; ≥ 8 scenarios written up with videos; you have a recorded rebuild-from-zero time (target < 30 min); you can explain every file in both repos; 6 blog posts and 3 open-source PRs are published (F-108); your CV passes the F-109 screening test and its bullets have real numbers; you solve coding tasks in time (F-103); every interview format is practised twice (F-112); 5 mock interviews are done.",
+   "done": "every item is checked."
+  },
+  {
+   "id": "F-101",
+   "group": "g14",
+   "title": "Fundamentals you will be quizzed on",
+   "how": "networking — OSI vs TCP/IP, the TCP handshake and TIME_WAIT, UDP, the DNS resolution path and record types, HTTP/1.1 vs 2 vs 3 and status codes, the TLS handshake and certificate chains, L4 vs L7 load balancing, CIDR maths by hand, NAT, forward vs reverse proxies, \"what happens when you type a URL\"; Linux — the boot process, processes and signals, file descriptors, inodes and links, permissions (setuid, sticky bit, umask), systemd and cron, /proc, memory, swap and what load average means; containers under the hood — namespaces, cgroups, overlayfs and the OCI runtime: build a \"container\" by hand with unshare, chroot and a cgroup.",
+   "done": "an Anki deck of about 200 cards you know cold, and you can demo your hand-made container and explain each step."
+  },
+  {
+   "id": "F-102",
+   "group": "g14",
+   "title": "Git like a senior engineer",
+   "how": "rebase (including interactive), cherry-pick, git bisect to find the commit that broke a test, git reflog recovery, reverting a merge, resolving conflicts, signed commits, Conventional Commits with an automated changelog and semantic versioning (release-please or semantic-release), trunk-based development vs GitFlow, monorepo vs polyrepo, and purging a secret from history with git filter-repo.",
+   "done": "you have done P-89 to P-91, and folionix/platform publishes release notes automatically."
+  },
+  {
+   "id": "F-103",
+   "group": "g14",
+   "title": "The coding round",
+   "how": "a repo ops-katas with tests in CI. Python, about 25 exercises tied to operations: parse access logs (top IPs, 5xx by path, p95 latency), a concurrent health checker with timeouts and retries, a CLI with argparse or click and pytest tests, JSON/YAML/CSV handling, a REST client with pagination and rate limits, a boto3 cleanup, a Kubernetes-client script that lists pods that are not Ready. Bash, about 20: find/xargs, grep -E, awk, sed, jq, set -euo pipefail, trap, getopts. Algorithms: about 40 LeetCode easy and 10 medium (arrays, strings, hash maps, two pointers, stacks, BFS), each timed at 30 minutes and solved out loud.",
+   "done": "you solve an unseen easy problem in 20 minutes and a log-parsing task in 30, explaining as you go."
+  },
+  {
+   "id": "F-104",
+   "group": "g14",
+   "title": "Nginx and reverse proxies",
+   "how": "on a test VM (or in front of the Compose demo): upstreams with failover, proxy headers (X-Forwarded-For, Host), TLS termination with Let's Encrypt (certbot) and HTTP/2, gzip, caching, rate limiting, client_max_body_size for uploads, a log format with request time; compare with Traefik and HAProxy.",
+   "done": "the config is in Git and P-92 is done."
+  },
+  {
+   "id": "F-105",
+   "group": "g14",
+   "title": "Messaging beyond Redis (lab)",
+   "how": "swap the Celery broker to RabbitMQ (quorum queues, dead-letter exchange) and compare with Redis; run Kafka on k3d with Strimzi, a small producer and consumer for upload events, and monitor consumer lag; know when to pick a queue and when a log.",
+   "done": "a write-up compares Redis, RabbitMQ, Kafka and SQS for Folionix's uploads, with measurements."
+  },
+  {
+   "id": "F-106",
+   "group": "g14",
+   "title": "Work like a team, even alone",
+   "how": "every F and P item as an issue on a public GitHub Projects board; a PR template with a checklist (tests, rollback plan, docs, cost); review each PR the next day as if it were someone else's; an external reviewer (peer or mentor) once a month; an RFC/design doc with alternatives for two big changes (the k3s move, multi-region); a definition of done.",
+   "done": "the board is public and two RFCs are in docs/rfcs/."
+  },
+  {
+   "id": "F-107",
+   "group": "g14",
+   "title": "Compliance and data protection basics",
+   "how": "Folionix holds personal data (names, emails, phone numbers): a GDPR data inventory, retention for logs and backups, the right to erasure across the database, backups and the search index, EU-only regions, providers' data processing agreements; map your audit evidence (CloudTrail, Git history, approvals) to SOC 2 / ISO 27001 controls at a high level; run Prowler on the AWS account and kube-bench on the cluster and fix the top findings.",
+   "done": "docs/compliance.md exists and the Prowler and kube-bench reports show the top issues fixed."
+  },
+  {
+   "id": "F-108",
+   "group": "g14",
+   "title": "Open source and writing",
+   "how": "one PR a month to a project you use (a Helm chart, docs, CI, a small bug); six blog posts from your drills on Hashnode, dev.to or LinkedIn — for example \"Zero-downtime Django on k3s\", \"Rebuilding the whole platform in N minutes\", \"How I found a NAT gateway bill\", \"18 AWS failures I caused on purpose\".",
+   "done": "three merged PRs and six posts, all linked from the README and your CV."
+  },
+  {
+   "id": "F-109",
+   "group": "g14",
+   "title": "A CV that passes screening",
+   "how": "collect 20–30 job ads you want; build a keyword matrix (tools, clouds, practices) and map each keyword to a Folionix task as proof; a one- to two-page ATS-friendly CV (plain layout, standard headings, no tables, icons or photos in the text), a skills line using the ads' wording, 3–5 Folionix bullets with real numbers (uptime, rebuild time, DORA metrics, cost saved) and certifications with Credly links; tailor the top third for each application; a GitHub profile README with pinned repos; LinkedIn headline, About and Featured (demo, status page, posts); a one-page portfolio site.",
+   "done": "an ATS checker scores your CV at least 75% against three target ads, and a working DevOps engineer has reviewed it."
+  },
+  {
+   "id": "F-110",
+   "group": "g14",
+   "title": "The behavioural and HR rounds",
+   "how": "\"tell me about yourself\" in 60 seconds and in 2 minutes; \"why DevOps?\" and \"why this company?\"; STAR stories beyond incidents — teamwork, a conflict, learning something fast, a missed deadline, leading something (your university thesis project counts); five good questions for the interviewer (on-call, deploy process, team size, how incidents are handled); salary research for your country and level, with a number ready; relocation or visa answers if needed; a follow-up email template.",
+   "done": "every answer is recorded and reviewed, and your salary range is written down with sources."
+  },
+  {
+   "id": "F-111",
+   "group": "g14",
+   "title": "The job search system",
+   "how": "a tracker (company, role, date, stage, contact, next step); 5–10 tailored applications a week once you are ready; two LinkedIn messages a week to engineers at target companies to ask about their work and referrals; one meetup a month (AWS, CNCF or DevOps user groups); student and internship roles during the master's; after every interview, add the questions you were asked to the bank below.",
+   "done": "the tracker is running and the first 20 applications are sent."
+  },
+  {
+   "id": "F-112",
+   "group": "g14",
+   "title": "Cover every interview format",
+   "how": "check that each format is practised at least twice in mock interviews (F-99): project deep dive (F-90, F-92), live troubleshooting (F-94), coding (F-103), fundamentals quiz (F-101, F-96), system design (F-97, plus generic ones: CI/CD for 100 microservices, a central logging platform, a multi-region database, infrastructure for a URL shortener), take-home (F-98), behavioural (F-95, F-110), and \"explain Kubernetes to a non-engineer\".",
+   "done": "every format has two recorded attempts with notes on what to improve."
+  },
+  {
+   "id": "P-01",
+   "group": "g15",
+   "title": "Wrong CPU architecture (\"exec format error\")",
+   "how": "build core-api for linux/arm64 only and run it on an x86 node (the demo VPS or x86 EKS nodes).",
+   "done": ""
+  },
+  {
+   "id": "P-02",
+   "group": "g15",
+   "title": "A critical CVE blocks the release",
+   "how": "pin an old base image tag in a branch.",
+   "done": ""
+  },
+  {
+   "id": "P-03",
+   "group": "g15",
+   "title": "A secret is committed (S-5)",
+   "how": "commit a fake token (random characters in a real token format) and push with git commit --no-verify.",
+   "done": ""
+  },
+  {
+   "id": "P-04",
+   "group": "g15",
+   "title": "The deploy PR never appears",
+   "how": "remove contents: write from the folionix-deployer GitHub App, or rotate its private key without updating the CI secret.",
+   "done": ""
+  },
+  {
+   "id": "P-05",
+   "group": "g15",
+   "title": "A bad release: errors spike, roll back",
+   "how": "release a tag with CHAOS_ERROR_RATE=0.2.",
+   "done": ""
+  },
+  {
+   "id": "P-06",
+   "group": "g15",
+   "title": "Requests fail during every deploy",
+   "how": "1 replica, no readiness probe and no preStop; run k6 during a release.",
+   "done": ""
+  },
+  {
+   "id": "P-07",
+   "group": "g15",
+   "title": "A migration breaks the running version",
+   "how": "in a branch, rename a column the old code still reads, and deploy.",
+   "done": ""
+  },
+  {
+   "id": "P-08",
+   "group": "g15",
+   "title": "A Helm release is stuck",
+   "how": "on k3d, start helm upgrade and kill it half-way.",
+   "done": ""
+  },
+  {
+   "id": "P-09",
+   "group": "g15",
+   "title": "ArgoCD stays OutOfSync or fights another controller",
+   "how": "keep replicas: 2 in the Deployment while the HPA scales it, or kubectl edit a managed object.",
+   "done": ""
+  },
+  {
+   "id": "P-10",
+   "group": "g15",
+   "title": "ImagePullBackOff",
+   "how": "set a tag that doesn't exist, or make a GHCR package private with no pull secret.",
+   "done": ""
+  },
+  {
+   "id": "P-11",
+   "group": "g16",
+   "title": "CrashLoopBackOff from bad config",
+   "how": "remove DATABASE_URL from the Secret, or set a wrong password.",
+   "done": ""
+  },
+  {
+   "id": "P-12",
+   "group": "g16",
+   "title": "OOMKilled (S-8)",
+   "how": "turn on the memory-leak chaos switch, or set the worker's memory limit to 128Mi and upload a large PDF.",
+   "done": ""
+  },
+  {
+   "id": "P-13",
+   "group": "g16",
+   "title": "A pod is stuck Pending",
+   "how": "request memory: 64Gi, use a StorageClass that doesn't exist, or set a nodeSelector no node matches.",
+   "done": ""
+  },
+  {
+   "id": "P-14",
+   "group": "g16",
+   "title": "A liveness probe causes a restart storm",
+   "how": "point liveness at /readyz (which checks the database) with a 1 s timeout, then run k6 with CHAOS_LATENCY_MS=1500.",
+   "done": ""
+  },
+  {
+   "id": "P-15",
+   "group": "g16",
+   "title": "The HPA doesn't scale",
+   "how": "remove the CPU requests from core-api.",
+   "done": ""
+  },
+  {
+   "id": "P-16",
+   "group": "g16",
+   "title": "A NetworkPolicy blocks DNS",
+   "how": "apply default-deny egress without the DNS rule.",
+   "done": ""
+  },
+  {
+   "id": "P-17",
+   "group": "g16",
+   "title": "Disk full / DiskPressure",
+   "how": "on k3d, fill the Postgres volume with fallocate, or fill the node's disk.",
+   "done": ""
+  },
+  {
+   "id": "P-18",
+   "group": "g16",
+   "title": "A node dies or is drained",
+   "how": "on k3d docker stop k3d-folionix-agent-1; on the demo, kubectl drain a node with --ignore-daemonsets --delete-emptydir-data under k6 load.",
+   "done": ""
+  },
+  {
+   "id": "P-19",
+   "group": "g16",
+   "title": "Slow at low CPU: throttling",
+   "how": "set core-api's CPU limit to 100m and run k6 browse.js.",
+   "done": ""
+  },
+  {
+   "id": "P-20",
+   "group": "g16",
+   "title": "Pods can't talk across nodes",
+   "how": "leave 51820/udp closed between the nodes, or block the pod network (10.42.0.0/16) in ufw.",
+   "done": ""
+  },
+  {
+   "id": "P-21",
+   "group": "g17",
+   "title": "The backup exists but the restore fails (S-24)",
+   "how": "in a test namespace, delete some submissions and their files, then restore from last night's backup.",
+   "done": ""
+  },
+  {
+   "id": "P-22",
+   "group": "g17",
+   "title": "The database runs out of connections",
+   "how": "scale core-api to 8 replicas × 4 workers with persistent connections, lower Postgres max_connections and run k6.",
+   "done": ""
+  },
+  {
+   "id": "P-23",
+   "group": "g17",
+   "title": "Redis goes down (S-11)",
+   "how": "scale Redis to 0 during uploads.",
+   "done": ""
+  },
+  {
+   "id": "P-24",
+   "group": "g17",
+   "title": "A poison message ends up in the dead-letter queue (S-12)",
+   "how": "from a Celery shell, send a task with a malformed payload.",
+   "done": ""
+  },
+  {
+   "id": "P-25",
+   "group": "g17",
+   "title": "The search index is lost (S-13)",
+   "how": "delete the Meilisearch volume.",
+   "done": ""
+  },
+  {
+   "id": "P-26",
+   "group": "g17",
+   "title": "Terraform: stuck lock, drift, a hand-made resource (S-3)",
+   "how": "(a) kill terraform apply half-way; (b) change a security group in the console; (c) create an S3 bucket by hand.",
+   "done": ""
+  },
+  {
+   "id": "P-27",
+   "group": "g17",
+   "title": "Destroying the wrong thing",
+   "how": "try to destroy envs/bootstrap.",
+   "done": ""
+  },
+  {
+   "id": "P-28",
+   "group": "g18",
+   "title": "Site down: the tunnel is disconnected",
+   "how": "scale cloudflared to 0.",
+   "done": ""
+  },
+  {
+   "id": "P-29",
+   "group": "g18",
+   "title": "502 Bad Gateway: the tunnel is up, the app is unreachable",
+   "how": "point the tunnel route at the wrong port, or scale the frontend to 0.",
+   "done": ""
+  },
+  {
+   "id": "P-30",
+   "group": "g18",
+   "title": "Uploads fail in the browser (CORS / presigned URL)",
+   "how": "delete the bucket's CORS rule, or set S3_PUBLIC_ENDPOINT_URL to an internal hostname.",
+   "done": ""
+  },
+  {
+   "id": "P-31",
+   "group": "g18",
+   "title": "A DNS record is deleted",
+   "how": "delete the demo record in Cloudflare.",
+   "done": ""
+  },
+  {
+   "id": "P-32",
+   "group": "g18",
+   "title": "An expired certificate (cloud drills with cert-manager)",
+   "how": "in a drill, use a broken ClusterIssuer.",
+   "done": ""
+  },
+  {
+   "id": "P-33",
+   "group": "g18",
+   "title": "A traffic spike or bot abuse",
+   "how": "a short k6 run with 200 virtual users against search on your own demo.",
+   "done": ""
+  },
+  {
+   "id": "P-34",
+   "group": "g19",
+   "title": "An internal endpoint is exposed",
+   "how": "add an Ingress path for /metrics.",
+   "done": ""
+  },
+  {
+   "id": "P-35",
+   "group": "g19",
+   "title": "Containers run as root",
+   "how": "remove the securityContext.",
+   "done": ""
+  },
+  {
+   "id": "P-37",
+   "group": "g19",
+   "title": "CI credentials are too powerful",
+   "how": "try terraform apply from a PR branch.",
+   "done": ""
+  },
+  {
+   "id": "P-38",
+   "group": "g20",
+   "title": "Forgotten resources keep billing",
+   "how": "leave the dev environment with a NAT gateway up for 1 hour, then run only the leftover check.",
+   "done": ""
+  },
+  {
+   "id": "P-39",
+   "group": "g20",
+   "title": "The VPS provider has a problem",
+   "how": "pretend one node — or the whole provider — is gone.",
+   "done": ""
+  },
+  {
+   "id": "P-40",
+   "group": "g21",
+   "title": "Monitoring is down and nobody knows",
+   "how": "scale Prometheus and Alertmanager to 0.",
+   "done": ""
+  },
+  {
+   "id": "P-41",
+   "group": "g21",
+   "title": "Alert noise",
+   "how": "alert on CPU > 50% for 1 minute.",
+   "done": ""
+  },
+  {
+   "id": "P-42",
+   "group": "g21",
+   "title": "Prometheus runs out of memory (high cardinality)",
+   "how": "add a label with raw URL paths (IDs included) to a metric, then run k6 over many submissions.",
+   "done": ""
+  },
+  {
+   "id": "P-43",
+   "group": "g22",
+   "title": "Rebuild from zero (S-15)",
+   "how": "destroy the drill cluster (keep the state bucket and backups). Fix now: terraform apply → bootstrap ArgoCD → restore the Sealed Secrets key → sync the root app → restore the database → smoke test; time each step. Prevent: everything in Git; the bootstrap tested monthly; a 30-minute RTO target.",
+   "done": ""
+  },
+  {
+   "id": "P-44",
+   "group": "g22",
+   "title": "A whole cloud region is lost (S-16, February+)",
+   "how": "take the AWS environment down during a drill. Fix now: fail over to Azure with DNS health checks and measure the switch time.",
+   "done": ""
+  },
+  {
+   "id": "P-45",
+   "group": "g22",
+   "title": "An upgrade removes an API (S-20, February+)",
+   "how": "keep a manifest on an API version that the new cluster version removed.",
+   "done": ""
+  },
+  {
+   "id": "P-46",
+   "group": "g22",
+   "title": "A CronJob fails silently",
+   "how": "give the nightly reset a wrong snapshot path.",
+   "done": ""
+  },
+  {
+   "id": "P-47",
+   "group": "g23",
+   "title": "The ALB returns 502, 503 or 504",
+   "how": "(a) set the target group health check path to /nothing; (b) remove the ALB → EC2 rule from the instance security group; (c) set CHAOS_LATENCY_MS above the ALB idle timeout.",
+   "done": ""
+  },
+  {
+   "id": "P-48",
+   "group": "g23",
+   "title": "A private instance cannot reach the internet",
+   "how": "delete the 0.0.0.0/0 route to the NAT gateway from the private route table.",
+   "done": ""
+  },
+  {
+   "id": "P-49",
+   "group": "g23",
+   "title": "AccessDenied when the policy looks right",
+   "how": "add an explicit Deny to the bucket policy, or encrypt the bucket with a KMS key whose key policy does not allow the role.",
+   "done": ""
+  },
+  {
+   "id": "P-50",
+   "group": "g23",
+   "title": "RDS connection failures and exhausted connections",
+   "how": "(a) remove the EC2 → RDS security group rule; (b) run k6 against workers with a pool that never closes connections.",
+   "done": ""
+  },
+  {
+   "id": "P-51",
+   "group": "g23",
+   "title": "The Auto Scaling group keeps replacing instances",
+   "how": "a launch template version with broken user-data (a wrong image tag).",
+   "done": ""
+  },
+  {
+   "id": "P-52",
+   "group": "g23",
+   "title": "Messages processed twice, or never",
+   "how": "set the SQS visibility timeout shorter than the Lambda run time; then upload a file the Lambda cannot parse.",
+   "done": ""
+  },
+  {
+   "id": "P-53",
+   "group": "g23",
+   "title": "CloudFront 403 and a certificate stuck in \"pending validation\"",
+   "how": "remove the origin access control statement from the bucket policy; request an ACM certificate without creating its DNS record, or in a region other than us-east-1.",
+   "done": ""
+  },
+  {
+   "id": "P-54",
+   "group": "g23",
+   "title": "EKS pods get no AWS credentials or no IP address",
+   "how": "(a) point the service account at a role whose trust policy names another namespace; (b) put the nodes in small /27 subnets and scale up.",
+   "done": ""
+  },
+  {
+   "id": "P-55",
+   "group": "g23",
+   "title": "A surprise bill",
+   "how": "pull images through the NAT gateway in a loop for an hour; leave a large EBS snapshot and an unused Elastic IP.",
+   "done": ""
+  },
+  {
+   "id": "P-56",
+   "group": "g23",
+   "title": "An access key leaks",
+   "how": "create an access key for a test user with no permissions, use it from your Mac, and treat it as leaked. Never push a real key.",
+   "done": ""
+  },
+  {
+   "id": "P-57",
+   "group": "g23",
+   "title": "An Availability Zone fails",
+   "how": "give one AZ's subnets a NACL that denies everything, and force an RDS Multi-AZ failover.",
+   "done": ""
+  },
+  {
+   "id": "P-57a",
+   "group": "g23",
+   "title": "An EC2 instance fails its status checks",
+   "how": "fill the root volume, or break /etc/fstab on a test instance and reboot.",
+   "done": ""
+  },
+  {
+   "id": "P-57b",
+   "group": "g23",
+   "title": "Lambda is throttled",
+   "how": "set reserved concurrency to 1 and upload 100 files at once.",
+   "done": ""
+  },
+  {
+   "id": "P-57c",
+   "group": "g23",
+   "title": "Route 53 failover does not fail over",
+   "how": "point the health check at a path that always returns 200, then stop the primary app.",
+   "done": ""
+  },
+  {
+   "id": "P-57d",
+   "group": "g23",
+   "title": "EKS nodes never join the cluster",
+   "how": "create a node group with a role that is missing a policy, or in subnets with no route to the API endpoint.",
+   "done": ""
+  },
+  {
+   "id": "P-57e",
+   "group": "g23",
+   "title": "Files deleted or encrypted (ransomware)",
+   "how": "with versioning on, delete a folder of objects in the uploads bucket by script.",
+   "done": ""
+  },
+  {
+   "id": "P-57f",
+   "group": "g23",
+   "title": "A CloudFormation stack is stuck",
+   "how": "make an update fail in a way rollback cannot undo (delete a resource by hand first).",
+   "done": ""
+  },
+  {
+   "id": "P-57g",
+   "group": "g23",
+   "title": "Spot capacity disappears",
+   "how": "run the ASG on one Spot instance type in one AZ, then simulate an interruption with AWS FIS.",
+   "done": ""
+  },
+  {
+   "id": "P-58",
+   "group": "g24",
+   "title": "docker stop is slow and work is lost",
+   "how": "use a shell-form ENTRYPOINT (sh -c \"celery …\") so the shell is PID 1.",
+   "done": ""
+  },
+  {
+   "id": "P-59",
+   "group": "g24",
+   "title": "Permission denied on a volume",
+   "how": "run as UID 10001 with a volume created earlier by root.",
+   "done": ""
+  },
+  {
+   "id": "P-60",
+   "group": "g24",
+   "title": "Containers cannot reach each other",
+   "how": "put search-svc on another Compose network, or use localhost in DATABASE_URL.",
+   "done": ""
+  },
+  {
+   "id": "P-61",
+   "group": "g24",
+   "title": "Docker fills the disk",
+   "how": "build many times without pruning; run one container without log rotation.",
+   "done": ""
+  },
+  {
+   "id": "P-62",
+   "group": "g24",
+   "title": "Slow builds and huge images",
+   "how": "COPY . . before installing dependencies; leave build tools in the final stage.",
+   "done": ""
+  },
+  {
+   "id": "P-63",
+   "group": "g25",
+   "title": "The server is slow: CPU or I/O?",
+   "how": "stress-ng --cpu 6, then a heavy fio write in a scratch directory.",
+   "done": ""
+  },
+  {
+   "id": "P-64",
+   "group": "g25",
+   "title": "\"No space left\" while df shows free space",
+   "how": "create a million tiny files; delete a large log that a process still holds open.",
+   "done": ""
+  },
+  {
+   "id": "P-65",
+   "group": "g25",
+   "title": "Too many open files",
+   "how": "set LimitNOFILE=256 for a service and run k6.",
+   "done": ""
+  },
+  {
+   "id": "P-66",
+   "group": "g25",
+   "title": "A systemd service will not start",
+   "how": "put a typo in a unit, or make its env file unreadable.",
+   "done": ""
+  },
+  {
+   "id": "P-67",
+   "group": "g25",
+   "title": "DNS fails on the host",
+   "how": "break /etc/resolv.conf or the systemd-resolved stub.",
+   "done": ""
+  },
+  {
+   "id": "P-68",
+   "group": "g25",
+   "title": "Connection refused or timed out?",
+   "how": "bind a service to 127.0.0.1; separately, block its port in ufw.",
+   "done": ""
+  },
+  {
+   "id": "P-69",
+   "group": "g25",
+   "title": "TLS handshake errors",
+   "how": "serve an expired certificate or one without its intermediate on a test nginx; call it with the wrong SNI.",
+   "done": ""
+  },
+  {
+   "id": "P-70",
+   "group": "g25",
+   "title": "The host runs out of memory",
+   "how": "stress-ng --vm on a node with no limits.",
+   "done": ""
+  },
+  {
+   "id": "P-71",
+   "group": "g26",
+   "title": "Forbidden (RBAC)",
+   "how": "give the CI ServiceAccount only the view role and let it try to deploy.",
+   "done": ""
+  },
+  {
+   "id": "P-72",
+   "group": "g26",
+   "title": "A quota blocks a deploy",
+   "how": "a ResourceQuota of 2 CPUs on the namespace, then scale up.",
+   "done": ""
+  },
+  {
+   "id": "P-73",
+   "group": "g27",
+   "title": "Removing one item destroys many (count)",
+   "how": "create subnets with count over a list, then remove the first item.",
+   "done": ""
+  },
+  {
+   "id": "P-74",
+   "group": "g27",
+   "title": "Renaming a resource destroys it",
+   "how": "rename aws_db_instance.main to .primary.",
+   "done": ""
+  },
+  {
+   "id": "P-75",
+   "group": "g27",
+   "title": "A provider upgrade breaks the plan",
+   "how": "bump the AWS or azurerm provider by one major version.",
+   "done": ""
+  },
+  {
+   "id": "P-76",
+   "group": "g27",
+   "title": "A secret sits in the state file",
+   "how": "pass the database password to RDS as a variable, then read the state.",
+   "done": ""
+  },
+  {
+   "id": "P-77",
+   "group": "g28",
+   "title": "A slow query takes the site down",
+   "how": "in a branch migration, drop an index browse depends on; run k6.",
+   "done": ""
+  },
+  {
+   "id": "P-78",
+   "group": "g28",
+   "title": "A long transaction blocks a migration",
+   "how": "hold a row lock in an open psql session, then run a migration that alters the table.",
+   "done": ""
+  },
+  {
+   "id": "P-79",
+   "group": "g28",
+   "title": "Replica lag and lost writes on failover",
+   "how": "run k6 upload_burst.js and kill the primary while replicas are asynchronous.",
+   "done": ""
+  },
+  {
+   "id": "P-80",
+   "group": "g29",
+   "title": "A scanner blocks the PR",
+   "how": "add an endpoint that builds SQL with string formatting.",
+   "done": ""
+  },
+  {
+   "id": "P-81",
+   "group": "g30",
+   "title": "An NSG blocks traffic",
+   "how": "add a deny rule above the allow on the app subnet.",
+   "done": ""
+  },
+  {
+   "id": "P-82",
+   "group": "g30",
+   "title": "AuthorizationFailed",
+   "how": "assign a role at the wrong scope, or test before the assignment has propagated.",
+   "done": ""
+  },
+  {
+   "id": "P-83",
+   "group": "g30",
+   "title": "Key Vault access denied",
+   "how": "remove the managed identity's Key Vault Secrets User role, or turn the vault firewall on.",
+   "done": ""
+  },
+  {
+   "id": "P-84",
+   "group": "g30",
+   "title": "AKS cannot pull from ACR (optional)",
+   "how": "detach ACR, or remove the kubelet identity's AcrPull role.",
+   "done": ""
+  },
+  {
+   "id": "P-85",
+   "group": "g30",
+   "title": "A private endpoint resolves to a public IP (optional)",
+   "how": "delete the private DNS zone link to the VNet.",
+   "done": ""
+  },
+  {
+   "id": "P-86",
+   "group": "g30",
+   "title": "Application Gateway returns 502 (optional)",
+   "how": "break the backend health probe path or the backend port.",
+   "done": ""
+  },
+  {
+   "id": "P-87",
+   "group": "g30",
+   "title": "Azure Policy denies a deployment (optional)",
+   "how": "apply a resource without the required tags.",
+   "done": ""
+  },
+  {
+   "id": "P-88",
+   "group": "g30",
+   "title": "An Azure surprise bill (optional)",
+   "how": "leave Application Gateway, a public IP and a VM disk running overnight.",
+   "done": ""
+  },
+  {
+   "id": "P-89",
+   "group": "g31",
+   "title": "A commit is lost",
+   "how": "git reset --hard HEAD~3 on a branch with unpushed work.",
+   "done": ""
+  },
+  {
+   "id": "P-90",
+   "group": "g31",
+   "title": "A bad merge breaks main",
+   "how": "merge a branch that breaks a test, then add commits on top.",
+   "done": ""
+  },
+  {
+   "id": "P-91",
+   "group": "g31",
+   "title": "A secret is in Git history",
+   "how": "commit a fake key, then remove it in a later commit.",
+   "done": ""
+  },
+  {
+   "id": "P-92",
+   "group": "g31",
+   "title": "Nginx returns 413, 502 or 504",
+   "how": "upload a large PDF with the default body size; stop the upstream; make the upstream slower than the proxy timeout.",
+   "done": ""
+  }
+ ]
+}
