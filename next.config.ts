@@ -39,10 +39,19 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // logos and photos uploaded from the admin panel are served from R2's public domain
   images: {
-    remotePatterns: [{ protocol: "https", hostname: new URL(FILES).hostname, pathname: "/f/**" }],
+    remotePatterns: [{ protocol: "https", hostname: new URL(FILES).hostname, pathname: "/**" }],
   },
   turbopack: {
     root: __dirname,
+  },
+  // the files moved to R2: links shared before the move keep working
+  async redirects() {
+    return [
+      { source: "/Ratul_Hasan_CV.pdf", destination: `${FILES}/Ratul_Hasan_CV.pdf`, permanent: true },
+      { source: "/ratul-hasan.jpg", destination: `${FILES}/ratul-hasan.jpg`, permanent: true },
+      { source: "/certificates/:file", destination: `${FILES}/certificates/:file`, permanent: true },
+      { source: "/logo/:file", destination: `${FILES}/logo/:file`, permanent: true },
+    ];
   },
   async headers() {
     return [

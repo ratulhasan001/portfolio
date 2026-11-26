@@ -79,7 +79,7 @@ export function ScholarIcon({ size = 16, className }: { size?: number; className
 }
 
 /**
- * "CV" set as a monogram, the same idea as the "RH" mark in the nav — the
+ * "CV" set as a monogram, the same idea as the "RH" mark in the nav, the
  * button says what it hands you instead of showing a download arrow.
  */
 export function CvIcon({ size = 16, className }: { size?: number; className?: string }) {

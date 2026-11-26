@@ -4,7 +4,8 @@ import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 import { profile } from "@/lib/data";
 import { CvViewer } from "@/components/cv-viewer";
 
-const CV_FILE = "/Ratul_Hasan_CV.pdf";
+// in R2; replace it from the admin panel (Profile → CV file)
+const CV_FILE = profile.cvFile || "https://files.ratulhasan.dev/Ratul_Hasan_CV.pdf";
 
 export const metadata: Metadata = {
   title: "CV | Ratul Hasan",

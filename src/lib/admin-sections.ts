@@ -14,7 +14,7 @@ export interface SectionInfo {
 }
 
 export const SECTIONS: SectionInfo[] = [
-  { key: "profile", label: "Profile", page: "Home", hint: "Name, headline, tagline, contact links and photo." },
+  { key: "profile", label: "Profile", page: "Home", hint: "Name, headline, tagline, contact links, photo and CV file." },
   { key: "publications", label: "Publications", page: "Home", hint: "Papers, preprints and work under review.", itemTitle: "title" },
   { key: "education", label: "Education", page: "Home", hint: "Degrees, theses and scores.", itemTitle: "degree" },
   { key: "experience", label: "Experience", page: "Home", hint: "Research, teaching and industry roles.", itemTitle: "org" },

@@ -27,7 +27,7 @@ export function GET() {
     "",
     "## Profiles",
     `- ${link("Portfolio", site)}`,
-    `- ${link("CV (PDF)", "/Ratul_Hasan_CV.pdf")}`,
+    `- ${link("CV (PDF)", profile.cvFile || "/Ratul_Hasan_CV.pdf")}`,
     `- ${link("GitHub", profile.github)}`,
     `- ${link("LinkedIn", profile.linkedin)}`,
     `- ${link("ORCID", profile.orcid)}`,

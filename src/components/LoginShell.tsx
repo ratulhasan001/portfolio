@@ -18,7 +18,7 @@ export function LoginShell({ children }: { children: React.ReactNode }) {
             <span className="size-2.5 rounded-full bg-white/20" />
             <span className="size-2.5 rounded-full bg-white/20" />
             <span className="size-2.5 rounded-full bg-white/20" />
-            <span className="ml-2 truncate font-mono text-[11.5px] text-white/45">admin.ratulhasan.dev — rh-console</span>
+            <span className="ml-2 truncate font-mono text-[11.5px] text-white/45">admin.ratulhasan.dev · rh-console</span>
           </div>
           <div className="px-6 pb-7 pt-6 sm:px-7">{children}</div>
         </section>

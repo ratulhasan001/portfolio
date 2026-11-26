@@ -21,7 +21,7 @@ import { publicProgress } from "@/lib/server/content";
 // The work plan's progress comes from the admin panel: cached, and refreshed the moment a status changes there.
 export const revalidate = 3600;
 
-const title = "Folionix — Ratul Hasan";
+const title = "Folionix | Ratul Hasan";
 const description = `${folionix.title}: ${folionix.subtitle}. An ongoing DevOps learning project.`;
 
 export const metadata: Metadata = {

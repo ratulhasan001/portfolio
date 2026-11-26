@@ -37,7 +37,7 @@ export const homeJsonLd = {
       image: {
         "@type": "ImageObject",
         "@id": `${site}/#portrait`,
-        url: `${site}${profile.photo}`,
+        url: profile.photo.startsWith("http") ? profile.photo : `${site}${profile.photo}`,
         caption: `Portrait of ${profile.name}`,
       },
       description: profile.tagline,

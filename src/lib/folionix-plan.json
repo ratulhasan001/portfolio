@@ -8,67 +8,67 @@
   {
    "id": "g1",
    "kind": "task",
-   "title": "Phase 1 · Week 1 — Understand and secure"
+   "title": "Phase 1 · Week 1 · Understand and secure"
   },
   {
    "id": "g2",
    "kind": "task",
-   "title": "Phase 2 · Week 2 — Containers"
+   "title": "Phase 2 · Week 2 · Containers"
   },
   {
    "id": "g3",
    "kind": "task",
-   "title": "Phase 3 · Week 3 — CI/CD"
+   "title": "Phase 3 · Week 3 · CI/CD"
   },
   {
    "id": "g4",
    "kind": "task",
-   "title": "Phase 4 · Weeks 3–4 — Live demo v1: Compose on one VPS"
+   "title": "Phase 4 · Weeks 3–4 · Live demo v1: Compose on one VPS"
   },
   {
    "id": "g5",
    "kind": "task",
-   "title": "Phase 5 · Weeks 5–6 — AWS by hand"
+   "title": "Phase 5 · Weeks 5–6 · AWS by hand"
   },
   {
    "id": "g6",
    "kind": "task",
-   "title": "Phase 5b · During AWS SAA study (5–25 Dec) — AWS beyond the basics"
+   "title": "Phase 5b · During AWS SAA study (5–25 Dec) · AWS beyond the basics"
   },
   {
    "id": "g7",
    "kind": "task",
-   "title": "Phase 6 · Weeks 7–8 — Terraform and your own AWS account"
+   "title": "Phase 6 · Weeks 7–8 · Terraform and your own AWS account"
   },
   {
    "id": "g8",
    "kind": "task",
-   "title": "Phase 7 · Weeks 8–10 — Kubernetes on k3d"
+   "title": "Phase 7 · Weeks 8–10 · Kubernetes on k3d"
   },
   {
    "id": "g9",
    "kind": "task",
-   "title": "Phase 8 · Week 11 — Live demo v2: 3-node k3s + GitOps"
+   "title": "Phase 8 · Week 11 · Live demo v2: 3-node k3s + GitOps"
   },
   {
    "id": "g10",
    "kind": "task",
-   "title": "Phase 9 · Week 11 — Observability"
+   "title": "Phase 9 · Week 11 · Observability"
   },
   {
    "id": "g11",
    "kind": "task",
-   "title": "Phase 10 · Week 12 — Azure"
+   "title": "Phase 10 · Week 12 · Azure"
   },
   {
    "id": "g12",
    "kind": "task",
-   "title": "Phase 11 · Week 13 — Drills and portfolio"
+   "title": "Phase 11 · Week 13 · Drills and portfolio"
   },
   {
    "id": "g13",
    "kind": "task",
-   "title": "Phase 12 · February–April — Advanced"
+   "title": "Phase 12 · February–April · Advanced"
   },
   {
    "id": "g14",
@@ -194,7 +194,7 @@
    "id": "F-05",
    "group": "g0",
    "title": "Open the other accounts",
-   "how": "OVHcloud (identity and card checks can take a day or two — you order the first server in week 3), Tailscale and healthchecks.io (§5). AWS waits until week 7 and Azure until week 12.",
+   "how": "OVHcloud (identity and card checks can take a day or two: you order the first server in week 3), Tailscale and healthchecks.io (§5). AWS waits until week 7 and Azure until week 12.",
    "done": "you can log in to each one."
   },
   {
@@ -215,14 +215,14 @@
    "id": "F-08",
    "group": "g1",
    "title": "Create the GitHub org and repos",
-   "how": "create the org folionix and require 2FA for members. First scan the app's full history with gitleaks git (older versions: gitleaks detect) — it must report no leaks. Then push the app to folionix/app and create folionix/platform with the folder layout in spec §B7 and a README.",
+   "how": "create the org folionix and require 2FA for members. First scan the app's full history with gitleaks git (older versions: gitleaks detect): it must report no leaks. Then push the app to folionix/app and create folionix/platform with the folder layout in spec §B7 and a README.",
    "done": "both repos exist and the history scan was clean."
   },
   {
    "id": "F-09",
    "group": "g1",
    "title": "Guard rails on both repos",
-   "how": "pre-commit with gitleaks, trailing-whitespace, end-of-file and YAML lint (later add hadolint, terraform fmt and shellcheck); GitHub secret scanning with push protection (free on public repos); Dependabot alerts; a ruleset on main — PR required, no force-push, linear history (required checks come in F-23); CODEOWNERS as in spec §B8 (0 required approvals while you are the only maintainer).",
+   "how": "pre-commit with gitleaks, trailing-whitespace, end-of-file and YAML lint (later add hadolint, terraform fmt and shellcheck); GitHub secret scanning with push protection (free on public repos); Dependabot alerts; a ruleset on main: PR required, no force-push, linear history (required checks come in F-23); CODEOWNERS as in spec §B8 (0 required approvals while you are the only maintainer).",
    "done": "a direct push to main is rejected and the hook blocks a commit containing a fake token."
   },
   {
@@ -250,7 +250,7 @@
    "id": "F-13",
    "group": "g2",
    "title": "Dockerfile for core-api and worker (one image)",
-   "how": "multi-stage: install dependencies with uv in a builder stage, then copy only the virtualenv and the code into a slim Python 3.13 runtime; a pinned base image tag and a .dockerignore (no .git, .venv, node_modules, .env or test output); runs as a non-root user with a fixed UID; no compilers or build tools in the final image; one image, two commands: web (gunicorn with uvicorn workers) and worker (celery). Migrations are not in the entrypoint — they run as a one-off command; PYTHONUNBUFFERED=1 and logs to stdout; decide how Django's static files are served (check settings.py, Learning Guide 5.1)",
+   "how": "multi-stage: install dependencies with uv in a builder stage, then copy only the virtualenv and the code into a slim Python 3.13 runtime; a pinned base image tag and a .dockerignore (no .git, .venv, node_modules, .env or test output); runs as a non-root user with a fixed UID; no compilers or build tools in the final image; one image, two commands: web (gunicorn with uvicorn workers) and worker (celery). Migrations are not in the entrypoint: they run as a one-off command; PYTHONUNBUFFERED=1 and logs to stdout; decide how Django's static files are served (check settings.py, Learning Guide 5.1)",
    "done": "hadolint is clean, the image is under ~300 MB, and docker run with an env file answers /healthz."
   },
   {
@@ -404,7 +404,7 @@
    "id": "F-33",
    "group": "g4",
    "title": "First runbook: \"site is down\"",
-   "how": "docs/runbooks/site-down.md — check the status page → the Cloudflare tunnel health → docker compose ps → logs → disk and memory → restart order → roll back.",
+   "how": "docs/runbooks/site-down.md: check the status page → the Cloudflare tunnel health → docker compose ps → logs → disk and memory → restart order → roll back.",
    "done": "you have followed it once in a drill (P-28)."
   },
   {
@@ -418,7 +418,7 @@
    "id": "F-34a",
    "group": "g4",
    "title": "Linux troubleshooting toolkit",
-   "how": "learn the commands per resource and note them in docs/runbooks/linux-triage.md — CPU and load (uptime, top/htop, pidstat, mpstat), memory (free, vmstat, dmesg for the OOM killer), disk (df -h, df -i, du, iostat -x, lsof +L1), network (ip, ss -tlnp, dig, resolvectl, curl -v, nc, mtr, tcpdump), processes and services (ps, systemctl, journalctl, strace, /proc/<pid>/limits) and TLS (openssl s_client, openssl x509 -noout -dates); learn the USE method and Brendan Gregg's \"Linux performance analysis in 60 seconds\". Break things on a scratch VM, or on the Compose server at a quiet hour.",
+   "how": "learn the commands per resource and note them in docs/runbooks/linux-triage.md: CPU and load (uptime, top/htop, pidstat, mpstat), memory (free, vmstat, dmesg for the OOM killer), disk (df -h, df -i, du, iostat -x, lsof +L1), network (ip, ss -tlnp, dig, resolvectl, curl -v, nc, mtr, tcpdump), processes and services (ps, systemctl, journalctl, strace, /proc/<pid>/limits) and TLS (openssl s_client, openssl x509 -noout -dates); learn the USE method and Brendan Gregg's \"Linux performance analysis in 60 seconds\". Break things on a scratch VM, or on the Compose server at a quiet hour.",
    "done": "the triage runbook exists and you have done P-63 to P-70 at least once each."
   },
   {
@@ -433,13 +433,13 @@
    "group": "g5",
    "title": "Document it, then tear it down",
    "how": "docs/aws-manual-build.md with screenshots and the diagram, plus the hourly cost of each piece from the AWS Pricing Calculator; then delete everything.",
-   "done": "the document exists — it is the \"before\" picture for the Terraform version."
+   "done": "the document exists: it is the \"before\" picture for the Terraform version."
   },
   {
    "id": "F-36a",
    "group": "g6",
    "title": "Auto Scaling and private-subnet access",
-   "how": "a launch template (ARM AMI, user-data that starts the Compose stack, IMDSv2 required, an instance profile); an Auto Scaling group across both private subnets, min 2 / max 4, ALB health checks, target tracking at 50% CPU; a NAT gateway for outbound traffic; no SSH and no bastion — connect with SSM Session Manager; roll out a new launch template version with an instance refresh; a mixed instances policy (Spot + On-Demand) with capacity rebalancing; scheduled and predictive scaling; a lifecycle hook; know placement groups and the EC2 purchase options.",
+   "how": "a launch template (ARM AMI, user-data that starts the Compose stack, IMDSv2 required, an instance profile); an Auto Scaling group across both private subnets, min 2 / max 4, ALB health checks, target tracking at 50% CPU; a NAT gateway for outbound traffic; no SSH and no bastion: connect with SSM Session Manager; roll out a new launch template version with an instance refresh; a mixed instances policy (Spot + On-Demand) with capacity rebalancing; scheduled and predictive scaling; a lifecycle hook; know placement groups and the EC2 purchase options.",
    "done": "you terminate an instance and the ASG replaces it; a k6 load test scales it out and back in; you open a shell with port 22 closed."
   },
   {
@@ -509,7 +509,7 @@
    "id": "F-37",
    "group": "g7",
    "title": "Secure the AWS account",
-   "how": "root MFA and no root access keys; an IAM Identity Center (or IAM) admin user with MFA for daily work; AWS Budgets at $20/month (alerts at 50%, 80% and 100% actual, and 100% forecast — alerts only warn you; they don't stop charges, and billing data can lag by a day); Cost Anomaly Detection; one EU region for everything.",
+   "how": "root MFA and no root access keys; an IAM Identity Center (or IAM) admin user with MFA for daily work; AWS Budgets at $20/month (alerts at 50%, 80% and 100% actual, and 100% forecast: alerts only warn you; they don't stop charges, and billing data can lag by a day); Cost Anomaly Detection; one EU region for everything.",
    "done": "a test budget alert reaches your inbox."
   },
   {
@@ -523,7 +523,7 @@
    "id": "F-39",
    "group": "g7",
    "title": "Modules and the dev environment",
-   "how": "modules network (no NAT gateway in dev — one costs ~$35–40/month), database (RDS Postgres db.t4g.micro, private), compute (ARM EC2 running the Compose stack from user-data, behind an ALB) and storage (S3); terraform/envs/dev wires them together with default_tags (project, env, owner, expires).",
+   "how": "modules network (no NAT gateway in dev: one costs ~$35–40/month), database (RDS Postgres db.t4g.micro, private), compute (ARM EC2 running the Compose stack from user-data, behind an ALB) and storage (S3); terraform/envs/dev wires them together with default_tags (project, env, owner, expires).",
    "done": "apply builds the Step 9 setup and the app answers through the ALB."
   },
   {
@@ -531,7 +531,7 @@
    "group": "g7",
    "title": "make cloud-up and make cloud-down",
    "how": "cloud-down destroys the environment, then lists anything chargeable still tagged project=folionix (NAT gateways, load balancers, unattached EBS volumes, Elastic IPs, RDS instances and snapshots, EKS clusters) and exits non-zero if it finds any.",
-   "done": "the spec §C4 completion test passes — up → tags visible → down → zero leftovers."
+   "done": "the spec §C4 completion test passes: up → tags visible → down → zero leftovers."
   },
   {
    "id": "F-41",
@@ -544,7 +544,7 @@
    "id": "F-42",
    "group": "g7",
    "title": "The demo as code (terraform/envs/demo)",
-   "how": "bring what you can under Terraform with import blocks — Cloudflare DNS records and tunnel routes (Cloudflare provider) and, if the ovh provider can import your VPS, the server too; everything else goes into a bootstrap script in platform/scripts/.",
+   "how": "bring what you can under Terraform with import blocks: Cloudflare DNS records and tunnel routes (Cloudflare provider) and, if the ovh provider can import your VPS, the server too; everything else goes into a bootstrap script in platform/scripts/.",
    "done": "plan shows no changes."
   },
   {
@@ -579,7 +579,7 @@
    "id": "F-43d",
    "group": "g7",
    "title": "AWS CLI, scripting and cost",
-   "how": "everyday CLI with --query and jq; a boto3 script that lists untagged and idle resources (unattached EBS volumes, old snapshots, idle load balancers, unused Elastic IPs) — rewrite it during Python Basics; Cost Explorer grouped by tag and by usage type (find NAT and data-transfer charges); know Savings Plans vs Reserved Instances vs Spot, Compute Optimizer and Trusted Advisor.",
+   "how": "everyday CLI with --query and jq; a boto3 script that lists untagged and idle resources (unattached EBS volumes, old snapshots, idle load balancers, unused Elastic IPs); rewrite it during Python Basics; Cost Explorer grouped by tag and by usage type (find NAT and data-transfer charges); know Savings Plans vs Reserved Instances vs Spot, Compute Optimizer and Trusted Advisor.",
    "done": "the script runs weekly in GitHub Actions and posts its findings, and you can explain the three biggest lines on your bill."
   },
   {
@@ -621,7 +621,7 @@
    "id": "F-46",
    "group": "g8",
    "title": "Make the pods production-grade",
-   "how": "a startupProbe for Django's slow start, readinessProbe → /readyz, livenessProbe → /healthz only (never check the database in liveness — P-14); requests and limits from measured kubectl top values; a securityContext (runAsNonRoot, readOnlyRootFilesystem where possible, drop ALL capabilities, no privilege escalation); PodDisruptionBudgets and topology spread for core-api and frontend; the namespace label pod-security.kubernetes.io/enforce=restricted.",
+   "how": "a startupProbe for Django's slow start, readinessProbe → /readyz, livenessProbe → /healthz only (never check the database in liveness, P-14); requests and limits from measured kubectl top values; a securityContext (runAsNonRoot, readOnlyRootFilesystem where possible, drop ALL capabilities, no privilege escalation); PodDisruptionBudgets and topology spread for core-api and frontend; the namespace label pod-security.kubernetes.io/enforce=restricted.",
    "done": "the restricted Pod Security level admits every pod."
   },
   {
@@ -684,21 +684,21 @@
    "id": "F-53",
    "group": "g9",
    "title": "Build the cluster (§5)",
-   "how": "order 3 new VPS-3 nodes in the same datacentre (Terraform or the console); keep the Compose server running. Harden each node as in F-24 and open the k3s ports only between the three nodes. Install k3s as an HA cluster with embedded etcd — --cluster-init on the first server and --server https://<node-1>:6443 on the other two — all with --flannel-backend=wireguard-native so pod traffic between nodes is encrypted; turn on etcd snapshots to R2.",
+   "how": "order 3 new VPS-3 nodes in the same datacentre (Terraform or the console); keep the Compose server running. Harden each node as in F-24 and open the k3s ports only between the three nodes. Install k3s as an HA cluster with embedded etcd: --cluster-init on the first server and --server https://<node-1>:6443 on the other two, all with --flannel-backend=wireguard-native so pod traffic between nodes is encrypted; turn on etcd snapshots to R2.",
    "done": "kubectl get nodes shows 3 Ready control-plane nodes and an etcd snapshot exists in R2."
   },
   {
    "id": "F-54",
    "group": "g9",
    "title": "ArgoCD",
-   "how": "install a minimal ArgoCD; change the admin password and store it; reach the UI only with kubectl port-forward or at argocd.<domain> behind Cloudflare Access (Zero Trust, free) — never on the open internet without a login.",
+   "how": "install a minimal ArgoCD; change the admin password and store it; reach the UI only with kubectl port-forward or at argocd.<domain> behind Cloudflare Access (Zero Trust, free): never on the open internet without a login.",
    "done": "the UI asks for Cloudflare Access before the ArgoCD login."
   },
   {
    "id": "F-55",
    "group": "g9",
    "title": "App-of-apps (platform/argocd/)",
-   "how": "one root app that creates child apps — sealed-secrets, cloudflared (2 replicas), CloudNativePG and its cluster, kube-prometheus-stack, and folionix (values-demo.yaml); sync waves so operators and CRDs come first; automated sync with prune and selfHeal.",
+   "how": "one root app that creates child apps: sealed-secrets, cloudflared (2 replicas), CloudNativePG and its cluster, kube-prometheus-stack, and folionix (values-demo.yaml); sync waves so operators and CRDs come first; automated sync with prune and selfHeal.",
    "done": "a resource you delete by hand is recreated from Git."
   },
   {
@@ -754,14 +754,14 @@
    "id": "F-62",
    "group": "g10",
    "title": "kube-prometheus-stack",
-   "how": "through ArgoCD, with demo-sized values — 7-day retention, a 10 GB volume, a 30 s scrape interval; Grafana with an anonymous read-only viewer at grafana.<domain>; admin access only behind Cloudflare Access.",
+   "how": "through ArgoCD, with demo-sized values: 7-day retention, a 10 GB volume, a 30 s scrape interval; Grafana with an anonymous read-only viewer at grafana.<domain>; admin access only behind Cloudflare Access.",
    "done": "the public dashboard loads with no login and the admin page asks for Cloudflare Access."
   },
   {
    "id": "F-63",
    "group": "g10",
    "title": "Scrape the app",
-   "how": "ServiceMonitors for the /metrics endpoints of core-api, search-svc and ai-svc (with no public route — P-34), plus Celery queue metrics.",
+   "how": "ServiceMonitors for the /metrics endpoints of core-api, search-svc and ai-svc (with no public route, P-34), plus Celery queue metrics.",
    "done": "every target shows \"up\" in Prometheus."
   },
   {
@@ -796,7 +796,7 @@
    "id": "F-66b",
    "group": "g10",
    "title": "On-call and incident process",
-   "how": "severity levels (SEV1–3) with examples; critical alerts reach your phone (PagerDuty's free plan or ntfy); an incident template with roles (incident commander, communications, scribe — even when all three are you), status page updates and a timeline; a blameless postmortem; one week \"on call\" answering every alert and logging the time to acknowledge; one game day where a friend breaks something without telling you.",
+   "how": "severity levels (SEV1–3) with examples; critical alerts reach your phone (PagerDuty's free plan or ntfy); an incident template with roles (incident commander, communications, scribe, even when all three are you), status page updates and a timeline; a blameless postmortem; one week \"on call\" answering every alert and logging the time to acknowledge; one game day where a friend breaks something without telling you.",
    "done": "docs/incidents/ holds a full incident record with acknowledgement time, timeline, status updates and the postmortem."
   },
   {
@@ -837,7 +837,7 @@
   {
    "id": "F-69c",
    "group": "g11",
-   "title": "Compute and containers without AKS (optional — AWS first)",
+   "title": "Compute and containers without AKS (optional, AWS first)",
    "how": "a VM Scale Set with cloud-init running the Compose stack and autoscale rules; Azure Container Registry with image scanning; core-api on Azure Container Apps (revisions, traffic split, scale rules, secrets from Key Vault); know when App Service fits better.",
    "done": "a new Container Apps revision takes 10% of traffic and you can roll it back in one command."
   },
@@ -845,13 +845,13 @@
    "id": "F-69d",
    "group": "g11",
    "title": "Storage, databases and secrets",
-   "how": "a storage account (LRS, ZRS, GRS — know when each), Blob lifecycle rules (hot → cool → cold → archive), soft delete and versioning, a user-delegation SAS, Azure Files; Azure Database for PostgreSQL Flexible Server with zone-redundant HA, point-in-time restore and a read replica; Azure Managed Redis or Azure Cache for Redis by name; Key Vault with RBAC and a firewall, read by a managed identity.",
+   "how": "a storage account (LRS, ZRS, GRS: know when each), Blob lifecycle rules (hot → cool → cold → archive), soft delete and versioning, a user-delegation SAS, Azure Files; Azure Database for PostgreSQL Flexible Server with zone-redundant HA, point-in-time restore and a read replica; Azure Managed Redis or Azure Cache for Redis by name; Key Vault with RBAC and a firewall, read by a managed identity.",
    "done": "the app runs against Flexible Server with no password in config, and you restore a deleted blob and a dropped table."
   },
   {
    "id": "F-69e",
    "group": "g11",
-   "title": "Event-driven and serverless (optional — AWS first)",
+   "title": "Event-driven and serverless (optional, AWS first)",
    "how": "Blob upload → Event Grid → Service Bus queue with dead-lettering → an Azure Function that writes the file's metadata to Cosmos DB (serverless); compare with the AWS version (S3 → SQS → Lambda → DynamoDB).",
    "done": "an upload creates a Cosmos DB item and a bad file lands in the dead-letter queue."
   },
@@ -865,14 +865,14 @@
   {
    "id": "F-69g",
    "group": "g11",
-   "title": "AKS the way companies run it (optional — AWS first)",
+   "title": "AKS the way companies run it (optional, AWS first)",
    "how": "extend F-68: Entra ID integration with Azure RBAC for Kubernetes; Workload Identity so core-api reads Blob and Key Vault with no keys; the Key Vault Secrets Store CSI driver; ACR attached with AcrPull; Azure CNI Overlay; the cluster autoscaler and node pools (system, user, spot); the application routing add-on or Application Gateway for Containers; Container Insights; planned maintenance and upgrades.",
    "done": "the app runs on AKS with no static credentials anywhere, and an az aks upgrade of the node pool finishes with zero failed k6 requests."
   },
   {
    "id": "F-69h",
    "group": "g11",
-   "title": "Azure from CI and cost (optional — AWS first)",
+   "title": "Azure from CI and cost (optional, AWS first)",
    "how": "GitHub Actions with OIDC (federated credentials) runs terraform plan on PRs and deploys to Container Apps and AKS; Cost Management by tag, Azure Advisor, reservations vs savings plans vs spot; a script that lists untagged or idle Azure resources (unattached disks, unused public IPs, idle gateways).",
    "done": "merging to main updates the Azure environment with no stored secrets, and the cleanup script runs weekly."
   },
@@ -915,21 +915,21 @@
    "id": "F-74",
    "group": "g12",
    "title": "Node drill on the live demo (P-18)",
-   "how": "kubectl drain one node under k6 load — the PDBs hold and CloudNativePG fails over if needed; kubectl uncordon; then a rolling k3s upgrade, one node at a time.",
+   "how": "kubectl drain one node under k6 load: the PDBs hold and CloudNativePG fails over if needed; kubectl uncordon; then a rolling k3s upgrade, one node at a time.",
    "done": "k6 shows no failed requests, or a measured blip you can explain."
   },
   {
    "id": "F-75",
    "group": "g12",
    "title": "Cost page",
-   "how": "docs/costs.md — the demo per month, each drill per hour, R2, the domain, and how to cut each one.",
+   "how": "docs/costs.md: the demo per month, each drill per hour, R2, the domain, and how to cut each one.",
    "done": "every number has a source."
   },
   {
    "id": "F-76",
    "group": "g12",
    "title": "Runbooks",
-   "how": "site down, database restore, high latency, node lost and tunnel down — each with symptoms, dashboards, commands and a rollback.",
+   "how": "site down, database restore, high latency, node lost and tunnel down, each with symptoms, dashboards, commands and a rollback.",
    "done": "each has been used at least once in a drill."
   },
   {
@@ -956,7 +956,7 @@
   {
    "id": "F-80",
    "group": "g13",
-   "title": "S-7: KEDA — workers scale on queue length, core-api on requests per second",
+   "title": "S-7: KEDA, workers scale on queue length, core-api on requests per second",
    "how": "",
    "done": ""
   },
@@ -977,7 +977,7 @@
   {
    "id": "F-83",
    "group": "g13",
-   "title": "S-4: policy as code — Checkov / conftest block an insecure change",
+   "title": "S-4: policy as code, Checkov / conftest block an insecure change",
    "how": "",
    "done": ""
   },
@@ -998,7 +998,7 @@
   {
    "id": "F-86",
    "group": "g13",
-   "title": "Loki + Tempo + OpenTelemetry Collector (or Grafana Cloud's free tier) — S-10 with traces",
+   "title": "Loki + Tempo + OpenTelemetry Collector (or Grafana Cloud's free tier): S-10 with traces",
    "how": "",
    "done": ""
   },
@@ -1012,7 +1012,7 @@
   {
    "id": "F-88",
    "group": "g13",
-   "title": "S-19 Falco alert on kubectl exec; S-18 Karpenter + spot on EKS; S-20 EKS upgrade (check removed APIs with pluto first — P-45); S-21 OpenCost; S-22 Backstage template",
+   "title": "S-19 Falco alert on kubectl exec; S-18 Karpenter + spot on EKS; S-20 EKS upgrade (check removed APIs with pluto first, P-45); S-21 OpenCost; S-22 Backstage template",
    "how": "",
    "done": ""
   },
@@ -1056,7 +1056,7 @@
    "group": "g13",
    "title": "Hybrid networking",
    "how": "a Site-to-Site VPN from the AWS VPC to an OVHcloud VPS running strongSwan; a Transit Gateway joining two VPCs and the VPN; Direct Connect stays theory.",
-   "done": "a private IP in the VPC reaches the VPS through the tunnel. Destroy the VPN and Transit Gateway the same day — both bill by the hour."
+   "done": "a private IP in the VPC reaches the VPS through the tunnel. Destroy the VPN and Transit Gateway the same day: both bill by the hour."
   },
   {
    "id": "F-89e",
@@ -1083,7 +1083,7 @@
    "id": "F-90",
    "group": "g14",
    "title": "The 10-minute live demo",
-   "how": "script it — architecture (1 min) → the live app (2) → Grafana and the status history (1) → break something with a chaos switch (1) → the alert fires → roll back through Git (2) → the postmortem and the cost page (2). Rehearse until you need no notes; record it.",
+   "how": "script it: architecture (1 min) → the live app (2) → Grafana and the status history (1) → break something with a chaos switch (1) → the alert fires → roll back through Git (2) → the postmortem and the cost page (2). Rehearse until you need no notes; record it.",
    "done": "you can do it without notes."
   },
   {
@@ -1097,7 +1097,7 @@
    "id": "F-92",
    "group": "g14",
    "title": "Defend every decision",
-   "how": "2 minutes per ADR, plus \"why not X?\" — Compose vs Kubernetes, k3s vs EKS, ArgoCD vs Flux vs push deploys, Sealed Secrets vs External Secrets, CloudNativePG vs RDS, R2 vs S3, Prometheus vs CloudWatch.",
+   "how": "2 minutes per ADR, plus \"why not X?\": Compose vs Kubernetes, k3s vs EKS, ArgoCD vs Flux vs push deploys, Sealed Secrets vs External Secrets, CloudNativePG vs RDS, R2 vs S3, Prometheus vs CloudWatch.",
    "done": "you can answer each one without notes."
   },
   {
@@ -1118,7 +1118,7 @@
    "id": "F-95",
    "group": "g14",
    "title": "STAR stories",
-   "how": "8 stories from your drills and postmortems — an outage, a bad deploy, a leaked secret, a cost leak, a zero-downtime release, a restore, high latency, a time you were wrong — each with numbers.",
+   "how": "8 stories from your drills and postmortems: an outage, a bad deploy, a leaked secret, a cost leak, a zero-downtime release, a restore, high latency, a time you were wrong, each with numbers.",
    "done": "each one takes about 2 minutes to tell."
   },
   {
@@ -1132,14 +1132,14 @@
    "id": "F-97",
    "group": "g14",
    "title": "System design with Folionix",
-   "how": "30 minutes each on a whiteboard — \"scale to 100 universities and 1 million PDFs\", \"make it multi-region\", \"add SSO\", \"cut the bill by half\".",
+   "how": "30 minutes each on a whiteboard: \"scale to 100 universities and 1 million PDFs\", \"make it multi-region\", \"add SSO\", \"cut the bill by half\".",
    "done": "you have done all four."
   },
   {
    "id": "F-98",
    "group": "g14",
    "title": "Timed take-home practice",
-   "how": "2–3 hours each — containerise a repo + CI; write a Helm chart; Terraform a VPC + a service; debug a broken cluster.",
+   "how": "2–3 hours each: containerise a repo + CI; write a Helm chart; Terraform a VPC + a service; debug a broken cluster.",
    "done": "you have finished one of each."
   },
   {
@@ -1153,14 +1153,14 @@
    "id": "F-100",
    "group": "g14",
    "title": "Job-ready check",
-   "how": "check every item — the demo has run 30+ days at ≥ 99.5% on the status page; ≥ 8 scenarios written up with videos; you have a recorded rebuild-from-zero time (target < 30 min); you can explain every file in both repos; 6 blog posts and 3 open-source PRs are published (F-108); your CV passes the F-109 screening test and its bullets have real numbers; you solve coding tasks in time (F-103); every interview format is practised twice (F-112); 5 mock interviews are done.",
+   "how": "check every item: the demo has run 30+ days at ≥ 99.5% on the status page; ≥ 8 scenarios written up with videos; you have a recorded rebuild-from-zero time (target < 30 min); you can explain every file in both repos; 6 blog posts and 3 open-source PRs are published (F-108); your CV passes the F-109 screening test and its bullets have real numbers; you solve coding tasks in time (F-103); every interview format is practised twice (F-112); 5 mock interviews are done.",
    "done": "every item is checked."
   },
   {
    "id": "F-101",
    "group": "g14",
    "title": "Fundamentals you will be quizzed on",
-   "how": "networking — OSI vs TCP/IP, the TCP handshake and TIME_WAIT, UDP, the DNS resolution path and record types, HTTP/1.1 vs 2 vs 3 and status codes, the TLS handshake and certificate chains, L4 vs L7 load balancing, CIDR maths by hand, NAT, forward vs reverse proxies, \"what happens when you type a URL\"; Linux — the boot process, processes and signals, file descriptors, inodes and links, permissions (setuid, sticky bit, umask), systemd and cron, /proc, memory, swap and what load average means; containers under the hood — namespaces, cgroups, overlayfs and the OCI runtime: build a \"container\" by hand with unshare, chroot and a cgroup.",
+   "how": "networking: OSI vs TCP/IP, the TCP handshake and TIME_WAIT, UDP, the DNS resolution path and record types, HTTP/1.1 vs 2 vs 3 and status codes, the TLS handshake and certificate chains, L4 vs L7 load balancing, CIDR maths by hand, NAT, forward vs reverse proxies, \"what happens when you type a URL\"; Linux: the boot process, processes and signals, file descriptors, inodes and links, permissions (setuid, sticky bit, umask), systemd and cron, /proc, memory, swap and what load average means; containers under the hood: namespaces, cgroups, overlayfs and the OCI runtime: build a \"container\" by hand with unshare, chroot and a cgroup.",
    "done": "an Anki deck of about 200 cards you know cold, and you can demo your hand-made container and explain each step."
   },
   {
@@ -1209,7 +1209,7 @@
    "id": "F-108",
    "group": "g14",
    "title": "Open source and writing",
-   "how": "one PR a month to a project you use (a Helm chart, docs, CI, a small bug); six blog posts from your drills on Hashnode, dev.to or LinkedIn — for example \"Zero-downtime Django on k3s\", \"Rebuilding the whole platform in N minutes\", \"How I found a NAT gateway bill\", \"18 AWS failures I caused on purpose\".",
+   "how": "one PR a month to a project you use (a Helm chart, docs, CI, a small bug); six blog posts from your drills on Hashnode, dev.to or LinkedIn: for example \"Zero-downtime Django on k3s\", \"Rebuilding the whole platform in N minutes\", \"How I found a NAT gateway bill\", \"18 AWS failures I caused on purpose\".",
    "done": "three merged PRs and six posts, all linked from the README and your CV."
   },
   {
@@ -1223,7 +1223,7 @@
    "id": "F-110",
    "group": "g14",
    "title": "The behavioural and HR rounds",
-   "how": "\"tell me about yourself\" in 60 seconds and in 2 minutes; \"why DevOps?\" and \"why this company?\"; STAR stories beyond incidents — teamwork, a conflict, learning something fast, a missed deadline, leading something (your university thesis project counts); five good questions for the interviewer (on-call, deploy process, team size, how incidents are handled); salary research for your country and level, with a number ready; relocation or visa answers if needed; a follow-up email template.",
+   "how": "\"tell me about yourself\" in 60 seconds and in 2 minutes; \"why DevOps?\" and \"why this company?\"; STAR stories beyond incidents: teamwork, a conflict, learning something fast, a missed deadline, leading something (your university thesis project counts); five good questions for the interviewer (on-call, deploy process, team size, how incidents are handled); salary research for your country and level, with a number ready; relocation or visa answers if needed; a follow-up email template.",
    "done": "every answer is recorded and reviewed, and your salary range is written down with sources."
   },
   {
@@ -1503,7 +1503,7 @@
    "id": "P-39",
    "group": "g20",
    "title": "The VPS provider has a problem",
-   "how": "pretend one node — or the whole provider — is gone.",
+   "how": "pretend one node (or the whole provider) is gone.",
    "done": ""
   },
   {

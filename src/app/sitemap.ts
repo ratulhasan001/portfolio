@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...projects.flatMap((p) => (p.detailsHref ? [p.detailsHref] : [])),
   ];
   return [
-    { url: profile.website, images: [`${profile.website}${profile.photo}`] },
+    { url: profile.website, images: [profile.photo.startsWith("http") ? profile.photo : `${profile.website}${profile.photo}`] },
     ...pages.map((path) => ({ url: `${profile.website}${path}` })),
   ];
 }

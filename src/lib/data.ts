@@ -18,8 +18,10 @@ const defaultProfile = {
   email: "ratul@ratulhasan.dev",
   phone: "+8801760972108",
   website: "https://ratulhasan.dev",
-  /** Portrait under public/: shown in the hero and given to search engines. */
-  photo: "/ratul-hasan.jpg",
+  /** Portrait (in R2, replaceable from the admin panel): shown in the hero and given to search engines. */
+  photo: "https://files.ratulhasan.dev/ratul-hasan.jpg",
+  /** The CV PDF shown at /cv (in R2, replaceable from the admin panel). */
+  cvFile: "https://files.ratulhasan.dev/Ratul_Hasan_CV.pdf",
   github: "https://github.com/ratulhasan001",
   linkedin: "https://linkedin.com/in/ratul-hasan-linked-in",
   orcid: "https://orcid.org/0009-0009-5429-7501",
@@ -70,7 +72,7 @@ export type Experience = {
   positions?: Position[];
   bullets: string[];
   tags: string[];
-  /** Path under /public — falls back to the timeline dot when absent. */
+  /** Logo URL (in R2, replaceable from the admin panel); the timeline dot is shown when absent. */
   logo?: string;
   /** Path under `public/` to an experience letter or certificate for the role. */
   certificate?: string;
@@ -100,7 +102,7 @@ const defaultExperience: Experience[] = [
         role: "Research Assistant",
         period: "October 2026 - Present",
         current: true,
-        certificate: "/certificates/elite-research-assistant-certificate.pdf",
+        certificate: "https://files.ratulhasan.dev/certificates/elite-research-assistant-certificate.pdf",
         certificateLabel: "Recognition certificate",
         supervisors: [
           {
@@ -120,7 +122,7 @@ const defaultExperience: Experience[] = [
       {
         role: "Research Intern",
         period: "June 2026 - September 2026",
-        certificate: "/certificates/elite-research-intern-certificate.pdf",
+        certificate: "https://files.ratulhasan.dev/certificates/elite-research-intern-certificate.pdf",
         certificateLabel: "Completion certificate",
         supervisors: [
           {
@@ -138,7 +140,7 @@ const defaultExperience: Experience[] = [
     ],
     bullets: [],
     tags: ["LLM", "NLP", "LLM Security", "Federated Learning", "Research"],
-    logo: "/logo/elitelab.png",
+    logo: "https://files.ratulhasan.dev/logo/elitelab.png",
   },
   {
     kind: "teaching-industry",
@@ -151,8 +153,8 @@ const defaultExperience: Experience[] = [
       "Ran coding exercises and programming contest practice sessions.",
     ],
     tags: ["C", "C++", "Data Structures", "Teaching"],
-    logo: "/logo/bsc.png",
-    certificate: "/certificates/bauet-cse-programming-instructor-experience-letter.pdf",
+    logo: "https://files.ratulhasan.dev/logo/bsc.png",
+    certificate: "https://files.ratulhasan.dev/certificates/bauet-cse-programming-instructor-experience-letter.pdf",
     certificateLabel: "Experience letter",
   },
   {
@@ -167,7 +169,7 @@ const defaultExperience: Experience[] = [
       "Built backend features in Laravel (PHP).",
     ],
     tags: ["Laravel", "PHP", "Backend"],
-    logo: "/logo/labar.jpeg",
+    logo: "https://files.ratulhasan.dev/logo/labar.jpeg",
   },
 ];
 
@@ -192,7 +194,7 @@ export type Education = {
   merit?: string;
   score?: { label: string; value: number; scale: number };
   supervisors?: Supervisor[];
-  /** Path under /public — falls back to the timeline dot when absent. */
+  /** Logo URL (in R2, replaceable from the admin panel); the timeline dot is shown when absent. */
   logo?: string;
 };
 
@@ -223,7 +225,7 @@ const defaultEducation: Education[] = [
         link: "https://scholar.google.com/citations?user=mqiCTO8AAAAJ&hl=en",
       },
     ],
-    logo: "/logo/bsc.png",
+    logo: "https://files.ratulhasan.dev/logo/bsc.png",
   },
   {
     school: "Govt. Majeed Memorial City College",
@@ -231,7 +233,7 @@ const defaultEducation: Education[] = [
     location: "Khulna, Bangladesh",
     period: "2019 - 2021",
     score: { label: "GPA", value: 5.0, scale: 5.0 },
-    logo: "/logo/hsc.png",
+    logo: "https://files.ratulhasan.dev/logo/hsc.png",
   },
 ];
 
@@ -380,7 +382,7 @@ const defaultPublications: Publication[] = [
       "Existing blockchain-based document verification systems suffer from scalability bottlenecks and high gas costs due to unrestricted uploads, duplicate on-chain storage, and inefficient transaction processing. To address these limitations, this paper proposes a decentralized framework integrating IPFS for off-chain document storage and Ethereum smart contracts for secure on-chain state management. An owner-controlled dynamic access mechanism using OpenZeppelin AccessControl restricts uploads to authorized entities, proactively reverts duplicate hash entries, and employs direct Solidity state-mapping for constant-time, dataset-independent cryptographic lookups. The system’s operational scalability is confirmed through performance analysis in the 1,000 fuzzed transaction executions and 10,000-document batch load test run using the Foundry testing suite. In the architecture, the duplication of gas usage is avoided actively by reverting uploads, average 41,317 gas is spent on the baseline document storage. More importantly, a batch-processing also helps to keep the amortized cost to 32,297 gas per document, and it gives 21.8% efficiency improvement. The verification process is also very lightweight in terms of read cost at the average read cost of 1,471 gas, and the highest read cost of 36 gas was recorded over all fuzzed inputs. These findings illustrate that a dynamic permissioning approach, active de-duplication and batch optimization is a feasible and less expensive solution to the problem of applications that need to have a robust document provenance, namely, enterprise credentialing and legal workflows.",
     digitalLibrary: "IEEE Xplore Digital Library",
     certificate:
-      "/certificates/peccii2026-gas-optimized-blockchain-presentation-certificate.pdf",
+      "https://files.ratulhasan.dev/certificates/peccii2026-gas-optimized-blockchain-presentation-certificate.pdf",
   },
   {
     title:
@@ -401,7 +403,7 @@ const defaultPublications: Publication[] = [
     type: "conference",
     digitalLibrary: "IEEE Xplore Digital Library",
     certificate:
-      "/certificates/spicscon2026-splitsafe-ultra-presentation-certificate.pdf",
+      "https://files.ratulhasan.dev/certificates/spicscon2026-splitsafe-ultra-presentation-certificate.pdf",
   },
   {
     title:
@@ -421,7 +423,7 @@ const defaultPublications: Publication[] = [
     type: "conference",
     digitalLibrary: "IEEE Xplore Digital Library",
     certificate:
-      "/certificates/spicscon2026-activisionnet-fusion-presentation-certificate.pdf",
+      "https://files.ratulhasan.dev/certificates/spicscon2026-activisionnet-fusion-presentation-certificate.pdf",
   },
 ];
 
@@ -431,7 +433,7 @@ export type Project = {
   tools: string[];
   /** External repo or live site; optional when `detailsHref` is set. */
   link?: string;
-  /** Key into `projectIcons` — the stack's real brand mark on the tile. */
+  /** Key into `projectIcons`: the stack's real brand mark on the tile. */
   icon: string;
   language: string;
   languageColor: string;
@@ -546,32 +548,32 @@ const defaultAchievements: Achievement[] = [
   },
   {
     text: "2x Inter-University Programming Contest: Best Rank 45 at IUT (Team: BAUET_Twisted_Minds)",
-    certificate: "/certificates/iut-national-ict-fest-2024-participation-certificate.pdf",
+    certificate: "https://files.ratulhasan.dev/certificates/iut-national-ict-fest-2024-participation-certificate.pdf",
     certificateLabel: "Participation certificate",
   },
   {
     text: "Ranked 10th, Independence Day Programming Contest, Military Institute of Science & Technology",
     certificate:
-      "/certificates/mist-independence-day-programming-contest-2023-10th-place-certificate.pdf",
+      "https://files.ratulhasan.dev/certificates/mist-independence-day-programming-contest-2023-10th-place-certificate.pdf",
   },
   {
     text: "1x Champion, Intra-University Programming Contest (Team)",
     certificate:
-      "/certificates/intra-bauet-programming-contest-2023-team-champion-certificate.pdf",
+      "https://files.ratulhasan.dev/certificates/intra-bauet-programming-contest-2023-team-champion-certificate.pdf",
   },
   {
     text: "1x 2nd Runner-up, MIND STORM 4.0 Programming Contest, BAUET",
-    certificate: "/certificates/mind-storm-4-programming-contest-2nd-runner-up-certificate.pdf",
+    certificate: "https://files.ratulhasan.dev/certificates/mind-storm-4-programming-contest-2nd-runner-up-certificate.pdf",
   },
   {
     text: "1x Runner-up, Intra-University Programming Contest (Solo)",
     certificate:
-      "/certificates/intra-bauet-programming-contest-2023-individual-1st-runner-up-certificate.pdf",
+      "https://files.ratulhasan.dev/certificates/intra-bauet-programming-contest-2023-individual-1st-runner-up-certificate.pdf",
   },
   {
     text: "1x 1st Runner-up, Intra-University Three Minute Thesis (3MT) Presentation",
     certificate:
-      "/certificates/bauet-tech-fair-2025-three-minute-thesis-1st-runner-up-certificate.pdf",
+      "https://files.ratulhasan.dev/certificates/bauet-tech-fair-2025-three-minute-thesis-1st-runner-up-certificate.pdf",
   },
 ];
 
@@ -655,7 +657,7 @@ const defaultLeadership: LeadershipEntry[] = [
       "Deputy IT and Skill Development Secretary",
       "Deputy Editorial Secretary",
     ],
-    certificate: "/certificates/bauet-computer-society-president-certificate.pdf",
+    certificate: "https://files.ratulhasan.dev/certificates/bauet-computer-society-president-certificate.pdf",
   },
   {
     org: "Intra-University Programming Contest, BAUET",
@@ -666,7 +668,7 @@ const defaultLeadership: LeadershipEntry[] = [
     org: "Hult Prize, BAUET",
     roles: ["Officer of Documentation"],
     points: ["Kept records, minutes and reports for the campus program."],
-    certificate: "/certificates/hult-prize-bauet-officer-of-documentation-certificate.pdf",
+    certificate: "https://files.ratulhasan.dev/certificates/hult-prize-bauet-officer-of-documentation-certificate.pdf",
   },
 ];
 

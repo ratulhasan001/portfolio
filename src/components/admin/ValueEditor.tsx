@@ -68,7 +68,7 @@ export function tidy(v: Json, required?: Set<string>): Json {
 }
 
 const LONG = /abstract|description|pitch|journey|tagline|detail|origin|text|role$/i;
-const FILE = /logo|photo|certificate|image|file|avatar/i;
+const FILE = /(logo|photo|certificate|image|file|avatar)$/i;
 
 export function FileButton({ onDone }: { onDone: (url: string) => void }) {
   const ref = useRef<HTMLInputElement>(null);
@@ -129,7 +129,16 @@ function StringField({ name, value, onChange, options }: { name: string; value: 
           ) : null}
         </>
       )}
-      {FILE.test(name) && <FileButton onDone={onChange} />}
+      {FILE.test(name) && (
+        <>
+          {/^https:\/\//.test(value) && (
+            <a href={value} target="_blank" rel="noreferrer" className="flex shrink-0 items-center rounded-lg border border-border-default px-2.5 text-[12px] font-semibold text-fg-muted hover:text-fg-default">
+              Open
+            </a>
+          )}
+          <FileButton onDone={onChange} />
+        </>
+      )}
     </div>
   );
 }

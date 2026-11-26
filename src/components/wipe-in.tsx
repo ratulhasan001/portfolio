@@ -82,7 +82,7 @@ export function WipeIn({
   );
 }
 
-/** Wipe, one word after the next — PowerPoint's "Wipe, By Word". */
+/** Wipe, one word after the next, PowerPoint's "Wipe, By Word". */
 export function WipeWords({
   text,
   className,

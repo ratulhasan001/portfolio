@@ -171,7 +171,7 @@ export function ExperienceSection() {
 
                     {stacked && <PositionFlow positions={exp.positions!} delay={i * 0.1} />}
 
-                    {/* Read straight through — the bullets are the substance of the
+                    {/* Read straight through, the bullets are the substance of the
                         role, so they are not tucked behind a toggle. */}
                     {exp.bullets.length > 0 && (
                       <ul className="mt-4 space-y-2.5">
