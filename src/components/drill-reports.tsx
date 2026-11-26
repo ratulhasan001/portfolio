@@ -2,7 +2,6 @@ import { ArrowUpRight, Check, FileText, GitCommitHorizontal, Image as ImageIcon,
 import { EVIDENCE_KINDS, type EvidenceKind, type Progress } from "@/lib/admin-sections";
 import plan from "@/lib/folionix-plan.json";
 
-const fmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" });
 
 export const EVIDENCE_ICON: Record<EvidenceKind, typeof FileText> = {
   writeup: FileText,
@@ -50,7 +49,7 @@ export function DrillReports({ progress }: { progress: Progress }) {
                   p.status === "done" ? "bg-status-published/[0.12] text-status-published" : "bg-status-review/[0.12] text-status-review"
                 }`}
               >
-                {p.status === "done" ? <Check size={11} /> : <Loader size={11} />} {p.status === "done" ? "Done" : "In progress"} · {fmt.format(new Date(p.at))}
+                {p.status === "done" ? <Check size={11} /> : <Loader size={11} />} {p.status === "done" ? "Done" : "In progress"}
               </span>
             </div>
             <h3 className="mt-1.5 text-[16px] font-bold text-fg-default">{t.title}</h3>

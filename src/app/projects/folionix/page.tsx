@@ -1,15 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, GraduationCap } from "lucide-react";
-import {
-  backing,
-  folionix,
-  milestones,
-  requestFlow,
-  services,
-  stack,
-  type MilestoneState,
-} from "@/lib/folionix";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { backing, folionix, requestFlow, services } from "@/lib/folionix";
 import { OngoingBadge } from "@/components/projects-section";
 import { PipelineDemo } from "@/components/pipeline-demo";
 import { FadeIn } from "@/components/fade-in";
@@ -43,14 +35,6 @@ export const metadata: Metadata = {
   },
 };
 
-const doneCount = milestones.filter((m) => m.state === "done").length;
-
-const stateLabel: Record<MilestoneState, string> = {
-  done: "Done",
-  "in-progress": "Starting now",
-  planned: "Up next",
-};
-
 function Section({
   index,
   title,
@@ -81,25 +65,6 @@ function Section({
       </div>
       {children}
     </section>
-  );
-}
-
-function StepNode({ state }: { state: MilestoneState }) {
-  if (state === "done")
-    return (
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-status-published text-canvas">
-        <Check size={14} strokeWidth={3} />
-      </span>
-    );
-  if (state === "in-progress")
-    return (
-      <span className="relative flex h-7 w-7 items-center justify-center rounded-full border-2 border-status-review bg-canvas">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-status-review opacity-25 motion-reduce:animate-none" />
-        <span className="h-2.5 w-2.5 rounded-full bg-status-review" />
-      </span>
-    );
-  return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-dashed border-border-strong bg-canvas" />
   );
 }
 
@@ -148,119 +113,9 @@ export default async function FolionixPage() {
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <div className="mt-7 flex gap-3 rounded-2xl border border-status-review/40 bg-status-review/[0.06] p-4 sm:p-5">
-            <GraduationCap
-              size={22}
-              className="mt-0.5 shrink-0 text-status-review"
-            />
-            <div>
-              <p className="text-[15px] font-semibold text-fg-default">
-                Ongoing project · Learning in public
-              </p>
-              <p className="mt-1 text-[14px] leading-relaxed text-fg-muted">
-                {folionix.journey}
-              </p>
-            </div>
-          </div>
-        </FadeIn>
-
-        {/* ---- Roadmap ---- */}
-        <Section
-          index="01"
-          title="Roadmap"
-          subtitle="What I will do, step by step. No fixed dates; each step is done when I have learned it and it works."
-        >
-          <div className="mb-6 rounded-xl border border-border-default bg-canvas-subtle p-4">
-            <div className="mono flex items-center justify-between text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
-              <span>Progress</span>
-              <span>
-                {doneCount} / {milestones.length} steps done
-              </span>
-            </div>
-            <div className="mt-2 flex gap-1.5">
-              {milestones.map((m) => (
-                <span
-                  key={m.title}
-                  title={`${m.when}: ${m.title}`}
-                  className={`h-2 flex-1 rounded-full ${
-                    m.state === "done"
-                      ? "bg-status-published"
-                      : m.state === "in-progress"
-                        ? "bg-status-review"
-                        : "bg-border-strong/60"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          <ol className="relative">
-            {milestones.map((m, i) => (
-              <li key={m.title} className="relative flex gap-4 pb-6 last:pb-0">
-                {i < milestones.length - 1 && (
-                  <span
-                    aria-hidden
-                    className={`absolute left-[13px] top-8 bottom-0 w-0.5 ${
-                      m.state === "done"
-                        ? "bg-status-published/60"
-                        : "bg-border-default"
-                    }`}
-                  />
-                )}
-                <div className="relative z-[1] shrink-0">
-                  <StepNode state={m.state} />
-                </div>
-                <FadeIn className="min-w-0 flex-1">
-                  <div
-                    className={`rounded-2xl border p-4 ${
-                      m.state === "in-progress"
-                        ? "border-status-review/50 bg-canvas"
-                        : m.state === "done"
-                          ? "border-border-strong bg-canvas"
-                          : "border-dashed border-border-default bg-canvas-subtle/60"
-                    }`}
-                  >
-                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                      <span className="mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
-                        {m.when}
-                      </span>
-                      <h3 className="text-[16px] font-bold text-fg-default">
-                        {m.title}
-                      </h3>
-                      <span
-                        className={`mono ml-auto rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${
-                          m.state === "done"
-                            ? "bg-status-published/[0.12] text-status-published"
-                            : m.state === "in-progress"
-                              ? "bg-status-review/[0.12] text-status-review"
-                              : "border border-border-default text-fg-subtle"
-                        }`}
-                      >
-                        {stateLabel[m.state]}
-                      </span>
-                    </div>
-                    <ul className="mt-2.5 space-y-1">
-                      {m.items.map((item) => (
-                        <li
-                          key={item}
-                          className="flex gap-2 text-[14px] leading-relaxed text-fg-muted"
-                        >
-                          <span className="mt-[9px] h-1 w-1 shrink-0 rotate-45 bg-fg-subtle" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </FadeIn>
-              </li>
-            ))}
-          </ol>
-        </Section>
-
         {/* ---- Pipeline demo ---- */}
         <Section
-          index="02"
+          index="01"
           title="The pipeline I'm building"
           subtitle="Press run to see what every change will go through, from pull request to a signed image deployed by ArgoCD."
         >
@@ -269,7 +124,7 @@ export default async function FolionixPage() {
 
         {/* ---- Architecture ---- */}
         <Section
-          index="03"
+          index="02"
           title="What runs inside"
           subtitle="The finished application: five services, each chosen to create a different kind of operations problem."
         >
@@ -326,39 +181,8 @@ export default async function FolionixPage() {
           </div>
         </Section>
 
-        {/* ---- Stack ---- */}
-        <Section
-          index="04"
-          title="Tools I'm learning through it"
-          subtitle="Only the first group is in use so far; the rest come with later steps."
-        >
-          <div className="grid gap-4 sm:grid-cols-2">
-            {stack.map(({ group, later, tools }) => (
-              <div key={group}>
-                <p className="mono text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
-                  {group}
-                </p>
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {tools.map((t) => (
-                    <span
-                      key={t}
-                      className={`rounded-full border px-2.5 py-1 text-[13px] font-medium ${
-                        later
-                          ? "border-dashed border-border-default text-fg-subtle"
-                          : "border-border-default bg-canvas-subtle text-fg-muted"
-                      }`}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
         {/* ---- Ownership ---- */}
-        <Section index="05" title="Who builds what">
+        <Section index="03" title="Who builds what">
           <div className="grid gap-3 sm:grid-cols-2">
             {folionix.ownership.map((o) => (
               <div
@@ -386,7 +210,7 @@ export default async function FolionixPage() {
         {/* ---- Drill reports and work plan (live from the admin panel) ---- */}
         <div id="drill-reports" className="scroll-mt-20">
           <Section
-            index="06"
+            index="04"
             title="Drill reports"
             subtitle="Failures I caused on purpose and fixed, with the measured numbers and the proof: write-ups, recordings and graphs."
           >
@@ -396,9 +220,9 @@ export default async function FolionixPage() {
 
         <div id="work-plan" className="scroll-mt-20">
           <Section
-            index="07"
+            index="05"
             title="Work plan"
-            subtitle="Every task and break-and-fix drill I plan to do, with where I am right now. Updated as I go."
+            subtitle="Every task and break-and-fix drill in the plan, with where I am right now."
           >
             <WorkPlan progress={progress} />
           </Section>

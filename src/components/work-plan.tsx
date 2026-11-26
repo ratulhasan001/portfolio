@@ -3,8 +3,6 @@ import type { Progress, TaskStatus } from "@/lib/admin-sections";
 import plan from "@/lib/folionix-plan.json";
 import { EVIDENCE_ICON, evidenceLabel } from "./drill-reports";
 
-const fmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" });
-
 const ICON: Record<TaskStatus, React.ReactNode> = {
   done: <Check size={13} className="text-status-published" />,
   doing: <Loader size={13} className="text-status-review" />,
@@ -51,7 +49,6 @@ export function WorkPlan({ progress }: { progress: Progress }) {
                 <span className="mt-1">{ICON[status(t.id)]}</span>
                 <span className="min-w-0">
                   <span className="mono text-[12px] text-fg-subtle">{t.id}</span> {t.title}
-                  <span className="text-fg-subtle"> · {fmt.format(new Date(progress[t.id]!.at))}</span>
                 </span>
               </li>
             ))}

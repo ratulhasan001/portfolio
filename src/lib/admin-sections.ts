@@ -26,13 +26,11 @@ export const SECTIONS: SectionInfo[] = [
   { key: "onlineJudges", label: "Online judges", page: "Home", hint: "Competitive programming profiles.", itemTitle: "platform" },
   { key: "experienceGroups", label: "Experience groups", page: "Home", hint: "The sub-lists of the Experience section.", itemTitle: "label" },
   { key: "digitalLibraryLabels", label: "Digital library labels", page: "Home", hint: "Short labels shown on publication cards.", map: true },
-  { key: "folionix", label: "Folionix: intro", page: "Folionix", hint: "Title, pitch, journey and repository ownership." },
-  { key: "milestones", label: "Folionix: milestones", page: "Folionix", hint: "The big steps of the project.", itemTitle: "title" },
+  { key: "folionix", label: "Folionix: intro", page: "Folionix", hint: "Title, pitch and repository ownership." },
   { key: "services", label: "Folionix: services", page: "Folionix", hint: "The application's services.", itemTitle: "name" },
   { key: "backing", label: "Folionix: backing services", page: "Folionix", hint: "Databases, queues and storage." },
   { key: "requestFlow", label: "Folionix: request flow", page: "Folionix", hint: "One submission's path through the system." },
   { key: "pipelineStages", label: "Folionix: pipeline stages", page: "Folionix", hint: "The CI/CD pipeline animation.", itemTitle: "name" },
-  { key: "stack", label: "Folionix: tool stack", page: "Folionix", hint: "Tools in use now and later.", itemTitle: "group" },
 ];
 
 export const sectionByKey = (key: string) => SECTIONS.find((s) => s.key === key);

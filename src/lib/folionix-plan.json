@@ -3,77 +3,77 @@
   {
    "id": "g0",
    "kind": "task",
-   "title": "Phase 0 · Set up (by 31 October)"
+   "title": "Phase 0 · Set up"
   },
   {
    "id": "g1",
    "kind": "task",
-   "title": "Phase 1 · Week 1 · Understand and secure"
+   "title": "Phase 1 · Understand and secure"
   },
   {
    "id": "g2",
    "kind": "task",
-   "title": "Phase 2 · Week 2 · Containers"
+   "title": "Phase 2 · Containers"
   },
   {
    "id": "g3",
    "kind": "task",
-   "title": "Phase 3 · Week 3 · CI/CD"
+   "title": "Phase 3 · CI/CD"
   },
   {
    "id": "g4",
    "kind": "task",
-   "title": "Phase 4 · Weeks 3–4 · Live demo v1: Compose on one VPS"
+   "title": "Phase 4 · Live demo v1: Compose on one VPS"
   },
   {
    "id": "g5",
    "kind": "task",
-   "title": "Phase 5 · Weeks 5–6 · AWS by hand"
+   "title": "Phase 5 · AWS by hand"
   },
   {
    "id": "g6",
    "kind": "task",
-   "title": "Phase 5b · During AWS SAA study (5–25 Dec) · AWS beyond the basics"
+   "title": "Phase 5b · AWS beyond the basics"
   },
   {
    "id": "g7",
    "kind": "task",
-   "title": "Phase 6 · Weeks 7–8 · Terraform and your own AWS account"
+   "title": "Phase 6 · Terraform and your own AWS account"
   },
   {
    "id": "g8",
    "kind": "task",
-   "title": "Phase 7 · Weeks 8–10 · Kubernetes on k3d"
+   "title": "Phase 7 · Kubernetes on k3d"
   },
   {
    "id": "g9",
    "kind": "task",
-   "title": "Phase 8 · Week 11 · Live demo v2: 3-node k3s + GitOps"
+   "title": "Phase 8 · Live demo v2: 3-node k3s + GitOps"
   },
   {
    "id": "g10",
    "kind": "task",
-   "title": "Phase 9 · Week 11 · Observability"
+   "title": "Phase 9 · Observability"
   },
   {
    "id": "g11",
    "kind": "task",
-   "title": "Phase 10 · Week 12 · Azure"
+   "title": "Phase 10 · Azure"
   },
   {
    "id": "g12",
    "kind": "task",
-   "title": "Phase 11 · Week 13 · Drills and portfolio"
+   "title": "Phase 11 · Drills and portfolio"
   },
   {
    "id": "g13",
    "kind": "task",
-   "title": "Phase 12 · February–April · Advanced"
+   "title": "Phase 12 · Advanced"
   },
   {
    "id": "g14",
    "kind": "task",
-   "title": "Phase 13 · Job-ready and interview tasks (from February, keep going)"
+   "title": "Phase 13 · Job-ready and interview tasks"
   },
   {
    "id": "g15",
@@ -194,7 +194,7 @@
    "id": "F-05",
    "group": "g0",
    "title": "Open the other accounts",
-   "how": "OVHcloud (identity and card checks can take a day or two: you order the first server in week 3), Tailscale and healthchecks.io (§5). AWS waits until week 7 and Azure until week 12.",
+   "how": "OVHcloud (identity and card checks can take a day or two), Tailscale and healthchecks.io (§5).",
    "done": "you can log in to each one."
   },
   {
@@ -412,7 +412,7 @@
    "group": "g4",
    "title": "Show it",
    "how": "add the live link, status page and architecture diagram to the README and your portfolio page.",
-   "done": "checkpoint Sat 28 Nov passes."
+   "done": "the live link, status page and diagram are on the README and the portfolio page."
   },
   {
    "id": "F-34a",
@@ -1537,14 +1537,14 @@
   {
    "id": "P-44",
    "group": "g22",
-   "title": "A whole cloud region is lost (S-16, February+)",
+   "title": "A whole cloud region is lost (S-16)",
    "how": "take the AWS environment down during a drill. Fix now: fail over to Azure with DNS health checks and measure the switch time.",
    "done": ""
   },
   {
    "id": "P-45",
    "group": "g22",
-   "title": "An upgrade removes an API (S-20, February+)",
+   "title": "An upgrade removes an API (S-20)",
    "how": "keep a manifest on an API version that the new cluster version removed.",
    "done": ""
   },
