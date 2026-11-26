@@ -26,7 +26,11 @@ export async function proxy(request: NextRequest) {
 
   if (area === "admin") {
     // the admin address shows nothing of the public site
-    if (pathname === "/") return page(request, new URL(`/admin${search}`, request.url));
+    if (pathname === "/") {
+      if (await isAuthed(request.cookies.get(SESSION_COOKIE)?.value, requestFrom(request.headers)))
+        return page(request, new URL(`/admin${search}`, request.url));
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
     if (!isAdminPath(pathname)) return NextResponse.redirect(`https://${HOSTS.site}${pathname}${search}`, 308);
   } else if (!isAdminPath(pathname)) {
     return NextResponse.next(); // dev: the public site
