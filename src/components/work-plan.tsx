@@ -1,6 +1,6 @@
 import { Check, CircleDashed, Loader, Minus } from "lucide-react";
 import type { Progress, TaskStatus } from "@/lib/admin-sections";
-import plan from "@/lib/folionix-plan.json";
+import { publicGroups, publicTasks } from "@/lib/plan-public";
 import { EVIDENCE_ICON, evidenceLabel } from "./drill-reports";
 
 const ICON: Record<TaskStatus, React.ReactNode> = {
@@ -16,49 +16,12 @@ const ICON: Record<TaskStatus, React.ReactNode> = {
  */
 export function WorkPlan({ progress }: { progress: Progress }) {
   const status = (id: string): TaskStatus => progress[id]?.status ?? "todo";
-  const counted = plan.tasks.filter((t) => status(t.id) !== "skipped");
-  const done = counted.filter((t) => status(t.id) === "done").length;
-  const doing = counted.filter((t) => status(t.id) === "doing").length;
-  const pct = (n: number) => (counted.length ? (n / counted.length) * 100 : 0);
-  const latest = plan.tasks
-    .filter((t) => progress[t.id] && status(t.id) !== "todo")
-    .sort((a, b) => (progress[b.id]!.at > progress[a.id]!.at ? 1 : -1))
-    .slice(0, 5);
 
   return (
     <div>
-      <div className="mb-5 rounded-xl border border-border-default bg-canvas-subtle p-4">
-        <div className="mono flex flex-wrap items-center justify-between gap-2 text-[11px] uppercase tracking-[0.1em] text-fg-subtle">
-          <span>
-            {done} done · {doing} in progress · {counted.length - done - doing} to do
-          </span>
-          <span>{Math.round(pct(done))}%</span>
-        </div>
-        <div className="mt-2 flex h-2 overflow-hidden rounded-full bg-border-strong/40">
-          <span className="bg-status-published" style={{ width: `${pct(done)}%` }} />
-          <span className="bg-status-review" style={{ width: `${pct(doing)}%` }} />
-        </div>
-      </div>
-
-      {latest.length > 0 && (
-        <div className="mb-5">
-          <p className="mono mb-2 text-[11px] uppercase tracking-[0.1em] text-fg-subtle">Latest updates</p>
-          <ul className="space-y-1.5">
-            {latest.map((t) => (
-              <li key={t.id} className="flex items-start gap-2 text-[14px] text-fg-muted">
-                <span className="mt-1">{ICON[status(t.id)]}</span>
-                <span className="min-w-0">
-                  <span className="mono text-[12px] text-fg-subtle">{t.id}</span> {t.title}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
       <div className="space-y-2">
-        {plan.groups.map((g) => {
-          const items = plan.tasks.filter((t) => t.group === g.id);
+        {publicGroups.map((g) => {
+          const items = publicTasks.filter((t) => t.group === g.id);
           const gDone = items.filter((t) => status(t.id) === "done").length;
           const gDoing = items.some((t) => status(t.id) === "doing");
           return (

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { backing, folionix, requestFlow, services } from "@/lib/folionix";
 import { OngoingBadge } from "@/components/projects-section";
 import { PipelineDemo } from "@/components/pipeline-demo";
@@ -8,6 +8,7 @@ import { FadeIn } from "@/components/fade-in";
 import { ogImage } from "@/lib/og";
 import { WorkPlan } from "@/components/work-plan";
 import { DrillReports } from "@/components/drill-reports";
+import { FolionixStatus } from "@/components/folionix-status";
 import { publicProgress } from "@/lib/server/content";
 
 // The work plan's progress comes from the admin panel: cached, and refreshed the moment a status changes there.
@@ -70,6 +71,10 @@ function Section({
 
 export default async function FolionixPage() {
   const progress = await publicProgress();
+  const links = (folionix.links ?? []).filter((l) => /^https:\/\//.test(l.url));
+  const decisions = (folionix.decisions ?? []).filter((d) => d.question.trim() && d.answer.trim());
+  let n = 0;
+  const idx = () => String(++n).padStart(2, "0");
   return (
     <div className="flex min-h-dvh flex-col bg-canvas">
       <header className="safe-top sticky top-0 z-10 border-b border-border-default bg-canvas/85 backdrop-blur-md">
@@ -113,19 +118,56 @@ export default async function FolionixPage() {
           </p>
         </FadeIn>
 
-        {/* ---- Pipeline demo ---- */}
-        <Section
-          index="01"
-          title="The pipeline I'm building"
-          subtitle="Press run to see what every change will go through, from pull request to a signed image deployed by ArgoCD."
-        >
-          <PipelineDemo />
+
+        {/* ---- My role: the first thing an interviewer asks ---- */}
+        <FadeIn delay={0.05}>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {folionix.ownership.map((o) => (
+              <div key={o.repo} className="rounded-2xl border border-border-strong bg-canvas p-4">
+                <p className="mono text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
+                  {o.label} · <span className="normal-case tracking-normal">{o.repo}</span>
+                </p>
+                <p className="mt-1.5 text-[14px] leading-relaxed text-fg-muted">{o.text}</p>
+              </div>
+            ))}
+          </div>
+          {links.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {links.map((l) => (
+                <a
+                  key={l.url}
+                  href={l.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-fg-default px-3.5 py-1.5 text-[13px] font-semibold text-fg-default transition-colors hover:bg-fg-default hover:text-canvas"
+                >
+                  {l.label} <ArrowUpRight size={13} />
+                </a>
+              ))}
+            </div>
+          )}
+          <p className="mt-3 text-[13px] text-fg-subtle">Both repositories are private for now and will be made public as the work progresses.</p>
+        </FadeIn>
+
+        {/* ---- Where it stands (live) ---- */}
+        <Section index={idx()} title="Where it stands" subtitle="Live from my progress tracker.">
+          <FolionixStatus progress={progress} />
         </Section>
+
+        <div id="drill-reports" className="scroll-mt-20">
+          <Section
+            index={idx()}
+            title="Proof: drill reports"
+            subtitle="Failures I caused on purpose and fixed, with the measured numbers and the proof: write-ups, recordings and graphs."
+          >
+            <DrillReports progress={progress} />
+          </Section>
+        </div>
 
         {/* ---- Architecture ---- */}
         <Section
-          index="02"
-          title="What runs inside"
+          index={idx()}
+          title="Architecture"
           subtitle="The finished application: five services, each chosen to create a different kind of operations problem."
         >
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -181,46 +223,32 @@ export default async function FolionixPage() {
           </div>
         </Section>
 
-        {/* ---- Ownership ---- */}
-        <Section index="03" title="Who builds what">
-          <div className="grid gap-3 sm:grid-cols-2">
-            {folionix.ownership.map((o) => (
-              <div
-                key={o.repo}
-                className="rounded-2xl border border-border-strong bg-canvas p-4"
-              >
-                <p className="mono text-[11px] uppercase tracking-[0.12em] text-fg-subtle">
-                  {o.label}
-                </p>
-                <p className="mono mt-1 text-[14px] font-semibold text-fg-default">
-                  {o.repo}
-                </p>
-                <p className="mt-2 text-[14px] leading-relaxed text-fg-muted">
-                  {o.text}
-                </p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-3 text-[13px] text-fg-subtle">
-            Both repositories are private for now and will be made public as
-            the work progresses.
-          </p>
+        {/* ---- Pipeline demo ---- */}
+        <Section
+          index={idx()}
+          title="The CI/CD pipeline I'm building"
+          subtitle="The planned pipeline as a simulation: press run to see what every change will go through, from pull request to a signed image deployed by ArgoCD."
+        >
+          <PipelineDemo />
         </Section>
 
-        {/* ---- Drill reports and work plan (live from the admin panel) ---- */}
-        <div id="drill-reports" className="scroll-mt-20">
-          <Section
-            index="04"
-            title="Drill reports"
-            subtitle="Failures I caused on purpose and fixed, with the measured numbers and the proof: write-ups, recordings and graphs."
-          >
-            <DrillReports progress={progress} />
+        {/* ---- Decisions (shown once filled in from the admin panel) ---- */}
+        {decisions.length > 0 && (
+          <Section index={idx()} title="Decisions and trade-offs" subtitle="Why I chose what I chose, and what I gave up for it.">
+            <div className="space-y-3">
+              {decisions.map((d) => (
+                <div key={d.question} className="rounded-2xl border border-border-default bg-canvas p-4">
+                  <p className="text-[15px] font-semibold text-fg-default">{d.question}</p>
+                  <p className="mt-1.5 text-[14px] leading-relaxed text-fg-muted">{d.answer}</p>
+                </div>
+              ))}
+            </div>
           </Section>
-        </div>
+        )}
 
         <div id="work-plan" className="scroll-mt-20">
           <Section
-            index="05"
+            index={idx()}
             title="Work plan"
             subtitle="Every task and break-and-fix drill in the plan, with where I am right now."
           >

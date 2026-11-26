@@ -1,6 +1,6 @@
 import { ArrowUpRight, Check, FileText, GitCommitHorizontal, Image as ImageIcon, LineChart, Loader, Play, SquareTerminal, Gauge, ClipboardList, Link2 } from "lucide-react";
 import { EVIDENCE_KINDS, type EvidenceKind, type Progress } from "@/lib/admin-sections";
-import plan from "@/lib/folionix-plan.json";
+import { publicTasks } from "@/lib/plan-public";
 
 
 export const EVIDENCE_ICON: Record<EvidenceKind, typeof FileText> = {
@@ -22,7 +22,7 @@ const isImage = (url: string) => /\.(png|jpe?g|webp|gif)$/i.test(new URL(url).pa
  * links to the proof: write-up, video, terminal recording, graphs, commits.
  */
 export function DrillReports({ progress }: { progress: Progress }) {
-  const shown = plan.tasks
+  const shown = publicTasks
     .filter((t) => progress[t.id]?.evidence?.showcase)
     .sort((a, b) => (progress[b.id]!.at > progress[a.id]!.at ? 1 : -1));
 

@@ -5,6 +5,7 @@ import { ChevronDown, ExternalLink, Search, Star } from "lucide-react";
 import { TASK_STATUSES, type Evidence, type Progress, type TaskStatus } from "@/lib/admin-sections";
 import { EvidenceEditor } from "@/components/admin/EvidenceEditor";
 import plan from "@/lib/folionix-plan.json";
+import { PRIVATE_GROUPS, PRIVATE_TASKS } from "@/lib/plan-public";
 import { adminApi } from "@/components/admin/api";
 import { Card, cx, useToast } from "@/components/admin/kit";
 
@@ -30,6 +31,7 @@ function Row({ task, p, onSet }: { task: Task; p: Progress[string] | undefined; 
           <span className={cx("min-w-0 text-[14px]", status === "done" && "text-fg-muted", status === "skipped" && "text-fg-subtle line-through")}>{task.title}</span>
           {p?.evidence?.showcase && <Star className="size-3.5 shrink-0 fill-current text-status-review" aria-label="Showcased" />}
           {p?.evidence && !p.evidence.showcase && <span className="shrink-0 rounded bg-canvas-inset px-1.5 text-[10.5px] font-semibold text-fg-muted">proof</span>}
+          {PRIVATE_TASKS.has(task.id) && <span className="shrink-0 rounded bg-canvas-inset px-1.5 text-[10.5px] font-semibold text-fg-muted">private</span>}
         </button>
         <div className="flex shrink-0 overflow-hidden rounded-lg border border-border-default" role="radiogroup" aria-label={`Status of ${task.id}`}>
           {TASK_STATUSES.map((s) => (
@@ -184,6 +186,7 @@ export default function FolionixProgress() {
                   <span className="min-w-0 flex-1">
                     <span className="block text-[11px] font-bold uppercase tracking-[0.12em] text-fg-subtle">{g.kind === "drill" ? "Drills" : "Tasks"}</span>
                     <span className="font-semibold">{g.title}</span>
+                    {PRIVATE_GROUPS.has(g.id) && <span className="ml-2 rounded bg-canvas-inset px-1.5 py-0.5 text-[10.5px] font-semibold text-fg-muted">private: not on the public page</span>}
                   </span>
                   <span className="shrink-0 text-[13px] text-fg-muted">
                     {done}/{all.length}

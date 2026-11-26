@@ -35,6 +35,14 @@ const defaultFolionix = {
       text: "Dockerfiles, CI/CD and, step by step, the infrastructure around it, written by me as I learn.",
     },
   ],
+  /** Shown as buttons under the intro; a link with an empty url is hidden (fill them in as they go live). */
+  links: [
+    { label: "Live demo", url: "" },
+    { label: "Platform repository", url: "" },
+    { label: "Status page", url: "" },
+  ],
+  /** "Why X and not Y?": the trade-offs behind the platform. Hidden until at least one is filled in. */
+  decisions: [{ question: "", answer: "" }],
 };
 
 const defaultServices = [
