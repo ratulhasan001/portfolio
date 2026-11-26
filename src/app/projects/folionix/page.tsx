@@ -157,8 +157,8 @@ export default async function FolionixPage() {
         <div id="drill-reports" className="scroll-mt-20">
           <Section
             index={idx()}
-            title="Proof: drill reports"
-            subtitle="Failures I caused on purpose and fixed, with the measured numbers and the proof: write-ups, recordings and graphs."
+            title="Major drills"
+            subtitle="Failures I cause on purpose and fix, each with a target. Finished drills show the measured numbers and the proof: write-ups, recordings and graphs."
           >
             <DrillReports progress={progress} />
           </Section>

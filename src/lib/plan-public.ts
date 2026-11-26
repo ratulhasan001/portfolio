@@ -12,3 +12,9 @@ export const isPrivateTask = (t: { id: string; group: string }) => PRIVATE_GROUP
 
 export const publicGroups = plan.groups.filter((g) => !PRIVATE_GROUPS.has(g.id));
 export const publicTasks = plan.tasks.filter((t) => !isPrivateTask(t));
+
+/** The 24 major drills (S-1 to S-24): listed under "Drill reports", not in the work plan. */
+export const MAJOR = "gS";
+export const majorDrills = publicTasks.filter((t) => t.group === MAJOR);
+/** The work plan below them: everything else. */
+export const workPlanGroups = publicGroups.filter((g) => g.id !== MAJOR);

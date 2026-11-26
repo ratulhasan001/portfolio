@@ -1,6 +1,6 @@
-import { ArrowUpRight, Check, FileText, GitCommitHorizontal, Image as ImageIcon, LineChart, Loader, Play, SquareTerminal, Gauge, ClipboardList, Link2 } from "lucide-react";
+import { ArrowUpRight, Check, CircleDashed, FileText, GitCommitHorizontal, Image as ImageIcon, LineChart, Loader, Play, SquareTerminal, Gauge, ClipboardList, Link2 } from "lucide-react";
 import { EVIDENCE_KINDS, type EvidenceKind, type Progress } from "@/lib/admin-sections";
-import { publicTasks } from "@/lib/plan-public";
+import { MAJOR, majorDrills, publicTasks } from "@/lib/plan-public";
 
 
 export const EVIDENCE_ICON: Record<EvidenceKind, typeof FileText> = {
@@ -18,27 +18,57 @@ export const evidenceLabel = (k: EvidenceKind) => EVIDENCE_KINDS.find((x) => x.i
 const isImage = (url: string) => /\.(png|jpe?g|webp|gif)$/i.test(new URL(url).pathname);
 
 /**
- * The drills (and tasks) marked "showcase" in the admin panel, each as a card with its summary, measured numbers and
- * links to the proof: write-up, video, terminal recording, graphs, commits.
+ * The 24 major drills (S-1 to S-24), all listed from the start. A drill with proof (or marked done) in the admin panel
+ * shows its full report: summary, measured numbers, screenshots and links. The rest show their goal and what will be
+ * measured. Any other task marked "showcase" in the admin panel is reported here too.
  */
 export function DrillReports({ progress }: { progress: Progress }) {
-  const shown = publicTasks
-    .filter((t) => progress[t.id]?.evidence?.showcase)
-    .sort((a, b) => (progress[b.id]!.at > progress[a.id]!.at ? 1 : -1));
+  const hasReport = (id: string) => !!progress[id]?.evidence || progress[id]?.status === "done";
+  const rank = (id: string) => (progress[id]?.status === "done" ? 0 : 1);
+  const shown = [...majorDrills.filter((t) => hasReport(t.id)), ...publicTasks.filter((t) => t.group !== MAJOR && progress[t.id]?.evidence?.showcase)]
+    .sort((a, b) => rank(a.id) - rank(b.id));
+  const pending = majorDrills.filter((t) => !hasReport(t.id));
 
-  if (!shown.length)
-    return (
-      <p className="rounded-xl border border-dashed border-border-default bg-canvas-subtle p-4 text-[14px] text-fg-muted">
-        Reports appear here as I finish the major drills: what broke, how I found it, how long recovery took, with the
-        write-up and a recording for each.
-      </p>
-    );
+  return (
+    <div className="space-y-4">
+      {shown.length > 0 && <Reports shown={shown} progress={progress} />}
+      {pending.length > 0 && (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {pending.map((t) => {
+            const doing = progress[t.id]?.status === "doing";
+            return (
+              <article key={t.id} id={`report-${t.id}`} className={`flex flex-col rounded-2xl border p-4 ${doing ? "border-status-review/50 bg-canvas" : "border-border-default bg-canvas-subtle/60"}`}>
+                <div className="flex items-center gap-2">
+                  <span className="mono text-[11px] uppercase tracking-[0.1em] text-fg-subtle">{t.id}</span>
+                  <span
+                    className={`mono ml-auto flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${
+                      doing ? "bg-status-review/[0.12] text-status-review" : "border border-border-default text-fg-subtle"
+                    }`}
+                  >
+                    {doing ? <Loader size={11} /> : <CircleDashed size={11} />} {doing ? "In progress" : "Planned"}
+                  </span>
+                </div>
+                <h3 className="mt-1.5 text-[15px] font-bold text-fg-default">{t.title}</h3>
+                <p className="mt-1.5 text-[13.5px] leading-relaxed text-fg-muted">{t.how}</p>
+                <p className="mt-auto pt-2.5 text-[13px] text-fg-default">
+                  <span className="mono text-[10.5px] uppercase tracking-[0.08em] text-fg-subtle">Target · </span>
+                  {t.done}
+                </p>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
+function Reports({ shown, progress }: { shown: typeof publicTasks; progress: Progress }) {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       {shown.map((t) => {
         const p = progress[t.id]!;
-        const e = p.evidence!;
+        const e = p.evidence ?? {};
         const images = (e.links ?? []).filter((l) => l.kind === "screenshot" || l.kind === "dashboard").filter((l) => isImage(l.url));
         return (
           <article key={t.id} id={`report-${t.id}`} className="flex flex-col rounded-2xl border border-border-strong bg-canvas p-4">
@@ -53,7 +83,7 @@ export function DrillReports({ progress }: { progress: Progress }) {
               </span>
             </div>
             <h3 className="mt-1.5 text-[16px] font-bold text-fg-default">{t.title}</h3>
-            {e.summary && <p className="mt-2 whitespace-pre-line text-[14px] leading-relaxed text-fg-muted">{e.summary}</p>}
+            <p className="mt-2 whitespace-pre-line text-[14px] leading-relaxed text-fg-muted">{e.summary || t.how}</p>
 
             {e.metrics?.length ? (
               <dl className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">

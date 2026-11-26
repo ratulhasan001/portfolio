@@ -1,6 +1,6 @@
 import { Check, CircleDashed, Loader, Minus } from "lucide-react";
 import type { Progress, TaskStatus } from "@/lib/admin-sections";
-import { publicGroups, publicTasks } from "@/lib/plan-public";
+import { publicTasks, workPlanGroups } from "@/lib/plan-public";
 import { EVIDENCE_ICON, evidenceLabel } from "./drill-reports";
 
 const ICON: Record<TaskStatus, React.ReactNode> = {
@@ -20,7 +20,7 @@ export function WorkPlan({ progress }: { progress: Progress }) {
   return (
     <div>
       <div className="space-y-2">
-        {publicGroups.map((g) => {
+        {workPlanGroups.map((g) => {
           const items = publicTasks.filter((t) => t.group === g.id);
           const gDone = items.filter((t) => status(t.id) === "done").length;
           const gDoing = items.some((t) => status(t.id) === "doing");

@@ -1,6 +1,11 @@
 {
  "groups": [
   {
+   "id": "gS",
+   "kind": "drill",
+   "title": "Major drills"
+  },
+  {
    "id": "g0",
    "kind": "task",
    "title": "Phase 0 · Set up"
@@ -162,6 +167,174 @@
   }
  ],
  "tasks": [
+  {
+   "id": "S-1",
+   "group": "gS",
+   "title": "Zero-downtime deploys",
+   "how": "Rolling update with readiness gates while k6 sends load.",
+   "done": "0 failed requests during the rollout."
+  },
+  {
+   "id": "S-2",
+   "group": "gS",
+   "title": "Expand/contract database migration",
+   "how": "Split full_name into given_name and family_name across three releases, under load.",
+   "done": "No errors and no downtime across all three releases."
+  },
+  {
+   "id": "S-3",
+   "group": "gS",
+   "title": "Terraform drift and state recovery",
+   "how": "Change a resource by hand in the console, detect it with a scheduled plan and reconcile; import a hand-made resource; recover a locked or corrupted state.",
+   "done": "Drift caught automatically, state back in sync, nothing lost."
+  },
+  {
+   "id": "S-4",
+   "group": "gS",
+   "title": "Policy-as-code gates",
+   "how": "Checkov and conftest block an insecure change in CI.",
+   "done": "The insecure change cannot be merged."
+  },
+  {
+   "id": "S-5",
+   "group": "gS",
+   "title": "Secret leak drill",
+   "how": "Commit a fake secret: gitleaks catches it in CI, then rotate it through Secrets Manager and External Secrets.",
+   "done": "Rotated with no downtime; time to rotate recorded."
+  },
+  {
+   "id": "S-6",
+   "group": "gS",
+   "title": "Canary release with automatic rollback",
+   "how": "Release a build with a 20% error rate through Argo Rollouts; Prometheus analysis rolls it back.",
+   "done": "Rolled back automatically, few users affected."
+  },
+  {
+   "id": "S-7",
+   "group": "gS",
+   "title": "Event-driven autoscaling",
+   "how": "Upload 1,000 PDFs: KEDA scales the PDF workers on queue depth, HPA scales core-api on requests per second.",
+   "done": "Queue drained; scale-up and scale-down times recorded."
+  },
+  {
+   "id": "S-8",
+   "group": "gS",
+   "title": "OOMKilled",
+   "how": "Turn on a memory leak, diagnose it from metrics and events, then tune requests and limits with VPA recommendations.",
+   "done": "Root cause found from data; no more restarts."
+  },
+  {
+   "id": "S-9",
+   "group": "gS",
+   "title": "Network policies",
+   "how": "Default-deny, with only the required paths allowed.",
+   "done": "Proof that ai-svc cannot reach Postgres."
+  },
+  {
+   "id": "S-10",
+   "group": "gS",
+   "title": "SLO burn-rate alert",
+   "how": "Slow the API down: the burn-rate alert fires, a trace shows the slow span, fix it and write the postmortem.",
+   "done": "Alert fired in time; postmortem written."
+  },
+  {
+   "id": "S-11",
+   "group": "gS",
+   "title": "Dependency failures",
+   "how": "Redis down (jobs resume after), search-svc down (the API falls back), ai-svc slow (timeouts, no cascade).",
+   "done": "No cascading failure; each recovery measured."
+  },
+  {
+   "id": "S-12",
+   "group": "gS",
+   "title": "Poison message",
+   "how": "A bad message lands in the dead-letter queue: find it, fix it and replay it.",
+   "done": "Nothing lost; the replayed jobs succeed."
+  },
+  {
+   "id": "S-13",
+   "group": "gS",
+   "title": "Stateful recovery",
+   "how": "Delete the Meilisearch volume, then restore it with Velero or a reindex.",
+   "done": "RTO and RPO measured."
+  },
+  {
+   "id": "S-14",
+   "group": "gS",
+   "title": "Database failover",
+   "how": "Force an RDS Multi-AZ failover.",
+   "done": "Error window and reconnect behaviour measured."
+  },
+  {
+   "id": "S-15",
+   "group": "gS",
+   "title": "Rebuild from zero",
+   "how": "Delete the whole cluster, then bring everything back with Terraform and ArgoCD.",
+   "done": "Target under 30 minutes; the actual time recorded."
+  },
+  {
+   "id": "S-16",
+   "group": "gS",
+   "title": "Cross-cloud failover",
+   "how": "AWS to Azure failover with DNS health checks.",
+   "done": "Traffic moves to Azure; the switch-over time measured."
+  },
+  {
+   "id": "S-17",
+   "group": "gS",
+   "title": "Supply-chain security",
+   "how": "Kyverno admits only cosign-signed images without critical CVEs.",
+   "done": "An unsigned or vulnerable image is refused."
+  },
+  {
+   "id": "S-18",
+   "group": "gS",
+   "title": "Spot instances without losing work",
+   "how": "Karpenter with Graviton spot nodes, with interruptions handled by PDBs.",
+   "done": "0 lost jobs through interruptions."
+  },
+  {
+   "id": "S-19",
+   "group": "gS",
+   "title": "Runtime security",
+   "how": "Falco raises an alert when someone opens a shell in a pod with kubectl exec.",
+   "done": "The alert fires within seconds."
+  },
+  {
+   "id": "S-20",
+   "group": "gS",
+   "title": "Zero-downtime cluster upgrade",
+   "how": "Upgrade EKS by one minor version, checking removed APIs first.",
+   "done": "No downtime during the upgrade."
+  },
+  {
+   "id": "S-21",
+   "group": "gS",
+   "title": "Cost per service",
+   "how": "Cost per service with OpenCost or Kubecost, then right-size.",
+   "done": "Monthly saving measured."
+  },
+  {
+   "id": "S-22",
+   "group": "gS",
+   "title": "Self-service platform",
+   "how": "A Backstage template creates a new service end to end: repo, CI, namespace, ArgoCD app and dashboards.",
+   "done": "A new service goes live from the template alone."
+  },
+  {
+   "id": "S-23",
+   "group": "gS",
+   "title": "Multi-tenant onboarding",
+   "how": "Onboard a second institution as its own namespace, database and bucket through an ApplicationSet, then compare with in-app multi-tenancy.",
+   "done": "Isolation and per-tenant cost shown."
+  },
+  {
+   "id": "S-24",
+   "group": "gS",
+   "title": "Disaster recovery",
+   "how": "Encrypted, scheduled Postgres backups and versioned object storage; simulate an accidental delete, restore into an isolated instance, verify row counts, foreign keys and file checksums, then promote; an automated restore test that fails loudly.",
+   "done": "RTO and RPO measured; restore verified."
+  },
   {
    "id": "F-01",
    "group": "g0",

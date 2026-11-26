@@ -1,6 +1,6 @@
 import { Check, Loader } from "lucide-react";
 import type { Progress, TaskStatus } from "@/lib/admin-sections";
-import { publicTasks } from "@/lib/plan-public";
+import { MAJOR, majorDrills, publicTasks } from "@/lib/plan-public";
 
 type Task = (typeof publicTasks)[number];
 
@@ -28,26 +28,26 @@ function List({ items, empty, icon }: { items: Task[]; empty: string; icon: Reac
  */
 export function FolionixStatus({ progress }: { progress: Progress }) {
   const status = (id: string): TaskStatus => progress[id]?.status ?? "todo";
-  const counted = publicTasks.filter((t) => status(t.id) !== "skipped");
+  const counted = publicTasks.filter((t) => t.group !== MAJOR && status(t.id) !== "skipped");
   const done = counted.filter((t) => status(t.id) === "done");
-  const doing = counted.filter((t) => status(t.id) === "doing");
+  const doing = [...counted, ...majorDrills].filter((t) => status(t.id) === "doing");
   const pct = (n: number) => (counted.length ? (n / counted.length) * 100 : 0);
   const newest = (a: { id: string }, b: { id: string }) => (progress[b.id]!.at > progress[a.id]!.at ? 1 : -1);
   const now = [...doing].sort(newest).slice(0, 3);
-  const recent = [...done].sort(newest).slice(0, 3);
-  const drills = publicTasks.filter((t) => t.id.startsWith("P-"));
+  const recent = [...done, ...majorDrills.filter((t) => status(t.id) === "done")].sort(newest).slice(0, 3);
+  const drills = majorDrills;
   const drillsDone = drills.filter((t) => status(t.id) === "done").length;
 
   return (
     <div className="rounded-2xl border border-border-strong bg-canvas p-4 sm:p-5">
       {/* the numbers appear once something is finished: a row of zeros only says "nothing done" */}
-      {done.length > 0 && (
+      {(done.length > 0 || drillsDone > 0) && (
         <div className="mb-4">
           <div className="grid grid-cols-3 gap-3 border-b border-border-default pb-4">
             {[
               { n: `${Math.round(pct(done.length))}%`, l: "of the plan done" },
               { n: `${done.length}/${counted.length}`, l: "tasks and drills" },
-              { n: `${drillsDone}/${drills.length}`, l: "break-and-fix drills" },
+              { n: `${drillsDone}/${drills.length}`, l: "major drills" },
             ].map((s) => (
               <div key={s.l}>
                 <p className="text-2xl font-extrabold tracking-tight text-fg-default sm:text-3xl">{s.n}</p>
